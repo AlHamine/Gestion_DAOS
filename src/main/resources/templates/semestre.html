@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semestre</title>
+  </head>
+  <body>
+    <!-- 
+<form th:action="@ajouter_ue" method="post">
+    <div>
+        <label for="">Code</label>
+        <input type="text" class="form-control" name="code">
+    </div>
+
+    <div>
+        <label for="">libelle</label>
+        <input type="text" class="form-control" name="libelle">
+    </div>
+
+    <div>
+        <label for="">Credit</label>
+        <input type="text" class="form-control" name="credit">
+    </div>
+    <div>
+        <label for="">Coefficient</label>
+        <input type="text" class="form-control" name="coefficient">
+    </div>
+
+<div>
+    <label for="">Coefficient</label>
+    <input type="text" class="form-control" name="coefficient">
+</div>
+
+</form> -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Code</th>
+          <th>Libelle</th>
+          <th>Credits</th>
+          <th>Coefficient</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="e:${listeDesUE}">
+          <td th:text="${e.id}"></td>
+          <td th:text="${e.code}"></td>
+          <td th:text="${e.libelle}"></td>
+          <td th:text="${e.credit}"></td>
+          <td th:text="${e.coefficient}"></td>
+          <td th:text="${e.id}"></td>
+          <td>
+            <a th:href="@{/rechercher_id_modifier(id=${e.id})}"> Modifier</a>
+            <a th:href="@{/rechercher_id_supprimer(id=${e.id})}"> Supprimer</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
