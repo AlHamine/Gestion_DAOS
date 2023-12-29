@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.EnseignementService;
 import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 
-/**
- * UEController
- */
+
 @Controller
 public class EnseignementController {
 

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.MaquetteService;
 import com.uasz.Gestion_DAOS.model.Maquette.Maquette;
 
-/**
- * UEController
- */
+
 @Controller
 public class MaquetteController {
 

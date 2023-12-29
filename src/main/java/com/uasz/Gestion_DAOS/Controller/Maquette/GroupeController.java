@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.GroupeService;
 import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
-/**
- * UEController
- */
+
 @Controller
 public class GroupeController {
 

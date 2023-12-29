@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.FormationService;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 
-/**
- * UEController
- */
+
 @Controller
 public class FormationController {
 

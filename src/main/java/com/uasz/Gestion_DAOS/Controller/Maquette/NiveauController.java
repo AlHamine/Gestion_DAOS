@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
-/**
- * UEController
- */
+
 @Controller
 public class NiveauController {
 

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.SemestreService;
 import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
 
-/**
- * UEController
- */
+
 @Controller
 public class SemestreController {
 

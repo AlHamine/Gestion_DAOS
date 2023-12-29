@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 
-/**
- * UEController
- */
 @Controller
 public class ClasseController {
 

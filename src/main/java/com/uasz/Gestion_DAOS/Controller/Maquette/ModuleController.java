@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.ModuleService;
 import com.uasz.Gestion_DAOS.model.Maquette.Module;
 
-/**
- * UEController
- */
+
 @Controller
 public class ModuleController {
 

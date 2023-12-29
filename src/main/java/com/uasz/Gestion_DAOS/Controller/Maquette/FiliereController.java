@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
 import com.uasz.Gestion_DAOS.model.Maquette.Filiere;
 
-/**
- * UEController
- */
+
 @Controller
 public class FiliereController {
 

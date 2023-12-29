@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 
-/**
- * UEController
- */
+
 @Controller
 public class CycleController {
 
