@@ -10,22 +10,21 @@ import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Deroulement;
  * DeroulementService
  */
 public class DeroulementService {
-
     @Autowired
-    private DeroulementRepository batimentRepository;
+    private DeroulementRepository deroulementRepository;
 
     public Deroulement ajouterDeroulement(Deroulement deroulement) {
-        batimentRepository.save(deroulement);
+        deroulementRepository.save(deroulement);
         return deroulement;
 
     }
 
     public List<Deroulement> afficherToutDeroulement() {
-        return batimentRepository.findAll();
+        return deroulementRepository.findAll();
     }
 
     public Deroulement rechercherDeroulement(Long id) {
-        return batimentRepository.findById(id).get();
+        return deroulementRepository.findById(id).get();
     }
 
     public Deroulement modifierDeroulement(Deroulement deroulement) {
@@ -36,7 +35,7 @@ public class DeroulementService {
             DeroulementModifier.setProcessus(deroulement.getProcessus());
             DeroulementModifier.setSeance(deroulement.getSeance());
 
-            return batimentRepository.save(DeroulementModifier);
+            return deroulementRepository.save(DeroulementModifier);
         } else
             return null;
     }
@@ -44,7 +43,7 @@ public class DeroulementService {
     public Boolean suprimerDeroulement(Deroulement deroulement) {
         Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
         if (DeroulementModifier != null) {
-            batimentRepository.delete(deroulement);
+            deroulementRepository.delete(deroulement);
             return true;
         } else
             return false;
