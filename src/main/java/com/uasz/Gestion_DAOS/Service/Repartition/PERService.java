@@ -2,14 +2,20 @@ package com.uasz.Gestion_DAOS.Service.Repartition;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Repartition.PERRepository;
 
 import com.uasz.Gestion_DAOS.model.Repartition.PER;
 
+import jakarta.transaction.Transactional;
+
 /**
  * PERService
  */
+@Service
+@Transactional
+
 public class PERService {
 
     
