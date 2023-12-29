@@ -2,17 +2,24 @@ package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Emploie_Du_Temps.DeroulementRepository;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Deroulement;
 
+import jakarta.transaction.Transactional;
+
 /**
  * DeroulementService
  */
+@Service
+@Transactional
+
 public class DeroulementService {
     @Autowired
     private DeroulementRepository deroulementRepository;
 
+ 
     public Deroulement ajouterDeroulement(Deroulement deroulement) {
         deroulementRepository.save(deroulement);
         return deroulement;

@@ -63,14 +63,15 @@ public class GestionDaosApplication implements CommandLineRunner {
 				8,
 				5));
 		ueService.ajouterUE(new UE(null,
-				"Phys 1", 
+				"Phys 1",
 				"INFPH101",
-				 null,
-				 null, null,
-				 new Date(),
 				null,
-				 7, 4));
+				null, null,
+				new Date(),
+				null,
+				7, 4));
 
 	}
+	// machin
 
 }

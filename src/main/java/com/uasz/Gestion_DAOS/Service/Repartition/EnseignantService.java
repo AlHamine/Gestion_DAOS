@@ -1,13 +1,19 @@
 package com.uasz.Gestion_DAOS.Service.Repartition;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Repartition.EnseignantRepository;
 import com.uasz.Gestion_DAOS.model.Repartition.Enseignant;
 
+import jakarta.transaction.Transactional;
+
 /**
  * EnseignantService
  */
+@Service
+@Transactional
+
 public class EnseignantService {
 
    
