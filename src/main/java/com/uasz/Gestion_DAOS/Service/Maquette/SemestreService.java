@@ -40,10 +40,10 @@ public class SemestreService {
             return null;
     }
 
-    public Boolean suprimerSemestre(Semestre semestre) {
-        Semestre semestreModifier = rechercherSemestre(semestre.getId());
+    public Boolean suprimerSemestre(Long id) {
+        Semestre semestreModifier = rechercherSemestre(id);
         if (semestreModifier != null) {
-            semestreRepository.delete(semestre);
+            semestreRepository.delete(semestreModifier);
             return true;
         } else
             return false;

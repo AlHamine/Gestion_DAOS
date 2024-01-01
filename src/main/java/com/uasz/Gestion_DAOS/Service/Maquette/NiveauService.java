@@ -37,10 +37,10 @@ public class NiveauService {
             return null;
     }
 
-    public Boolean suprimerNiveau(Niveau niveau) {
-        Niveau niveauModifier = rechercherNiveau(niveau.getId());
+    public Boolean suprimerNiveau(Long id) {
+        Niveau niveauModifier = rechercherNiveau(id);
         if (niveauModifier != null) {
-            niveauRepository.delete(niveau);
+            niveauRepository.delete(niveauModifier);
             return true;
         } else
             return false;

@@ -19,11 +19,15 @@ public class UEService {
 
     }
 
+    
     public List<UE> afficherToutUE() {
         return ueRepository.findAll();
     }
 
     public UE rechercherUE(Long id) {
+        if (!ueRepository.findById(id).isPresent()) {
+            return null;
+        }
         return ueRepository.findById(id).get();
     }
 
@@ -41,16 +45,37 @@ public class UEService {
         } else
             return null;
     }
-
-    public Boolean suprimerUE(UE ue) {
-        UE euModifier = rechercherUE(ue.getId());
+ public UE modifierUE(Long id,UE ue) {
+        UE euModifier = rechercherUE(id);
         if (euModifier != null) {
-            ueRepository.delete(ue);
+            euModifier.setCode(ue.getCode());
+            euModifier.setDescription(ue.getDescription());
+            euModifier.setLibelle(ue.getLibelle());
+            euModifier.setModule(ue.getModule());
+            euModifier.setCredit(ue.getCredit());
+            euModifier.setCoefficient(ue.getCoefficient());
+
+            return ueRepository.save(euModifier);
+        } else
+            return null;
+    }
+
+    // public Boolean suprimerUE(UE ue) {
+    //     UE euModifier = rechercherUE(ue.getId());
+    //     if (euModifier != null) {
+    //         ueRepository.delete(ue);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+    public Boolean suprimerUE(Long id) {
+        UE euModifier = rechercherUE(id);
+        if (euModifier != null) {
+            ueRepository.delete(euModifier);
             return true;
         } else
             return false;
     }
-
 
 
 }

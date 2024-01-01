@@ -24,7 +24,7 @@ import com.uasz.Gestion_DAOS.Service.Repartition.PERService;
 import com.uasz.Gestion_DAOS.Service.Repartition.RepartitionService;
 import com.uasz.Gestion_DAOS.Service.Repartition.VacataireService;
 
-import lombok.Data;
+
 // @Data 
 @Service
 public class AllService {

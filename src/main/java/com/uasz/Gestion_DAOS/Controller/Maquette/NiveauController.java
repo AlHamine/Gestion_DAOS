@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
@@ -31,5 +32,12 @@ public class NiveauController {
         niveauService.ajouterNiveau(niveau);
         return "redirect:/niveau";
     }
+    @RequestMapping(value = "/supprimer_niveau", method = RequestMethod.GET)
+    public String supprimer_niveau(Model modele, @RequestParam(name = "id") Long id) {
+        // ueService.modifierUE(ue);
+        Boolean ok = niveauService.suprimerNiveau(id);
 
+        return "redirect:/niveau";
+    }
 }
+

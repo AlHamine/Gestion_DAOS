@@ -41,10 +41,10 @@ public class ModuleService {
             return null;
     }
 
-    public Boolean suprimerModule(Module module) {
-        Module moduleModifier = rechercherModule(module.getId());
+    public Boolean suprimerModule(Long id) {
+        Module moduleModifier = rechercherModule(id);
         if (moduleModifier != null) {
-            moduleRepository.delete(module);
+            moduleRepository.delete(moduleModifier);
             return true;
         } else
             return false;
