@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.SemestreService;
 import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
@@ -31,5 +32,11 @@ public class SemestreController {
         semestreService.ajouterSemestre(semestre);
         return "redirect:/semestre";
     }
+@RequestMapping(value = "/supprimer_semestre", method = RequestMethod.GET)
+    public String supprimer_semestre(Model modele, @RequestParam(name = "id") Long id) {
+        // ueService.modifierUE(ue);
+        Boolean ok = semestreService.suprimerSemestre(id);
 
+        return "redirect:/semestre";
+    }
 }
