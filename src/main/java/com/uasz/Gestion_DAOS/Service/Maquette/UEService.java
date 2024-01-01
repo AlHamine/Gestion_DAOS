@@ -50,7 +50,4 @@ public class UEService {
         } else
             return false;
     }
-
-
-
 }
