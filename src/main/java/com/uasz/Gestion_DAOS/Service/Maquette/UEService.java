@@ -82,11 +82,7 @@ public class UEService {
         return false;
     }
 
-<<<<<<< HEAD
-=======
     public List<EC> detailsUE(Long id) {
         return ueRepository.findById(id).get().getEcs();
     }
-
->>>>>>> ccd378ced521b5d3ffa5b37cbbfbf8173fb77aa0
 }
