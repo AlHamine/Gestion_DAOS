@@ -1,7 +1,6 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.UERepository;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;

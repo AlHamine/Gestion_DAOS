@@ -3,8 +3,6 @@ package com.uasz.Gestion_DAOS.Controller.Maquette;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -70,13 +68,11 @@ public class UEController {
     // modele.addAttribute("ue", ue);
     // return "ue_edit";
     // }
+    
     @RequestMapping(value = "/modifier_ue", method = RequestMethod.POST)
     public String modifier_ue(UE ue) {
         ueService.modifierUE(ue);
-        // UE ue = ueService.rechercherUE(id);
-        // modele.addAttribute("ue", ue);
         return "redirect:/ue";
-        // return "ue_edit";
     }
 
     // @RequestMapping(value = "/rechercher_id_modifier", method =

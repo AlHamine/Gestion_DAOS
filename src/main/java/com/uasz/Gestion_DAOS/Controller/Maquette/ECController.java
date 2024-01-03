@@ -23,7 +23,7 @@ public class ECController {
     public String lister_eC(Model model) {
         List<EC> eCList = eCService.afficherToutEC();
         model.addAttribute("listeDesEC", eCList);
-        return "eC";
+        return "ec";
     }
 
     @RequestMapping(value = "/ajouter_ec", method = RequestMethod.POST)
