@@ -17,7 +17,6 @@ public class Deroulement {
     private String matiere;
     private Date date;
     private String processus;
-
     @OneToOne
     private Seance seance;
 }

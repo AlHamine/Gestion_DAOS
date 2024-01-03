@@ -41,10 +41,10 @@ import java.util.List;
             return null;
     }
 
-    public Boolean suprimerEC(EC ec) {
-        EC ecModifier = rechercherEC(ec.getId());
+    public Boolean suprimerEC(Long id) {
+        EC ecModifier = rechercherEC(id);
         if (ecModifier != null) {
-            ecRepository.delete(ec);
+            ecRepository.delete(ecModifier);
             return true;
         } else
             return false;
