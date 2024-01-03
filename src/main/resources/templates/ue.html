@@ -164,41 +164,35 @@
     
     </div>
     <table>
-<thead>
-
-<tr>
-<th>Id</th>
-<th>Code</th>
-<th>Libelle</th>
-<th>Credits</th>
-<th>Coefficient</th>
-<th style="text-align: center; background-color: firebrick;">Operation</th>
-<!-- <th >Action</th> -->
-</tr>
-</thead>
-<tbody>
-<tr th:each="e:${listeDesUE}" class="table-row">
-    <td th:text="${e.id}"></td>
-    <td th:text="${e.code}"></td>
-    <td th:text="${e.libelle}"></td>
-    <td th:text="${e.credit}"></td>
-    <td th:text="${e.coefficient}"></td>
-    <!-- <td th:text="${e.id}"></td> -->
-<td>
-<!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
-    Modifier
-</button>
-<a th:href="@{/rechercher_id_supprimer(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
-
-</td>
-
-
-</tr>
-
-
-</tbody>
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Libelle</th>
+            <th>Credits</th>
+            <th>Coefficient</th>
+            <th style="text-align: center; background-color: firebrick;">Operation</th>
+            <!-- <th >Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="e:${listeDesUE}" class="table-row">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.code}"></td>
+                <td th:text="${e.libelle}"></td>
+                <td th:text="${e.credit}"></td>
+                <td th:text="${e.coefficient}"></td>
+                <!-- <td th:text="${e.id}"></td> -->
+                <td>
+                    <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
+                        Modifier
+                    </button>
+                    <a th:href="@{/rechercher_id_supprimer(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
+                    <a th:href="@{/rechercher_id_supprimer(id=${e.id})}" class="btn btn-primary"> Details</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
     <!-- The Modal -->
     <div class="modal" id="myModal2">
