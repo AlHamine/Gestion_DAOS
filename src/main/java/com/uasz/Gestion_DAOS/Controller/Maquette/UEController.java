@@ -35,17 +35,31 @@ public class UEController {
         return "redirect:/ue";
     }
 
-    //     @RequestMapping(value = "/form_ajouter_ue", method = RequestMethod.GET)
+    @RequestMapping(value = "/rechercher_id_supprimer", method = RequestMethod.GET)
+    public String supprimer_ue(Model modele, @RequestParam(name = "id") Long id) {
+        ueService.suprimerUE(id);
+        return "redirect:/ue";
+    }
+
+    @RequestMapping(value = "/details_ue", method = RequestMethod.GET)
+    public String details_ue(Model modele, @RequestParam(name = "id") Long id) {
+        modele.addAttribute("ue", ueService.rechercherUE(id));
+        modele.addAttribute("listeDesEC", ueService.detailsUE(id));
+        return "ue_details";
+    }
+
+    // @RequestMapping(value = "/form_ajouter_ue", method = RequestMethod.GET)
     // public String form_ajouter_ue(Model modele) {
-    //     return "ue_add";
+    // return "ue_add";
     // }
 
-    // @RequestMapping(value = "/rechercher_id_modifier", method = RequestMethod.GET)
+    // @RequestMapping(value = "/rechercher_id_modifier", method =
+    // RequestMethod.GET)
     // public String modifier_ue(Model modele, @RequestParam(name = "id") Long id) {
-    //     // ueService.modifierUE(ue);
-    //     UE ue = ueService.rechercherUE(id);
-    //     modele.addAttribute("ue", ue);
-    //     return "ue_edit";
+    // // ueService.modifierUE(ue);
+    // UE ue = ueService.rechercherUE(id);
+    // modele.addAttribute("ue", ue);
+    // return "ue_edit";
     // }
 
     // @RequestMapping(value = "/rechercher_id_modifier", method =
@@ -54,11 +68,5 @@ public class UEController {
     // // ueService.modifierUE(ue);
     // return "redirect:/ue";
     // }
-    @RequestMapping(value = "/rechercher_id_supprimer", method = RequestMethod.GET)
-    public String supprimer_ue(Model modele, @RequestParam(name = "id") Long id) {
-        // ueService.modifierUE(ue);
-        Boolean ok = ueService.suprimerUE(id);
 
-        return "redirect:/ue";
-    }
 }

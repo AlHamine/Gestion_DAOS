@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.uasz.Gestion_DAOS.Service.AllService;
+// import com.uasz.Gestion_DAOS.Service.AllService;
+import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
+import com.uasz.Gestion_DAOS.model.Maquette.EC;
 import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
@@ -23,10 +25,26 @@ public class GestionDaosApplication implements CommandLineRunner {
 	@Autowired
 	public UEService ueService;
 
+	@Autowired
+	public ECService ecService;
+
 	@Override
 	public void run(String... args) throws Exception {
 		// ueService.ajouterUE(new UE(null, "Reseaux et Telecoms", "INFF351", 8, 4, "",
 		// null, null, 8, 5));
+		UE ue1 = new UE(
+				null,
+				"GL 3",
+				"INFF353",
+				null,
+				null,
+				null,
+				new Date(),
+				null,
+				8,
+				5);
+
+		ueService.ajouterUE(ue1);
 		ueService.ajouterUE(
 				new UE(
 						null,
@@ -92,6 +110,69 @@ public class GestionDaosApplication implements CommandLineRunner {
 						new Date(),
 						null,
 						7, 4));
+		ecService.ajouterEC(
+				new EC(
+						null,
+						"EC 2",
+						"EC002",
+						3,
+						2,
+						2,
+						1,
+
+						4,
+						"Description for EC 2",
+						new Date(),
+						ue1,
+						null)
+
+		);
+
+		ecService.ajouterEC(new EC(
+				null,
+				"EC 1",
+				"EC001",
+				4,
+				3,
+				2,
+				1,
+
+				5,
+				"Description for EC 1",
+				null,
+				ue1,
+				null));
+		UE ue2 = new UE(
+				null,
+				"Another Course",
+				"INFX001",
+				null,
+				null,
+				null,
+				new Date(),
+				null,
+				6,
+				3);
+
+		ueService.ajouterUE(ue2);
+
+		ecService.ajouterEC(
+				new EC(
+						null,
+						"EC 3",
+						"EC003",
+						4,
+						3,
+						2,
+						1,
+
+						5,
+						"Description for EC 3",
+						new Date(),
+						ue2,
+						null)
+
+		);
 
 		// .semestreService.ajouterSemestre(
 		// new Semestre(null,

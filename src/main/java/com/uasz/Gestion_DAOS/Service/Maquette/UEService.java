@@ -1,11 +1,14 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.UERepository;
+import com.uasz.Gestion_DAOS.model.Maquette.EC;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
+
 @Service
 @Transactional
 
@@ -19,7 +22,6 @@ public class UEService {
 
     }
 
-    
     public List<UE> afficherToutUE() {
         return ueRepository.findAll();
     }
@@ -45,7 +47,8 @@ public class UEService {
         } else
             return null;
     }
- public UE modifierUE(Long id,UE ue) {
+
+    public UE modifierUE(Long id, UE ue) {
         UE euModifier = rechercherUE(id);
         if (euModifier != null) {
             euModifier.setCode(ue.getCode());
@@ -61,21 +64,25 @@ public class UEService {
     }
 
     // public Boolean suprimerUE(UE ue) {
-    //     UE euModifier = rechercherUE(ue.getId());
-    //     if (euModifier != null) {
-    //         ueRepository.delete(ue);
-    //         return true;
-    //     } else
-    //         return false;
+    // UE euModifier = rechercherUE(ue.getId());
+    // if (euModifier != null) {
+    // ueRepository.delete(ue);
+    // return true;
+    // } else
+    // return false;
     // }
+
     public Boolean suprimerUE(Long id) {
-        UE euModifier = rechercherUE(id);
-        if (euModifier != null) {
-            ueRepository.delete(euModifier);
+        UE eu = rechercherUE(id);
+        if (eu != null) {
+            ueRepository.delete(eu);
             return true;
-        } else
-            return false;
+        }
+        return false;
     }
 
+    public List<EC> detailsUE(Long id) {
+        return ueRepository.findById(id).get().getEcs();
+    }
 
 }
