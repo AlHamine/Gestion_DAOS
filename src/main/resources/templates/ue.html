@@ -174,7 +174,7 @@
             <th>Credits</th>
             <th>Coefficient</th>
             <th style="text-align: center; background-color: firebrick;">Operation</th>
-            <!-- <th >Action</th> -->
+            <th>Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -186,14 +186,19 @@
                 <td th:text="${e.coefficient}"></td>
                 <!-- <td th:text="${e.id}"></td> -->
                 <td>
-                    <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
+                    <div class="text-center">
+                    
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
                         Modifier
                     </button>
                     <a th:href="@{/rechercher_id_supprimer(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
-                    <a th:href="@{/details_ue(id=${e.id})}" class="btn btn-outline-primary"> Details</a>
+                    </div>
                 </td>
-            </tr>
+                <td>
+                    <div class="text-center">
+                    <a th:href="@{/details_ue(id=${e.id})}" class="btn btn-outline-primary"> Details</a></td>
+                        </div>
+                </tr>
         </tbody>
     </table>
     <!-- The Modal -->

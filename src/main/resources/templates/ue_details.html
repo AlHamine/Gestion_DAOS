@@ -255,7 +255,7 @@
           <th style="text-align: center; background-color: firebrick">
             Operation
           </th>
-          <!-- <th >Action</th> -->
+          <th>Detail</th>
         </tr>
       </thead>
       <tbody>
@@ -273,6 +273,7 @@
 
           <td>
             <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
+          <div class="text-center">
             <button
               type="button"
               class="btn btn-primary"
@@ -287,13 +288,13 @@
             >
               Supprimer</a
             >
-            <a
-              th:href="@{/detail_ue(id=${e.id})}"
-              class="btn btn-outline-success"
-            >
-              Detail</a
-            >
+          </div>
           </td>
+          <td><div class="text-center">
+            <a th:href="@{/detail_ue(id=${e.id})}" class="btn btn-outline-success">
+              Detail</a>
+
+          </div> </td>
         </tr>
       </tbody>
     </table>
