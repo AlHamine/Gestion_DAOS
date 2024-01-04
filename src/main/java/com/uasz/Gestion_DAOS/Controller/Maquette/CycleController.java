@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
@@ -32,4 +33,9 @@ public class CycleController {
         return "redirect:/cycle";
     }
 
+    @RequestMapping(value = "/supprimer_cycle", method = RequestMethod.GET)
+    public String supprimer_cycle(Model modele, @RequestParam(name = "id") Long id) {
+        cycleService.suprimerCycle(id);
+        return "redirect:/cycle";
+    }
 }

@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import com.uasz.Gestion_DAOS.Service.AllService;
+
+import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
+import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
@@ -27,6 +29,9 @@ public class GestionDaosApplication implements CommandLineRunner {
 	@Autowired
 	public ECService ecService;
 
+	@Autowired
+	private CycleService cycleService;
+
 	@Override
 	public void run(String... args) throws Exception {
 		// ueService.ajouterUE(new UE(null, "Reseaux et Telecoms", "INFF351", 8, 4, "", null, null, 8, 5));
@@ -38,12 +43,16 @@ public class GestionDaosApplication implements CommandLineRunner {
 		ueService.ajouterUE(new UE(null,"Programmation1  2","INFC102",null,null,null,new Date(),null,6,3));
 		ueService.ajouterUE(new UE(null,"Math 1","INFM201",null,null,null,new Date(),null,8,5));
 		ueService.ajouterUE(new UE(null,"Phys 1","INFPH101",null,null, null,new Date(),null,7, 4));
-		ecService.ajouterEC(new EC(null,"EC 2","EC002",3,2,2,1,4,"Description for EC 2",new Date(),ue1,null));
-		ecService.ajouterEC(new EC(null,"EC 1","EC001",4,3,2,1,5,"Description for EC 1",null,ue1,null));
 		UE ue2 = new UE(null,"Another Course","INFX001",null,null,null,new Date(),null,6,3);
 		ueService.ajouterUE(ue2);
-		ecService.ajouterEC(new EC(null,"EC 3","EC003",4,3,2,1,5,"Description for EC 3",new Date(),ue2,null));
 
+		ecService.ajouterEC(new EC(null,"EC 2","EC002",3,2,2,1,4,"Description for EC 2",new Date(),ue1,null));
+		ecService.ajouterEC(new EC(null,"EC 1","EC001",4,3,2,1,5,"Description for EC 1",null,ue1,null));
+		ecService.ajouterEC(new EC(null,"EC 3","EC003",4,3,2,1,5,"Description for EC 3",new Date(),ue2,null));
 		// .semestreService.ajouterSemestre(new Semestre(null, "Bonnheur", null, null));
+
+		cycleService.ajouterCycle(new Cycle(null, "L1", null));
+		cycleService.ajouterCycle(new Cycle(null, "L2", null));
+		cycleService.ajouterCycle(new Cycle(null, "L3", null));
 	}
 }

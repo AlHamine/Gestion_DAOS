@@ -34,7 +34,6 @@ public class CycleService {
             cycleModifier.setNiveaux(cycle.getNiveaux());
             cycleModifier.setNom(cycle.getNom());
 
-
             return cycleRepository.save(cycleModifier);
         } else
             return null;
@@ -49,6 +48,12 @@ public class CycleService {
             return false;
     }
 
-
-
+    public Boolean suprimerCycle(Long id) {
+        Cycle cycle = rechercherCycle(id);
+        if (cycle!= null) {
+            cycleRepository.delete(cycle);
+            return true;
+        }
+        return false;
+    }
 }

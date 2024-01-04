@@ -33,11 +33,9 @@ public class ECController {
     }
 
     @RequestMapping(value = "/supprimer_ec", method = RequestMethod.GET)
-    public String supprimer_ue(Model modele, @RequestParam(name = "id") Long id,
-            @RequestParam(name = "id2") Long id2) {
-
-        eCService.suprimerEC(id);
-        return "redirect:/details_ue?id=" + id2;
+    public String supprimer_ue(Model modele, @RequestParam(name = "id") Long idEC, @RequestParam(name = "id2") Long idUE) {
+        eCService.suprimerEC(idEC);
+        return "redirect:/details_ue?id=" + idUE;
         // return "redirect:/ue";
     }
 
