@@ -154,8 +154,8 @@
       <div class="modal-dialog modal-fullscreen-xl-down">
         <div class="modal-content">
           <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Ajouter un nouveau UE</h4>
+          <div class="modal-header text-center btn-success">
+            <h4 class="modal-title ">Ajouter un nouveau EC a UE</h4>
             <button
               type="button"
               class="btn-close"
@@ -210,23 +210,24 @@
 
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Description</label>
-                  <input type="text" class="form-control" name="description" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
                   <label class="form-label" for="">Coefficient</label>
 
                   <input type="text" class="form-control" name="coefficient" />
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit">Envoyer</button>
+
+              <div class="row g-3 align-items-center">
+                <div class="mb-3 mt-3">
+                  <label class="form-label" for="">Description</label>
+                  <input type="text" class="form-control" name="description" />
+                </div>
+              </div>
+              <button class="btn btn-success" type="submit">Ajouter</button>
             </form>
           </div>
 
           <!-- Modal footer -->
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button
               type="button"
               class="btn btn-danger"
@@ -234,7 +235,7 @@
             >
               Close
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -242,6 +243,7 @@
     <table id="table_EC">
       <thead>
         <tr>
+          <th style="display: none;">Id</th>
           <th>Code</th>
           <th>Libelle</th>
           <th>CM</th>
@@ -260,6 +262,7 @@
       </thead>
       <tbody>
         <tr th:each="e:${listeDesEC}" class="table-row">
+          <td style="display: none;" th:text="${e.id}"></td>
           <td th:text="${e.code}"></td>
           <td th:text="${e.libelle}"></td>
           <td th:text="${e.cm}"></td>
@@ -282,7 +285,7 @@
             >
               Modifier
             </button>
-            <a
+            <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet EC')"
               th:href="@{/supprimer_ec(id=${e.id},id2=${ue.id})}"
               class="btn btn-danger"
             >
@@ -300,49 +303,53 @@
     </table>
 
     <!-- The Modal -->
-    <div class="modal" id="myModal">
+    <div class="modal" id="myModal2">
       <div class="modal-dialog modal-fullscreen-xl-down">
         <div class="modal-content">
           <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Ajouter un nouveau UE</h4>
+          <div class="modal-header text-center btn-primary">
+            <h4 class="modal-title">Modifier EC</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
     
           <!-- Modal body -->
           <div class="modal-body">
             <form th:action="@{ajouter_ec(id=${ue.id})}" method="post">
+              <div class="mb-3" style="display: none;">
+                <label for="id">Id</label>
+                <input type="text" class="form-control" name="id" id="id">
+              </div>
               <div class="mb-3 mt-3">
                 <label class="form-label" for="">Code</label>
     
-                <input type="text" class="form-control" name="code" />
+                <input type="text" class="form-control" name="code" id="code" />
               </div>
     
               <div class="mb-3 mt-3">
                 <label class="form-label" for="">libelle</label>
     
-                <input type="text" class="form-control" name="libelle" />
+                <input type="text" class="form-control" name="libelle" id="libelle" />
               </div>
     
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">CM</label>
     
-                  <input type="text" class="form-control" name="cm" />
+                  <input type="text" class="form-control" name="cm" id="cm" />
                 </div>
               </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TD</label>
     
-                  <input type="text" class="form-control" name="td" />
+                  <input type="text" class="form-control" name="td" id="td" />
                 </div>
               </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TP</label>
     
-                  <input type="text" class="form-control" name="tp" />
+                  <input type="text" class="form-control" name="tp" id="tp" />
                 </div>
               </div>
     
@@ -350,33 +357,34 @@
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TPE</label>
     
-                  <input type="text" class="form-control" name="tpe" />
+                  <input type="text" class="form-control" name="tpe" id="tpe" />
                 </div>
               </div>
     
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Description</label>
-                  <input type="text" class="form-control" name="description" />
-                </div>
-              </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">Coefficient</label>
     
-                  <input type="text" class="form-control" name="coefficient" />
+                  <input type="text" class="form-control" name="coefficient" id="coefficient" />
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit">Envoyer</button>
+
+              <div class="row g-3 align-items-center">
+                <div class="mb-3 mt-3">
+                  <label class="form-label" for="">Description</label>
+                  <input type="text" class="form-control" name="description" id="description" />
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">Modifier</button>
             </form>
           </div>
     
           <!-- Modal footer -->
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
               Close
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -385,7 +393,7 @@
         // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
     $(document).ready(function () {
       // Ajout d'un gestionnaire de clic pour toutes les lignes avec la classe "table-row"
-      $('.table-row').on('click', function () {
+        $('.table-row').on('click', function () {
         // Supprimer la classe "selected" de toutes les lignes
         $('.table-row').removeClass('selected');
         // Ajouter la classe "selected" à la ligne cliquée
@@ -394,12 +402,20 @@
         var id = $(this).find('td:eq(0)').text();
         var code = $(this).find('td:eq(1)').text();
         var libelle = $(this).find('td:eq(2)').text();
-        var credit = $(this).find('td:eq(3)').text();
-        var coefficient = $(this).find('td:eq(4)').text();
+        var cm = $(this).find('td:eq(3)').text();
+        var td = $(this).find('td:eq(4)').text();
+        var tp = $(this).find('td:eq(5)').text();
+        var tpe = $(this).find('td:eq(7)').text();
+        var coefficient = $(this).find('td:eq(9)').text();
+        var description = $(this).find('td:eq(10)').text();
         document.getElementById("id").value = id;
         document.getElementById("code").value = code;
         document.getElementById("libelle").value = libelle;
-        document.getElementById("credit").value = credit;
+        document.getElementById("cm").value = cm;
+        document.getElementById("td").value = td;
+        document.getElementById("tp").value = tp;
+        document.getElementById("tpe").value = tpe;
+        document.getElementById("description").value = description;
         document.getElementById("coefficient").value = coefficient;
       });
 
