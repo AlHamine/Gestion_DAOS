@@ -83,7 +83,6 @@ public class CycleService {
             Niveau niveau = niveauService.rechercherNiveau(idNiveau);
             niveaux.add(niveau);
         }
-        System.out.println(niveaux.toString());
         return niveaux;
     }
 
