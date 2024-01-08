@@ -16,7 +16,9 @@ public class Cycle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private String nom;
-    @OneToMany
+
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "cycle")
+    @OneToMany(mappedBy = "cycle")
     private List<Niveau> niveaux;
 }
 

@@ -155,7 +155,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Ajouter un nouveau UE</h4>
+            <h4 class="modal-title">Ajouter un nouveau EC</h4>
             <button
               type="button"
               class="btn-close"
@@ -273,28 +273,33 @@
 
           <td>
             <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
-          <div class="text-center">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#myModal2"
-            >
-              Modifier
-            </button>
-            <a
-              th:href="@{/supprimer_ec(id=${e.id},id2=${ue.id})}"
-              class="btn btn-danger"
-            >
-              Supprimer</a
-            >
-          </div>
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal2"
+              >
+                Modifier
+              </button>
+              <a
+                th:href="@{/supprimer_ec(id=${e.id},id2=${ue.id})}"
+                class="btn btn-danger"
+              >
+                Supprimer</a
+              >
+            </div>
           </td>
-          <td><div class="text-center">
-            <a th:href="@{/detail_ue(id=${e.id})}" class="btn btn-outline-success">
-              Detail</a>
-
-          </div> </td>
+          <td>
+            <div class="text-center">
+              <a
+                th:href="@{/detail_ue(id=${e.id})}"
+                class="btn btn-outline-success"
+              >
+                Detail</a
+              >
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -306,54 +311,58 @@
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">Ajouter un nouveau UE</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
-    
+
           <!-- Modal body -->
           <div class="modal-body">
             <form th:action="@{ajouter_ec(id=${ue.id})}" method="post">
               <div class="mb-3 mt-3">
                 <label class="form-label" for="">Code</label>
-    
+
                 <input type="text" class="form-control" name="code" />
               </div>
-    
+
               <div class="mb-3 mt-3">
                 <label class="form-label" for="">libelle</label>
-    
+
                 <input type="text" class="form-control" name="libelle" />
               </div>
-    
+
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">CM</label>
-    
+
                   <input type="text" class="form-control" name="cm" />
                 </div>
               </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TD</label>
-    
+
                   <input type="text" class="form-control" name="td" />
                 </div>
               </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TP</label>
-    
+
                   <input type="text" class="form-control" name="tp" />
                 </div>
               </div>
-    
+
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">TPE</label>
-    
+
                   <input type="text" class="form-control" name="tpe" />
                 </div>
               </div>
-    
+
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">Description</label>
@@ -363,17 +372,21 @@
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for="">Coefficient</label>
-    
+
                   <input type="text" class="form-control" name="coefficient" />
                 </div>
               </div>
               <button class="btn btn-primary" type="submit">Envoyer</button>
             </form>
           </div>
-    
+
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
               Close
             </button>
           </div>
@@ -382,30 +395,29 @@
     </div>
 
     <script>
-        // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
-    $(document).ready(function () {
-      // Ajout d'un gestionnaire de clic pour toutes les lignes avec la classe "table-row"
-      $('.table-row').on('click', function () {
-        // Supprimer la classe "selected" de toutes les lignes
-        $('.table-row').removeClass('selected');
-        // Ajouter la classe "selected" à la ligne cliquée
-        $(this).addClass('selected');
-        // Récupérer les données de la ligne sélectionnée
-        var id = $(this).find('td:eq(0)').text();
-        var code = $(this).find('td:eq(1)').text();
-        var libelle = $(this).find('td:eq(2)').text();
-        var credit = $(this).find('td:eq(3)').text();
-        var coefficient = $(this).find('td:eq(4)').text();
-        document.getElementById("id").value = id;
-        document.getElementById("code").value = code;
-        document.getElementById("libelle").value = libelle;
-        document.getElementById("credit").value = credit;
-        document.getElementById("coefficient").value = coefficient;
-      });
-
-    $("#table_EC").DataTable({ });
+      // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
+      $(document).ready(function () {
+        // Ajout d'un gestionnaire de clic pour toutes les lignes avec la classe "table-row"
+        $(".table-row").on("click", function () {
+          // Supprimer la classe "selected" de toutes les lignes
+          $(".table-row").removeClass("selected");
+          // Ajouter la classe "selected" à la ligne cliquée
+          $(this).addClass("selected");
+          // Récupérer les données de la ligne sélectionnée
+          var id = $(this).find("td:eq(0)").text();
+          var code = $(this).find("td:eq(1)").text();
+          var libelle = $(this).find("td:eq(2)").text();
+          var credit = $(this).find("td:eq(3)").text();
+          var coefficient = $(this).find("td:eq(4)").text();
+          document.getElementById("id").value = id;
+          document.getElementById("code").value = code;
+          document.getElementById("libelle").value = libelle;
+          document.getElementById("credit").value = credit;
+          document.getElementById("coefficient").value = coefficient;
         });
 
+        $("#table_EC").DataTable({});
+      });
     </script>
   </body>
 </html>

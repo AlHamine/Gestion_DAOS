@@ -46,6 +46,8 @@ public class NiveauService {
             return false;
     }
 
-
+    // public List<Cycle> getNiveauByCycle(Long id) {
+    //     return niveauRepository.findAllById(id);
+    // }
 
 }

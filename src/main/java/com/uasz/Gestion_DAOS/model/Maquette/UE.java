@@ -24,6 +24,7 @@ public class UE {
     private String description;
     @OneToMany(mappedBy = "ue")
     private List<EC> ecs;
+    
     @OneToMany(mappedBy = "ue")
     private List<Module> module;
 
