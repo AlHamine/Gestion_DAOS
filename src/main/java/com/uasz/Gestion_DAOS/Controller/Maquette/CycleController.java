@@ -38,4 +38,11 @@ public class CycleController {
         cycleService.suprimerCycle(id);
         return "redirect:/cycle";
     }
+
+    @RequestMapping(value = "/details_cycle", method = RequestMethod.GET)
+    public String details_cycle(Model modele, @RequestParam(name = "id") Long id) {
+        modele.addAttribute("cycle", cycleService.rechercherCycle(id));
+        modele.addAttribute("listeDesNiveau", cycleService.detailsNiveau(id));
+        return "cycle_details";
+    }
 }

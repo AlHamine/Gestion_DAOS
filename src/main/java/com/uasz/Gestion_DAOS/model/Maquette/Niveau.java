@@ -14,6 +14,8 @@ public class Niveau {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "cycle")
     @ManyToOne
     private Cycle cycle;
 }

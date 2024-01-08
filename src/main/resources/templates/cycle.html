@@ -125,14 +125,14 @@
                         <label class="form-label " for="">Nom</label>
                         <input type="text" class="form-control" name="nom" />
                     </div>
-                    <div class="float-right">
+                    <div class="text-end">
                         <button class="btn btn-primary" type="submit">Envoyer</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    </div>
+</div>
     
     </div>
     <table id="table_UE">
@@ -141,7 +141,7 @@
             <th>Id</th>
             <th>Nom</th>
             <th style="text-align: center; background-color: firebrick;">Operation</th>
-            <th style="text-align: center; background-color: blue;">Details</th>
+            <th style="text-align: center;">Details</th>
             <!-- <th >Action</th> -->
             </tr>
         </thead>
@@ -150,14 +150,17 @@
                 <td th:text="${e.id}"></td>
                 <td th:text="${e.nom}"></td>
                 <td>
-                    <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
-                        Modifier
-                    </button>
-                    <a th:href="@{/supprimer_cycle(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
+                            Modifier
+                        </button>
+                        <a th:href="@{/supprimer_cycle(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
+                    </div>  
                 </td>
                 <td>
-                    <a th:href="@{/details_ue(id=${e.id})}" class="btn btn-outline-primary"> Details</a>
+                    <div class="text-center">
+                        <a th:href="@{/details_cycle(id=${e.id})}" class="btn btn-outline-primary"> Details</a>
+                    </div>
                 </td>
             </tr>
         </tbody>

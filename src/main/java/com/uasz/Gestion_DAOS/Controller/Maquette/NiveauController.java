@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
@@ -20,24 +21,39 @@ public class NiveauController {
     @Autowired
     private NiveauService niveauService;
 
+    @Autowired
+    private CycleService cycleService;
+
     @RequestMapping(value = "/niveau", method = RequestMethod.GET)
     public String lister_niveau(Model model) {
         List<Niveau> niveauList = niveauService.afficherToutNiveau();
-        model.addAttribute("listeDesNiveau", niveauList);
+        model.addAttribute("listeDesNiveauX", niveauList);
         return "niveau";
     }
 
-    @RequestMapping(value = "/ajouter_niveau", method = RequestMethod.POST)
-    public String ajouter_niveau(Model modele, Niveau niveau) {
-        niveauService.ajouterNiveau(niveau);
-        return "redirect:/niveau";
-    }
-    @RequestMapping(value = "/supprimer_niveau", method = RequestMethod.GET)
-    public String supprimer_niveau(Model modele, @RequestParam(name = "id") Long id) {
-        // ueService.modifierUE(ue);
-        Boolean ok = niveauService.suprimerNiveau(id);
+    // @RequestMapping(value = "/ajouter_niveau", method = RequestMethod.POST)
+    // public String ajouter_niveau(Model modele, Niveau niveau) {
+    //     niveauService.ajouterNiveau(niveau);
+    //     return "redirect:/niveau";
+    // }
 
-        return "redirect:/niveau";
+    @RequestMapping(value = "/supprimer_niveau", method = RequestMethod.GET)
+    public String supprimer_niveau(Model modele, @RequestParam(name = "niveauId") Long niveauId, @RequestParam(name = "cycleId") Long cycleId) {
+        niveauService.suprimerNiveau(niveauId);
+        return "redirect:/details_cycle?id=" + cycleId;
+    }
+
+    // @RequestMapping(value = "/modifier_niveau", method = RequestMethod.GET)
+    // public String modifier_niveau(Model modele, @RequestParam(name = "niveauId") Long niveauId, @RequestParam(name = "cycleId") Long cycleId) {
+    //     niveauService.suprimerNiveau(niveauId);
+    //     return "redirect:/details_cycle?id=" + cycleId;
+    // }
+
+    @RequestMapping(value = "/ajouter_niveau", method = RequestMethod.POST)
+    public String ajouterNiveau(Model model, Niveau niveau, @RequestParam(name = "id") Long cycleId) {
+        niveau.setCycle(cycleService.rechercherCycle(cycleId));
+        niveauService.ajouterNiveau(niveau);
+        return "redirect:/details_cycle?id=" + cycleId;
     }
 }
 
