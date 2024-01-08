@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Repartition;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class VacataireService {
 
-   
     @Autowired
     private VacataireRepository vacataireRepository;
 
@@ -53,5 +53,5 @@ public class VacataireService {
         } else
             return false;
     }
- 
+
 }

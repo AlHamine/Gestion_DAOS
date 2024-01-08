@@ -29,6 +29,7 @@ import java.util.List;
         
         @ManyToOne
         private UE ue;
+
         
         @OneToMany(mappedBy = "ec")
         private List<Module> module;
