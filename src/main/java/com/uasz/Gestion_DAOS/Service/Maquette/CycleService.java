@@ -81,9 +81,10 @@ public class CycleService {
         List<Niveau> niveaux = new ArrayList<>();
         for (Long idNiveau : listIDNiveaux) {
             Niveau niveau = niveauService.rechercherNiveau(idNiveau);
+            // System.out.println(niveau.getNom());
             niveaux.add(niveau);
         }
-        System.out.println(niveaux.toString());
+        
         return niveaux;
     }
 

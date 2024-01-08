@@ -24,52 +24,48 @@
 // import com.uasz.Gestion_DAOS.Service.Repartition.RepartitionService;
 // import com.uasz.Gestion_DAOS.Service.Repartition.VacataireService;
 
-
-// // @Data 
+// // @Data
 // @Service
 // public class AllService {
-//     @Autowired
-//     public UEService ueService;
-//     @Autowired
-//     public SemestreService semestreService;
-//     @Autowired
-//     public PERService perService;
-//     @Autowired
-//     public EnseignantService enseignantService;
-//     @Autowired
-//     public VacataireService vacataireService;
-//     @Autowired
-//     public RepartitionService repartitionService;
-//     @Autowired
-//     public NiveauService niveauService;
-//     @Autowired
-//     public ModuleService moduleService;
-//     @Autowired
-//     public MaquetteService maquetteService;
-//     @Autowired
-//     public GroupeService groupeService;
-//     @Autowired
-//     public FormationService formationService;
-//     @Autowired
-//     public FiliereService filiereService;
-//     @Autowired
-//     public EnseignementService enseignementService;
-//     @Autowired
-//     public ECService ecservice;
-//     @Autowired
-//     public CycleService cycleService;
-//     @Autowired
-//     public BatimentService batimentService;
-//     @Autowired
-//     public DeroulementService deroulementService;
-//     @Autowired
-//     public EmploiService emploiService;
-//     @Autowired
-//     public SalleService salleService;
-//     @Autowired
-//     public SeanceService seanceService;
-
-
-
+// @Autowired
+// public UEService ueService;
+// @Autowired
+// public SemestreService semestreService;
+// @Autowired
+// public PERService perService;
+// @Autowired
+// public EnseignantService enseignantService;
+// @Autowired
+// public VacataireService vacataireService;
+// @Autowired
+// public RepartitionService repartitionService;
+// @Autowired
+// public NiveauService niveauService;
+// @Autowired
+// public ModuleService moduleService;
+// @Autowired
+// public MaquetteService maquetteService;
+// @Autowired
+// public GroupeService groupeService;
+// @Autowired
+// public FormationService formationService;
+// @Autowired
+// public FiliereService filiereService;
+// @Autowired
+// public EnseignementService enseignementService;
+// @Autowired
+// public ECService ecservice;
+// @Autowired
+// public CycleService cycleService;
+// @Autowired
+// public BatimentService batimentService;
+// @Autowired
+// public DeroulementService deroulementService;
+// @Autowired
+// public EmploiService emploiService;
+// @Autowired
+// public SalleService salleService;
+// @Autowired
+// public SeanceService seanceService;
 
 // }
