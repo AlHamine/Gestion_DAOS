@@ -36,3 +36,4 @@ pom.xml
 HELP.md
 mvnw
 mvnw.cmd
+/src/main/resources/application.properties
