@@ -149,6 +149,45 @@
       </tbody>
     </table>
 
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+      <div class="modal-dialog modal-fullscreen-xl-down">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header text-center btn-primary">
+            <h4 class="modal-title">Modifier Niveau</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form th:action="@{ajouter_niveau(id=${cycle.id})}" method="post">
+              <div class="mb-3" style="display: none">
+                <label for="id">Id</label>
+                <input type="text" class="form-control" name="id" id="id" />
+              </div>
+              <div class="mb-3 mt-3">
+                <label class="form-label" for="nom">Nom</label>
+                <input type="text" class="form-control" name="nom" id="nom" />
+              </div>
+              <button class="btn btn-primary" type="submit">Modifier</button>
+            </form>
+          </div>
+
+          <!-- Modal footer -->
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
     <script>
       // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
       $(document).ready(function () {
