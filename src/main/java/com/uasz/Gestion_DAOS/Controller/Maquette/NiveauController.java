@@ -53,6 +53,7 @@ public class NiveauController {
     public String ajouterNiveau(Model model, Niveau niveau, @RequestParam(name = "id") Long cycleId) {
         niveau.setCycle(cycleService.rechercherCycle(cycleId));
         niveauService.ajouterNiveau(niveau);
+        System.out.println("++++++++++ => " + niveau.getId());
         return "redirect:/details_cycle?id=" + cycleId;
     }
 }

@@ -67,31 +67,27 @@ public class CycleService {
     }
 
     public List<Niveau> detailsNiveau(Long idCycle) {
-        // System.out.println("++++++++++" +
-        // cycleRepository.findById(idCycle).get().getNiveaux().toString());
-        // Niveau n = (Niveau) cycleRepository.findByCycle(idCycle).get(0);
-        // System.out.println(n.getNom());
-        return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
-        // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
-        // return niveauService.rechercherNiveau(listIDNiveaux.get(0));
-        // System.out.println("++++++++++++++" +
-        // cycleRepository.findByCycle(cycleRepository.findById(idCycle).get()).toString());
-        // return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
+    //     System.out.println("++++++++++" + cycleRepository.findById(idCycle).get().getNiveaux().toString());
+    //     return cycleRepository.findById(idCycle).get().getNiveaux();
+    //     // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+    //     // return niveauService.rechercherNiveau(listIDNiveaux.get(0));
+    //     // System.out.println("++++++++++++++" + cycleRepository.findByCycle(cycleRepository.findById(idCycle).get()).toString());
+    //     // return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
 
-        // return niveauService.afficherToutNiveau();
+        return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
     }
 
     // public List<Niveau> detailsNiveau(Long idCycle) {
-    // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+    //     List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
 
-    // List<Niveau> niveaux = new ArrayList<>();
-    // for (Long idNiveau : listIDNiveaux) {
-    // Niveau niveau = niveauService.rechercherNiveau(idNiveau);
-    // // System.out.println(niveau.getNom());
-    // niveaux.add(niveau);
-    // }
-
-    // return niveaux;
+    //     List<Niveau> niveaux = new ArrayList<>();
+    //     for (Long idNiveau : listIDNiveaux) {
+    //         Niveau niveau = niveauService.rechercherNiveau(idNiveau);
+    //         // System.out.println(niveau.getNom());
+    //         niveaux.add(niveau);
+    //     }
+        
+    //     return niveaux;
     // }
 
     // public Niveau detailsNiveau(Long id) {

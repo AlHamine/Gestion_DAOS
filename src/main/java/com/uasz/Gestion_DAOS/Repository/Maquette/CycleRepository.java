@@ -19,8 +19,7 @@ public interface CycleRepository extends JpaRepository<Cycle, Long> {
     // @Query(nativeQuery = true, value = "SELECT * FROM niveau WHERE cycle =:idc ")
     // List<Niveau> findByCycle(@Param("idc") Long idc);
 
-    // @Query(nativeQuery = true, value = "SELECT id FROM niveau WHERE cycle_id
-    // =:idCycle ")
+    // @Query(nativeQuery = true, value = "SELECT id FROM niveau WHERE cycle_id =:idCycle ")
     // List<Long> findByCycle(@Param("idCycle") Long idCycle);
-    //
+
 }
