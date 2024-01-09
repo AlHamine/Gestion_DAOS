@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
 @Transactional
 
@@ -57,48 +59,52 @@ public class CycleService {
 
     public Boolean suprimerCycle(Long id) {
         Cycle cycle = rechercherCycle(id);
-        if (cycle!= null) {
+        if (cycle != null) {
             cycleRepository.delete(cycle);
             return true;
         }
         return false;
     }
 
-    // public List<Niveau> detailsNiveau(Long idCycle) {
-    //     System.out.println("++++++++++" + cycleRepository.findById(idCycle).get().getNiveaux().toString());
-    //     return cycleRepository.findById(idCycle).get().getNiveaux();
-    //     // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
-    //     // return niveauService.rechercherNiveau(listIDNiveaux.get(0));
-    //     // System.out.println("++++++++++++++" + cycleRepository.findByCycle(cycleRepository.findById(idCycle).get()).toString());
-    //     // return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
-
-    //     // return niveauService.afficherToutNiveau();
-    // }
-
     public List<Niveau> detailsNiveau(Long idCycle) {
-        List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+        // System.out.println("++++++++++" +
+        // cycleRepository.findById(idCycle).get().getNiveaux().toString());
+        // Niveau n = (Niveau) cycleRepository.findByCycle(idCycle).get(0);
+        // System.out.println(n.getNom());
+        return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
+        // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+        // return niveauService.rechercherNiveau(listIDNiveaux.get(0));
+        // System.out.println("++++++++++++++" +
+        // cycleRepository.findByCycle(cycleRepository.findById(idCycle).get()).toString());
+        // return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
 
-        List<Niveau> niveaux = new ArrayList<>();
-        for (Long idNiveau : listIDNiveaux) {
-            Niveau niveau = niveauService.rechercherNiveau(idNiveau);
-            // System.out.println(niveau.getNom());
-            niveaux.add(niveau);
-        }
-        
-        return niveaux;
+        // return niveauService.afficherToutNiveau();
     }
 
+    // public List<Niveau> detailsNiveau(Long idCycle) {
+    // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+
+    // List<Niveau> niveaux = new ArrayList<>();
+    // for (Long idNiveau : listIDNiveaux) {
+    // Niveau niveau = niveauService.rechercherNiveau(idNiveau);
+    // // System.out.println(niveau.getNom());
+    // niveaux.add(niveau);
+    // }
+
+    // return niveaux;
+    // }
+
     // public Niveau detailsNiveau(Long id) {
-    //     List<Long> listID = cycleRepository.findByCycle(id);
-    //     return niveauService.rechercherNiveau(listID.get(0));
+    // List<Long> listID = cycleRepository.findByCycle(id);
+    // return niveauService.rechercherNiveau(listID.get(0));
     // }
 
     // public List<Niveau> detailsNiveau(Long idCycle) {
-    //     List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
+    // List<Long> listIDNiveaux = cycleRepository.findByCycle(idCycle);
 
-    //     return listIDNiveaux.stream()
-    //             .map(niveauService::rechercherNiveau)
-    //             .collect(Collectors.toList());
+    // return listIDNiveaux.stream()
+    // .map(niveauService::rechercherNiveau)
+    // .collect(Collectors.toList());
     // }
 
 }

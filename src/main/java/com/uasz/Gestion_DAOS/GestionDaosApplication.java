@@ -52,9 +52,11 @@ public class GestionDaosApplication implements CommandLineRunner {
 		ueService.ajouterUE(new UE(null, "Math 1", "INFM201", null, null, null, new Date(), null, 8, 5));
 		ueService.ajouterUE(new UE(null, "Phys 1", "INFPH101", null, null, null, new Date(), null, 7, 4));
 
-		ecService.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), ue1, null));
+		ecService
+				.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), ue1, null));
 		ecService.ajouterEC(new EC(null, "EC 1", "EC001", 4, 3, 2, 1, 5, "Description for EC 1", null, ue1, null));
-		ecService.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), ue2, null));
+		ecService
+				.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), ue2, null));
 		// .semestreService.ajouterSemestre(new Semestre(null, "Bonnheur", null, null));
 
 		cycleService.ajouterCycle(new Cycle(null, "Licence", null));
@@ -69,5 +71,6 @@ public class GestionDaosApplication implements CommandLineRunner {
 		niveauService.ajouterNiveau(niveau1);
 		niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1));
 		niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2));
+		niveauService.ajouterNiveau(new Niveau(null, "testNiveau", cycle2));
 	}
 }

@@ -15,7 +15,7 @@ public class Niveau {
     private Long id;
     private String nom;
     // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "cycle")
+    @JoinColumn(name = "cycle")
     @ManyToOne
     private Cycle cycle;
 }
