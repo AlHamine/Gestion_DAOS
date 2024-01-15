@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +8,7 @@ import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
+
 @Service
 @Transactional
 
@@ -33,7 +35,7 @@ public class GroupeService {
         if (groupeModifier != null) {
             groupeModifier.setClasse(groupe.getClasse());
             groupeModifier.setEnseignement(groupe.getEnseignement());
-            groupeModifier.setNom(groupe.getNom());
+            groupeModifier.setLibelle(groupe.getLibelle());
 
             return groupeRepository.save(groupeModifier);
         } else
@@ -48,7 +50,5 @@ public class GroupeService {
         } else
             return false;
     }
-
-
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 
 @Controller
 public class ClasseController {
@@ -29,6 +30,16 @@ public class ClasseController {
     public String ajouter_classe(Model modele, Classe classe) {
         classeService.ajouterClasse(classe);
         return "redirect:/classe";
+    }
+
+    @RequestMapping(value = "/ens_classe", method = RequestMethod.GET)
+    public String enseignement_classe(Model model, Long id) {
+        List<Enseignement> enseignementList = classeService.enseignements_classe(id);
+        // System.out.println("+++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>" +
+        // enseignementList);
+        model.addAttribute("classe", classeService.rechercherClasse(id));
+        model.addAttribute("listeDesEnseignement", enseignementList);
+        return "classe_ens";
     }
 
 }

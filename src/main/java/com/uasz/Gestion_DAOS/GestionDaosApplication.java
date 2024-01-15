@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,10 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
+import com.uasz.Gestion_DAOS.Service.Maquette.EnseignementService;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
+import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
+import com.uasz.Gestion_DAOS.Service.Maquette.GroupeService;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
+import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
+import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
@@ -33,6 +42,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 	@Autowired
 	private CycleService cycleService;
+	@Autowired
+	private ClasseService classeService;
+	@Autowired
+	private GroupeService groupeService;
+	@Autowired
+	private EnseignementService enseignementService;
 
 	@Autowired
 	private NiveauService niveauService;
@@ -72,5 +87,26 @@ public class GestionDaosApplication implements CommandLineRunner {
 		niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1));
 		niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2));
 		niveauService.ajouterNiveau(new Niveau(null, "testNiveau", cycle2));
+		Classe ccl1 = new Classe(null, "L1-2I", null, null, null, null);
+		classeService.ajouterClasse(ccl1);
+		Classe ccl2 = new Classe(null, "L2-2I", null, null, null, null);
+		classeService.ajouterClasse(ccl2);
+		classeService.ajouterClasse(new Classe(null, "MI", null, null, null, null));
+
+		classeService.ajouterClasse(new Classe(null, "MIO", null, null, null, null));
+		classeService.ajouterClasse(new Classe(null, "GEOGRAPHIE", null, null, null, null));
+
+		classeService.ajouterClasse(new Classe(null, "MATH", null, null, null, null));
+
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", null, ccl1));
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", null, ccl1));
+
+		groupeService.ajouterGroupe(new Groupe(null, "Alpha", null, ccl2));
+		groupeService.ajouterGroupe(new Groupe(null, "Beta", null, ccl2));
+		enseignementService.ajouterEnseignement(
+				new Enseignement(null, "testENS1",
+						List.of("Objectif 1", "Objectif 2", "Objectif 3"),
+						"Machin",
+						ccl1, null, null));
 	}
 }

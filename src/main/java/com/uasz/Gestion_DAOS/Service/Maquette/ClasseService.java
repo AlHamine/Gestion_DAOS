@@ -4,6 +4,7 @@ import com.uasz.Gestion_DAOS.Repository.Maquette.ClasseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -49,6 +50,11 @@ public class ClasseService {
             return true;
         } else
             return false;
+    }
+
+    public List<Enseignement> enseignements_classe(Long id) {
+        return classeRepository.findById(id).get().getEnseignement();
+
     }
 
 }
