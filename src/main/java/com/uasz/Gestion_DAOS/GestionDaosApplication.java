@@ -8,10 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
+import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
+import com.uasz.Gestion_DAOS.Service.Maquette.FormationService;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
+import com.uasz.Gestion_DAOS.model.Maquette.Filiere;
+import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
@@ -36,6 +40,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 	@Autowired
 	private NiveauService niveauService;
+
+	@Autowired
+	private FiliereService filiereService;
+
+	@Autowired
+	private FormationService formationService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -65,9 +75,36 @@ public class GestionDaosApplication implements CommandLineRunner {
 		cycleService.ajouterCycle(cycle1);
 		cycleService.ajouterCycle(cycle2);
 
-		Niveau niveau1 = new Niveau(null, "L1", cycle1);
+		Niveau niveau1 = new Niveau(null, "L1", cycle1, null);
+		Niveau niveau2 = new Niveau(null, "L2", cycle1, null);
+		Niveau niveau3 = new Niveau(null, "M1", cycle2, null);
 		niveauService.ajouterNiveau(niveau1);
-		niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1));
-		niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2));
+		niveauService.ajouterNiveau(niveau2);
+		niveauService.ajouterNiveau(niveau3);
+	
+
+		Filiere filiere1 = new Filiere(null, "L2I", null);
+		Filiere filiere2 = new Filiere(null, "Mathematique", null);
+		Filiere filiere3 = new Filiere(null, "Cybersecurite", null);
+		Filiere filiere4 = new Filiere(null, "Physique", null);
+		Filiere filiere5 = new Filiere(null, "LEA", null);
+		filiereService.ajouterFiliere(filiere1);
+		filiereService.ajouterFiliere(filiere2);
+		filiereService.ajouterFiliere(filiere3);
+		filiereService.ajouterFiliere(filiere4);
+		filiereService.ajouterFiliere(filiere5);
+
+		Formation formation1 = new Formation(null, "Developpement fullStack", filiere1, null, null, niveau1);
+		Formation formation2 = new Formation(null, "Cryptographie", filiere2, null, null, niveau2);
+		Formation formation3 = new Formation(null, "Hacking", filiere3, null, null, niveau3);
+		Formation formation4 = new Formation(null, "Astronomie", filiere4, null, null, niveau1);
+		Formation formation5 = new Formation(null, "Developpement personnelle", filiere5, null, null, niveau2);
+		formationService.ajouterFormation(formation1);
+		formationService.ajouterFormation(formation2);
+		formationService.ajouterFormation(formation3);
+		formationService.ajouterFormation(formation4);
+		formationService.ajouterFormation(formation5);
+
 	}
+		
 }

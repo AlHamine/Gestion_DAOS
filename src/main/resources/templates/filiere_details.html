@@ -14,7 +14,7 @@
     <script th:src="@{/js/dataTables.buttons.min.js}"></script>
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
 
-    <title>Gestion des Cycles</title>
+    <title>Gestion des Filiere</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -71,7 +71,7 @@
         data-bs-toggle="modal"
         data-bs-target="#myModal"
       >
-        Ajouter un Niveau
+        Ajouter une formation
       </button>
     </div>
 
@@ -81,7 +81,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Ajouter un nouveau Niveau</h4>
+            <h4 class="modal-title">Ajouter une nouvelle fomation</h4>
             <button
               type="button"
               class="btn-close"
@@ -92,7 +92,7 @@
           <!-- Modal body -->
           <div class="modal-body">
             <form
-              th:action="@{ajouter_niveau(cycleId=${cycle.id})}"
+              th:action="@{ajouter_formation(filiereId=${filiere.id})}"
               method="post"
             >
               <div class="mb-3 mt-3">
@@ -120,7 +120,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="e:${listeDesNiveau}" class="table-row">
+        <tr th:each="e:${listeDesFormation}" class="table-row">
           <td th:text="${e.id}"></td>
           <td th:text="${e.nom}"></td>
 
@@ -136,7 +136,7 @@
                 Modifier
               </button>
               <a
-                th:href="@{/supprimer_niveau(niveauId=${e.id},cycleId=${cycle.id})}"
+                th:href="@{/supprimer_formation(formationId=${e.id},filiereId=${filiere.id})}"
                 class="btn btn-danger"
               >
                 Supprimer</a
@@ -146,7 +146,7 @@
           <td>
             <div class="text-center">
               <a
-                th:href="@{/details_niveau_formation(niveauId=${e.id})}"
+                th:href="@{/detailsFormationNiveau(formationId=${e.id})}"
                 class="btn btn-outline-success"
               >
                 Detail
@@ -163,7 +163,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header text-center btn-primary">
-            <h4 class="modal-title">Modifier Niveau</h4>
+            <h4 class="modal-title">Modifier Formation</h4>
             <button
               type="button"
               class="btn-close"
@@ -174,7 +174,7 @@
           <!-- Modal body -->
           <div class="modal-body">
             <form
-              th:action="@{ajouter_niveau(cycleId=${cycle.id})}"
+              th:action="@{ajouter_formation(filiereId=${filiere.id})}"
               method="post"
             >
               <div class="mb-3" style="display: none">

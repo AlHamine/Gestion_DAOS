@@ -14,7 +14,7 @@
 <script th:src="@{/js/dataTables.buttons.min.js}"></script>
 <script th:src="@{/js/jquery.dataTables.min.js}"></script>
    
-<title>Gestion UE</title>
+<title>Gestion Filiere</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,10 +63,10 @@
     </style>
 </head>
 <body>
-    <div><h4 style="color: #007bff;">Gestion des Cycles</h4></div>
+    <div><h4 style="color: #007bff;">Gestion des Filieres</h4></div>
 <div class="text-center">
     <button  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
-        Ajouter de Cycle
+        Ajouter de Filiere
     </button>
 </div>
 <!-- The Modal -->
@@ -76,13 +76,13 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Ajouter de Cycle</h4>
+                <h4 class="modal-title">Ajouter une Filiere</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form th:action="@{ajouter_cycle}" method="post">
+                <form th:action="@{ajouter_filiere}" method="post">
                     <div class="mb-3 mt-3">
                         <label class="form-label " for="">Nom</label>
                         <input type="text" class="form-control" name="nom" />
@@ -108,7 +108,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="e:${listeDesCycle}" class="table-row">
+            <tr th:each="e:${listeDesFiliere}" class="table-row">
                 <td th:text="${e.id}"></td>
                 <td th:text="${e.nom}"></td>
                 <td>
@@ -116,31 +116,31 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">
                             Modifier
                         </button>
-                        <a th:href="@{/supprimer_cycle(id=${e.id})}" class="btn btn-danger"> Supprimer</a>
+                        <a th:href="@{/supprimer_filiere(filiereId=${e.id})}" class="btn btn-danger"> Supprimer</a>
                     </div>  
                 </td>
                 <td>
                     <div class="text-center">
-                        <a th:href="@{/details_cycle(id=${e.id})}" class="btn btn-outline-primary"> Details</a>
+                        <a th:href="@{/details_filiere(filiereId=${e.id})}" class="btn btn-outline-primary"> Details</a>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-    <!-- The Modal -->
+    <!-- The Modal for modifia -->
     <div class="modal" id="myModal2">
         <div class="modal-dialog modal-fullscreen-xl-down">
             <div class="modal-content">
     
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modifier un Cycle</h4>
+                    <h4 class="modal-title">Modifier une filiere</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
     
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form th:action="@{ajouter_cycle}" method="post" class="mx-auto">
+                    <form th:action="@{ajouter_filiere}" method="post" class="mx-auto">
                         <div class="mb-3" style="display: none;">
                             <label for="id">Id</label>
                             <input  type="text" class="form-control" name="id" id="id">
