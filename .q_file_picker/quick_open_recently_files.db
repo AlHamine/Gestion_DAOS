@@ -1,13 +1,14 @@
 # Auto generated, please do not modify# auto generated file, used to cache recently opened files
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/EnseignementController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/classe_ens.html
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Service/Maquette/EnseignementService.java
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/ECController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/model/Maquette/Enseignement.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/ClasseController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/classe.html
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/GestionDaosApplication.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Service/Maquette/ClasseService.java
-/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/EnseignementController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Repartition/EnseignantController.java
-/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Service/Maquette/EnseignementService.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Repository/Maquette/UERepository.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Repository/Maquette/EnseignementRepository.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/model/Maquette/Groupe.java

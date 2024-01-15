@@ -41,14 +41,13 @@ public class EnseignementService {
             return null;
     }
 
-    public Boolean suprimerEnseignement(Enseignement enseignement) {
-        Enseignement enseignementModifier = rechercherEnseignement(enseignement.getId());
+    public Boolean suprimerEnseignement(Long id) {
+        Enseignement enseignementModifier = rechercherEnseignement(id);
         if (enseignementModifier != null) {
-            enseignementRepository.delete(enseignement);
+            enseignementRepository.delete(enseignementModifier);
             return true;
         } else
             return false;
     }
 
- 
 }
