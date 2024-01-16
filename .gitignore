@@ -37,4 +37,5 @@ HELP.md
 mvnw
 mvnw.cmd
 src/main/resources/application.properties
-q_file_picker/quick_open_file_list.db
+
+.q_file_picker/
