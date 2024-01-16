@@ -54,7 +54,14 @@ public class NiveauController {
     public String ajouterNiveau(Model model, Niveau niveau, @RequestParam(name = "idcycle") Long cycleId) {
         niveau.setCycle(cycleService.rechercherCycle(cycleId));
         niveauService.ajouterNiveau(niveau);
-        System.out.println("++++++++++ => " + niveau.getId());
+        // System.out.println("++++++++++ => " + niveau.getId());
         return "redirect:/details_cycle?id=" + cycleId;
+    }
+
+    @RequestMapping(value = "/details_niveau_formation", method = RequestMethod.GET)
+    public String detailsNiveauFormation(Model model, @RequestParam(name = "niveauId") Long niveauId) {
+        model.addAttribute("niveau", niveauService.rechercherNiveau(niveauId));
+        model.addAttribute("lesformationsDuNiveaux", niveauService.detailsFormationsDuNiveaux(niveauId));
+        return "niveau_details";
     }
 }

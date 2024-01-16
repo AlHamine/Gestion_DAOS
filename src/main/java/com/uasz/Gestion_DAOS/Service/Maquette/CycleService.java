@@ -9,7 +9,7 @@ import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
 import jakarta.transaction.Transactional;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +20,8 @@ public class CycleService {
     @Autowired
     private CycleRepository cycleRepository;
 
-    @Autowired
-    private NiveauService niveauService;
+    // @Autowired
+    // private NiveauService niveauService;
 
     public Cycle ajouterCycle(Cycle cycle) {
         cycleRepository.save(cycle);

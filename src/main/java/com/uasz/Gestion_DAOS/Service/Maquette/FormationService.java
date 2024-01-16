@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.FormationRepository;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
+import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -50,5 +51,18 @@ public class FormationService {
     }
 
 
+    public Boolean suprimerFormation(Long formatonId) {
+        Formation formationModifier = rechercherFormation(formatonId);
+        if (formationModifier != null) {
+            formationRepository.delete(formationModifier);
+            return true;
+        } else
+            return false;
+    }
+
+    public Niveau detailsFormationNiveau(Long formationId) {
+        // return formationRepository.findByNiveau(formationRepository.findById((formationId)).get());
+        return formationRepository.findById((formationId)).get().getNiveau();
+    }
 
 }
