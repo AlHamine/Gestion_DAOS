@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
     <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}" />
     <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
-
+    <link rel="stylesheet" th:href="@{/css/stylePerso.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/jquery-3.7.0.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
@@ -15,63 +15,17 @@
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
 
     <title>Gestion des Cycles</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-
-      th,
-      td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-      }
-
-      th {
-        background-color: #4caf50;
-        color: white;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      a {
-        text-decoration: none;
-        color: #007bff;
-        margin-right: 10px;
-      }
-      .table-row {
-        cursor: pointer;
-      }
-
-      .selected {
-        background-color: #a0d8ff; /* Couleur de fond pour la sélection */
-      }
-      .hi {
-        visibility: hidden;
-      }
-    </style>
   </head>
   <body>
-    <div><h2 style="color: #007bff">Gestion DAOS</h2></div>
+    <div th:include="fragments/nav"></div>
     <div class="text-center">
       <!-- <h3>Liste des Niveau : <span th:text="${ue.code}"></span><span th:text="${ue.libelle}"></span></h3> -->
       <button
         type="button"
         class="btn btn-success"
         data-bs-toggle="modal"
-        data-bs-target="#myModal"
-      >
+        data-bs-target="#myModal">
         Ajouter un Niveau
       </button>
     </div>
@@ -86,15 +40,15 @@
             <button
               type="button"
               class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
+              data-bs-dismiss="modal"></button>
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}" method="post">
+            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}"
+              method="post">
               <div class="mb-3 mt-3">
-                <label class="form-label" for="">Nom</label>
+                <label class="form-label" for>Nom</label>
                 <input type="text" class="form-control" name="nom" />
               </div>
               <div class="text-end">
@@ -129,16 +83,13 @@
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#myModal2"
-              >
+                data-bs-target="#myModal2">
                 Modifier
               </button>
               <a
                 th:href="@{/supprimer_niveau(niveauId=${e.id},cycleId=${cycle.id})}"
-                class="btn btn-danger"
-              >
-                Supprimer</a
-              >
+                class="btn btn-danger">
+                Supprimer</a>
             </div>
           </td>
           <td>
@@ -160,13 +111,13 @@
             <button
               type="button"
               class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
+              data-bs-dismiss="modal"></button>
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}" method="post">
+            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}"
+              method="post">
               <div class="mb-3" style="display: none">
                 <label for="id">Id</label>
                 <input type="text" class="form-control" name="id" id="id" />
