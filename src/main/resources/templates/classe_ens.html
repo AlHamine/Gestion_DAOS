@@ -139,122 +139,25 @@
       </div>
     </nav>
     <div class="text-center">
-      <h3>Liste des EC : <span th:text="${ue.code}"> </span>  <span th:text="${ue.libelle}"></span></h3>
+      <!-- <h3>Liste des EC : <span th:text="${ue.code}"> </span>  <span th:text="${ue.libelle}"></span></h3> -->
       <button
         type="button"
         class="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#myModal"
       >
-        Ajouter un nouveau EC
+        Ajouter un nouveau Enseignement
       </button>
-    </div>
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog modal-fullscreen-xl-down">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header text-center btn-success">
-            <h4 class="modal-title">Ajouter un nouveau EC a UE</h4>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form th:action="@{ajouter_ec(id=${ue.id})}" method="post">
-              <div class="mb-3 mt-3">
-                <label class="form-label" for="">Code</label>
-
-                <input type="text" class="form-control" name="code" />
-              </div>
-
-              <div class="mb-3 mt-3">
-                <label class="form-label" for="">libelle</label>
-
-                <input type="text" class="form-control" name="libelle" />
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">CM</label>
-
-                  <input type="text" class="form-control" name="cm" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TD</label>
-
-                  <input type="text" class="form-control" name="td" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TP</label>
-
-                  <input type="text" class="form-control" name="tp" />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TPE</label>
-
-                  <input type="text" class="form-control" name="tpe" />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Coefficient</label>
-
-                  <input type="text" class="form-control" name="coefficient" />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Description</label>
-                  <input type="text" class="form-control" name="description" />
-                </div>
-              </div>
-              <button class="btn btn-success" type="submit">Ajouter</button>
-            </form>
-          </div>
-
-          <!-- Modal footer -->
-          <!-- <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div> -->
-        </div>
-      </div>
     </div>
 
     <table id="table_EC">
       <thead>
         <tr>
           <th style="display: none">Id</th>
-          <th>Code</th>
+          
           <th>Libelle</th>
-          <th>CM</th>
-          <th>TD</th>
-          <th>TP</th>
-          <th>CM+TD+TP</th>
-          <th>TPE</th>
-          <th>VHT</th>
-          <th>Coefficient</th>
           <th>Description</th>
+          <th>Objectifs</th>
           <th style="text-align: center; background-color: firebrick">
             Operation
           </th>
@@ -262,18 +165,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="e:${listeDesEC}" class="table-row">
+        <tr th:each="e:${listeDesEnseignement}" class="table-row">
           <td style="display: none" th:text="${e.id}"></td>
-          <td th:text="${e.code}"></td>
+    
           <td th:text="${e.libelle}"></td>
-          <td th:text="${e.cm}"></td>
-          <td th:text="${e.td}"></td>
-          <td th:text="${e.tp}"></td>
-          <td th:text="${e.cm + e.td + e.tp}"></td>
-          <td th:text="${e.tpe}"></td>
-          <td th:text="${e.cm + e.td + e.tp+e.tpe}"></td>
-          <td th:text="${e.coefficient}"></td>
           <td th:text="${e.description}"></td>
+      <td>
+            <span th:each="o:${e.objectifs}">
+              <p th:text="${o}"></p>
+            </span>
+          </td>
 
           <td>
             <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
@@ -287,8 +188,8 @@
                 Modifier
               </button>
               <a
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet EC')"
-                th:href="@{/supprimer_ec(id=${e.id},id2=${ue.id})}"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet Enseignement')"
+                th:href="@{/supprimer_ens_classe(id=${e.id},id2=${classe.id})}"
                 class="btn btn-danger"
               >
                 Supprimer</a
@@ -319,98 +220,7 @@
             ></button>
           </div>
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form th:action="@{ajouter_ec(id=${ue.id})}" method="post">
-              <div class="mb-3" style="display: none">
-                <label for="id">Id</label>
-                <input type="text" class="form-control" name="id" id="id" />
-              </div>
-              <div class="mb-3 mt-3">
-                <label class="form-label" for="">Code</label>
-
-                <input type="text" class="form-control" name="code" id="code" />
-              </div>
-
-              <div class="mb-3 mt-3">
-                <label class="form-label" for="">libelle</label>
-
-                <input
-                  type="text"
-                  class="form-control"
-                  name="libelle"
-                  id="libelle"
-                />
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">CM</label>
-
-                  <input type="text" class="form-control" name="cm" id="cm" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TD</label>
-
-                  <input type="text" class="form-control" name="td" id="td" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TP</label>
-
-                  <input type="text" class="form-control" name="tp" id="tp" />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">TPE</label>
-
-                  <input type="text" class="form-control" name="tpe" id="tpe" />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Coefficient</label>
-
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="coefficient"
-                    id="coefficient"
-                  />
-                </div>
-              </div>
-
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for="">Description</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="description"
-                    id="description"
-                  />
-                </div>
-              </div>
-              <button class="btn btn-primary" type="submit">Modifier</button>
-            </form>
-          </div>
-
-          <!-- Modal footer -->
-          <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-              Close
-            </button>
-          </div> -->
-        </div>
-      </div>
-    </div>
-
+        
     <script>
       // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
       $(document).ready(function () {

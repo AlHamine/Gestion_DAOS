@@ -14,7 +14,6 @@ import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
-
 @Controller
 public class NiveauController {
 
@@ -33,24 +32,26 @@ public class NiveauController {
 
     // @RequestMapping(value = "/ajouter_niveau", method = RequestMethod.POST)
     // public String ajouter_niveau(Model modele, Niveau niveau) {
-    //     niveauService.ajouterNiveau(niveau);
-    //     return "redirect:/niveau";
+    // niveauService.ajouterNiveau(niveau);
+    // return "redirect:/niveau";
     // }
 
     @RequestMapping(value = "/supprimer_niveau", method = RequestMethod.GET)
-    public String supprimer_niveau(Model modele, @RequestParam(name = "niveauId") Long niveauId, @RequestParam(name = "cycleId") Long cycleId) {
+    public String supprimer_niveau(Model modele, @RequestParam(name = "niveauId") Long niveauId,
+            @RequestParam(name = "cycleId") Long cycleId) {
         niveauService.suprimerNiveau(niveauId);
         return "redirect:/details_cycle?id=" + cycleId;
     }
 
     // @RequestMapping(value = "/modifier_niveau", method = RequestMethod.GET)
-    // public String modifier_niveau(Model modele, @RequestParam(name = "niveauId") Long niveauId, @RequestParam(name = "cycleId") Long cycleId) {
-    //     niveauService.suprimerNiveau(niveauId);
-    //     return "redirect:/details_cycle?id=" + cycleId;
+    // public String modifier_niveau(Model modele, @RequestParam(name = "niveauId")
+    // Long niveauId, @RequestParam(name = "cycleId") Long cycleId) {
+    // niveauService.suprimerNiveau(niveauId);
+    // return "redirect:/details_cycle?id=" + cycleId;
     // }
 
     @RequestMapping(value = "/ajouter_niveau", method = RequestMethod.POST)
-    public String ajouterNiveau(Model model, Niveau niveau, @RequestParam(name = "cycleId") Long cycleId) {
+    public String ajouterNiveau(Model model, Niveau niveau, @RequestParam(name = "idcycle") Long cycleId) {
         niveau.setCycle(cycleService.rechercherCycle(cycleId));
         niveauService.ajouterNiveau(niveau);
         // System.out.println("++++++++++ => " + niveau.getId());
@@ -64,4 +65,3 @@ public class NiveauController {
         return "niveau_details";
     }
 }
-

@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class Groupe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    private  String nom;
+    private Long id;
+    private String libelle;
     @OneToMany
     private List<Enseignement> enseignement;
     @ManyToOne

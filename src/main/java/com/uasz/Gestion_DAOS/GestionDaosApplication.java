@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,12 +13,18 @@ import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
 import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
 import com.uasz.Gestion_DAOS.Service.Maquette.FormationService;
+import com.uasz.Gestion_DAOS.Service.Maquette.EnseignementService;
 import com.uasz.Gestion_DAOS.Service.Maquette.NiveauService;
+import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
+import com.uasz.Gestion_DAOS.Service.Maquette.GroupeService;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
+import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
 import com.uasz.Gestion_DAOS.model.Maquette.Filiere;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
+import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
@@ -37,6 +46,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 	@Autowired
 	private CycleService cycleService;
+	@Autowired
+	private ClasseService classeService;
+	@Autowired
+	private GroupeService groupeService;
+	@Autowired
+	private EnseignementService enseignementService;
 
 	@Autowired
 	private NiveauService niveauService;
@@ -62,9 +77,11 @@ public class GestionDaosApplication implements CommandLineRunner {
 		ueService.ajouterUE(new UE(null, "Math 1", "INFM201", null, null, null, new Date(), null, 8, 5));
 		ueService.ajouterUE(new UE(null, "Phys 1", "INFPH101", null, null, null, new Date(), null, 7, 4));
 
-		ecService.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), ue1, null));
+		ecService
+				.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), ue1, null));
 		ecService.ajouterEC(new EC(null, "EC 1", "EC001", 4, 3, 2, 1, 5, "Description for EC 1", null, ue1, null));
-		ecService.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), ue2, null));
+		ecService
+				.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), ue2, null));
 		// .semestreService.ajouterSemestre(new Semestre(null, "Bonnheur", null, null));
 
 		cycleService.ajouterCycle(new Cycle(null, "Licence", null));
@@ -104,7 +121,6 @@ public class GestionDaosApplication implements CommandLineRunner {
 		formationService.ajouterFormation(formation3);
 		formationService.ajouterFormation(formation4);
 		formationService.ajouterFormation(formation5);
-
 	}
 		
 }
