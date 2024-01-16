@@ -39,3 +39,4 @@ mvnw.cmd
 src/main/resources/application.properties
 
 .q_file_picker/
+.q_file_picker/quick_open_recently_files.db
