@@ -98,7 +98,6 @@ public class GestionDaosApplication implements CommandLineRunner {
 		niveauService.ajouterNiveau(niveau1);
 		niveauService.ajouterNiveau(niveau2);
 		niveauService.ajouterNiveau(niveau3);
-	
 
 		Filiere filiere1 = new Filiere(null, "L2I", null);
 		Filiere filiere2 = new Filiere(null, "Mathematique", null);
@@ -121,6 +120,28 @@ public class GestionDaosApplication implements CommandLineRunner {
 		formationService.ajouterFormation(formation3);
 		formationService.ajouterFormation(formation4);
 		formationService.ajouterFormation(formation5);
+		Classe ccl1 = new Classe(null, "L1-2I", null, null, null, null);
+		classeService.ajouterClasse(ccl1);
+		Classe ccl2 = new Classe(null, "L2-2I", null, null, null, null);
+		classeService.ajouterClasse(ccl2);
+		classeService.ajouterClasse(new Classe(null, "MI", null, null, null, null));
+
+		classeService.ajouterClasse(new Classe(null, "MIO", null, null, null, null));
+		classeService.ajouterClasse(new Classe(null, "GEOGRAPHIE", null, null, null, null));
+
+		classeService.ajouterClasse(new Classe(null, "MATH", null, null, null, null));
+
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", null, ccl1));
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", null, ccl1));
+
+		groupeService.ajouterGroupe(new Groupe(null, "Alpha", null, ccl2));
+		groupeService.ajouterGroupe(new Groupe(null, "Beta", null, ccl2));
+		enseignementService.ajouterEnseignement(
+				new Enseignement(null, "testENS1",
+						List.of("Objectif 1", "Objectif 2", "Objectif 3"),
+						"Machin",
+						ccl1, null, null));
+
 	}
-		
+
 }
