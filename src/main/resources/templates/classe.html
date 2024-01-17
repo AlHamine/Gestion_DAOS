@@ -103,7 +103,7 @@
                     <td th:text="${e.id}"></td>
                     <td th:text="${e.libelle}"></td>
                     <td th:text="${e.effectif}"></td>
-                    <td th:text="${e.nbreGroupe}"></td>
+                    <td th:text="${e.getGroupes().size()}"></td>
                     <td th:text="${e.description}"></td>
                     <td>
                         <a class="btn btn-primary"
@@ -112,10 +112,8 @@
 
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary"
-                            data-bs-toggle="modal" data-bs-target="#myModal2">
-                            voir les groupes
-                        </button>
+                        <a th:href="@{/groupe_classe(id=${e.id})}"
+                            class="btn btn-primary">voir les groupes</a>
                     </td>
 
                     <td>

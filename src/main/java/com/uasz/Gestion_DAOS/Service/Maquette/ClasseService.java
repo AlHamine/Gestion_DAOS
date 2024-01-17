@@ -1,13 +1,17 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.ClasseRepository;
+import com.uasz.Gestion_DAOS.Repository.Maquette.GroupeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
+import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -15,6 +19,8 @@ import java.util.List;
 public class ClasseService {
     @Autowired
     private ClasseRepository classeRepository;
+    @Autowired
+    private GroupeRepository gRepository;
 
     public Classe ajouterClasse(Classe classe) {
         classeRepository.save(classe);
@@ -61,4 +67,29 @@ public class ClasseService {
 
     }
 
+    public List<Groupe> groupe_classe(Long id) {
+        return classeRepository.findById(id).get().getGroupes();
+
+    }
+
+    // public List<Groupe> groupe_classe(Long id) {
+    // return classeRepository.findByClasse(id);
+
+    // }
+
+    // public List<Groupe> groupe_classe(Long idc) {
+    // List<Object[]> results = classeRepository.findByClasse(idc);
+
+    // // Process the result and convert it into a List<Groupe>
+    // List<Groupe> groupes = results.stream()
+    // .map(result -> new Groupe((Long) result[0], (String) result[1], (Integer)
+    // result[2], (String) result[3],
+    // null, classeRepository.getById(idc)))
+    // .collect(Collectors.toList());
+
+    // groupes.stream().forEach(e -> System.out.println("+++++++++++++++++++++++" +
+    // e));
+
+    // return groupes;
+    // }
 }

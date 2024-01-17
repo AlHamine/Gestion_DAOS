@@ -120,7 +120,7 @@ public class GestionDaosApplication implements CommandLineRunner {
 		formationService.ajouterFormation(formation3);
 		formationService.ajouterFormation(formation4);
 		formationService.ajouterFormation(formation5);
-		Classe ccl1 = new Classe(null, "L1-2I", 10, 3, "c'est cool", null, null, null, null);
+		Classe ccl1 = new Classe(null, "L1-2I", 10, 3, "c'est cool", null, null, new ArrayList<>(), null);
 		classeService.ajouterClasse(ccl1);
 		Classe ccl2 = new Classe(null, "L2-2I", 14, 5, "Tres interressant", null, null, null, null);
 		classeService.ajouterClasse(ccl2);
@@ -135,11 +135,11 @@ public class GestionDaosApplication implements CommandLineRunner {
 		classeService
 				.ajouterClasse(new Classe(null, "MATH", 14, 5, "Discipline tre ancienne ", null, null, null, null));
 
-		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", null, ccl1));
-		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", null, ccl1));
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, null, null, ccl1));
+		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, null, null, ccl1));
 
-		groupeService.ajouterGroupe(new Groupe(null, "Alpha", null, ccl2));
-		groupeService.ajouterGroupe(new Groupe(null, "Beta", null, ccl2));
+		groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, null, null, ccl2));
+		groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, null, null, ccl2));
 		enseignementService.ajouterEnseignement(
 				new Enseignement(null, "testENS1",
 						List.of("Objectif 1", "Objectif 2", "Objectif 3"),

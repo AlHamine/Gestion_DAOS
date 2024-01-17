@@ -30,27 +30,14 @@
           // Récupérer les données de la ligne sélectionnée
           var id = $(this).find("td:eq(0)").text();
           var libelle = $(this).find("td:eq(1)").text();
-          var description = $(this).find("td:eq(2)").text();
+          var effectif = $(this).find("td:eq(2)").text();
+
+          var description = $(this).find("td:eq(3)").text();
           // var objectifs = $(this).find("span:eq(3)").toArray();
           document.getElementById("id").value = id;
           document.getElementById("libelle").value = libelle;
+          document.getElementById("effectif").value = effectif;
           document.getElementById("description").value = description;
-          
-          let listObjectifs2=document.querySelectorAll('.objectifselected');
-          
-          listObjectifs2.forEach(e=>{
-            let objectifCourant=e.querySelector('p').innerText;
-            let listItem = document.createElement('li');
-            listItem.textContent = objectifCourant;
-            listeChaines.appendChild(listItem);
-            objectifs.push(objectifCourant);
-          })
-          // objectifs=[];
-          // document.getElementById("listeChaines").value = objectifs;
-  // $(".objectifselected").remove();
-  
-    console.log(objectifs);
-   
           
         });
 
@@ -61,13 +48,13 @@
   <body>
     <div th:include="fragments/nav"></div>
     <div class="text-center">
-      <!-- <h3>Liste des EC : <span th:text="${ue.code}"> </span>  <span th:text="${ue.libelle}"></span></h3> -->
+      <h3>Liste des Groupes : <span th:text="${classe.libelle}"> </span> Nombre de Groupes <span th:text="${nbreGroupe}"></span></h3>
       <button
         type="button"
         class="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#myModal">
-        Ajouter un nouveau Enseignement
+        Ajouter un nouveau groupe
       </button>
     </div>
 
@@ -77,19 +64,25 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header text-center btn-success">
-            <h4 class="modal-title">Ajouter un nouveau EC a UE</h4>
+            <h4 class="modal-title">Ajouter un nouveau Groupe a la classe</h4>
             <button type="button" class="btn-close"
               data-bs-dismiss="modal"></button>
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form th:action="@{ajouter_ens(idc=${classe.id})}" method="post">
+            <form th:action="@{ajouter_groupe_classe(idc=${classe.id})}" method="post">
 
               <div class="mb-3 mt-3">
                 <label class="form-label" for>libelle</label>
 
                 <input type="text" class="form-control" name="libelle" />
+              </div>
+               <div class="mb-3 mt-3">
+                <label class="form-label" for>Effectif</label>
+
+                <input type="text" class="form-control" 
+                  name="effectif" />
               </div>
 
               <div class="row g-3 align-items-center">
@@ -98,17 +91,7 @@
                   <input type="text" class="form-control" name="description" />
                 </div>
               </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for>Objectifs</label>
-                  <input type="text" class="form-control" name="objectif"
-                    id="objectif" />
-                  <button type="button" class="btn btn-outline-primary"
-                    onclick="ajouterObjectifs()">Enregistrer objectif</button>
-                  <button type="button" class="btn btn-outline-primary"
-                    onclick="ajouterObjectifs()">Ajouter un autre
-                    objectif</button>
-                </div>
+         
               </div>
               <div class="row g-3 align-items-center" style="display: none;">
                 <div class="mb-3 mt-3">
@@ -130,9 +113,9 @@
         <tr>
           <th style="display: none">Id</th>
 
-          <th>Libelle</th>
+          <th>Libellé</th>
+          <th>Effectif</th>
           <th>Description</th>
-          <th>Objectifs</th>
           <th style="text-align: center; background-color: firebrick">
             Operation
           </th>
@@ -140,16 +123,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="e:${listeDesEnseignement}" class="table-row">
+        <tr th:each="e:${listeDesGroupe}" class="table-row">
           <td style="display: none" th:text="${e.id}"></td>
 
           <td th:text="${e.libelle}"></td>
+          <td th:text="${e.effectif}"></td>
           <td th:text="${e.description}"></td>
-          <td>
-            <span th:each="o:${e.objectifs}" class="objectif">
-              <p th:text="${o}"></p>
-            </span>
-          </td>
 
           <td>
             <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
@@ -162,8 +141,8 @@
                 Modifier
               </button>
               <a
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet Enseignement')"
-                th:href="@{/supprimer_ens_classe(id=${e.id},id2=${classe.id})}"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce Groupe')"
+                th:href="@{/supprimer_groupe_classe(id=${e.id},id2=${classe.id})}"
                 class="btn btn-danger">
                 Supprimer</a>
             </div>
@@ -185,53 +164,33 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header text-center btn-primary">
-            <h4 class="modal-title">Modifier un Enseignement</h4>
+            <h4 class="modal-title">Modifier un Groupe</h4>
             <button type="button" class="btn-close"
               data-bs-dismiss="modal"></button>
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form th:action="@{ajouter_ens(idc=${classe.id})}" method="post">
+            <form th:action="@{ajouter_groupe_classe(idc=${classe.id})}" method="post">
               <div class="mb-3" style="display: none">
                 <label for="id">Id</label>
                 <input type="text" class="form-control" name="id" id="id" />
               </div>
               <div class="mb-3 mt-3">
                 <label class="form-label" for>libelle</label>
-
                 <input type="text" class="form-control" id="libelle"
                   name="libelle" />
               </div>
-
+                <div class="mb-3 mt-3">
+                <label class="form-label" for>Effectif</label>
+                <input type="text" class="form-control" id="effectif"
+                  name="effectif" />
+              </div>
               <div class="row g-3 align-items-center">
                 <div class="mb-3 mt-3">
                   <label class="form-label" for>Description</label>
                   <input type="text" class="form-control" name="description"
                     id="description" />
-                </div>
-              </div>
-              <div class="row g-3 align-items-center" style="display: none;">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for>Objectifs</label>
-                  <input type="text" class="form-control" name="objectifs"
-                    id="objectifsmodif" />
-
-                </div>
-              </div>
-              <div class="row g-3 align-items-center">
-                <div class="mb-3 mt-3">
-                  <label class="form-label" for>Objectifs</label>
-                  <ul id="listeChaines"> </ul>
-                  <input type="text" class="form-control" name="objectif"
-                    id="object" />
-                  <button type="button" class="btn btn-outline-primary"
-                    onclick="modifierObjectifs()">Enregistrer
-                    objectif</button>
-                  <button type="button" class="btn btn-outline-danger"
-                    onclick="viderObjectifs()">Vider
-                    la liste des objectif</button>
-
                 </div>
               </div>
 

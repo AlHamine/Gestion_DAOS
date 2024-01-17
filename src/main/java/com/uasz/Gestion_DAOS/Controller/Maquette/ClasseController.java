@@ -48,4 +48,16 @@ public class ClasseController {
         return "classe_ens";
     }
 
+    @RequestMapping(value = "/groupe_classe", method = RequestMethod.GET)
+    public String groupe_classe(Model model, Long id) {
+
+        // System.out.println("+++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>" +
+        // enseignementList);
+        Classe c = classeService.rechercherClasse(id);
+        model.addAttribute("classe", c);
+        model.addAttribute("nbreGroupe", c.getGroupes().size());
+        model.addAttribute("listeDesGroupe", classeService.groupe_classe(id));
+        return "classe_groupe";
+    }
+
 }

@@ -23,7 +23,7 @@ public class Classe {
     private List<Enseignement> enseignement;
     @ManyToOne
     private Semestre semestre;
-    @ManyToMany(mappedBy = "classe")
+    @OneToMany(mappedBy = "classe")
     private List<Groupe> groupes;
     @ManyToOne
     private Formation formation;

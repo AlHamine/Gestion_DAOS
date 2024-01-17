@@ -19,8 +19,10 @@
   </head>
   <body>
     <div th:include="fragments/nav"></div>
-    
+
     <div class="text-center">
+      <h3>Liste des Formations : <span th:text="${filiere.nom}"> </span></h3>
+
       <button
         type="button"
         class="btn btn-success"
