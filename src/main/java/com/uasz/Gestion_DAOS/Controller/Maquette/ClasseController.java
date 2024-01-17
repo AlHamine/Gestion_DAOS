@@ -32,6 +32,12 @@ public class ClasseController {
         return "redirect:/classe";
     }
 
+    @RequestMapping(value = "/supprimerClasse", method = RequestMethod.GET)
+    public String supprimerClasse(Model modele, Long id) {
+        classeService.suprimerClasse(id);
+        return "redirect:/classe";
+    }
+
     @RequestMapping(value = "/ens_classe", method = RequestMethod.GET)
     public String enseignement_classe(Model model, Long id) {
         List<Enseignement> enseignementList = classeService.enseignements_classe(id);

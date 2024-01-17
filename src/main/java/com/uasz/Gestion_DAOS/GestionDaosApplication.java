@@ -120,16 +120,20 @@ public class GestionDaosApplication implements CommandLineRunner {
 		formationService.ajouterFormation(formation3);
 		formationService.ajouterFormation(formation4);
 		formationService.ajouterFormation(formation5);
-		Classe ccl1 = new Classe(null, "L1-2I", null, null, null, null);
+		Classe ccl1 = new Classe(null, "L1-2I", 10, 3, "c'est cool", null, null, null, null);
 		classeService.ajouterClasse(ccl1);
-		Classe ccl2 = new Classe(null, "L2-2I", null, null, null, null);
+		Classe ccl2 = new Classe(null, "L2-2I", 14, 5, "Tres interressant", null, null, null, null);
 		classeService.ajouterClasse(ccl2);
-		classeService.ajouterClasse(new Classe(null, "MI", null, null, null, null));
+		classeService
+				.ajouterClasse(new Classe(null, "MI", 14, 5, "Tres interressant et a retenir", null, null, null, null));
 
-		classeService.ajouterClasse(new Classe(null, "MIO", null, null, null, null));
-		classeService.ajouterClasse(new Classe(null, "GEOGRAPHIE", null, null, null, null));
+		classeService
+				.ajouterClasse(new Classe(null, "MIO", 14, 5, "Informatiquement parlant ", null, null, null, null));
+		classeService.ajouterClasse(
+				new Classe(null, "GEOGRAPHIE", 14, 5, "Util pour exploter les petrole", null, null, null, null));
 
-		classeService.ajouterClasse(new Classe(null, "MATH", null, null, null, null));
+		classeService
+				.ajouterClasse(new Classe(null, "MATH", 14, 5, "Discipline tre ancienne ", null, null, null, null));
 
 		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", null, ccl1));
 		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", null, ccl1));

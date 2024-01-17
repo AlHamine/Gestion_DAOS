@@ -33,20 +33,24 @@ public class ClasseService {
     public Classe modifierClasse(Classe classe) {
         Classe classeModifier = rechercherClasse(classe.getId());
         if (classeModifier != null) {
-            classeModifier.setNom(classe.getNom());
+            classeModifier.setLibelle(classe.getLibelle());
+            ;
             classeModifier.setEnseignement(classe.getEnseignement());
             classeModifier.setFormation(classe.getFormation());
             classeModifier.setGroupes(classe.getGroupes());
             classeModifier.setSemestre(classe.getSemestre());
+            classeModifier.setDescription(classe.getDescription());
+            classeModifier.setEffectif(classe.getEffectif());
+            classeModifier.setNbreGroupe(classe.getNbreGroupe());
             return classeRepository.save(classeModifier);
         } else
             return null;
     }
 
-    public Boolean suprimerClasse(Classe classe) {
-        Classe classeModifier = rechercherClasse(classe.getId());
+    public Boolean suprimerClasse(Long id) {
+        Classe classeModifier = rechercherClasse(id);
         if (classeModifier != null) {
-            classeRepository.delete(classe);
+            classeRepository.delete(classeModifier);
             return true;
         } else
             return false;
