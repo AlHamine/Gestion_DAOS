@@ -1,8 +1,13 @@
 # Auto generated, please do not modify# auto generated file, used to cache recently opened files
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Fonctionnalite.Developpeer
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/semestre.html
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/model/Maquette/Classe.java
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/fragments/nav.html
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/model/Maquette/Semestre.java
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/model/Utilisateur/Utilisateur.java
+/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/ClasseController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/classe.html
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/classe_groupe.html
-/home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Controller/Maquette/ClasseController.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS/Service/Maquette/ClasseService.java
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/filiere.html
 /home/smah/Documents/Projet/Gestion_DAOS/src/main/resources/templates/filiere_details.html

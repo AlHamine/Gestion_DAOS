@@ -3,6 +3,7 @@ Maquette{UE EC ENSEIGNEMENT CLASSE CYCLE NIVEAU FILIERE  FORMATION SEMESTRE GROU
 Pas encore termin ==>MODULE Maquette
 En cours==> 
 
+indice:::> utiliser les select option poir lier semestre a classe [lecteur seule]
 
 
 A la fin ajouter l'attribut datedeCreation a toutesbles classes
