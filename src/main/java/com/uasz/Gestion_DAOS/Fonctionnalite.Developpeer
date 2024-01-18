@@ -5,5 +5,16 @@ En cours==>
 
 indice:::> utiliser les select option poir lier semestre a classe [lecteur seule]
 
+Emploie_Du_Temps==>
+DeroulementController.java
+EmploiController.java
+SalleController.java
+SeanceController.java
 
-A la fin ajouter l'attribut datedeCreation a toutesbles classes
+Repartition=====>
+EnseignantController.java
+PERController.java
+RepartitionController.java
+VacataireController.java
+
+A la fin ajouter l'attribut datedeCreation a toutesbles classesBatimentController.java
