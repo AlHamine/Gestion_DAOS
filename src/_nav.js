@@ -44,72 +44,73 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Components',
+    name: 'DAOS (Components)',
   },
   {
     component: CNavGroup,
-    name: 'Base',
+    name: 'Maquette (Base)',
     to: '/base',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Accordion',
-        to: '/base/accordion',
+        name: 'UE (Accordion)',
+        // to: '/base/accordion',
+        to: '/base/Ue',
       },
       {
         component: CNavItem,
-        name: 'Breadcrumb',
+        name: 'EC (Breadcrumb)',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Cards',
+        name: 'Module (Cards)',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'Carousel',
+        name: 'Semetre (Carousel)',
         to: '/base/carousels',
       },
       {
         component: CNavItem,
-        name: 'Collapse',
+        name: 'Maquette (Collapse)',
         to: '/base/collapses',
       },
       {
         component: CNavItem,
-        name: 'List group',
+        name: 'Enseignement (List group)',
         to: '/base/list-groups',
       },
       {
         component: CNavItem,
-        name: 'Navs & Tabs',
+        name: 'Cycle (Navs & Tabs)',
         to: '/base/navs',
       },
       {
         component: CNavItem,
-        name: 'Pagination',
+        name: 'Niveau (Pagination)',
         to: '/base/paginations',
       },
       {
         component: CNavItem,
-        name: 'Placeholders',
+        name: 'Filiere (Placeholders)',
         to: '/base/placeholders',
       },
       {
         component: CNavItem,
-        name: 'Popovers',
+        name: 'Formation (Popovers)',
         to: '/base/popovers',
       },
       {
         component: CNavItem,
-        name: 'Progress',
+        name: 'Classse (Progress)',
         to: '/base/progress',
       },
       {
         component: CNavItem,
-        name: 'Spinners',
+        name: 'Groupe (Spinners)',
         to: '/base/spinners',
       },
       {
@@ -126,7 +127,7 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Buttons',
+    name: 'Repartition (Buttons)',
     to: '/buttons',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
@@ -149,7 +150,7 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Forms',
+    name: 'Empoi du temps (Forms)',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
