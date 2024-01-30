@@ -42,10 +42,10 @@ public class GroupeService {
             return null;
     }
 
-    public Boolean suprimerGroupe(Groupe groupe) {
-        Groupe groupeModifier = rechercherGroupe(groupe.getId());
+    public Boolean suprimerGroupe(Long id) {
+        Groupe groupeModifier = rechercherGroupe(id);
         if (groupeModifier != null) {
-            groupeRepository.delete(groupe);
+            groupeRepository.delete(groupeModifier);
             return true;
         } else
             return false;

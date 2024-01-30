@@ -32,6 +32,12 @@ public class ClasseController {
         return "redirect:/classe";
     }
 
+    @RequestMapping(value = "/supprimerClasse", method = RequestMethod.GET)
+    public String supprimerClasse(Model modele, Long id) {
+        classeService.suprimerClasse(id);
+        return "redirect:/classe";
+    }
+
     @RequestMapping(value = "/ens_classe", method = RequestMethod.GET)
     public String enseignement_classe(Model model, Long id) {
         List<Enseignement> enseignementList = classeService.enseignements_classe(id);
@@ -40,6 +46,18 @@ public class ClasseController {
         model.addAttribute("classe", classeService.rechercherClasse(id));
         model.addAttribute("listeDesEnseignement", enseignementList);
         return "classe_ens";
+    }
+
+    @RequestMapping(value = "/groupe_classe", method = RequestMethod.GET)
+    public String groupe_classe(Model model, Long id) {
+
+        // System.out.println("+++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>" +
+        // enseignementList);
+        Classe c = classeService.rechercherClasse(id);
+        model.addAttribute("classe", c);
+        model.addAttribute("nbreGroupe", c.getGroupes().size());
+        model.addAttribute("listeDesGroupe", classeService.groupe_classe(id));
+        return "classe_groupe";
     }
 
 }

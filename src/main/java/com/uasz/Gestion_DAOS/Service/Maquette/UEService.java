@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 @Transactional
-
 public class UEService {
     @Autowired
     private UERepository ueRepository;

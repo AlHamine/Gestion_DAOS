@@ -15,14 +15,18 @@ public class Classe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
+    private String libelle;
+    private int effectif;
+    private int nbreGroupe;
+    private String description;
     @OneToMany(mappedBy = "classe")
     private List<Enseignement> enseignement;
     @ManyToOne
     private Semestre semestre;
-    @ManyToMany(mappedBy = "classe")
+    @OneToMany(mappedBy = "classe")
     private List<Groupe> groupes;
     @ManyToOne
     private Formation formation;
+    
 
 }

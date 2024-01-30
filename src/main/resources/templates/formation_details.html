@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
     <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}" />
     <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
-
+<link rel="stylesheet" th:href="@{/css/stylePerso.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/jquery-3.7.0.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
@@ -15,54 +15,10 @@
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
 
     <title>Gestion des Cycles</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-
-      th,
-      td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-      }
-
-      th {
-        background-color: #4caf50;
-        color: white;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      a {
-        text-decoration: none;
-        color: #007bff;
-        margin-right: 10px;
-      }
-      .table-row {
-        cursor: pointer;
-      }
-
-      .selected {
-        background-color: #a0d8ff; /* Couleur de fond pour la sélection */
-      }
-      .hi {
-        visibility: hidden;
-      }
-    </style>
+   
   </head>
   <body>
+    <div th:include="fragments/nav"></div>
     <div style="text-align: center">
       <h2 style="color: #007bff">Le niveau de la formation</h2>
     </div>

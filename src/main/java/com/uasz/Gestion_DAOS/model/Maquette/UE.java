@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uasz.Gestion_DAOS.model.Utilisateur.Utilisateur;
 
 @Entity
@@ -22,6 +23,7 @@ public class UE {
     private String libelle;
     private String Code;
     private String description;
+    @JsonIgnore
     @OneToMany(mappedBy = "ue")
     private List<EC> ecs;
     

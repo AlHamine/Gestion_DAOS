@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
 import com.uasz.Gestion_DAOS.Service.Maquette.EnseignementService;
+import com.uasz.Gestion_DAOS.model.Maquette.EC;
 import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 
 @Controller
@@ -18,6 +20,8 @@ public class EnseignementController {
 
     @Autowired
     private EnseignementService enseignementService;
+    @Autowired
+    private ClasseService classeService;
 
     @RequestMapping(value = "/enseignement", method = RequestMethod.GET)
     public String lister_enseignement(Model model) {
@@ -37,6 +41,13 @@ public class EnseignementController {
             @RequestParam(name = "id2") Long idClasse) {
         enseignementService.suprimerEnseignement(idEns);
         return "redirect:/ens_classe?id=" + idClasse;
-        // return "redirect:/ue";
+
+    }
+
+    @RequestMapping(value = "/ajouter_ens", method = RequestMethod.POST)
+    public String ajouter_ens(Model modele, Enseignement ens, @RequestParam(name = "idc") Long idClasse) {
+        ens.setClasse(classeService.rechercherClasse(idClasse));
+        enseignementService.ajouterEnseignement(ens);
+        return "redirect:/ens_classe?id=" + idClasse;
     }
 }

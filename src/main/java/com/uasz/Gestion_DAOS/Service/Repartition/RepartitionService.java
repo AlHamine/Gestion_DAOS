@@ -17,7 +17,6 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class RepartitionService {
 
-    
     @Autowired
     private RepartitionRepository repartitionRepository;
 
@@ -64,5 +63,5 @@ public class RepartitionService {
         } else
             return false;
     }
- 
+
 }
