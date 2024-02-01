@@ -22,6 +22,4 @@ public class Formation {
     private Maquette maquette;
     @OneToMany(mappedBy = "formation")
     private List<Classe> classes;
-    @ManyToOne
-    private Niveau niveau;
 }

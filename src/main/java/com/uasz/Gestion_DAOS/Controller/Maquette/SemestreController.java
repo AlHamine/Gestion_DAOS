@@ -35,7 +35,7 @@ public class SemestreController {
 @RequestMapping(value = "/supprimer_semestre", method = RequestMethod.GET)
     public String supprimer_semestre(Model modele, @RequestParam(name = "id") Long id) {
         // ueService.modifierUE(ue);
-        semestreService.suprimerSemestre(id);
+        Boolean ok = semestreService.suprimerSemestre(id);
 
         return "redirect:/semestre";
     }

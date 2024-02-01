@@ -14,19 +14,10 @@ import lombok.NoArgsConstructor;
 public class Groupe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String libelle;
-    private int effectif;
-    private String description;
+    private  Long id;
+    private  String nom;
     @OneToMany
     private List<Enseignement> enseignement;
     @ManyToOne
-    @JoinColumn(name = "classe")
     private Classe classe;
-
-    @Override
-    public String toString() {
-        return this.getId() + " " + this.libelle + " " + this.effectif + " " + this.getDescription();
-    }
-    
 }

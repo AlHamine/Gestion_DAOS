@@ -2,7 +2,6 @@ package com.uasz.Gestion_DAOS.Service.Maquette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.NiveauRepository;
-import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
 import jakarta.transaction.Transactional;
@@ -50,9 +49,5 @@ public class NiveauService {
     // public List<Cycle> getNiveauByCycle(Long id) {
     //     return niveauRepository.findAllById(id);
     // }
-
-    public List<Formation> detailsFormationsDuNiveaux(Long niveauId) {
-        return niveauRepository.findByFormation(niveauRepository.findById(niveauId).get());
-    }
 
 }

@@ -34,8 +34,7 @@ public class SemestreService {
         if (semestreModifier != null) {
             semestreModifier.setClasses(semestre.getClasses());
             semestreModifier.setModules(semestre.getModules());
-            semestreModifier.setLibelle(semestre.getLibelle());
-            semestreModifier.setDescription(semestre.getDescription());
+            semestreModifier.setNom(semestre.getNom());
             return semestreRepository.save(semestreModifier);
         } else
             return null;

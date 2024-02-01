@@ -31,6 +31,5 @@ public class EnseignantController {
         enseignantService.ajouterEnseignant(enseignant);
         return "redirect:/enseignant";
     }
-    
 
 }

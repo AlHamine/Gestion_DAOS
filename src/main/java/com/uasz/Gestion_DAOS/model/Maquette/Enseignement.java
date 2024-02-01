@@ -1,7 +1,5 @@
 package com.uasz.Gestion_DAOS.model.Maquette;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +13,7 @@ public class Enseignement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-    private String libelle;
-    private List<String> objectifs;
-    private String description;
+    private String nom;
     @ManyToOne
     private Classe classe;
     @ManyToOne

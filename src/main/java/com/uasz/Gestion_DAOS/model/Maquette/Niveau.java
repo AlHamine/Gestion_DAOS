@@ -1,7 +1,5 @@
 package com.uasz.Gestion_DAOS.model.Maquette;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +18,4 @@ public class Niveau {
     @JoinColumn(name = "cycle")
     @ManyToOne
     private Cycle cycle;
-    @OneToMany(mappedBy = "niveau")
-    private List<Formation> formations;
 }

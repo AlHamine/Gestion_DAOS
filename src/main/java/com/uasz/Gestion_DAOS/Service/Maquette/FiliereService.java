@@ -3,9 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.FiliereRepository;
-import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 import com.uasz.Gestion_DAOS.model.Maquette.Filiere;
-import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -49,16 +47,6 @@ public class FiliereService {
             return false;
     }
 
-    public Boolean suprimerFiliere(Long id) {
-        Filiere filiere = rechercherFiliere(id);
-        if (filiere!= null) {
-            filiereRepository.delete(filiere);
-            return true;
-        }
-        return false;
-    }
 
-    public List<Formation> detailsFormation(Long filiereId) {
-        return filiereRepository.findByFormation(filiereRepository.findById(filiereId).get());
-    }
+
 }

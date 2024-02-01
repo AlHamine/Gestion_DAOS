@@ -15,8 +15,7 @@ public class Semestre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-    private String libelle;
-    private String description;
+    private  String nom;
     @OneToMany(mappedBy = "semestre")
     private List<Classe> classes;
     @OneToMany(mappedBy = "semestre")
