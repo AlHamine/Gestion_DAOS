@@ -40,17 +40,17 @@ export default function EditUe() {
   // }
 
   const updateUE = (ueModifier, ueId) => {
-    fetch(SERVER_URL + `/maquette/ue/${ueId}`, {
+    console.log('UE DESC = ' + ueModifier.description + ' ID = ' + ueId)
+    fetch(SERVER_URL + `maquette/ue/${ueId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(ueModifier),
     })
       .then((response) => {
         if (response.ok) {
-          // fetchCars();
           alert('UE mofifier')
         } else {
-          alert('Something went wrong !')
+          alert("Une erreur s'est produite lors de la modification.")
         }
       })
       .catch((err) => console.error(err))
@@ -126,7 +126,7 @@ export default function EditUe() {
           <CButton color="danger" size="sm" className="me-4">
             Annuler
           </CButton>
-          <CButton color="primary" size="sm" onClick={() => updateUE(ue, ue.id)}>
+          <CButton color="primary" size="sm" onClick={() => updateUE(ue, 1)}>
             Modifier UE
           </CButton>
         </div>
