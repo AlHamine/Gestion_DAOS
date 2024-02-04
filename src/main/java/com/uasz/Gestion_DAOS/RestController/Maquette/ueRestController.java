@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
-// import lombok.RequiredArgsConstructor;
-
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/maquette")
 // @RequiredArgsConstructor
@@ -51,7 +48,7 @@ public class ueRestController {
 
     // @DeleteMapping(path = "/ue/{id}")
     // public void supprimer_ue(@PathVariable Long id) {
-    //     ueService.suprimerUE(id);
+    // ueService.suprimerUE(id);
     // }
 
     @DeleteMapping(path = "/ue/{id}")
@@ -59,5 +56,7 @@ public class ueRestController {
         ueService.suprimerUE(id);
         return new ResponseEntity<>("UE supprimée avec succès", HttpStatus.OK);
     }
+
+ 
 
 }
