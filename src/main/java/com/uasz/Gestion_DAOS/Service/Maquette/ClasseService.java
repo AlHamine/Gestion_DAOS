@@ -40,7 +40,6 @@ public class ClasseService {
         Classe classeModifier = rechercherClasse(classe.getId());
         if (classeModifier != null) {
             classeModifier.setLibelle(classe.getLibelle());
-            ;
             classeModifier.setEnseignement(classe.getEnseignement());
             classeModifier.setFormation(classe.getFormation());
             classeModifier.setGroupes(classe.getGroupes());
