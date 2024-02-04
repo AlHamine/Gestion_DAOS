@@ -42,11 +42,11 @@ const Ue = () => {
   const onDelClick = (id) => {
     // console.log(typeof id)
     if (window.confirm('Are you sure to delete?')) {
-      fetch(SERVER_URL + `/maquette/ue/${id}`, { method: 'DELETE' })
+      fetch(SERVER_URL + `maquette/ue/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
             alert('UE supprimer')
-            // fetchUE()
+            fetchUE()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
