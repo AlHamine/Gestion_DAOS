@@ -24,7 +24,7 @@ public class UE {
     private String Code;
     private String description;
     @JsonIgnore
-    @OneToMany(mappedBy = "ue")
+    @OneToMany(mappedBy = "ue", cascade = CascadeType.ALL)
     private List<EC> ecs;
     
     @OneToMany(mappedBy = "ue")
