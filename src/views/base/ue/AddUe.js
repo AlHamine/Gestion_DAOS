@@ -2,7 +2,7 @@ import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from
 import React, { useState } from 'react'
 import { SERVER_URL } from 'src/constantURL'
 
-export default function AddUe(props) {
+export default function AddUe() {
   const [ue, setUE] = useState({
     libelle: '',
     description: '',

@@ -9,6 +9,8 @@ const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 // Ajout de nouvelle element
 const Ue = React.lazy(() => import('./views/base/ue/Ue'))
 const AddUe = React.lazy(() => import('./views/base/ue/AddUe'))
+const EditUe = React.lazy(() => import('./views/base/ue/EditUe'))
+// Fin
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
 const Cards = React.lazy(() => import('./views/base/cards/Cards'))
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'))
@@ -63,7 +65,9 @@ const routes = [
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
   // Ajout de nouvelle alement
   { path: '/base/ue', name: 'Ue', element: Ue },
-  { path: '/base/ue/AddUe', name: 'Ue', element: AddUe },
+  { path: '/base/ue/AddUe', name: 'AddUe', element: AddUe },
+  { path: '/base/ue/EditUe', name: 'EditUe', element: EditUe },
+  // Fin
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', element: Cards },
   { path: '/base/carousels', name: 'Carousel', element: Carousels },
