@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 # /target
-pom.xml
+
 HELP.md
 mvnw
 mvnw.cmd
