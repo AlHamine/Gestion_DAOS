@@ -1,8 +1,14 @@
+/* eslint-disable prettier/prettier */
 import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
 import React, { useState } from 'react'
 import { SERVER_URL } from 'src/constantURL'
-
+import { useLocation } from 'react-router-dom'
+// eslint-disable-next-line react/prop-types
 export default function EditUe() {
+  const location = useLocation()
+  const { objetProp } = location.state || {}
+  console.log("+++++++++++++++++++++++++",objetProp)
+  // const objetProp = props.location.state.ue;
   const [ue, setUE] = useState({
     libelle: '',
     description: '',

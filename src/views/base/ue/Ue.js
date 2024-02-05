@@ -96,10 +96,8 @@ const Ue = () => {
                     <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
                     <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
                     <CTableDataCell className="text-center">
-                      {/* <CButton color="primary" className="me-1">
-                        Modifier
-                      </CButton> */}
-                      <Link to={'/base/ue/EditUe'}>
+                      <Link to={{ pathname: '/base/ue/EditUe', state: { ue } }}>
+                        {/* <Link to={'/base/ue/EditUe'}> */}
                         <CButton color="primary" style={{ fontWeight: 'bold' }}>
                           Modifier
                         </CButton>
