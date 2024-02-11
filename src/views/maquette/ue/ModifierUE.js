@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
 import { useNavigate } from 'react-router-dom'
 
-export default function EditUe() {
+export default function ModifierUE() {
   const { id } = useParams()
   const [ue, setUE] = useState({})
   const navigate = useNavigate()
@@ -24,17 +24,17 @@ export default function EditUe() {
     })
   }
 
-  const afterAddUE = () => {
-    ;<CPopover
-      title="Ajout du UE reussit"
-      content="L'UE a été modifier avec success dans la base de donnée"
-      placement="right"
-    >
-      <CButton color="danger" size="lg">
-        Click to toggle popover
-      </CButton>
-    </CPopover>
-  }
+  // const afterAddUE = () => {
+  //   ;<CPopover
+  //     title="Ajout du UE reussit"
+  //     content="L'UE a été modifier avec success dans la base de donnée"
+  //     placement="right"
+  //   >
+  //     <CButton color="danger" size="lg">
+  //       Click to toggle popover
+  //     </CButton>
+  //   </CPopover>
+  // }
 
   const getUE = () => {
     fetch(SERVER_URL + `maquette/ue/${id}`)
@@ -64,7 +64,7 @@ export default function EditUe() {
       .then((response) => {
         if (response.ok) {
           // afterAddUE()
-          navigate('/base/ue')
+          navigate('/maquette/ue/UE')
         } else {
           alert("Une erreur s'est produite lors de la modification.")
         }

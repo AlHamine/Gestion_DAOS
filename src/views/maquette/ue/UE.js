@@ -15,17 +15,34 @@ import {
   CButton,
   CPagination,
   CPaginationItem,
+  CFormInput,
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
-// import { DocsExample } from 'src/components'
+// import { cilZoom } from '@coreui/icons'
 
-const Ue = () => {
+export default function UE() {
   const [listUE, setListUE] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(5) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
 
   useEffect(() => {
     fetchUE()
   }, [])
+
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listUE.length / itemsPerPage)
+
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
 
   const fetchUE = () => {
     fetch(SERVER_URL + 'maquette/ue')
@@ -40,12 +57,10 @@ const Ue = () => {
   }
 
   const onDelClick = (id) => {
-    // console.log(typeof id)
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Are you sure to delete de UE?')) {
       fetch(SERVER_URL + `maquette/ue/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('UE supprimer')
             fetchUE()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
@@ -55,11 +70,20 @@ const Ue = () => {
     }
   }
 
+  // Index de la dernière UE à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première UE à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des UE à afficher sur la page actuelle
+  const currentUEs = listUE
+    .filter((ue) => ue.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(indexOfFirstUE, indexOfLastUE)
+
   return (
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/base/ue/AddUe'}>
+          <Link to={'/maquette/ue/AjouterUE'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
               Ajouter un UE
             </CButton>
@@ -69,10 +93,22 @@ const Ue = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des UE</small>
+            <div>
+              <div>
+                <strong style={{ display: 'block', textAlign: 'center' }}>Liste des UE</strong>
+              </div>
+
+              <CFormInput
+                type="text"
+                size="sm"
+                placeholder="Rechercher UE par libelle"
+                aria-label="sm input example"
+                // icon={cilZoom}
+                onChange={handleSearchChange}
+              />
+            </div>
           </CCardHeader>
           <CCardBody>
-            {/* <DocsExample href="components/table#table-head"> */}
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
@@ -88,18 +124,17 @@ const Ue = () => {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listUE.map((ue, index) => (
+                {currentUEs.map((ue, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
+                    <CTableHeaderCell scope="row"> {ue.id} </CTableHeaderCell>
                     <CTableDataCell>{ue.code}</CTableDataCell>
-                    <CTableDataCell>{ue.libelle}</CTableDataCell>
+                    <CTableDataCell>
+                      {ue.libelle.length > 15 ? `${ue.libelle.substring(0, 15)}...` : ue.libelle}
+                    </CTableDataCell>
                     <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
                     <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
                     <CTableDataCell className="text-center">
-                      {/* <CButton color="primary" className="me-1">
-                        Modifier
-                      </CButton> */}
-                      <Link to={`/base/ue/EditUe/${ue.id}`}>
+                      <Link to={`/maquette/ue/ModifierUE/${ue.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
@@ -114,20 +149,32 @@ const Ue = () => {
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
-                  <CPaginationItem disabled>Previous</CPaginationItem>
-                  <CPaginationItem>1</CPaginationItem>
-                  <CPaginationItem>2</CPaginationItem>
-                  <CPaginationItem>3</CPaginationItem>
-                  <CPaginationItem>Next</CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>Previous</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-200)}>
+                      Previous
+                    </CPaginationItem>
+                  )}
+                  <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                    Fin
+                  </CPaginationItem>
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Next</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-100)}>
+                      Next
+                    </CPaginationItem>
+                  )}
                 </CPagination>
               </CTableBody>
             </CTable>
-            {/* </DocsExample> */}
           </CCardBody>
         </CCard>
       </CCol>
     </CRow>
   )
 }
-
-export default Ue

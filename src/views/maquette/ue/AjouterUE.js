@@ -1,20 +1,20 @@
-import {
-  CButton,
-  CFormInput,
-  CFormTextarea,
-  CInputGroup,
-  CInputGroupText,
-  CPopover,
-} from '@coreui/react'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { SERVER_URL } from 'src/constantURL'
+import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SERVER_URL } from 'src/constantURL'
 
-export default function EditUe() {
-  const { id } = useParams()
-  const [ue, setUE] = useState({})
+export default function AjouterUE() {
   const navigate = useNavigate()
+  const [ue, setUE] = useState({
+    libelle: '',
+    description: '',
+    module: [],
+    createdAt: new Date().toISOString().split('.')[0] + 'Z',
+    utilisateur: null,
+    credit: '',
+    coefficient: '',
+    code: '',
+  })
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -24,52 +24,26 @@ export default function EditUe() {
     })
   }
 
-  const afterAddUE = () => {
-    ;<CPopover
-      title="Ajout du UE reussit"
-      content="L'UE a été modifier avec success dans la base de donnée"
-      placement="right"
-    >
-      <CButton color="danger" size="lg">
-        Click to toggle popover
-      </CButton>
-    </CPopover>
-  }
-
-  const getUE = () => {
-    fetch(SERVER_URL + `maquette/ue/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-
-        return response.json()
-      })
-      .then((data) => {
-        setUE(data)
-      })
-      .catch((error) => console.error('Error fetching UE:', error))
-  }
-
-  useEffect(() => {
-    getUE()
-  }, [])
-
-  const updateUE = (ueModifier, ueId) => {
-    fetch(SERVER_URL + `maquette/ue/${ueId}`, {
-      method: 'PUT',
+  const addUe = (uesave) => {
+    fetch(SERVER_URL + 'maquette/ue', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(ueModifier),
+      body: JSON.stringify(uesave),
     })
       .then((response) => {
         if (response.ok) {
-          // afterAddUE()
-          navigate('/base/ue')
+          // fetchUE()
+          alert('UE ajouter avec successful')
+          navigate('/maquette/ue/UE')
         } else {
-          alert("Une erreur s'est produite lors de la modification.")
+          alert('Something went wrong')
         }
       })
       .catch((err) => console.error(err))
+  }
+
+  const handleSave = () => {
+    addUe(ue)
   }
 
   return (
@@ -83,7 +57,6 @@ export default function EditUe() {
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
             name="code"
-            value={ue.code}
             onChange={handleChange}
           />
         </CInputGroup>
@@ -96,7 +69,6 @@ export default function EditUe() {
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
             name="libelle"
-            value={ue.libelle}
             onChange={handleChange}
           />
         </CInputGroup>
@@ -109,7 +81,6 @@ export default function EditUe() {
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
             name="credit"
-            value={ue.credit}
             onChange={handleChange}
           />
         </CInputGroup>
@@ -122,7 +93,6 @@ export default function EditUe() {
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
             name="coefficient"
-            value={ue.coefficient}
             onChange={handleChange}
           />
         </CInputGroup>
@@ -131,7 +101,6 @@ export default function EditUe() {
           <CFormTextarea
             aria-label="With textarea"
             name="description"
-            value={ue.description}
             onChange={handleChange}
           ></CFormTextarea>
         </CInputGroup>
@@ -139,8 +108,8 @@ export default function EditUe() {
           <CButton color="danger" size="sm" className="me-4">
             Annuler
           </CButton>
-          <CButton color="primary" size="sm" onClick={() => updateUE(ue, id)}>
-            Modifier UE
+          <CButton color="primary" size="sm" onClick={handleSave}>
+            Creer un UE
           </CButton>
         </div>
       </div>
