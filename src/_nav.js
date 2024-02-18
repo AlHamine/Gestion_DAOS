@@ -1,16 +1,19 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
+  cilBalanceScale,
   cilBell,
   cilCalculator,
   cilChartPie,
   cilCursor,
   cilDescription,
   cilDrop,
+  cilLineStyle,
   cilNotes,
   cilPencil,
   cilPuzzle,
   cilSpeedometer,
+  cilSpreadsheet,
   cilStar,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
@@ -28,8 +31,145 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'GESTION DAOS',
   },
+  //--------------------------- DAOS ---------------------------
+  // --------------------------- LES ELEMENTS DE MAQUETTE ---------------------------
+  {
+    component: CNavGroup,
+    name: 'Maquette',
+    to: '/maquette',
+    icon: <CIcon icon={cilLineStyle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Classe',
+        to: '/maquette/classe/Classe',
+      },
+      {
+        component: CNavItem,
+        name: 'Cycle',
+        to: '/maquette/cycle/Cycle',
+      },
+      {
+        component: CNavItem,
+        name: 'EC',
+        to: '/maquette/ec/EC',
+      },
+      {
+        component: CNavItem,
+        name: 'Enseignement',
+        to: '/maquette/enseignement/Enseignement',
+      },
+      {
+        component: CNavItem,
+        name: 'Filiere',
+        to: '/maquette/filiere/Filiere',
+      },
+      {
+        component: CNavItem,
+        name: 'Formation',
+        to: '/maquette/formation/Formation',
+      },
+      {
+        component: CNavItem,
+        name: 'Groupe',
+        to: '/maquette/groupe/Groupe',
+      },
+      {
+        component: CNavItem,
+        name: 'Maquette',
+        to: '/maquette/maquette/Maquette',
+      },
+      {
+        component: CNavItem,
+        name: 'Module',
+        to: '/maquette/module/Module',
+      },
+      {
+        component: CNavItem,
+        name: 'Niveau',
+        to: '/maquette/niveau/Niveau',
+      },
+      {
+        component: CNavItem,
+        name: 'Semestre',
+        to: '/maquette/semestre/Semestre',
+      },
+      {
+        component: CNavItem,
+        name: 'UE',
+        to: '/maquette/ue/UE',
+      },
+    ],
+  },
+
+  // --------------------------- LES ELEMENTS DE REPARTITION ---------------------------
+  {
+    component: CNavGroup,
+    name: 'Repartition',
+    to: '/repartition',
+    icon: <CIcon icon={cilBalanceScale} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Enseignant',
+        to: '/repartition/enseignant/Enseignant',
+      },
+      {
+        component: CNavItem,
+        name: 'PER',
+        to: '/repartition/per/PER',
+      },
+      {
+        component: CNavItem,
+        name: 'Repartition',
+        to: '/repartition/repartition/Repartition',
+      },
+      {
+        component: CNavItem,
+        name: 'Vacataire',
+        to: '/repartition/vacataire/Vacataire',
+      },
+    ],
+  },
+
+  // --------------------------- EMPLOI DU TEMPS ---------------------------
+  {
+    component: CNavGroup,
+    name: 'Emploi Du Temps',
+    to: '/emploiDuTemps',
+    icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Batiment',
+        to: '/emploiDuTemps/batiment/Batiment',
+      },
+      {
+        component: CNavItem,
+        name: 'Deroulement',
+        to: '/emploiDuTemps/deroulement/Deroulement',
+      },
+      {
+        component: CNavItem,
+        name: 'Emploi',
+        to: '/emploiDuTemps/emploi/Emploi',
+      },
+      {
+        component: CNavItem,
+        name: 'Salle',
+        to: '/emploiDuTemps/salle/Salle',
+      },
+      {
+        component: CNavItem,
+        name: 'Seance',
+        to: '/emploiDuTemps/seance/Seance',
+      },
+    ],
+  },
+
+  // --------------------------- FIN DAOS ---------------------------
   {
     component: CNavItem,
     name: 'Colors',

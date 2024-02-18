@@ -1,8 +1,10 @@
 import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
 
 export default function AddUe() {
+  const navigate = useNavigate()
   const [ue, setUE] = useState({
     libelle: '',
     description: '',
@@ -32,6 +34,7 @@ export default function AddUe() {
         if (response.ok) {
           // fetchUE()
           alert('UE ajouter avec successful')
+          navigate('/base/ue')
         } else {
           alert('Something went wrong')
         }
