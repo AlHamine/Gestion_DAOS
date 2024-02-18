@@ -52,7 +52,11 @@ export default function UE() {
         }
         return response.json()
       })
-      .then((data) => setListUE(data))
+      .then((data) => {
+        // Trier les ateliers par date de création en ordre décroissant
+        data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        setListUE(data)
+      })
       .catch((error) => console.error('Error fetching UE:', error))
   }
 

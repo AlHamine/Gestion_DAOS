@@ -1,4 +1,4 @@
-import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
+import { CButton, CCard, CCardHeader, CCol, CForm, CFormInput, CFormTextarea } from '@coreui/react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
@@ -46,73 +46,92 @@ export default function AjouterUE() {
     addUe(ue)
   }
 
+  const backward = () => {
+    navigate('/maquette/ue/UE')
+  }
+
   return (
     <div>
-      <div className="mx-auto text-center" style={{ maxWidth: '60%' }}>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Code
-          </CInputGroupText>
+      <CForm className="row g-3" validated={true}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <div>
+              <strong style={{ display: 'block', textAlign: 'center' }}>Creation du UE</strong>
+            </div>
+          </CCardHeader>
+        </CCard>
+        <CCol md={6}>
           <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
+            type="text"
+            id="validationServer01"
+            label="Code"
+            defaultValue=""
             name="code"
             onChange={handleChange}
+            valid
+            required
           />
-        </CInputGroup>
-
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Libelle
-          </CInputGroupText>
+        </CCol>
+        <CCol md={6}>
           <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
+            type="text"
+            id="validationServer01"
+            label="Libelle"
+            defaultValue=""
             name="libelle"
             onChange={handleChange}
+            valid
+            required
           />
-        </CInputGroup>
-
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Credit
-          </CInputGroupText>
+        </CCol>
+        <CCol md={6}>
           <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
+            type="number"
+            id="validationServer02"
+            label="Credit"
+            defaultValue=""
+            valid
             name="credit"
             onChange={handleChange}
+            required
+            min="0"
           />
-        </CInputGroup>
-
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Coefficient
-          </CInputGroupText>
+        </CCol>
+        <CCol md={6}>
           <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
+            type="number"
+            id="validationServer02"
+            label="Coefficient"
+            defaultValue=""
+            valid
             name="coefficient"
             onChange={handleChange}
+            required
+            min="0"
           />
-        </CInputGroup>
-        <CInputGroup>
-          <CInputGroupText>La description du UE</CInputGroupText>
+        </CCol>
+        <div className="mb-3">
           <CFormTextarea
-            aria-label="With textarea"
+            feedbackInvalid="SVP entrer la description du UE."
+            id="validationTextarea"
+            label="Description"
+            placeholder="L'objectif de l'UE."
+            required
             name="description"
             onChange={handleChange}
           ></CFormTextarea>
-        </CInputGroup>
-        <div style={{ marginTop: '20px' }}>
-          <CButton color="danger" size="sm" className="me-4">
-            Annuler
-          </CButton>
-          <CButton color="primary" size="sm" onClick={handleSave}>
-            Creer un UE
-          </CButton>
         </div>
-      </div>
+        <div>
+          <CCol xs={12} className="d-flex justify-content-center">
+            <CButton color="danger" type="submit" className="me-2" onClick={backward}>
+              Retour
+            </CButton>
+            <CButton color="primary" onClick={handleSave}>
+              Valider
+            </CButton>
+          </CCol>
+        </div>
+      </CForm>
     </div>
   )
 }
