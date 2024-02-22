@@ -65,8 +65,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-	</dependencies>
+		<dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-core</artifactId>
+        <version>11.6</version>
 
+    </dependency>
+	<dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+        <version>3.0.3</version> <!-- Assurez-vous de spécifier la version appropriée -->
+    </dependency>
+	</dependencies>
+<dependencyManagement>
+    <dependencies>
+        <!-- Spring Cloud BOM -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2021.0.0</version> <!-- Assurez-vous de spécifier la version appropriée -->
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
