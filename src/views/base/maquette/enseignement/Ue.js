@@ -20,7 +20,7 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
-const Filiere = () => {
+const Ue = () => {
   const [listUE, setListUE] = useState([])
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Filiere = () => {
   }, [])
 
   const fetchUE = () => {
-    fetch(SERVER_URL + 'maquette/filiere')
+    fetch(SERVER_URL + 'maquette/ue')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -36,16 +36,16 @@ const Filiere = () => {
         return response.json()
       })
       .then((data) => setListUE(data))
-      .catch((error) => console.error('Error fetching Filiere:', error))
+      .catch((error) => console.error('Error fetching UE:', error))
   }
 
   const onDelClick = (id) => {
     // console.log(typeof id)
     if (window.confirm('Are you sure to delete?')) {
-      fetch(SERVER_URL + `maquette/filiere/${id}`, { method: 'DELETE' })
+      fetch(SERVER_URL + `maquette/ue/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('Filiere supprimer')
+            alert('UE supprimer')
             fetchUE()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
@@ -59,9 +59,9 @@ const Filiere = () => {
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/maquette/filiere/AjouterFiliere'}>
+          <Link to={'/base/ue/AddUe'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un Filiere
+              Ajouter un UE
             </CButton>
           </Link>
         </div>
@@ -69,7 +69,7 @@ const Filiere = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des Filiere</small>
+            <strong>Liste </strong> <small>des UE</small>
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -77,10 +77,10 @@ const Filiere = () => {
               <CTableHead color="dark">
                 <CTableRow>
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
-                  {/* <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Code</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Credits</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell> */}
+                  <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -88,23 +88,23 @@ const Filiere = () => {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listUE.map((Filiere, index) => (
+                {listUE.map((ue, index) => (
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
-                    <CTableDataCell>{Filiere.nom}</CTableDataCell>
-                    {/* <CTableDataCell>{Filiere.libelle}</CTableDataCell>
-                    <CTableDataCell className="text-center">{Filiere.credit}</CTableDataCell>
-                    <CTableDataCell className="text-center">{Filiere.coefficient}</CTableDataCell> */}
+                    <CTableDataCell>{ue.code}</CTableDataCell>
+                    <CTableDataCell>{ue.libelle}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
                     <CTableDataCell className="text-center">
                       {/* <CButton color="primary" className="me-1">
                         Modifier
                       </CButton> */}
-                      <Link to={`/base/filiere/EditFiliere/${Filiere.id}`}>
+                      <Link to={`/base/ue/EditUe/${ue.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Filiere.id)}>
+                      <CButton color="danger" onClick={() => onDelClick(ue.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
@@ -130,4 +130,4 @@ const Filiere = () => {
   )
 }
 
-export default Filiere
+export default Ue

@@ -59,7 +59,7 @@ const Filiere = () => {
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/maquette/filiere/AjouterFiliere'}>
+          <Link to={'/base/filiere/AddFiliere'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
               Ajouter un Filiere
             </CButton>
