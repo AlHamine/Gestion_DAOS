@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+        <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}">
+        <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}">
+        <link rel="stylesheet" th:href="@{/css/stylePerso.css}">
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/jquery-3.7.0.js}"></script>
+        <script th:src="@{/js/bootstrap.js}"></script>
+        <script th:src="@{/js/dataTables.buttons.min.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+
+        <title>Gestion Classe</title>
+
+    </head>
+
+    <body>
+        <div th:include="fragments/nav"></div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#myModal">
+                Ajouter un nouveau Classe
+            </button>
+        </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-fullscreen-xl-down">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header btn btn-success">
+                        <h4 class="modal-title">Ajouter un
+                            nouveau Classe</h4>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form th:action="@{ajouter_classe}" method="post">
+
+                            <div class="mb-3 mt-3">
+                                <label class="form-label" for>libelle</label>
+                                <input type="text" class="form-control"
+                                    name="libelle" />
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label class="form-label " for>Effectif</label>
+                                <input type="text" class="form-control"
+                                    name="effectif" />
+                            </div>
+
+                            <div class="row g-3 align-items-center">
+                                <div class="mb-3 mt-3">
+                                    <label class="form-label" for>Nombre de
+                                        groupes</label>
+                                    <input type="text" class="form-control"
+                                        name="nbreGroupe" />
+                                </div>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <div class="mb-3 mt-3">
+                                    <label class="form-label" for>Description
+                                    </label>
+                                    <input type="text" class="form-control"
+                                        name="description" />
+                                </div>
+                            </div>
+
+                            <button class="btn btn-success"
+                                type="submit">Enregistrer</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table id="table_Classe">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Libellé</th>
+                    <th>Effectif</th>
+                    <th>Nombre de Groupes</th>
+                    <th>Description</th>
+                    <th>Enseignements</th>
+                    <th>Groupes</th>
+
+                    <th
+                        style="text-align: center; background-color: firebrick;">Operation</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="e:${listeDesClasse}" class="table-row">
+                    <td th:text="${e.id}"></td>
+                    <td th:text="${e.libelle}"></td>
+                    <td th:text="${e.effectif}"></td>
+                    <td th:text="${e.getGroupes().size()}"></td>
+                    <td th:text="${e.description}"></td>
+                    <td>
+                        <a class="btn btn-primary"
+                            th:href="@{/ens_classe(id=${e.id})}">voir les
+                            enseignements</a>
+
+                    </td>
+                    <td>
+                        <a th:href="@{/groupe_classe(id=${e.id})}"
+                            class="btn btn-primary">voir les groupes</a>
+                    </td>
+
+                    <td>
+                        <div class="text-center">
+
+                            <button type="button" class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#myModal2">
+                                Modifier
+                            </button>
+                            <a th:href="@{/supprimerClasse(id=${e.id})}"
+                                class="btn btn-danger"> Supprimer</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <a th:href="@{/details_classe(id=${e.id})}"
+                                class="btn btn-outline-primary"> Details</a>
+                        </td>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <!-- The Modal -->
+        <div class="modal" id="myModal2">
+            <div class="modal-dialog modal-fullscreen-xl-down">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header btn btn-primary">
+                        <h4 class="modal-title ">Modifier une Classe</h4>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form th:action="@{ajouter_classe}" method="post">
+
+                            <div class="mb-3 mt-3" style="display: none;">
+                                <label class="form-label" for>Id</label>
+                                <input type="text" class="form-control"
+                                    name="id" id="id" />
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label class="form-label" for>libelle</label>
+                                <input type="text" class="form-control"
+                                    name="libelle" id="libelle" />
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label class="form-label " for>Effectif</label>
+                                <input type="text" class="form-control"
+                                    name="effectif" id="effectif" />
+                            </div>
+
+                            <div class="row g-3 align-items-center">
+                                <div class="mb-3 mt-3">
+                                    <label class="form-label" for>Nombre de
+                                        groupes</label>
+                                    <input type="text" class="form-control"
+                                        name="nbreGroupe" id="nbreGroupe" />
+                                </div>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <div class="mb-3 mt-3">
+                                    <label class="form-label" for>Description
+                                    </label>
+                                    <input type="text" class="form-control"
+                                        name="description" id="description" />
+                                </div>
+                            </div>
+                            <button class="btn btn-primary"
+                                type="submit">Enregistrer</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // Utilisation de jQclassery pour simplifier l'ajout de gestionnaires d'événements
+        $(document).ready(function() {
+            // Ajout d'un gestionnaire de clic pour toutes les lignes avec la classe "table-row"
+            $('.table-row').on('click', function() {
+                // Supprimer la classe "selected" de toutes les lignes
+                $('.table-row').removeClass('selected');
+                // Ajouter la classe "selected" à la ligne cliquée
+                $(this).addClass('selected');
+                // Récupérer les données de la ligne sélectionnée
+                var id = $(this).find('td:eq(0)').text();
+                var libelle = $(this).find('td:eq(1)').text();
+                var effectif = $(this).find('td:eq(2)').text();
+                var nbreGroupe = $(this).find('td:eq(3)').text();
+                var description = $(this).find('td:eq(4)').text();
+                document.getElementById("id").value = id;
+                document.getElementById("libelle").value = libelle;
+                document.getElementById("effectif").value = effectif;
+                document.getElementById("nbreGroupe").value = nbreGroupe;
+                document.getElementById("description").value = description;
+            });
+            $("#table_Classe").DataTable({});
+        });
+    </script>
+    </body>
+
+</html>

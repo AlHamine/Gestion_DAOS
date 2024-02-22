@@ -34,7 +34,7 @@ public class UE {
     private Utilisateur utilisateur;
     private int credit;
     private int coefficient;
-
+    
 
 }
 
