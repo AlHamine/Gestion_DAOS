@@ -29,7 +29,6 @@
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/model/Cycle.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Security/WebConfig.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Repository/GroupeRepository.java
-/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/ControllerTheamLyf/UEController.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Controller/NiveauController.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Repository/ECRepository.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Service/AllService.java
@@ -62,4 +61,5 @@
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Service/GroupeService.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Service/FiliereService.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/model/Formation.java
+/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/ControllerTheamLyf/UEControllerT.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Maquette/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Maquette/Controller/CycleController.java
