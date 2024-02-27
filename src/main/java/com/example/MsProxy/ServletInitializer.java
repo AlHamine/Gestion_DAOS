@@ -1,4 +1,4 @@
-package com.uasz.Gestion_DAOS_EmploiDuTemps;
+package com.example.MsProxy;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(GestionDaosEmploiDuTempsApplication.class);
+		return application.sources(MsProxyApplication.class);
 	}
 
 }

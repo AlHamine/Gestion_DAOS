@@ -5,52 +5,37 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.uasz</groupId>
-	<artifactId>Gestion_DAOS_EmploiDuTemps</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>Ms-Proxy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Gestion_DAOS_EmploiDuTemps</name>
-	<description>Micorservice for emploi du temps</description>
+	<name>Ms-Proxy</name>
+	<description>C&apos;est le microservice de configuration</description>
 	<properties>
 		<java.version>17</java.version>
+		<spring-cloud.version>2023.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway-mvc</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -62,46 +47,28 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-        <groupId>io.github.openfeign</groupId>
-        <artifactId>feign-core</artifactId>
-        <version>11.6</version>
-
-    </dependency>
-	<dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-openfeign</artifactId>
-        <version>3.0.3</version> <!-- Assurez-vous de spécifier la version appropriée -->
-    </dependency>
 	</dependencies>
-<dependencyManagement>
-    <dependencies>
-        <!-- Spring Cloud BOM -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>2021.0.0</version> <!-- Assurez-vous de spécifier la version appropriée -->
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
