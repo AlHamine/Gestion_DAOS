@@ -9,5 +9,4 @@ public class MsRegisterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsRegisterApplication.class, args);
 	}
-
 }
