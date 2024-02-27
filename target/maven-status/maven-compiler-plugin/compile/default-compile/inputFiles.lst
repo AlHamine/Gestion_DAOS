@@ -5,9 +5,12 @@
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/model/Enseignement.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Controller/RepartitionController.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Repository/VacataireRepository.java
+/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/MSMaquette/Model/UE.java
+/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/MSMaquette/Controller/UEControllerU.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Security/SecurityConfig.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Repository/PERRepository.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/model/Vacataire.java
+/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/MSMaquette/Service/UEProxy.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/model/Enseignant.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/GestionDaosRepartitionApplication.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Controller/VacataireController.java
@@ -22,6 +25,3 @@
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Controller/EnseignantController.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Repository/EnseignantRepository.java
 /home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/Gestion_DAOS_Repartition/Service/PERService.java
-/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/MSMaquette/Model/UE.java
-/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/MSMaquette/Service/UEProxy.java
-/home/smah/Documents/Projet/DAOS_microservice/Gestion_DAOS_Repartition/Gestion_DAOS/src/main/java/com/uasz/MSMaquette/Service/UEService.java
