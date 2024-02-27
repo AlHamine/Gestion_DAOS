@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.uasz.Gestion_DAOS_EmploiDuTemps.Service.SalleService;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.model.Salle;
-
+@EnableDiscoveryClient
 @SpringBootApplication
 public class GestionDaosEmploiDuTempsApplication implements CommandLineRunner {
 
