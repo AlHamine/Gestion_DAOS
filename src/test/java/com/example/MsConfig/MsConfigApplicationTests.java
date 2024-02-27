@@ -1,10 +1,10 @@
-package com.uasz.Gestion_DAOS_EmploiDuTemps;
+package com.example.MsConfig;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GestionDaosEmploiDuTempsApplicationTests {
+class MsConfigApplicationTests {
 
 	@Test
 	void contextLoads() {
