@@ -1,10 +1,10 @@
-package com.example.MsProxy;
+package com.example.MsRegister;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsProxyApplicationTests {
+class MsRegisterApplicationTests {
 
 	@Test
 	void contextLoads() {

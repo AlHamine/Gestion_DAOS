@@ -1,13 +1,13 @@
-package com.example.MsProxy;
+package com.example.MsRegister;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsProxyApplication {
+public class MsRegisterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MsProxyApplication.class, args);
+		SpringApplication.run(MsRegisterApplication.class, args);
 	}
 
 }
