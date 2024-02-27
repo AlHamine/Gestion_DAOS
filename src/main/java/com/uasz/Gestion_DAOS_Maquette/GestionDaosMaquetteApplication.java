@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.uasz.Gestion_DAOS_Maquette.Service.ClasseService;
 import com.uasz.Gestion_DAOS_Maquette.Service.CycleService;
@@ -28,6 +29,7 @@ import com.uasz.Gestion_DAOS_Maquette.model.Groupe;
 import com.uasz.Gestion_DAOS_Maquette.model.Niveau;
 import com.uasz.Gestion_DAOS_Maquette.model.UE;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class GestionDaosMaquetteApplication implements CommandLineRunner {
 

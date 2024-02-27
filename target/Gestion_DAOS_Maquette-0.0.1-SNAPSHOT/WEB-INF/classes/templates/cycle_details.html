@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/stylePerso.css}">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/jquery-3.7.0.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{/js/dataTables.buttons.min.js}"></script>
+    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+
+    <title>Gestion des Cycles</title>
+
+  </head>
+  <body>
+    <div th:include="fragments/nav"></div>
+    <div class="text-center">
+      <!-- <h3>Liste des Niveau : <span th:text="${ue.code}"></span><span th:text="${ue.libelle}"></span></h3> -->
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#myModal">
+        Ajouter un Niveau
+      </button>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-fullscreen-xl-down">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Ajouter un nouveau Niveau</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}"
+              method="post">
+              <div class="mb-3 mt-3">
+                <label class="form-label" for>Nom</label>
+                <input type="text" class="form-control" name="nom" />
+              </div>
+              <div class="text-end">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table id="table_Niveau">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th style="text-align: center; background-color: firebrick">
+            Operation
+          </th>
+          <th>Detait</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="e:${listeDesNiveau}" class="table-row">
+          <td th:text="${e.id}"></td>
+          <td th:text="${e.nom}"></td>
+
+          <td>
+            <!-- <a th:href="@{/rechercher_id_modifier(id=${e.id})}"   class="btn btn-primary"> Modifier</a> -->
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal2">
+                Modifier
+              </button>
+              <a
+                th:href="@{/supprimer_niveau(niveauId=${e.id},cycleId=${cycle.id})}"
+                class="btn btn-danger">
+                Supprimer</a>
+            </div>
+          </td>
+          <td>
+            <div class="text-center">
+              <a
+                th:href="@{/details_niveau_formation(niveauId=${e.id})}"
+                class="btn btn-outline-success">
+                Detail
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+      <div class="modal-dialog modal-fullscreen-xl-down">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header text-center btn-primary">
+            <h4 class="modal-title">Modifier Niveau</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form th:action="@{ajouter_niveau(idcycle=${cycle.id})}"
+              method="post">
+              <div class="mb-3" style="display: none">
+                <label for="id">Id</label>
+                <input type="text" class="form-control" name="id" id="id" />
+              </div>
+              <div class="mb-3 mt-3">
+                <label class="form-label" for="nom">Nom</label>
+                <input type="text" class="form-control" name="nom" id="nom" />
+              </div>
+              <button class="btn btn-primary" type="submit">Modifier</button>
+            </form>
+          </div>
+
+          <!-- Modal footer -->
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Utilisation de jQuery pour simplifier l'ajout de gestionnaires d'événements
+      $(document).ready(function () {
+        // Ajout d'un gestionnaire de clic pour toutes les lignes avec la classe "table-row"
+        $(".table-row").on("click", function () {
+          // Supprimer la classe "selected" de toutes les lignes
+          $(".table-row").removeClass("selected");
+
+          // Ajouter la classe "selected" à la ligne cliquée
+          $(this).addClass("selected");
+
+          // Récupérer les données de la ligne sélectionnée
+          var id = $(this).find("td:eq(0)").text();
+          var nom = $(this).find("td:eq(1)").text();
+          document.getElementById("id").value = id;
+          document.getElementById("nom").value = nom;
+        });
+
+        $("#table_Niveau").DataTable({});
+      });
+    </script>
+  </body>
+</html>
