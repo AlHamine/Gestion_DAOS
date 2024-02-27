@@ -1,0 +1,26 @@
+Les classe finis =>
+Maquette{UE EC ENSEIGNEMENT CLASSE CYCLE NIVEAU FILIERE  FORMATION SEMESTRE GROUPE}
+Pas encore termin ==>MODULE Maquette
+En cours==> 
+--------------------------------------------------------------------------------------------------------------------------------
+Les components finis=>
+
+components en cours=>
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+indice:::> utiliser les select option poir lier semestre a classe [lecteur seule]
+
+Emploie_Du_Temps==>
+DeroulementController.java
+EmploiController.java
+SalleController.java
+SeanceController.java
+
+Repartition=====>
+EnseignantController.java
+PERController.java
+RepartitionController.java
+VacataireController.java
+
+A la fin ajouter l'attribut datedeCreation a toutesbles classesBatimentController.java
