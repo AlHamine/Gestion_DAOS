@@ -12,7 +12,6 @@ com/uasz/Gestion_DAOS_Repartition/GestionDaosRepartitionApplication.class
 com/uasz/Gestion_DAOS_Repartition/ServletInitializer.class
 com/uasz/Gestion_DAOS_Repartition/Service/RepartitionService.class
 com/uasz/Gestion_DAOS_Repartition/Service/PERService.class
-com/uasz/Gestion_DAOS_Repartition/Service/EnseignantService.class
 com/uasz/Gestion_DAOS_Repartition/Service/VacataireService.class
 com/uasz/Gestion_DAOS_Repartition/Controller/EnseignementController.class
 com/uasz/Gestion_DAOS_Repartition/Controller/PERController.class
