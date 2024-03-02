@@ -18,23 +18,24 @@ import {
   CFormInput,
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 // import { cilZoom } from '@coreui/icons'
 
-export default function UE() {
-  const [listUE, setListUE] = useState([])
+export default function UEDetailsEC() {
+  const { id } = useParams()
+  const [listEC, setListEC] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [itemsPerPage] = useState(10) // Nombre d'éléments par page
   const [currentPage, setCurrentPage] = useState(1) // La page courante
 
   useEffect(() => {
-    fetchUE()
+    fetchEC()
   }, [])
 
   const handleSearchChange = (libelle) => {
     setSearchTerm(libelle.target.value)
   }
-  const lastPageNumber = Math.ceil(listUE.length / itemsPerPage)
+  const lastPageNumber = Math.ceil(listEC.length / itemsPerPage)
 
   const handleChangePaginate = (value) => {
     if (value === -100) {
@@ -44,8 +45,8 @@ export default function UE() {
     } else setCurrentPage(value)
   }
 
-  const fetchUE = () => {
-    fetch(SERVER_URL + 'maquette/ue')
+  const fetchEC = () => {
+    fetch(SERVER_URL + `maquette/uedetails/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -53,19 +54,18 @@ export default function UE() {
         return response.json()
       })
       .then((data) => {
-        // Trier les ateliers par date de création en ordre décroissant
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        setListUE(data)
+        setListEC(data)
       })
-      .catch((error) => console.error('Error fetching UE:', error))
+      .catch((error) => console.error('Error fetching EC details UE:', error))
   }
 
   const onDelClick = (id) => {
     if (window.confirm('Are you sure to delete de UE?')) {
-      fetch(SERVER_URL + `maquette/ue/${id}`, { method: 'DELETE' })
+      fetch(SERVER_URL + `maquette/ec/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            fetchUE()
+            fetchEC()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
@@ -79,15 +79,15 @@ export default function UE() {
   // Index de la première UE à afficher sur la page
   const indexOfFirstUE = indexOfLastUE - itemsPerPage
   // Liste des UE à afficher sur la page actuelle
-  const currentUEs = listUE
-    .filter((ue) => ue.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
+  const currentECs = listEC
+    .filter((ec) => ec.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(indexOfFirstUE, indexOfLastUE)
 
   return (
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/maquette/ue/AjouterUE'}>
+          <Link to={'/maquette/ec/AjouterUE'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
               Ajouter un UE
             </CButton>
@@ -116,24 +116,15 @@ export default function UE() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell
-                    scope="col"
-                    style={{
-                      maxWidth: '50px',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    #
-                  </CTableHeaderCell>
-                  {/* <CTableHeaderCell scope="col" className="w-25">
-                    #
-                  </CTableHeaderCell> */}
+                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Code</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Credits</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">CM</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">TD</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">TP</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">TPE</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Description</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -141,27 +132,32 @@ export default function UE() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {currentUEs.map((ue, index) => (
+                {currentECs.map((ec, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row">{ue.id}</CTableHeaderCell>
-                    <CTableDataCell>{ue.code}</CTableDataCell>
+                    <CTableHeaderCell scope="row"> {ec.id} </CTableHeaderCell>
+                    <CTableDataCell>{ec.code}</CTableDataCell>
                     <CTableDataCell>
-                      {ue.libelle.length > 15 ? `${ue.libelle.substring(0, 15)}...` : ue.libelle}
+                      {ec.libelle.length > 15 ? `${ec.libelle.substring(0, 15)}...` : ec.libelle}
                     </CTableDataCell>
-                    <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
-                    <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.cm}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.td}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.tp}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.tpe}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.coefficient}</CTableDataCell>
+                    <CTableDataCell className="text-center">{ec.description}</CTableDataCell>
                     <CTableDataCell className="text-center">
-                      <Link to={`/maquette/ue/ModifierUE/${ue.id}`}>
+                      <Link to={`/maquette/ec/ModifierUE/${ec.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(ue.id)}>
+                      <CButton color="danger" onClick={() => onDelClick(ec.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/ue/${ue.id}/UEDetailsEC`}>
+                      {/* <CButton color="info">Detail</CButton> */}
+                      <Link to={`/maquette/ec/${ec.id}/UEDetailsEC`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}
