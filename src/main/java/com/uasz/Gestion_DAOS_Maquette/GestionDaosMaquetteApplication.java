@@ -2,7 +2,6 @@ package com.uasz.Gestion_DAOS_Maquette;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,40 +9,34 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-import com.uasz.Gestion_DAOS_Maquette.Service.ClasseService;
-import com.uasz.Gestion_DAOS_Maquette.Service.CycleService;
-import com.uasz.Gestion_DAOS_Maquette.Service.ECService;
-import com.uasz.Gestion_DAOS_Maquette.Service.EnseignementService;
-import com.uasz.Gestion_DAOS_Maquette.Service.FiliereService;
-import com.uasz.Gestion_DAOS_Maquette.Service.FormationService;
-import com.uasz.Gestion_DAOS_Maquette.Service.GroupeService;
-import com.uasz.Gestion_DAOS_Maquette.Service.NiveauService;
-import com.uasz.Gestion_DAOS_Maquette.Service.UEService;
-import com.uasz.Gestion_DAOS_Maquette.model.Classe;
-import com.uasz.Gestion_DAOS_Maquette.model.Cycle;
-import com.uasz.Gestion_DAOS_Maquette.model.EC;
-import com.uasz.Gestion_DAOS_Maquette.model.Enseignement;
-import com.uasz.Gestion_DAOS_Maquette.model.Filiere;
-import com.uasz.Gestion_DAOS_Maquette.model.Formation;
-import com.uasz.Gestion_DAOS_Maquette.model.Groupe;
-import com.uasz.Gestion_DAOS_Maquette.model.Niveau;
-import com.uasz.Gestion_DAOS_Maquette.model.UE;
+import com.uasz.Gestion_DAOS_Maquette.Repository.ClasseRepository;
+import com.uasz.Gestion_DAOS_Maquette.Repository.EnseignementRepository;
+import com.uasz.Gestion_DAOS_Maquette.Repository.FormationRepository;
+import com.uasz.Gestion_DAOS_Maquette.Repository.ModuleRepository;
+import com.uasz.Gestion_DAOS_Maquette.Repository.SemestreRepository;
+import com.uasz.Gestion_DAOS_Maquette.Service.*;
+import com.uasz.Gestion_DAOS_Maquette.model.*;
+import com.uasz.Gestion_DAOS_Maquette.model.Module;
 
 @EnableDiscoveryClient
 @SpringBootApplication
 public class GestionDaosMaquetteApplication implements CommandLineRunner {
 
 	@Autowired
-	UEService ueService;
+	private UEService ueService;
+
 	@Autowired
-	public ECService ecService;
+	private ECService ecService;
 
 	@Autowired
 	private CycleService cycleService;
+
 	@Autowired
 	private ClasseService classeService;
+
 	@Autowired
 	private GroupeService groupeService;
+
 	@Autowired
 	private EnseignementService enseignementService;
 
@@ -56,127 +49,107 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 	@Autowired
 	private FormationService formationService;
 
+	@Autowired
+	private ClasseRepository classeRepository;
+	@Autowired
+	private SemestreRepository semestreRepository;
+
+	@Autowired
+	private ModuleRepository moduleRepository;
+	private EnseignementRepository enseignementRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(GestionDaosMaquetteApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		ueService.ajouterUE(new UE(null, "GL 1", "INFF351", null, null, null, new Date(), null, 8, 5));
-		UE ue1 = new UE(null, "GL 3", "INFF353", null, null, null, new Date(), null, 8, 5);
-		ueService.ajouterUE(ue1);
-		UE ue2 = new UE(null, "Another Course", "INFX001", null, null, null, new Date(), null, 6, 3);
-		ueService.ajouterUE(ue2);
-		ueService.ajouterUE(new UE(null, "GL 1", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 2", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(new UE(null, "Base de Donnees  1", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation1  2", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 1", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 1", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ueService.ajouterUE(new UE(null, "GL 3", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 4", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(
-				new UE(null, "Base de Donnees  Avance", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation3 4", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 5", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 7", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ueService.ajouterUE(ue2);
-		ueService.ajouterUE(new UE(null, "GL 1", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 2", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(new UE(null, "Base de Donnees  1", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation1  2", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 1", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 1", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ueService.ajouterUE(new UE(null, "GL 3", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 4", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(
-				new UE(null, "Base de Donnees  Avance", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation3 4", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 5", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 7", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ueService.ajouterUE(ue2);
-		ueService.ajouterUE(new UE(null, "GL 1", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 2", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(new UE(null, "Base de Donnees  1", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation1  2", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 1", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 1", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ueService.ajouterUE(new UE(null, "GL 3", "INFF351", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "GL 4", "INFF352", null, null, null, new Date(), null, 6, 4));
-		ueService.ajouterUE(
-				new UE(null, "Base de Donnees  Avance", "INFC101", null, null, null, new Date(), null, 7, 3));
-		ueService.ajouterUE(new UE(null, "Programmation3 4", "INFC102", null, null, null, new Date(), null, 6, 3));
-		ueService.ajouterUE(new UE(null, "Math 5", "INFM201", null, null, null, new Date(), null, 8, 5));
-		ueService.ajouterUE(new UE(null, "Phys 7", "INFPH101", null, null, null, new Date(), null, 7, 4));
-		ecService
-				.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), ue1, null));
-		ecService.ajouterEC(new EC(null, "EC 1", "EC001", 4, 3, 2, 1, 5, "Description for EC 1", null, ue1, null));
-		ecService
-				.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), ue2, null));
-		// .semestreService.ajouterSemestre(new Semestre(null, "Bonnheur", null, null));
+		// Ajout des unités d'enseignement (UEs)
+		UE ue_1 = ueService.ajouterUE(new UE(null, "Reseaux et Telecoms", "INF351", 8, 4, null, null, null, null));
+		UE ue_2 = ueService.ajouterUE(new UE(null, "Genie Logiciel 1", "INF352", 8, 4, null, null, null, null));
+		UE ue_3 = ueService
+				.ajouterUE(new UE(null, "Technologies embarques et Mobiles", "INF353", 8, 4, null, null, null, null));
+		UE ue_4 = ueService
+				.ajouterUE(new UE(null, "Gestions de donnees structurees", "INF354", 8, 4, null, null, null, null));
+		UE ue_5 = ueService.ajouterUE(new UE(null, "Humanites et Entreprise", "INF355", 6, 3, null, null, null, null));
 
+		// Ajout des cycles
 		cycleService.ajouterCycle(new Cycle(null, "Licence", null));
 		cycleService.ajouterCycle(new Cycle(null, "Master", null));
 		cycleService.ajouterCycle(new Cycle(null, "Doctorat", null));
-		Cycle cycle1 = new Cycle(null, "Bachelor", null);
-		Cycle cycle2 = new Cycle(null, "Ingenieurie", null);
-		cycleService.ajouterCycle(cycle1);
-		cycleService.ajouterCycle(cycle2);
 
-		Niveau niveau1 = new Niveau(null, "L1", cycle1, null);
-		Niveau niveau2 = new Niveau(null, "L2", cycle1, null);
-		Niveau niveau3 = new Niveau(null, "M1", cycle2, null);
-		niveauService.ajouterNiveau(niveau1);
-		niveauService.ajouterNiveau(niveau2);
-		niveauService.ajouterNiveau(niveau3);
+		// Ajout des niveaux
+		Cycle cycle1 = cycleService.ajouterCycle(new Cycle(null, "Bachelor", null));
+		Cycle cycle2 = cycleService.ajouterCycle(new Cycle(null, "Ingenieurie", null));
 
-		Filiere filiere1 = new Filiere(null, "L2I", null);
-		Filiere filiere2 = new Filiere(null, "Mathematique", null);
-		Filiere filiere3 = new Filiere(null, "Cybersecurite", null);
-		Filiere filiere4 = new Filiere(null, "Physique", null);
-		Filiere filiere5 = new Filiere(null, "LEA", null);
-		filiereService.ajouterFiliere(filiere1);
-		filiereService.ajouterFiliere(filiere2);
-		filiereService.ajouterFiliere(filiere3);
-		filiereService.ajouterFiliere(filiere4);
-		filiereService.ajouterFiliere(filiere5);
+		Niveau l1 = niveauService.ajouterNiveau(new Niveau(null, "L1", cycle1, null));
+		Niveau l2 = niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1, null));
+		Niveau l3 = niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2, null));
 
-		Formation formation1 = new Formation(null, "Developpement fullStack", filiere1, null, null, niveau1);
-		Formation formation2 = new Formation(null, "Cryptographie", filiere2, null, null, niveau2);
-		Formation formation3 = new Formation(null, "Hacking", filiere3, null, null, niveau3);
-		Formation formation4 = new Formation(null, "Astronomie", filiere4, null, null, niveau1);
-		Formation formation5 = new Formation(null, "Developpement personnelle", filiere5, null, null, niveau2);
-		formationService.ajouterFormation(formation1);
-		formationService.ajouterFormation(formation2);
-		formationService.ajouterFormation(formation3);
-		formationService.ajouterFormation(formation4);
-		formationService.ajouterFormation(formation5);
-		Classe ccl1 = new Classe(null, "L1-2I", 10, 3, "c'est cool", null, null, new ArrayList<>(), null);
-		classeService.ajouterClasse(ccl1);
-		Classe ccl2 = new Classe(null, "L2-2I", 14, 5, "Tres interressant", null, null, null, null);
-		classeService.ajouterClasse(ccl2);
-		classeService
-				.ajouterClasse(new Classe(null, "MI", 14, 5, "Tres interressant et a retenir", null, null, null, null));
+		// Ajout des filières
+		Filiere filiere1 = filiereService.ajouterFiliere(new Filiere(null, "L2I", null));
+		Filiere filiere2 = filiereService.ajouterFiliere(new Filiere(null, "Mathematique", null));
+		Filiere filiere3 = filiereService.ajouterFiliere(new Filiere(null, "Cybersecurite", null));
+		Filiere filiere4 = filiereService.ajouterFiliere(new Filiere(null, "Physique", null));
+		Filiere filiere5 = filiereService.ajouterFiliere(new Filiere(null, "LEA", null));
 
-		classeService
-				.ajouterClasse(new Classe(null, "MIO", 14, 5, "Informatiquement parlant ", null, null, null, null));
-		classeService.ajouterClasse(
-				new Classe(null, "GEOGRAPHIE", 14, 5, "Util pour exploter les petrole", null, null, null, null));
+		// Ajout des formations
+		Formation l3_L2I = formationService
+				.ajouterFormation(new Formation(null, "L2I", filiere1, null, null, l1));
+		Formation l2_MPI = formationService
+				.ajouterFormation(new Formation(null, "Mathematique", filiere2, null, null, l2));
 
-		classeService
-				.ajouterClasse(new Classe(null, "MATH", 14, 5, "Discipline tre ancienne ", null, null, null, null));
+		// Ajout des enseignements
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "testENS1",
+		// "Machin", classe1, groupe1, null));
+		Semestre t = new Semestre(null, null, null, null, null);
+		Semestre semestre_5 = semestreRepository.save(new Semestre(null, "Semestre 5", null, null, null));
+		Semestre semestre_6 = semestreRepository.save(new Semestre(null, "Semestre 6", null, null, null));
+		Semestre semestre_3 = semestreRepository.save(new Semestre(null, "Semestre 3", null, null, null));
+		Semestre semestre_4 = semestreRepository.save(new Semestre(null, "Semestre 4", null, null, null));
+		// Ajout des classes
+		Classe semestre_5_3_L21 = classeRepository
+				.save(new Classe(null, "Licence 3 L2] Semestre 5", 30, 1, null,
+						null, null, null, null));
+		Classe semestre_6_3_L21 = classeRepository.save(new Classe(null, "Licence 3 L2] Semestre 6", 30, 1, null,
+				null, null, null, null));
+		Classe semestre_3_2_MPI = classeRepository.save(new Classe(null, "Licence 2 MPI Semestre 3", 70, 2, null,
+				null, null, null, null));
+		Classe semestre_4_L2_MI = classeRepository.save(new Classe(null, "Licence 2 MI Semestre 4", 30, 1, null,
+				null, null, null, null));
+		Classe semestre_4_L2_MP = classeRepository.save(new Classe(null, "Licence 2 MP Semestre 4", 30, 1, null,
+				null, null, null, null));
+		// Ajou des modules
+		// Ajout des groupes
+		Groupe groupe1 = groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, null, null, semestre_6_3_L21));
+		Groupe groupe2 = groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, null, null, semestre_6_3_L21));
+		Groupe groupe3 = groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, null, null, semestre_4_L2_MI));
+		Groupe groupe4 = groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, null, null, semestre_4_L2_MI));
 
-		groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, null, null, ccl1));
-		groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, null, null, ccl1));
+		Module dd = new Module(null, null, null, 0, 0, null,
+				null, null, ue_3, null, semestre_4, null);
+		Module module1 = moduleRepository
+				.save(new Module(null, "Genie Logiciel 1", "CM", 2, 2, null,
+						null, null, ue_3, null, semestre_4, null));
+		Module module2 = moduleRepository.save(new Module(null, "Genie Logiciel 1", "TD", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+		Module module3 = moduleRepository.save(new Module(null, "Reseaux et Telecoms", "CM", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+		Module module4 = moduleRepository.save(new Module(null, "Reseaux et Telecoms", "TD", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+		Enseignement e = new Enseignement(null, null, null, module4, semestre_4_L2_MP, groupe4);
+		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module1, semestre_5_3_L21, null));
+		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module2, semestre_5_3_L21, null));
+		enseignementRepository
+				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3, semestre_5_3_L21, null));
+		enseignementRepository
+				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4, semestre_5_3_L21, null));
 
-		groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, null, null, ccl2));
-		groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, null, null, ccl2));
-		enseignementService.ajouterEnseignement(
-				new Enseignement(null, "testENS1",
-						List.of("Objectif 1", "Objectif 2", "Objectif 3"),
-						"Machin",
-						ccl1, null, null));
+		// ue_1);
+		// ueService.ajouterUE(ue_2);
+		// ueService.ajouterUE(ue_3);
+		// ueService.ajouterUE(ue_4);
+		// ueService.ajouterUE(ue_5);
 
 	}
-
 }

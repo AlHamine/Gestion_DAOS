@@ -14,17 +14,22 @@ import java.util.List;
 public class Module {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    private  String nom;
+    private Long id;
+    private String nom;
+    private String cours;
+    private int coefficient;
+    private int nbreHeure;
+    private String description;
+    private String objectifs;
+    @ManyToOne
+    private Maquette maquette;
     @ManyToOne
     private UE ue;
     @ManyToOne
     private EC ec;
     @ManyToOne
     private Semestre semestre;
-    @ManyToMany (mappedBy = "module")
-    private List<Enseignement>enseignements;
-    @ManyToOne
-    private Maquette maquette;
+    @ManyToMany(mappedBy = "module")
+    private List<Enseignement> enseignements;
 
 }

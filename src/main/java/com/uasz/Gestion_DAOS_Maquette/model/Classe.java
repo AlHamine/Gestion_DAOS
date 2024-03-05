@@ -19,12 +19,12 @@ public class Classe {
     private int effectif;
     private int nbreGroupe;
     private String description;
+    @ManyToOne
+    private Formation formation;
     @OneToMany(mappedBy = "classe")
     private List<Enseignement> enseignement;
     @ManyToOne
     private Semestre semestre;
     @OneToMany(mappedBy = "classe")
     private List<Groupe> groupes;
-    @ManyToOne
-    private Formation formation;
 }

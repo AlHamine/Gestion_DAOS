@@ -14,7 +14,7 @@ import java.util.List;
 public class Semestre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
     private String libelle;
     private String description;
     @OneToMany(mappedBy = "semestre")
