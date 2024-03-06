@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.CycleService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
 
 

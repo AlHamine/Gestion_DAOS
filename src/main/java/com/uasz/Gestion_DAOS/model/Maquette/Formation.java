@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class Formation {
     private Filiere filiere;
     @OneToOne
     private Maquette maquette;
+    @JsonIgnore
     @OneToMany(mappedBy = "formation")
     private List<Classe> classes;
     @ManyToOne

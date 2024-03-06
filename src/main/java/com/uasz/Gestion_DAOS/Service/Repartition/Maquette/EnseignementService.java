@@ -1,4 +1,4 @@
-package com.uasz.Gestion_DAOS.Service.Maquette;
+package com.uasz.Gestion_DAOS.Service.Repartition.Maquette;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class EnseignementService {
     public Enseignement modifierEnseignement(Enseignement enseignement) {
         Enseignement enseignementModifier = rechercherEnseignement(enseignement.getId());
         if (enseignementModifier != null) {
-            enseignementModifier.setClasse(enseignement.getClasse());
+            // enseignementModifier.setClasse(enseignement.getClasse());
             enseignementModifier.setGroupe(enseignement.getGroupe());
             enseignementModifier.setModule(enseignement.getModule());
             enseignementModifier.setLibelle(enseignement.getLibelle());

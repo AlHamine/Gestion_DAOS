@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.ClasseService;
-import com.uasz.Gestion_DAOS.Service.Maquette.GroupeService;
-import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.ClasseService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.GroupeService;
+// import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
 @Controller

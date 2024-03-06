@@ -40,10 +40,10 @@ public class BatimentService {
             return null;
     }
 
-    public Boolean suprimerBatiment(Batiment batiment) {
-        Batiment BatimentModifier = rechercherBatiment(batiment.getId());
+    public Boolean suprimerBatiment(long id) {
+        Batiment BatimentModifier = rechercherBatiment(id);
         if (BatimentModifier != null) {
-            batimentRepository.delete(batiment);
+            batimentRepository.delete(BatimentModifier);
             return true;
         } else
             return false;

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uasz.Gestion_DAOS.Service.Repartition.EnseignantService;
 import com.uasz.Gestion_DAOS.model.Repartition.Enseignant;
 
-
 @Controller
 public class EnseignantController {
 
@@ -31,6 +30,5 @@ public class EnseignantController {
         enseignantService.ajouterEnseignant(enseignant);
         return "redirect:/enseignant";
     }
-    
 
 }

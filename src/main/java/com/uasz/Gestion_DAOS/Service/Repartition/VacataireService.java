@@ -45,10 +45,10 @@ public class VacataireService {
             return null;
     }
 
-    public Boolean suprimerVacataire(Vacataire vacataire) {
-        Vacataire vacataireModifier = rechercherVacataire(vacataire.getId());
+    public Boolean suprimerVacataire(Long id) {
+        Vacataire vacataireModifier = rechercherVacataire(id);
         if (vacataireModifier != null) {
-            vacataireRepository.delete(vacataire);
+            vacataireRepository.delete(vacataireModifier);
             return true;
         } else
             return false;

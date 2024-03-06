@@ -44,10 +44,10 @@ public class EnseignantService {
             return null;
     }
 
-    public Boolean suprimerEnseignant(Enseignant enseignant) {
-        Enseignant enseignantModifier = rechercherEnseignant(enseignant.getId());
+    public Boolean suprimerEnseignant(long id) {
+        Enseignant enseignantModifier = rechercherEnseignant(id);
         if (enseignantModifier != null) {
-            enseignantRepository.delete(enseignant);
+            enseignantRepository.delete(enseignantModifier);
             return true;
         } else
             return false;

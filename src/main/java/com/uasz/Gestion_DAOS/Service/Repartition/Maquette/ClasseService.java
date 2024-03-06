@@ -1,17 +1,17 @@
-package com.uasz.Gestion_DAOS.Service.Maquette;
+package com.uasz.Gestion_DAOS.Service.Repartition.Maquette;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.ClasseRepository;
 import com.uasz.Gestion_DAOS.Repository.Maquette.GroupeRepository;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
-import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,19 +37,23 @@ public class ClasseService {
     }
 
     public Classe modifierClasse(Classe classe) {
-        Classe classeModifier = rechercherClasse(classe.getId());
-        if (classeModifier != null) {
-            classeModifier.setLibelle(classe.getLibelle());
-            classeModifier.setEnseignement(classe.getEnseignement());
-            classeModifier.setFormation(classe.getFormation());
-            classeModifier.setGroupes(classe.getGroupes());
-            classeModifier.setSemestre(classe.getSemestre());
-            classeModifier.setDescription(classe.getDescription());
-            classeModifier.setEffectif(classe.getEffectif());
-            classeModifier.setNbreGroupe(classe.getNbreGroupe());
-            return classeRepository.save(classeModifier);
-        } else
+        // Rechercher la classe dans la base de données par son ID
+        Optional<Classe> classeOptional = classeRepository.findById(classe.getId());
+
+        // Vérifier si la classe existe dans la base de données
+        if (classeOptional.isPresent()) {
+            // Obtenir la classe existante
+            Classe classeExistante = classeOptional.get();
+            // Copier les propriétés de la classe fournie vers la classe existante en
+            // ignorant l'attribut 'id'
+            BeanUtils.copyProperties(classe, classeExistante, "id");
+            // Sauvegarder et retourner la classe modifiée
+            return classeRepository.save(classeExistante);
+        } else {
+            // La classe n'existe pas dans la base de données, retourner null ou jeter une
+            // exception selon le cas
             return null;
+        }
     }
 
     public Boolean suprimerClasse(Long id) {
@@ -61,10 +65,10 @@ public class ClasseService {
             return false;
     }
 
-    public List<Enseignement> enseignements_classe(Long id) {
-        return classeRepository.findById(id).get().getEnseignement();
+    // public List<Enseignement> enseignements_classe(Long id) {
+    // return classeRepository.findById(id).get().getEnseignement();
 
-    }
+    // }
 
     public List<Groupe> groupe_classe(Long id) {
         return classeRepository.findById(id).get().getGroupes();

@@ -1,4 +1,4 @@
-package com.uasz.Gestion_DAOS.Service.Maquette;
+package com.uasz.Gestion_DAOS.Service.Repartition.Maquette;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +82,10 @@ public class UEService {
 
     public List<EC> detailsUE(Long id) {
         return ueRepository.findById(id).get().getEcs();
+    }
+
+    public List<com.uasz.Gestion_DAOS.model.Maquette.Module> UE_modules(Long id) {
+        System.out.println("fdfdfddfdfdf" + ueRepository.findById(id).get().getModule());
+        return ueRepository.findById(id).get().getModule();
     }
 }

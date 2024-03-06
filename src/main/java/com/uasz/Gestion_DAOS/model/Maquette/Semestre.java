@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,11 +16,13 @@ import java.util.List;
 public class Semestre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
     private String libelle;
     private String description;
+    @JsonIgnore
     @OneToMany(mappedBy = "semestre")
     private List<Classe> classes;
+    @JsonIgnore
     @OneToMany(mappedBy = "semestre")
     private List<Module> modules;
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +15,9 @@ public class Deroulement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String matiere;
-    private Date date;
-    private String processus;
+    private List<String> objectifs;
+    // private Date date;
+    private String description;
     @OneToOne
     private Seance seance;
 }

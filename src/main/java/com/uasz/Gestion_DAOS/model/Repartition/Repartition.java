@@ -8,30 +8,22 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
+import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
+import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Repartition {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String classe;
-    private int effectif;
-    private  int semestre;
-    @ManyToOne
-    private Enseignement enseignement;
-    private int credit;
-    private int dureeCours;
-      @ManyToOne
-    private Enseignant enseignant;
-    private int cm;
-    private String ResponsableTD;
-    private String ResponsableTP;
-    private int travauxDirige;
-    private int travauxPratique;
-    @OneToMany(mappedBy = "repartition")
-    private List<Seance> seances;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @ManyToOne
+  private Enseignement enseignement;
+  @ManyToOne
+  private Enseignant enseignant;
+  @OneToMany(mappedBy = "repartition")
+  private List<Seance> seances;
 }

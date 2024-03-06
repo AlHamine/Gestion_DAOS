@@ -9,33 +9,37 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.uasz.Gestion_DAOS.model.Utilisateur.Utilisateur;
+// import com.uasz.Gestion_DAOS.model.Utilisateur.Utilisateur;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UE {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String libelle;
     private String Code;
+    private int credit;
+    private int coefficient;
     private String description;
+    private Date createdAt = new Date();
     @JsonIgnore
     @OneToMany(mappedBy = "ue", cascade = CascadeType.ALL)
     private List<EC> ecs;
-    
+    @JsonIgnore
     @OneToMany(mappedBy = "ue")
     private List<Module> module;
 
-    private Date createdAt = new Date();
-    @ManyToOne
-    private Utilisateur utilisateur;
-    private int credit;
-    private int coefficient;
-
-
+    @Override
+    public String toString() {
+        return "UE{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                ", Code='" + Code + '\'' +
+                // N'incluez pas 'module' ici pour éviter la récursion
+                '}';
+    }
 }
-

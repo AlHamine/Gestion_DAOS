@@ -20,6 +20,7 @@ public class RepartitionService {
     @Autowired
     private RepartitionRepository repartitionRepository;
 
+    @SuppressWarnings("null")
     public Repartition ajouterRepartition(Repartition repartition) {
         repartitionRepository.save(repartition);
         return repartition;
@@ -30,6 +31,7 @@ public class RepartitionService {
         return repartitionRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     public Repartition rechercherRepartition(Long id) {
         return repartitionRepository.findById(id).get();
     }
@@ -37,28 +39,19 @@ public class RepartitionService {
     public Repartition modifierRepartition(Repartition repartition) {
         Repartition repartitionModifier = rechercherRepartition(repartition.getId());
         if (repartitionModifier != null) {
-            repartitionModifier.setClasse(repartition.getClasse());
-            repartitionModifier.setCm(repartition.getCm());
-            repartitionModifier.setCredit(repartition.getCredit());
-            repartitionModifier.setDureeCours(repartition.getDureeCours());
-            repartitionModifier.setEffectif(repartition.getEffectif());
             repartitionModifier.setEnseignant(repartition.getEnseignant());
             repartitionModifier.setEnseignement(repartition.getEnseignement());
-            repartitionModifier.setResponsableTD(repartition.getResponsableTD());
             repartitionModifier.setSeances(repartition.getSeances());
-            repartitionModifier.setSemestre(repartition.getSemestre());
-            repartitionModifier.setTravauxDirige(repartition.getTravauxDirige());
-            repartition.setTravauxPratique(repartition.getTravauxPratique());
 
             return repartitionRepository.save(repartitionModifier);
         } else
             return null;
     }
 
-    public Boolean suprimerRepartition(Repartition repartition) {
-        Repartition repartitionModifier = rechercherRepartition(repartition.getId());
+    public Boolean suprimerRepartition(Long id) {
+        Repartition repartitionModifier = rechercherRepartition(id);
         if (repartitionModifier != null) {
-            repartitionRepository.delete(repartition);
+            repartitionRepository.delete(repartitionModifier);
             return true;
         } else
             return false;

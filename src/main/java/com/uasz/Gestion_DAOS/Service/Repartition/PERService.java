@@ -49,10 +49,10 @@ public class PERService {
             return null;
     }
 
-    public Boolean suprimerPER(PER per) {
-        PER perModifier = rechercherPER(per.getId());
+    public Boolean suprimerPER(Long id) {
+        PER perModifier = rechercherPER(id);
         if (perModifier != null) {
-            perRepository.delete(per);
+            perRepository.delete(perModifier);
             return true;
         } else
             return false;

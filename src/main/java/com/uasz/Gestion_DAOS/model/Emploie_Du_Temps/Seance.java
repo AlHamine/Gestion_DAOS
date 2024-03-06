@@ -8,20 +8,26 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
-@Data @NoArgsConstructor @AllArgsConstructor
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titre;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateFin;
+    // private String titre;
+    private LocalDateTime heureDebut;
+    private String dureee;
 
     @ManyToOne
     private Emploi emploi;
     @OneToOne(mappedBy = "seance")
-    private Deroulement deroulement ;
+    private Deroulement deroulement;
+    @JsonIgnore
     @ManyToOne
     private Repartition repartition;
 }

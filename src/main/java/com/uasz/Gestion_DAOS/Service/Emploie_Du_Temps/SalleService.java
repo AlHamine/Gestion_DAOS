@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,20 +38,26 @@ public class SalleService {
         Salle salleModifier = rechercherSalle(salle.getId());
         if (salleModifier != null) {
             salleModifier.setBatiment(salle.getBatiment());
-            salleModifier.setCapacity(salle.getCapacity());
+            salleModifier.setCapacite(salle.getCapacite());
             salleModifier.setNumero(salle.getNumero());
             return salleRepository.save(salleModifier);
         } else
             return null;
     }
 
-    public Boolean suprimerSalle(Salle batiment) {
-        Salle salleModifier = rechercherSalle(batiment.getId());
+    public Boolean suprimerSalle(long id) {
+        Salle salleModifier = rechercherSalle(id);
         if (salleModifier != null) {
-            salleRepository.delete(batiment);
+            salleRepository.delete(salleModifier);
             return true;
         } else
             return false;
+    }
+
+    public List<Salle> afficherSalleSelonBatiment(Long id) {
+        // System.out.println("ttttttttttttttttttttttttt" +
+        // salleRepository.findByBatiment(id).toString());
+        return salleRepository.findByBatiment(id);
     }
 
 }

@@ -23,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
     // @Autowired
     // private UserDetailsServiceImpl userDetailsService;
@@ -94,15 +94,13 @@ public class SecurityConfig{
     // }
 
     // Moins de security
-    
+
     @Bean
     SecurityFilterChain configureSecurity(HttpSecurity http) throws Exception {
-        
         http.csrf().disable().cors().and()
                 .authorizeHttpRequests().anyRequest().permitAll();
         return http.build();
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

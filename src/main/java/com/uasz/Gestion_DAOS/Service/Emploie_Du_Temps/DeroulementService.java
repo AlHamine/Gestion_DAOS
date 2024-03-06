@@ -19,7 +19,6 @@ public class DeroulementService {
     @Autowired
     private DeroulementRepository deroulementRepository;
 
- 
     public Deroulement ajouterDeroulement(Deroulement deroulement) {
         deroulementRepository.save(deroulement);
         return deroulement;
@@ -37,9 +36,9 @@ public class DeroulementService {
     public Deroulement modifierDeroulement(Deroulement deroulement) {
         Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
         if (DeroulementModifier != null) {
-            DeroulementModifier.setDate(deroulement.getDate());
-            DeroulementModifier.setMatiere(deroulement.getMatiere());
-            DeroulementModifier.setProcessus(deroulement.getProcessus());
+            // DeroulementModifier.setDate(deroulement.getDate());
+            DeroulementModifier.setObjectifs(deroulement.getObjectifs());
+            DeroulementModifier.setDescription(deroulement.getDescription());
             DeroulementModifier.setSeance(deroulement.getSeance());
 
             return deroulementRepository.save(DeroulementModifier);
@@ -47,10 +46,10 @@ public class DeroulementService {
             return null;
     }
 
-    public Boolean suprimerDeroulement(Deroulement deroulement) {
-        Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
+    public Boolean suprimerDeroulement(Long deroulement) {
+        Deroulement DeroulementModifier = rechercherDeroulement(deroulement);
         if (DeroulementModifier != null) {
-            deroulementRepository.delete(deroulement);
+            deroulementRepository.delete(DeroulementModifier);
             return true;
         } else
             return false;
