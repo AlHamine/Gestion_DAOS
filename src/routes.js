@@ -129,7 +129,10 @@ const AjouterEmploi = React.lazy(() => import('./views/emploiDuTemps/emploi/Ajou
 const ModifierEmploi = React.lazy(() => import('./views/emploiDuTemps/emploi/ModifierEmploi'))
 // ---------------------------- Salle ----------------------------
 const Salle = React.lazy(() => import('./views/emploiDuTemps/salle/Salle'))
+const BatimentSalle = React.lazy(() => import('./views/emploiDuTemps/salle/BatimentSalle'))
+
 const AjouterSalle = React.lazy(() => import('./views/emploiDuTemps/salle/AjouterSalle'))
+const AjouterSalleB = React.lazy(() => import('./views/emploiDuTemps/salle/BatimentSalleAjout'))
 const ModifierSalle = React.lazy(() => import('./views/emploiDuTemps/salle/ModifierSalle'))
 // ---------------------------- Seance ----------------------------
 const Seance = React.lazy(() => import('./views/emploiDuTemps/seance/Seance'))
@@ -372,10 +375,16 @@ const routes = [
   },
   // ---------------------------- Salle ----------------------------
   { path: '/emploiDuTemps/salle/Salle', name: 'Salle', element: Salle },
+  { path: '/emploiDuTemps/batiment/:id/Salle', name: 'BatimentSalle', element: BatimentSalle },
   {
     path: '/emploiDuTemps/salle/AjouterSalle',
     name: 'AjouterSalle',
     element: AjouterSalle,
+  },
+  {
+    path: '/emploiDuTemps/batiment/:id/AjouterSalle',
+    name: 'AjouterSalleB',
+    element: AjouterSalleB,
   },
   {
     path: '/emploiDuTemps/salle/ModifierSalle/:id',
