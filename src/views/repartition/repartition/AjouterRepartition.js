@@ -114,7 +114,7 @@ export default function AjouterRepartition() {
               <option>Selectionner un enseignement</option>
               {enseignements.map((e) => (
                 <option key={e.id} value={e.id}>
-                  Classe: {e.groupe.classe.libelle} - Groupe: {e.groupe.libelle} {e.module.nom}
+                  Classe: {e.classe} {e.groupe ? ` - Groupe : ${e.groupe}` : ' - '} {e.module}
                 </option>
               ))}
             </CFormSelect>
