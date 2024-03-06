@@ -10,25 +10,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = PER.class, name = "PER"),
-        @JsonSubTypes.Type(value = Vacataire.class, name = "VAC")
+        @JsonSubTypes.Type(value = PERDTO.class, name = "PER"),
+        @JsonSubTypes.Type(value = VacataireDTO.class, name = "VAC")
 })
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", length = 3)
-public abstract class Enseignant {
+// @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// @DiscriminatorColumn(name = "type", length = 3)null
+public abstract class EnseignantDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     private String prenom;
     private String grade;
-    @OneToMany(mappedBy = "enseignant")
-    List<Repartition> repartitions;
+
+    List<RepartitionDTO> repartitions;
 
 }

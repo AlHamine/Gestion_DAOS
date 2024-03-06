@@ -156,12 +156,13 @@ public class GestionDaosApplication implements CommandLineRunner {
 		String[] prenomss = { "Sandrine", "Sylvie", "Paul", "Luc", "Marie" };
 
 		// Créez et ajoutez 5 objets Vacataire à la base de données
-		for (int i = 4; i == 0; i--) {
+		for (int i = 4; i >= 0; i--) {
 			Vacataire vacataire = new Vacataire();
 			vacataire.setNom(nomss[i]);
 			vacataire.setPrenom(prenomss[i]);
 			vacataire.setSpecialite(specialites[i]);
 			vacataire.setGrade(grades[i]);
+
 			// Ajoutez cet objet Vacataire à la base de données en utilisant le service
 			// approprié
 			vacataireService.ajouterVacataire(vacataire);
@@ -179,6 +180,11 @@ public class GestionDaosApplication implements CommandLineRunner {
 		vac.setSpecialite(specialites[2]);
 		vac.setGrade(grades[0]);
 		all.vacataireService.ajouterVacataire(vac);
+		PER per = new PER("B078X", specialites[3]);
+		per.setGrade(grades[2]);
+		per.setNom("TestPer");
+		per.setPrenom("TestPfrenom");
+		all.perService.ajouterPER(per);
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -270,10 +276,10 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 		Enseignement enseignement1 = enseignementRepository
 				.save(new Enseignement(null, "Genie Logiciel 1", null, module1,
-						semestre_5_3_L21, null));
+						semestre_5_3_L21, groupe1));
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1",
 				null,
-				module2, semestre_5_3_L21, null));
+				module2, semestre_5_3_L21, groupe2));
 		Enseignement enseignement2 = enseignementRepository
 				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
 						semestre_5_3_L21, null));
@@ -284,7 +290,7 @@ public class GestionDaosApplication implements CommandLineRunner {
 		Repartition r1 = repartitionService
 				.ajouterRepartition(new Repartition(null, enseignement1, vac, null));
 		Repartition r2 = repartitionService
-				.ajouterRepartition(new Repartition(null, enseignement2, vac, null));
+				.ajouterRepartition(new Repartition(null, enseignement2, per, null));
 
 		// =================================================================
 

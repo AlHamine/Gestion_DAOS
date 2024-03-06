@@ -7,23 +7,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Enseignement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Setter
+@Getter
+public class EnseignementDTO {
     private Long id;
     private String libelle;
     private String description;
-    @ManyToOne
-    private Module module;
-    @ManyToOne
-    private Classe classe;
-    @ManyToOne
-    private Groupe groupe;
-
+    private String module;
+    private String classe;
+    private String semestre;
+    private String groupe;
 }
