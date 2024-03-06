@@ -1,7 +1,4 @@
-com/uasz/Gestion_DAOS_Repartition/model/Enseignement.class
 com/uasz/Gestion_DAOS_Repartition/Repository/EnseignantRepository.class
-com/uasz/Gestion_DAOS_Repartition/Service/EnseignementService.class
-com/uasz/Gestion_DAOS_Repartition/Repository/EnseignementRepository.class
 com/uasz/Gestion_DAOS_Repartition/Controller/EnseignantController.class
 com/uasz/Gestion_DAOS_Repartition/Repository/RepartitionRepository.class
 com/uasz/Gestion_DAOS_Repartition/Controller/VacataireController.class
@@ -13,7 +10,6 @@ com/uasz/Gestion_DAOS_Repartition/ServletInitializer.class
 com/uasz/Gestion_DAOS_Repartition/Service/RepartitionService.class
 com/uasz/Gestion_DAOS_Repartition/Service/PERService.class
 com/uasz/Gestion_DAOS_Repartition/Service/VacataireService.class
-com/uasz/Gestion_DAOS_Repartition/Controller/EnseignementController.class
 com/uasz/Gestion_DAOS_Repartition/Controller/PERController.class
 com/uasz/Gestion_DAOS_Repartition/Repository/PERRepository.class
 com/uasz/Gestion_DAOS_Repartition/model/PER.class

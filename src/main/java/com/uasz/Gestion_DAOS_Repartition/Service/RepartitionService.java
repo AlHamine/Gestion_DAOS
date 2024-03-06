@@ -52,12 +52,12 @@ public class RepartitionService {
     }
 
     // public Boolean suprimerRepartition(Repartition repartition) {
-    //     Repartition repartitionModifier = rechercherRepartition(repartition.getId());
-    //     if (repartitionModifier != null) {
-    //         repartitionRepository.delete(repartition);
-    //         return true;
-    //     } else
-    //         return false;
+    // Repartition repartitionModifier = rechercherRepartition(repartition.getId());
+    // if (repartitionModifier != null) {
+    // repartitionRepository.delete(repartition);
+    // return true;
+    // } else
+    // return false;
     // }
 
     public Boolean suprimerRepartition(Long id) {

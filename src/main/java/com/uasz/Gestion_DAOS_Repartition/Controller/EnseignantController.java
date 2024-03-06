@@ -24,27 +24,27 @@ public class EnseignantController {
     @Autowired
     private EnseignantService enseignantService;
 
-    @GetMapping(path = "/batiment")
+    @GetMapping(path = "/enseignant")
     public List<Enseignant> listerEnseignant() {
         return enseignantService.afficherToutEnseignant();
     }
 
-    @GetMapping(path = "/batiment/{id}")
+    @GetMapping(path = "/enseignant/{id}")
     public Enseignant recherchEnseignant(@PathVariable Long id) {
         return enseignantService.rechercherEnseignant(id);
     }
 
-    @PostMapping(path = "/batiment")
+    @PostMapping(path = "/enseignant")
     public Enseignant ajouterEnseignant(@RequestBody Enseignant Enseignant) {
         return enseignantService.ajouterEnseignant(Enseignant);
     }
 
-    @PutMapping(path = "/batiment/{id}")
+    @PutMapping(path = "/enseignant/{id}")
     public Enseignant modifierEnseignant(@RequestBody Enseignant Enseignant, @PathVariable Long id) {
         return enseignantService.modifierEnseignant(Enseignant);
     }
 
-    @DeleteMapping(path = "/batiment/{id}")
+    @DeleteMapping(path = "/enseignant/{id}")
     public ResponseEntity<String> supprimerEnseignant(@PathVariable Long id) {
         enseignantService.suprimerEnseignant(id);
         return new ResponseEntity<>("Enseignant supprimée avec succès", HttpStatus.OK);
