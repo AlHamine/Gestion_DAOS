@@ -61,6 +61,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const UE = React.lazy(() => import('./views/maquette/ue/UE'))
 const AjouterUE = React.lazy(() => import('./views/maquette/ue/AjouterUE'))
 const ModifierUE = React.lazy(() => import('./views/maquette/ue/ModifierUE'))
+const UEDetailsEC = React.lazy(() => import('./views/maquette/ue/UEDetailsEC'))
 // ---------------------------- Classe ----------------------------
 const Classe = React.lazy(() => import('./views/maquette/classe/Classe'))
 const AjouterClasse = React.lazy(() => import('./views/maquette/classe/AjouterClasse'))
@@ -285,6 +286,7 @@ const routes = [
   { path: '/maquette/ue/UE', name: 'UE', element: UE },
   { path: '/maquette/ue/AjouterUE', name: 'AjouterUE', element: AjouterUE },
   { path: '/maquette/ue/ModifierUE/:id', name: 'ModifierUE', element: ModifierUE },
+  { path: '/maquette/ue/:id/UEDetailsEC', name: 'UEDetailsEC', element: UEDetailsEC },
 
   // ########################## Repartition ##########################
   // ---------------------------- Enseignant ----------------------------
