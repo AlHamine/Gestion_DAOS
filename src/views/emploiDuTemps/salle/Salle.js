@@ -20,6 +20,8 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Salle() {
   const [listSalle, setListSalle] = useState([])
 
@@ -93,15 +95,19 @@ export default function Salle() {
                     <CTableDataCell>{Salle.capacite}</CTableDataCell>
                     <CTableDataCell className="text-center">
                       {/* <CButton color="primary" className="me-1">
-                        Modifier
+                        <EditIcon className="icon4" />
                       </CButton> */}
                       <Link to={`/emploiDuTemps/salle/ModifierSalle/${Salle.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Salle.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(Salle.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     {/* <CTableDataCell>

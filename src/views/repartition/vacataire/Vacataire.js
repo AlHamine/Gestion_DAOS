@@ -20,6 +20,8 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Vacataire() {
   const [listVacataire, setListVacataire] = useState([])
 
@@ -101,11 +103,15 @@ export default function Vacataire() {
                       </CButton> */}
                       <Link to={`/repartition/vacataire/ModifierVacataire/${Vacataire.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Vacataire.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(Vacataire.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>

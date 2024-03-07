@@ -50,14 +50,11 @@ export default function AjouterRepartition() {
   const handleChangeEnseignement = (e) => {
     const selectedId = e.target.value
     console.log(selectedId)
-    const selectedEnseignement = enseignements.find((e) => {
-      // console.log(selectedEnseignement)
-      return e.id == selectedId
-    })
+    const selectedEnseignement = enseignements.find((e) => e.id == selectedId)
     console.log(selectedEnseignement)
     setRepartition((prevState) => ({
       ...prevState,
-      enseignement: selectedEnseignement,
+      enseignement: { id: selectedEnseignement.id },
     }))
   }
   const backward = () => {
@@ -99,6 +96,8 @@ export default function AjouterRepartition() {
 
   return (
     <div style={{ transform: 'scale(1.4)' }}>
+      <br></br>
+      <h1 className="text-center">AJOUT D{"'"}UNE REPARTITION</h1>
       <CForm className="row g-3" validated={true}>
         <br />
         <br />

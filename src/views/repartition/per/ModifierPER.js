@@ -77,7 +77,7 @@ export default function ModifierPER() {
   }
 
   return (
-    <div style={{ transform: 'scale(1.5)' }}>
+    <div style={{ transform: 'scale(1.0)' }}>
       <div className="mx-auto text-center" style={{ maxWidth: '60%' }}>
         <CForm className="row g-3" validated={true}>
           <CInputGroup size="sm" className="mb-3">

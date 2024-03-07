@@ -19,7 +19,8 @@ import {
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
-
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Repartition() {
   const [listRepartition, setListRepartition] = useState([])
 
@@ -76,12 +77,12 @@ export default function Repartition() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell>#</CTableHeaderCell>
+                  {/* <CTableHeaderCell style={{ width: '0px' }}>#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Enseignant</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Classe</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Groupe</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Module</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Type</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Semestre</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Operation</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Details</CTableHeaderCell>
                 </CTableRow>
@@ -89,30 +90,36 @@ export default function Repartition() {
               <CTableBody>
                 {listRepartition.map((Repartition, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell style={{ width: '0px' }}> {index + 1} </CTableHeaderCell>
-                    <CTableDataCell style={{ width: '4px' }}>
+                    {/* <CTableHeaderCell style={{ width: '0px' }}>{index + 1}</CTableHeaderCell> */}
+                    <CTableDataCell style={{ width: '6px' }}>
                       {Repartition.enseignant.prenom} {Repartition.enseignant.nom}{' '}
                       {Repartition.enseignant.grade} en {Repartition.enseignant.specialite}
                     </CTableDataCell>
-                    <CTableDataCell>
-                      {Repartition.enseignement.groupe.classe.libelle}{' '}
-                    </CTableDataCell>
-                    <CTableDataCell>{Repartition.enseignement.groupe.libelle} </CTableDataCell>
-                    <CTableDataCell>{Repartition.enseignement.module.nom}</CTableDataCell>
                     <CTableDataCell>{Repartition.enseignement.libelle}</CTableDataCell>
+                    <CTableDataCell>
+                      {Repartition.enseignement.classe}{' '}
+                      {Repartition.enseignement.groupe
+                        ? ` - Groupe : ${Repartition.enseignement.groupe}`
+                        : ''}
+                    </CTableDataCell>
+                    {/* <CTableDataCell>{Repartition.enseignement.groupe.libelle} </CTableDataCell> */}
+                    <CTableDataCell>{Repartition.enseignement.module}</CTableDataCell>
+                    <CTableDataCell>{Repartition.enseignement.semestre}</CTableDataCell>
+                    {/* <CTableDataCell>{Repartition.enseignement.semestre}</CTableDataCell> */}
 
                     {/* <CTableDataCell className="text-center">{Repartition.grade}</CTableDataCell> */}
                     <CTableDataCell className="text-center">
-                      {/* <CButton color="primary" className="me-1">
-                        Modifier
-                      </CButton> */}
                       <Link to={`/repartition/repartition/ModifierRepartition/${Repartition.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Repartition.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(Repartition.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>

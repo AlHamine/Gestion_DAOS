@@ -20,6 +20,8 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Batiment() {
   const [listBatiment, setListBatiment] = useState([])
 
@@ -95,11 +97,15 @@ export default function Batiment() {
                       </CButton> */}
                       <Link to={`/emploiDuTemps/batiment/ModifierBatiment/${Batiment.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Batiment.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(Batiment.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>

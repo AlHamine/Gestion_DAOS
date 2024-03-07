@@ -20,6 +20,8 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Deroulement() {
   const [listderoulement, setListderoulement] = useState([])
 
@@ -108,15 +110,19 @@ export default function Deroulement() {
                     {/* <CTableDataCell className="text-center">{deroulement.grade}</CTableDataCell> */}
                     <CTableDataCell>
                       {/* <CButton color="primary" className="me-1">
-                        Modifier
+                        <EditIcon className="icon4" />
                       </CButton> */}
                       <Link to={`/emploiDuTemps/deroulement/Modifierderoulement/${deroulement.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(deroulement.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(deroulement.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>

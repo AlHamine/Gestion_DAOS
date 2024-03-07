@@ -20,6 +20,8 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function Seance() {
   const [listSeance, setListSeance] = useState([])
 
@@ -101,7 +103,7 @@ export default function Seance() {
                         </CButton>
                       </Link>
                       <CButton color="danger" onClick={() => onDelClick(Seance.id)}>
-                        Supprimer
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     {/* <CTableDataCell>

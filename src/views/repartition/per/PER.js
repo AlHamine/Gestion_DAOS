@@ -20,9 +20,33 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 export default function PER() {
   const [listPER, setListPER] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(10) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listPER.length / itemsPerPage)
 
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
+  // Index de la dernière UE à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première UE à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des UE à afficher sur la page actuelle
+  const currentUEs = listPER
+    .filter((ue) => ue.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(indexOfFirstUE, indexOfLastUE)
   useEffect(() => {
     fetchPER()
   }, [])
@@ -101,11 +125,15 @@ export default function PER() {
                       </CButton> */}
                       <Link to={`/repartition/per/ModifierPER/${PER.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
-                          Modifier
+                          <EditIcon className="icon4" />
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(PER.id)}>
-                        Supprimer
+                      <CButton
+                        style={{ color: 'white' }}
+                        color="danger"
+                        onClick={() => onDelClick(PER.id)}
+                      >
+                        <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
