@@ -20,33 +20,33 @@ import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
-export default function Repartition() {
-  const [listRepartition, setListRepartition] = useState([])
+const Filiere = () => {
+  const [listUE, setListUE] = useState([])
 
   useEffect(() => {
-    fetchRepartition()
+    fetchUE()
   }, [])
 
-  const fetchRepartition = () => {
-    fetch(SERVER_URL + 'repartition/repartition')
+  const fetchUE = () => {
+    fetch(SERVER_URL + 'maquette/filiere')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
         return response.json()
       })
-      .then((data) => setListRepartition(data))
-      .catch((error) => console.error('Error fetching Repartition:', error))
+      .then((data) => setListUE(data))
+      .catch((error) => console.error('Error fetching Filiere:', error))
   }
 
   const onDelClick = (id) => {
     // console.log(typeof id)
     if (window.confirm('Are you sure to delete?')) {
-      fetch(SERVER_URL + `repartition/repartition/${id}`, { method: 'DELETE' })
+      fetch(SERVER_URL + `maquette/filiere/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('Repartition supprimer')
-            fetchRepartition()
+            alert('Filiere supprimer')
+            fetchUE()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
@@ -59,9 +59,9 @@ export default function Repartition() {
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/repartition/repartition/AjouterRepartition'}>
+          <Link to={'/base/filiere/AddFiliere'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un Repartition
+              Ajouter un Filiere
             </CButton>
           </Link>
         </div>
@@ -69,49 +69,42 @@ export default function Repartition() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des Repartition</small>
+            <strong>Liste </strong> <small>des Filiere</small>
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell>#</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Enseignant</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Classe</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Groupe</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Module</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Type</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Operation</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Credits</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell> */}
+                  <CTableHeaderCell scope="col" className="text-center">
+                    Operation
+                  </CTableHeaderCell>
                   <CTableHeaderCell scope="col">Details</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listRepartition.map((Repartition, index) => (
+                {listUE.map((Filiere, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell style={{ width: '0px' }}> {index + 1} </CTableHeaderCell>
-                    <CTableDataCell style={{ width: '4px' }}>
-                      {Repartition.enseignant.prenom} {Repartition.enseignant.nom}{' '}
-                      {Repartition.enseignant.grade} en {Repartition.enseignant.specialite}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      {Repartition.enseignement.groupe.classe.libelle}{' '}
-                    </CTableDataCell>
-                    <CTableDataCell>{Repartition.enseignement.groupe.libelle} </CTableDataCell>
-                    <CTableDataCell>{Repartition.enseignement.module.nom}</CTableDataCell>
-                    <CTableDataCell>{Repartition.enseignement.libelle}</CTableDataCell>
-
-                    {/* <CTableDataCell className="text-center">{Repartition.grade}</CTableDataCell> */}
+                    <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
+                    <CTableDataCell>{Filiere.nom}</CTableDataCell>
+                    {/* <CTableDataCell>{Filiere.libelle}</CTableDataCell>
+                    <CTableDataCell className="text-center">{Filiere.credit}</CTableDataCell>
+                    <CTableDataCell className="text-center">{Filiere.coefficient}</CTableDataCell> */}
                     <CTableDataCell className="text-center">
                       {/* <CButton color="primary" className="me-1">
                         Modifier
                       </CButton> */}
-                      <Link to={`/repartition/repartition/ModifierRepartition/${Repartition.id}`}>
+                      <Link to={`/base/filiere/EditFiliere/${Filiere.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Repartition.id)}>
+                      <CButton color="danger" onClick={() => onDelClick(Filiere.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
@@ -136,3 +129,5 @@ export default function Repartition() {
     </CRow>
   )
 }
+
+export default Filiere

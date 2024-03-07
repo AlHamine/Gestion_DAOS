@@ -18,35 +18,54 @@ import {
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import Typography from 'src/views/theme/typography/Typography'
 // import { DocsExample } from 'src/components'
 
-const Ue = () => {
-  const [listUE, setListUE] = useState([])
+export default function BatimentSalle() {
+  const { id } = useParams()
+  const [listSalle, setListSalle] = useState([])
+  const [batiment, setBatiment] = useState({})
 
   useEffect(() => {
-    fetchUE()
+    const chargerbatiments = () => {
+      fetch(SERVER_URL + `emploi/batiment/${id}`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            throw new Error('Network response was not ok')
+          }
+        })
+        .then((data) => setBatiment(data))
+        .catch((err) => console.error(err))
+    }
+    chargerbatiments()
+    fetchSalle()
   }, [])
 
-  const fetchUE = () => {
-    fetch(SERVER_URL + 'maquette/ue')
+  const fetchSalle = () => {
+    fetch(SERVER_URL + `emploi/batiment/${id}/salles`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
         return response.json()
       })
-      .then((data) => setListUE(data))
-      .catch((error) => console.error('Error fetching UE:', error))
+      .then((data) => setListSalle(data))
+      .catch((error) => console.error('Error fetching Salle:', error))
   }
 
   const onDelClick = (id) => {
     // console.log(typeof id)
     if (window.confirm('Are you sure to delete?')) {
-      fetch(SERVER_URL + `maquette/ue/${id}`, { method: 'DELETE' })
+      fetch(SERVER_URL + `emploi/salle/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('UE supprimer')
-            fetchUE()
+            alert('Salle supprimer')
+            fetchSalle()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
@@ -59,9 +78,12 @@ const Ue = () => {
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/base/ue/AddUe'}>
+          <p style={{ fontSize: '30px' }}>
+            Liste des salles du batiment <b>{batiment.nom}</b>{' '}
+          </p>
+          <Link to={`/emploiDuTemps/batiment/${id}/AjouterSalle`}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un UE
+              Ajouter un Salle
             </CButton>
           </Link>
         </div>
@@ -69,7 +91,7 @@ const Ue = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des UE</small>
+            <strong>Liste </strong> <small>des Salle</small>
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -77,35 +99,36 @@ const Ue = () => {
               <CTableHead color="dark">
                 <CTableRow>
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Code</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Credits</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Numero</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Capacite</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Details</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">Details</CTableHeaderCell> */}
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listUE.map((ue, index) => (
+                {listSalle.map((Salle, index) => (
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
-                    <CTableDataCell>{ue.code}</CTableDataCell>
-                    <CTableDataCell>{ue.libelle}</CTableDataCell>
-                    <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
-                    <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
+                    <CTableDataCell>{Salle.numero}</CTableDataCell>
+                    <CTableDataCell>{Salle.capacite}</CTableDataCell>
                     <CTableDataCell className="text-center">
-                      <CButton color="primary" className="me-1">
+                      {/* <CButton color="primary" className="me-1">
                         Modifier
-                      </CButton>
-                      <CButton color="danger" onClick={() => onDelClick(ue.id)}>
+                      </CButton> */}
+                      <Link to={`/emploiDuTemps/salle/ModifierSalle/${Salle.id}`}>
+                        <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
+                          Modifier
+                        </CButton>
+                      </Link>
+                      <CButton color="danger" onClick={() => onDelClick(Salle.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
-                    <CTableDataCell>
+                    {/* <CTableDataCell>
                       <CButton color="info">Detail</CButton>
-                    </CTableDataCell>
+                    </CTableDataCell> */}
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
@@ -124,5 +147,3 @@ const Ue = () => {
     </CRow>
   )
 }
-
-export default Ue

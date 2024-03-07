@@ -1,61 +1,37 @@
 import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 import { SERVER_URL } from 'src/constantURL'
-import { useParams } from 'react-router-dom'
-export default function ModifierVacataire() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [vacataire, setVacataire] = useState({
-    prenom: '',
-    nom: '',
-    grade: '',
-    // matricule: '',
-    specialite: '',
-    // createdAt: new Date().toISOString().split('.')[0] + 'Z',
-    // utilisateur: null,
-    // credit: '',
-    // coefficient: '',
-    // code: '',
+
+export default function AddClasse(props) {
+  const [Classe, setClasse] = useState({
+    libelle: '',
+    description: '',
+    module: [],
+    createdAt: new Date().toISOString().split('.')[0] + 'Z',
+    utilisateur: null,
+    credit: '',
+    coefficient: '',
+    code: '',
   })
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    setVacataire({
-      ...vacataire,
-      [name]: value,
+    const { name, valClasse } = event.target
+    setClasse({
+      ...Classe,
+      [name]: valClasse,
     })
   }
-  const getVacataire = () => {
-    fetch(SERVER_URL + `repartition/vacataire/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
 
-        return response.json()
-      })
-      .then((data) => {
-        setVacataire(data)
-      })
-      .catch((error) => console.error('Error fetching UE:', error))
-  }
-
-  useEffect(() => {
-    getVacataire()
-  }, [])
-
-  const addVacataire = (uesave) => {
-    fetch(SERVER_URL + 'repartition/vacataire', {
+  const addClasse = (Classesave) => {
+    fetch(SERVER_URL + 'maqClassette/Classe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(uesave),
+      body: JSON.stringify(Classesave),
     })
       .then((response) => {
         if (response.ok) {
-          // fetchVacataire()
-          alert('vacataire modifier avec successful')
-          navigate('/repartition/vacataire/Vacataire')
+          // fetchClasse()
+          alert('Classe ajouter avec successful')
         } else {
           alert('Something went wrong')
         }
@@ -64,7 +40,7 @@ export default function ModifierVacataire() {
   }
 
   const handleSave = () => {
-    addVacataire(vacataire)
+    addClasse(Classe)
   }
 
   return (
@@ -72,59 +48,69 @@ export default function ModifierVacataire() {
       <div className="mx-auto text-center" style={{ maxWidth: '60%' }}>
         <CInputGroup size="sm" className="mb-3">
           <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Prenom
+            Code
           </CInputGroupText>
           <CFormInput
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.prenom}
-            name="prenom"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Nom
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.nom}
-            name="nom"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Grade
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.grade}
-            name="grade"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Specialite
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.specialite}
-            name="specialite"
+            // valClasse={Classe.code}
+            name="code"
             onChange={handleChange}
           />
         </CInputGroup>
 
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Libelle
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            // valClasse={Classe.libelle}
+            name="libelle"
+            onChange={handleChange}
+          />
+        </CInputGroup>
+
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Credit
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            // valClasse={Classe.credit}
+            name="credit"
+            onChange={handleChange}
+          />
+        </CInputGroup>
+
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Coefficient
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            // valClasse={Classe.coefficient}
+            name="coefficient"
+            onChange={handleChange}
+          />
+        </CInputGroup>
+        <CInputGroup>
+          <CInputGroupText>La description du Classe</CInputGroupText>
+          <CFormTextarea
+            aria-label="With textarea"
+            name="description"
+            onChange={handleChange}
+          ></CFormTextarea>
+        </CInputGroup>
         <div style={{ marginTop: '20px' }}>
           <CButton color="danger" size="sm" className="me-4">
             Annuler
           </CButton>
           <CButton color="primary" size="sm" onClick={handleSave}>
-            Enregistrer
+            Creer un Classe
           </CButton>
         </div>
       </div>

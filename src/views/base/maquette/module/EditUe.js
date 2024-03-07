@@ -1,33 +1,43 @@
-import { CButton, CFormInput, CFormTextarea, CInputGroup, CInputGroupText } from '@coreui/react'
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { SERVER_URL } from 'src/constantURL'
+import {
+  CButton,
+  CFormInput,
+  CFormTextarea,
+  CInputGroup,
+  CInputGroupText,
+  CPopover,
+} from '@coreui/react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-export default function ModifierVacataire() {
+import { SERVER_URL } from 'src/constantURL'
+import { useNavigate } from 'react-router-dom'
+
+export default function EditUe() {
   const { id } = useParams()
+  const [ue, setUE] = useState({})
   const navigate = useNavigate()
-  const [vacataire, setVacataire] = useState({
-    prenom: '',
-    nom: '',
-    grade: '',
-    // matricule: '',
-    specialite: '',
-    // createdAt: new Date().toISOString().split('.')[0] + 'Z',
-    // utilisateur: null,
-    // credit: '',
-    // coefficient: '',
-    // code: '',
-  })
 
   const handleChange = (event) => {
     const { name, value } = event.target
-    setVacataire({
-      ...vacataire,
+    setUE({
+      ...ue,
       [name]: value,
     })
   }
-  const getVacataire = () => {
-    fetch(SERVER_URL + `repartition/vacataire/${id}`)
+
+  const afterAddUE = () => {
+    ;<CPopover
+      title="Ajout du UE reussit"
+      content="L'UE a été modifier avec success dans la base de donnée"
+      placement="right"
+    >
+      <CButton color="danger" size="lg">
+        Click to toggle popover
+      </CButton>
+    </CPopover>
+  }
+
+  const getUE = () => {
+    fetch(SERVER_URL + `maquette/ue/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -36,35 +46,30 @@ export default function ModifierVacataire() {
         return response.json()
       })
       .then((data) => {
-        setVacataire(data)
+        setUE(data)
       })
       .catch((error) => console.error('Error fetching UE:', error))
   }
 
   useEffect(() => {
-    getVacataire()
+    getUE()
   }, [])
 
-  const addVacataire = (uesave) => {
-    fetch(SERVER_URL + 'repartition/vacataire', {
-      method: 'POST',
+  const updateUE = (ueModifier, ueId) => {
+    fetch(SERVER_URL + `maquette/ue/${ueId}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(uesave),
+      body: JSON.stringify(ueModifier),
     })
       .then((response) => {
         if (response.ok) {
-          // fetchVacataire()
-          alert('vacataire modifier avec successful')
-          navigate('/repartition/vacataire/Vacataire')
+          // afterAddUE()
+          navigate('/base/ue')
         } else {
-          alert('Something went wrong')
+          alert("Une erreur s'est produite lors de la modification.")
         }
       })
       .catch((err) => console.error(err))
-  }
-
-  const handleSave = () => {
-    addVacataire(vacataire)
   }
 
   return (
@@ -72,59 +77,70 @@ export default function ModifierVacataire() {
       <div className="mx-auto text-center" style={{ maxWidth: '60%' }}>
         <CInputGroup size="sm" className="mb-3">
           <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Prenom
+            Code
           </CInputGroupText>
           <CFormInput
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.prenom}
-            name="prenom"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Nom
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.nom}
-            name="nom"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Grade
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.grade}
-            name="grade"
-            onChange={handleChange}
-          />
-        </CInputGroup>
-        <CInputGroup size="sm" className="mb-3">
-          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
-            Specialite
-          </CInputGroupText>
-          <CFormInput
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-sm"
-            value={vacataire.specialite}
-            name="specialite"
+            name="code"
+            value={ue.code}
             onChange={handleChange}
           />
         </CInputGroup>
 
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Libelle
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            name="libelle"
+            value={ue.libelle}
+            onChange={handleChange}
+          />
+        </CInputGroup>
+
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Credit
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            name="credit"
+            value={ue.credit}
+            onChange={handleChange}
+          />
+        </CInputGroup>
+
+        <CInputGroup size="sm" className="mb-3">
+          <CInputGroupText id="inputGroup-sizing-sm" className="w-25">
+            Coefficient
+          </CInputGroupText>
+          <CFormInput
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+            name="coefficient"
+            value={ue.coefficient}
+            onChange={handleChange}
+          />
+        </CInputGroup>
+        <CInputGroup>
+          <CInputGroupText>La description du UE</CInputGroupText>
+          <CFormTextarea
+            aria-label="With textarea"
+            name="description"
+            value={ue.description}
+            onChange={handleChange}
+          ></CFormTextarea>
+        </CInputGroup>
         <div style={{ marginTop: '20px' }}>
           <CButton color="danger" size="sm" className="me-4">
             Annuler
           </CButton>
-          <CButton color="primary" size="sm" onClick={handleSave}>
-            Enregistrer
+          <CButton color="primary" size="sm" onClick={() => updateUE(ue, id)}>
+            Modifier UE
           </CButton>
         </div>
       </div>

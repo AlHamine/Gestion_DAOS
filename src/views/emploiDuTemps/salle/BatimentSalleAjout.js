@@ -14,7 +14,7 @@ import {
 } from '@coreui/react'
 import { useParams } from 'react-router-dom'
 
-export default function AjouterSalle() {
+export default function AjouterSalleB() {
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -26,7 +26,7 @@ export default function AjouterSalle() {
   })
 
   const backward = () => {
-    navigate('/emploiDuTemps/salle/Salle')
+    navigate(`/emploiDuTemps/batiment/${id}/Salle`)
   }
   useEffect(() => {
     const chargerbatiments = () => {
@@ -66,8 +66,8 @@ export default function AjouterSalle() {
   }
 
   const addSalle = (repartition) => {
-    // const selectedBatiment = batiments.find((e) => e.id == salle.batimentId)
-    // salle.batiment = selectedBatiment
+    const selectedBatiment = batiments.find((e) => e.id == id)
+    salle.batiment = selectedBatiment
     console.log('TEST FETCHING', repartition)
     fetch(SERVER_URL + 'emploi/salle', {
       method: 'POST',
@@ -76,7 +76,7 @@ export default function AjouterSalle() {
     })
       .then((response) => {
         if (response.ok) {
-          alert('Repartition modifiée avec succès')
+          alert('Salle ajoutée avec succès')
           backward()
         } else {
           alert('Something went wrong')
@@ -87,6 +87,7 @@ export default function AjouterSalle() {
 
   const handleSave = () => {
     addSalle(salle)
+    console.log(salle)
   }
 
   return (
@@ -119,7 +120,7 @@ export default function AjouterSalle() {
         <CCol md={6} className="text-center">
           <CFormInput
             type="number"
-            id="validationServer01"
+            id="validationServer02"
             label="Capacite"
             defaultValue={10}
             name="capacite"
@@ -134,7 +135,7 @@ export default function AjouterSalle() {
             aria-label="Default select example"
             name="batiment"
             onChange={handleChangeBatiment}
-
+            value={id}
             // disabled={true}
           >
             <option>Selectionner un Batiment</option>
