@@ -8,9 +8,9 @@ export default function AjouterUE() {
   const [ue, setUE] = useState({
     libelle: '',
     description: '',
-    module: [],
-    createdAt: new Date().toISOString().split('.')[0] + 'Z',
-    utilisateur: null,
+    // module: [],
+    // createdAt: new Date().toISOString().split('.')[0] + 'Z',
+    // utilisateur: null,
     credit: '',
     coefficient: '',
     code: '',

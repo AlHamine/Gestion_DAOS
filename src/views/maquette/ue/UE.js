@@ -7,7 +7,6 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -19,7 +18,6 @@ import {
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
-// import { cilZoom } from '@coreui/icons'
 
 export default function UE() {
   const [listUE, setListUE] = useState([])
@@ -107,7 +105,6 @@ export default function UE() {
                 size="sm"
                 placeholder="Rechercher UE par libelle"
                 aria-label="sm input example"
-                // icon={cilZoom}
                 onChange={handleSearchChange}
               />
             </div>
@@ -180,12 +177,28 @@ export default function UE() {
                       Previous
                     </CPaginationItem>
                   )}
-                  <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
-                  <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
-                  <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
-                  <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
-                    Fin
-                  </CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>1</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>2</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>3</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Fin</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                      Fin
+                    </CPaginationItem>
+                  )}
                   {currentPage === lastPageNumber ? (
                     <CPaginationItem disabled>Next</CPaginationItem>
                   ) : (
