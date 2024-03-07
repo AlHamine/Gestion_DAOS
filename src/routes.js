@@ -198,7 +198,7 @@ const routes = [
     element: AjouterEnseignement,
   },
   {
-    path: '/maquette/ec/ModifierEnseignement/:id',
+    path: '/maquette/enseignement/ModifierEnseignement/:id',
     name: 'ModifierEnseignement',
     element: ModifierEnseignement,
   },

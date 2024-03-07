@@ -7,7 +7,6 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -15,19 +14,35 @@ import {
   CButton,
   CPagination,
   CPaginationItem,
+  CFormInput,
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
-// import { DocsExample } from 'src/components'
 
-const Filiere = () => {
-  const [listUE, setListUE] = useState([])
+export default function Filiere() {
+  const [listFiliere, setListFiliere] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(10) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
 
   useEffect(() => {
-    fetchUE()
+    fetchFiliere()
   }, [])
 
-  const fetchUE = () => {
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listFiliere.length / itemsPerPage)
+
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
+
+  const fetchFiliere = () => {
     fetch(SERVER_URL + 'maquette/filiere')
       .then((response) => {
         if (!response.ok) {
@@ -35,18 +50,20 @@ const Filiere = () => {
         }
         return response.json()
       })
-      .then((data) => setListUE(data))
+      .then((data) => {
+        // Trier les ateliers par date de création en ordre décroissant
+        data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        setListFiliere(data)
+      })
       .catch((error) => console.error('Error fetching Filiere:', error))
   }
 
   const onDelClick = (id) => {
-    // console.log(typeof id)
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Are you sure to delete the Filiere?')) {
       fetch(SERVER_URL + `maquette/filiere/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('Filiere supprimer')
-            fetchUE()
+            fetchFiliere()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
@@ -55,13 +72,22 @@ const Filiere = () => {
     }
   }
 
+  // Index de la dernière Filiere à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première Filiere à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des Filiere à afficher sur la page actuelle
+  const currentFilieres = listFiliere
+    .filter((filiere) => filiere.nom.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(indexOfFirstUE, indexOfLastUE)
+
   return (
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
           <Link to={'/maquette/filiere/AjouterFiliere'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un Filiere
+              Ajouter une Filiere
             </CButton>
           </Link>
         </div>
@@ -69,18 +95,25 @@ const Filiere = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des Filiere</small>
+            <div>
+              <div>
+                <strong style={{ display: 'block', textAlign: 'center' }}>Liste de Filiere</strong>
+              </div>
+              <CFormInput
+                type="text"
+                size="sm"
+                placeholder="Rechercher Filiere par son nom"
+                aria-label="sm input example"
+                onChange={handleSearchChange}
+              />
+            </div>
           </CCardHeader>
           <CCardBody>
-            {/* <DocsExample href="components/table#table-head"> */}
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
-                  {/* <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Credits</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Coefficient</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -88,46 +121,77 @@ const Filiere = () => {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listUE.map((Filiere, index) => (
+                {currentFilieres.map((filiere, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
-                    <CTableDataCell>{Filiere.nom}</CTableDataCell>
-                    {/* <CTableDataCell>{Filiere.libelle}</CTableDataCell>
-                    <CTableDataCell className="text-center">{Filiere.credit}</CTableDataCell>
-                    <CTableDataCell className="text-center">{Filiere.coefficient}</CTableDataCell> */}
+                    <CTableHeaderCell scope="row">{filiere.id}</CTableHeaderCell>
+                    <CTableDataCell>
+                      {filiere.nom.length > 10 ? `${filiere.nom.substring(0, 10)}...` : filiere.nom}
+                    </CTableDataCell>
                     <CTableDataCell className="text-center">
-                      {/* <CButton color="primary" className="me-1">
-                        Modifier
-                      </CButton> */}
-                      <Link to={`/base/filiere/EditFiliere/${Filiere.id}`}>
+                      <Link to={`/maquette/filiere/ModifierFiliere/${filiere.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(Filiere.id)}>
+                      <CButton color="danger" onClick={() => onDelClick(filiere.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <CButton color="info">Detail</CButton>
+                      <Link to={`/maquette/filiere/${filiere.id}/UEDetailsEC`}>
+                        <CButton
+                          color="info"
+                          style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}
+                        >
+                          Detail
+                        </CButton>
+                      </Link>
                     </CTableDataCell>
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
-                  <CPaginationItem disabled>Previous</CPaginationItem>
-                  <CPaginationItem>1</CPaginationItem>
-                  <CPaginationItem>2</CPaginationItem>
-                  <CPaginationItem>3</CPaginationItem>
-                  <CPaginationItem>Next</CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>Previous</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-200)}>
+                      Previous
+                    </CPaginationItem>
+                  )}
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>1</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>2</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>3</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Fin</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                      Fin
+                    </CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Next</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-100)}>
+                      Next
+                    </CPaginationItem>
+                  )}
                 </CPagination>
               </CTableBody>
             </CTable>
-            {/* </DocsExample> */}
           </CCardBody>
         </CCard>
       </CCol>
     </CRow>
   )
 }
-
-export default Filiere

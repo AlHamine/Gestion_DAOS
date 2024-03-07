@@ -57,28 +57,28 @@ export default function UEDetailsEC() {
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         setListEC(data)
       })
-      .catch((error) => console.error('Error fetching EC details UE:', error))
+      .catch((error) => console.error('Error fetching EC details EC:', error))
   }
 
   const onDelClick = (id) => {
-    if (window.confirm('Are you sure to delete de UE?')) {
+    if (window.confirm('Are you sure to delete the EC?')) {
       fetch(SERVER_URL + `maquette/ec/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
             fetchEC()
           } else {
-            alert("Une erreur s'est produite lors de la suppression.")
+            alert("Une erreur s'est produite lors de la suppression du EC.")
           }
         })
         .catch((err) => console.error(err))
     }
   }
 
-  // Index de la dernière UE à afficher sur la page
+  // Index de la dernière EC à afficher sur la page
   const indexOfLastUE = currentPage * itemsPerPage
-  // Index de la première UE à afficher sur la page
+  // Index de la première EC à afficher sur la page
   const indexOfFirstUE = indexOfLastUE - itemsPerPage
-  // Liste des UE à afficher sur la page actuelle
+  // Liste des EC à afficher sur la page actuelle
   const currentECs = listEC
     .filter((ec) => ec.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(indexOfFirstUE, indexOfLastUE)
@@ -89,7 +89,7 @@ export default function UEDetailsEC() {
         <div className="text-center">
           <Link to={'/maquette/ec/AjouterUE'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un UE
+              Ajouter un EC
             </CButton>
           </Link>
         </div>
@@ -99,13 +99,13 @@ export default function UEDetailsEC() {
           <CCardHeader>
             <div>
               <div>
-                <strong style={{ display: 'block', textAlign: 'center' }}>Liste des UE</strong>
+                <strong style={{ display: 'block', textAlign: 'center' }}>Liste des EC</strong>
               </div>
 
               <CFormInput
                 type="text"
                 size="sm"
-                placeholder="Rechercher UE par libelle"
+                placeholder="Rechercher EC par libelle"
                 aria-label="sm input example"
                 // icon={cilZoom}
                 onChange={handleSearchChange}
