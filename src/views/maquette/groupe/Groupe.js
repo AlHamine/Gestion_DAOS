@@ -138,7 +138,7 @@ export default function Groupe() {
                         : groupe.effectif}
                     </CTableDataCell>
                     <CTableDataCell>
-                      {groupe.description.length > 15
+                      {groupe.description && groupe.description.length > 15
                         ? `${groupe.description.substring(0, 15)}...`
                         : groupe.description}
                     </CTableDataCell>
