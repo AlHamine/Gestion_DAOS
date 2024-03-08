@@ -25,17 +25,18 @@ public class Enseignement_RepartitionService {
             enseignement_Repartition.setClasse(enseignement.getClasse().getLibelle());
             enseignement_Repartition.setDescription(enseignement.getDescription());
             enseignement_Repartition.setId(enseignement.getId());
-            enseignement_Repartition.setGroupe(enseignement.getGroupe().getLibelle());
             enseignement_Repartition.setIdModule(enseignement.getModule().getId());
             enseignement_Repartition.setIdClasse(enseignement.getClasse().getId());
             enseignement_Repartition.setNbreHeure(enseignement.getModule().getNbreHeure());
             enseignement_Repartition.setCoefficient(enseignement.getModule().getCoefficient());
-            enseignement_Repartition.setCours(enseignement.getModule().getNom());
+            enseignement_Repartition.setLibelle(enseignement.getLibelle());
+            enseignement_Repartition.setCours(enseignement.getModule().getCours());
             if (enseignement.getGroupe() != null) {
                 enseignement_Repartition.setIdGroupe(enseignement.getGroupe().getId());
                 enseignement_Repartition.setGroupe(enseignement.getGroupe().getLibelle());
 
             }
+
             enseignement_Repartition.setSemestre(enseignement.getClasse().getSemestre().getLibelle());
             enseignement_Repartitions.add(enseignement_Repartition);
         }

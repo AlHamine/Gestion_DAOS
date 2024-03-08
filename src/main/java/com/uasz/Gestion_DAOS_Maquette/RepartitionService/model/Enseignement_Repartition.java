@@ -22,11 +22,9 @@ public class Enseignement_Repartition {
     private int nbreHeure;
     private Long idClasse;
     private String classe;
-
     private Long idGroupe;
     private String groupe;
-
-    private Long idSemestre;
+    // private Long idSemestre;
     private String semestre;
 
 }

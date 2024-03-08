@@ -16,7 +16,7 @@ public class Enseignement_RepartitionRestController {
     @Autowired
     private Enseignement_RepartitionService enseignement_RepartitionService;
 
-    @GetMapping
+    @GetMapping("/enseignements_Repartitions")
     public List<Enseignement_Repartition> lister_Enseignement() {
         return enseignement_RepartitionService.lister_Enseignement_Repartition();
 

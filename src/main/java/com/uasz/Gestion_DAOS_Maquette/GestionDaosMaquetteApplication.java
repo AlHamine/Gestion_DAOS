@@ -1,8 +1,5 @@
 package com.uasz.Gestion_DAOS_Maquette;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.uasz.Gestion_DAOS_Maquette.Repository.ClasseRepository;
 import com.uasz.Gestion_DAOS_Maquette.Repository.EnseignementRepository;
-import com.uasz.Gestion_DAOS_Maquette.Repository.FormationRepository;
 import com.uasz.Gestion_DAOS_Maquette.Repository.ModuleRepository;
 import com.uasz.Gestion_DAOS_Maquette.Repository.SemestreRepository;
 import com.uasz.Gestion_DAOS_Maquette.Service.*;
@@ -56,6 +52,7 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 
 	@Autowired
 	private ModuleRepository moduleRepository;
+	@Autowired
 	private EnseignementRepository enseignementRepository;
 
 	public static void main(String[] args) {
@@ -109,16 +106,16 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 		Semestre semestre_4 = semestreRepository.save(new Semestre(null, "Semestre 4", null, null, null));
 		// Ajout des classes
 		Classe semestre_5_3_L21 = classeRepository
-				.save(new Classe(null, "Licence 3 L2] Semestre 5", 30, 1, null,
-						null, null, null, null));
-		Classe semestre_6_3_L21 = classeRepository.save(new Classe(null, "Licence 3 L2] Semestre 6", 30, 1, null,
-				null, null, null, null));
+				.save(new Classe(null, "Licence 3 L2I Semestre 5", 30, 1, null,
+						l3_L2I, null, semestre_5, null));
+		Classe semestre_6_3_L21 = classeRepository.save(new Classe(null, "Licence 3 L2I Semestre 6", 30, 1, null,
+				l3_L2I, null, semestre_6, null));
 		Classe semestre_3_2_MPI = classeRepository.save(new Classe(null, "Licence 2 MPI Semestre 3", 70, 2, null,
-				null, null, null, null));
+				l2_MPI, null, semestre_3, null));
 		Classe semestre_4_L2_MI = classeRepository.save(new Classe(null, "Licence 2 MI Semestre 4", 30, 1, null,
-				null, null, null, null));
+				l2_MPI, null, semestre_4, null));
 		Classe semestre_4_L2_MP = classeRepository.save(new Classe(null, "Licence 2 MP Semestre 4", 30, 1, null,
-				null, null, null, null));
+				l2_MPI, null, semestre_4, null));
 		// Ajou des modules
 		// Ajout des groupes
 		Groupe groupe1 = groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, null, null, semestre_6_3_L21));
@@ -139,11 +136,14 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 				null, null, ue_3, null, semestre_4, null));
 		Enseignement e = new Enseignement(null, null, null, module4, semestre_4_L2_MP, groupe4);
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module1, semestre_5_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module2, semestre_5_3_L21, null));
+		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null,
+				module2, semestre_5_3_L21, null));
 		enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3, semestre_5_3_L21, null));
+				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
+						semestre_5_3_L21, null));
 		enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4, semestre_5_3_L21, null));
+				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4,
+						semestre_5_3_L21, null));
 
 		// ue_1);
 		// ueService.ajouterUE(ue_2);
