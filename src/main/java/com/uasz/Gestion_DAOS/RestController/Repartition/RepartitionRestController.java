@@ -1,6 +1,8 @@
 package com.uasz.Gestion_DAOS.RestController.Repartition;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS.Service.Mapper;
 import com.uasz.Gestion_DAOS.Service.Repartition.RepartitionService;
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
+import com.uasz.Gestion_DAOS.model.Repartition.RepartitionDTO;
 
 @RestController
 @RequestMapping("/repartition")
@@ -23,8 +27,9 @@ public class RepartitionRestController {
     private RepartitionService repartitionService;
 
     @GetMapping(path = "/repartition")
-    public List<Repartition> listerRepartition() {
-        return repartitionService.afficherToutRepartition();
+    public List<RepartitionDTO> listerRepartition() {
+        return repartitionService.afficherToutRepartition().stream().map(r -> Mapper.mRepartitionDTO(r))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/repartition/{id}")

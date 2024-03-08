@@ -3,6 +3,7 @@ package com.uasz.Gestion_DAOS.model.Maquette;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,5 +26,6 @@ public class Enseignement {
     private Classe classe;
     @ManyToOne
     private Groupe groupe;
-
+    @OneToOne
+    private Repartition repartition;
 }

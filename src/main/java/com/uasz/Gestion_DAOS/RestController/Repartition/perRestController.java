@@ -1,6 +1,7 @@
 package com.uasz.Gestion_DAOS.RestController.Repartition;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,21 +16,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS.Service.Mapper;
 import com.uasz.Gestion_DAOS.Service.Repartition.PERService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.UEService;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 import com.uasz.Gestion_DAOS.model.Repartition.PER;
+import com.uasz.Gestion_DAOS.model.Repartition.PERDTO;
 
 @RestController
 @RequestMapping("/repartition")
 // @RequiredArgsConstructor
 public class perRestController {
-   @Autowired
+    @Autowired
     private PERService perService;
 
     @GetMapping(path = "/per")
-    public List<PER> listerPER() {
-        return perService.afficherToutPER();
+    public List<PERDTO> listerPER() {
+        return perService.afficherToutPER().stream().map(p -> Mapper.mapPerdto(p)).collect(Collectors.toList());
     }
 
     @GetMapping(path = "/per/{id}")
@@ -51,4 +54,5 @@ public class perRestController {
     public ResponseEntity<String> supprimerPER(@PathVariable Long id) {
         perService.suprimerPER(id);
         return new ResponseEntity<>("PER supprimée avec succès", HttpStatus.OK);
-    }}
+    }
+}

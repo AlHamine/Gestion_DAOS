@@ -12,6 +12,7 @@ import com.uasz.Gestion_DAOS.Service.Repartition.EnseignantService;
 import com.uasz.Gestion_DAOS.Service.Repartition.PERService;
 import com.uasz.Gestion_DAOS.Service.Repartition.RepartitionService;
 import com.uasz.Gestion_DAOS.Service.Repartition.VacataireService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.ClasseService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.CycleService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.ECService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.EnseignementService;
@@ -23,6 +24,7 @@ import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.ModuleService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.NiveauService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.SemestreService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.UEService;
+import com.uasz.Gestion_DAOS.model.Rapport;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -73,5 +75,18 @@ public class AllService {
     public SalleService salleService;
     @Autowired
     public SeanceService seanceService;
+    @Autowired
+    public ClasseService classeService;
+
+    public Rapport getRapport() {
+        return new Rapport(enseignementService.afficherToutEnseignement().size(),
+                enseignantService.afficherToutEnseignant().size(),
+                vacataireService.afficherToutVacataire().size(), perService.afficherToutPER().size(),
+                formationService.afficherToutFormation().size(),
+                filiereService.afficherToutFiliere().size(), salleService.afficherToutSalle().size(),
+                batimentService.afficherToutBatiment().size(), classeService.afficherToutClasse().size(),
+                seanceService.afficherToutSeance().size(),
+                repartitionService.afficherToutRepartition().size());
+    }
 
 }

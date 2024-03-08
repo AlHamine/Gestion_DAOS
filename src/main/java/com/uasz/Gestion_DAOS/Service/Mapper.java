@@ -67,7 +67,7 @@ public class Mapper {
                     enseignant.getRepartitions().stream().map(repartition -> {
                         RepartitionDTO rDTO = new RepartitionDTO();
                         rDTO.setEnseignement(mapEnseignementToDTO(repartition.getEnseignement()));
-                            rDTO.setEnseignant(new VacataireDTO(edto.getId(),edto.getNom(),edto.getPrenom(),edto.getGrade(),null,edto.getSpecialite()));
+                            // rDTO.setEnseignant(new VacataireDTO(edto.getId(),edto.getNom(),edto.getPrenom(),edto.getGrade(),null,edto.getSpecialite()));
                         rDTO.setSeances(repartition.getSeances().stream().map(s -> new SeanceDTO(s))
                                 .collect(Collectors.toList()));
 
@@ -117,7 +117,7 @@ public class Mapper {
         eDTO.setLibelle(enseignement.getLibelle());
         if (enseignement.getGroupe() != null)
             eDTO.setGroupe(enseignement.getGroupe().getLibelle());
-        eDTO.setModule(enseignement.getModule().getNom() + " - " + enseignement.getModule().getCours());
+        eDTO.setModule( enseignement.getModule().getCours()+" - " +enseignement.getModule().getNom());
         eDTO.setSemestre(enseignement.getClasse().getSemestre().getLibelle());
 
         return eDTO;

@@ -129,16 +129,18 @@ public class GestionDaosApplication implements CommandLineRunner {
 		Cycle cycle2 = new Cycle(null, "Ingenieurie", null);
 		cycleService.ajouterCycle(cycle1);
 		cycleService.ajouterCycle(cycle2);
-		String[] noms = { "Dupont", "Martin", "Dubois", "Thomas", "Lefebvre" };
-		String[] prenoms = { "Jean", "Marie", "Claire", "Philippe", "Sophie" };
+		String[] noms = { "Dupont", "Martin", "Dubois", "Thomas", "Lefebvre", "Dubois", "Thomas", "Lefebvre" };
+		String[] prenoms = { "Jean", "Marie", "Claire", "Philippe", "Sophie", "Claire", "Philippe", "Sophie" };
 		String[] grades = { "Professeur", "Maître de conférences", "Assistant",
+				"Chargé de cours", "Docteur", "Assistant",
 				"Chargé de cours", "Docteur" };
-		String[] matricules = { "MAT001", "MAT002", "MAT003", "MAT004", "MAT005" };
+		String[] matricules = { "MAT001", "MAT002", "MAT003", "MAT004", "MAT005", "MAT003", "MAT004", "MAT005" };
 		String[] specialites = { "Informatique", "Mathématiques", "Physique",
+				"Biologie", "Chimie", "Physique",
 				"Biologie", "Chimie" };
 
 		// // Créez et ajoutez 5 objets PER à la base de données
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 8; i++) {
 			PER per = new PER();
 			per.setNom(noms[i]);
 			per.setPrenom(prenoms[i]);
@@ -247,10 +249,10 @@ public class GestionDaosApplication implements CommandLineRunner {
 				l2_MPI, null, semestre_4, null));
 		// Ajou des modules
 		// Ajout des groupes
-		Groupe groupe1 = groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, null, null, semestre_6_3_L21));
-		Groupe groupe2 = groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, null, null, semestre_6_3_L21));
-		Groupe groupe3 = groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, null, null, semestre_4_L2_MI));
-		Groupe groupe4 = groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, null, null, semestre_4_L2_MI));
+		Groupe groupe1 = groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, "", null, semestre_6_3_L21));
+		Groupe groupe2 = groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, "", null, semestre_6_3_L21));
+		Groupe groupe3 = groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, "", null, semestre_4_L2_MI));
+		Groupe groupe4 = groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, "", null, semestre_4_L2_MI));
 
 		Module dd = new Module(null, null, null, 0, 0, null,
 				null, null, ue_3, null, semestre_4, null);
@@ -263,29 +265,30 @@ public class GestionDaosApplication implements CommandLineRunner {
 				null, null, ue_3, null, semestre_4, null));
 		Module module4 = moduleRepository.save(new Module(null, "Reseaux et Telecoms", "TD", 2, 2, null,
 				null, null, ue_3, null, semestre_4, null));
-		Enseignement e = new Enseignement(null, null, null, module4, semestre_4_L2_MP, groupe4);
-		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module1, semestre_5_3_L21, null));
+		Enseignement e = new Enseignement(null, null, null, module4, semestre_4_L2_MP, groupe4, null);
+		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module1, semestre_5_3_L21, null,
+				null));
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null,
-				module2, semestre_5_3_L21, null));
+				module2, semestre_5_3_L21, null, null));
 		enseignementRepository
 				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
-						semestre_5_3_L21, null));
+						semestre_5_3_L21, null, null));
 		enseignementRepository
 				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4,
-						semestre_5_3_L21, null));
+						semestre_5_3_L21, null, null));
 
 		Enseignement enseignement1 = enseignementRepository
 				.save(new Enseignement(null, "Genie Logiciel 1", null, module1,
-						semestre_5_3_L21, groupe1));
+						semestre_5_3_L21, groupe1, null));
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1",
 				null,
-				module2, semestre_5_3_L21, groupe2));
+				module2, semestre_5_3_L21, groupe2, null));
 		Enseignement enseignement2 = enseignementRepository
 				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
-						semestre_5_3_L21, null));
+						semestre_5_3_L21, null, null));
 		enseignementRepository
 				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4,
-						semestre_5_3_L21, null));
+						semestre_5_3_L21, null, null));
 
 		Repartition r1 = repartitionService
 				.ajouterRepartition(new Repartition(null, enseignement1, vac, null));

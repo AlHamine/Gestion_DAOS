@@ -20,7 +20,7 @@ public class Repartition {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @ManyToOne
+  @OneToOne
   private Enseignement enseignement;
   @ManyToOne
   private Enseignant enseignant;

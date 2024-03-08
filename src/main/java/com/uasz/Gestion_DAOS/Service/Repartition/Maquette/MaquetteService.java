@@ -50,10 +50,10 @@ public class MaquetteService {
             return null;
     }
 
-    public Boolean suprimerMaquette(Maquette ue) {
-        Maquette maquetteModifier = rechercherMaquette(ue.getId());
+    public Boolean suprimerMaquette(Long ue) {
+        Maquette maquetteModifier = rechercherMaquette(ue);
         if (maquetteModifier != null) {
-            maquetteRepository.delete(ue);
+            maquetteRepository.delete(maquetteModifier);
             return true;
         } else
             return false;
