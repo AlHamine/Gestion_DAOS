@@ -124,22 +124,23 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		cycleService.ajouterCycle(new Cycle(null, "Licence", null));
-		cycleService.ajouterCycle(new Cycle(null, "Master", null));
-		cycleService.ajouterCycle(new Cycle(null, "Doctorat", null));
-		Cycle cycle1 = new Cycle(null, "Bachelor", null);
-		Cycle cycle2 = new Cycle(null, "Ingenieurie", null);
-		cycleService.ajouterCycle(cycle1);
-		cycleService.ajouterCycle(cycle2);
-		String[] noms = { "DIALLO", "DRAME", "TOURE", "DIOP", "MALACK", "FAYE", "FAYE", "NDIAYE" };
-		String[] prenoms = { "Ousmane", "Khadim", "Bachir", "Kamir", "Youssou", "El Hadji", "Marie", "Sophie" };
-		String[] grades = { "Professeur", "Maître de conférences", "Assistant",
-				"Chargé de cours", "Docteur", "Assistant",
-				"Chargé de cours", "Docteur" };
-		String[] matricules = { "MAT001", "MAT002", "MAT003", "MAT004", "MAT005", "MAT003", "MAT004", "MAT005" };
-		String[] specialites = { "Informatique", "Mathématiques", "Physique",
-				"Biologie", "Chimie", "Physique",
-				"Biologie", "Chimie" };
+		Cycle cycle1 = cycleService.ajouterCycle(new Cycle(null, "Licence", null));
+		Cycle cycle2 = cycleService.ajouterCycle(new Cycle(null, "Master", null));
+		Cycle cycle3 = cycleService.ajouterCycle(new Cycle(null, "Doctorat", null));
+		// Les niveaux
+		Niveau l1 = niveauService.ajouterNiveau(new Niveau(null, "L1", cycle1, null));
+		Niveau l2 = niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1, null));
+		Niveau l3 = niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2, null));
+		// Les enseignants
+		String[] noms = { "DIOP", "DRAME", "NDOYE", "NDIAYE", "FAYE", "FAYE", "NDIAYE", "DIAW" };
+		String[] prenoms = { "Ibrahima", "Khadim", "Malick", "Mr", "Youssou", "El Hadji", "Marie", "Mame Kouna" };
+		String[] grades = { "Professeur", "Docteur", "Maître de conférences", "Docteur",
+				"Professeur", "Docteur", "Professeur", "Doctoreur" };
+		String[] matricules = { "MAT001", "MAT002", "MAT003", "MAT004", "MAT005", "MAT003", "MAT004", "MatrK83" };
+
+		String[] specialites = { "Genie Logiciel", "IA", "Reseaux",
+				"Droit", "Securite et Reseaux", "Reseaux et Telecom",
+				"Genie Logiciel", "Anglais" };
 
 		// // Créez et ajoutez 5 objets PER à la base de données
 		for (int i = 0; i < 8; i++) {
@@ -156,46 +157,50 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 			pERService.ajouterPER(per);
 		}
-		String[] nomss = { "MALACK", "MBOUP", "Dieng", "Ka", "THIAM" };
-		String[] prenomss = { "Kamir", "Mor", "Sidiya", "Dame", "Amadou" };
+		String[] nomss = { "BAKHOUM", "MBOUP", "Dieng", "Ka", "THIAM" };
+		String[] prenomss = { "Aannah", "Mor", "Sidiya", "Dame", "Amadou" };
 
 		// Créez et ajoutez 5 objets Vacataire à la base de données
 		for (int i = 4; i >= 0; i--) {
 			Vacataire vacataire = new Vacataire();
 			vacataire.setNom(nomss[i]);
 			vacataire.setPrenom(prenomss[i]);
-			vacataire.setSpecialite(specialites[i]);
-			vacataire.setGrade(grades[i]);
-
-			// Ajoutez cet objet Vacataire à la base de données en utilisant le service
-			// approprié
+			vacataire.setSpecialite("Genie Logiciel");
+			vacataire.setGrade("Charge de cours");
 			vacataireService.ajouterVacataire(vacataire);
 		}
+		// AJout des Batiment
 		Batiment b1 = new Batiment(null, "Bloc Scientifique", null);
+		all.batimentService.ajouterBatiment(b1);
+
+		Batiment b3 = new Batiment(null, "Batiment Informatique", null);
+		all.batimentService.ajouterBatiment(b3);
 		all.batimentService.ajouterBatiment(b1);
 		Batiment b2 = new Batiment(null, "PGF SUP", null);
 
 		all.batimentService.ajouterBatiment(b2);
 		Salle salle1 = all.salleService.ajouterSalle(new Salle(null, "A1", 15, b1, null));
 		all.salleService.ajouterSalle(new Salle(null, "B4", 25, b2, null));
+
+		all.salleService.ajouterSalle(new Salle(null, "F02", 25, b3, null));
+		all.salleService.ajouterSalle(new Salle(null, "F03", 25, b3, null));
+		all.salleService.ajouterSalle(new Salle(null, "F01", 25, b3, null));
+		all.salleService.ajouterSalle(new Salle(null, "F04", 25, b3, null));
+
+		// Exemple concret
 		Vacataire vac = new Vacataire();
-		vac.setNom(nomss[2]);
-		vac.setPrenom(prenomss[3]);
-		vac.setSpecialite(specialites[2]);
-		vac.setGrade(grades[0]);
+		vac.setNom("Malack");
+		vac.setPrenom("Kamir");
+		vac.setSpecialite("Genie Logiciel");
+		vac.setGrade("Docteur");
 		all.vacataireService.ajouterVacataire(vac);
-		PER per = new PER("B078X", specialites[3]);
-		per.setGrade(grades[2]);
-		per.setNom("Diop");
+
+		PER per = new PER("B078X", "Genie Logiciel");
+		per.setGrade("Professeur");
+		per.setNom("DIOP");
 		per.setPrenom("Ibrahima");
 		all.perService.ajouterPER(per);
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Ajout des unités d'enseignement (UEs)
@@ -207,32 +212,19 @@ public class GestionDaosApplication implements CommandLineRunner {
 				.ajouterUE(new UE(null, "Gestions de donnees structurees", "INF354", 8, 4, null, null, null, null));
 		UE ue_5 = ueService.ajouterUE(new UE(null, "Humanites et Entreprise", "INF355", 6, 3, null, null, null, null));
 
-		// Ajout des cycles
-		cycleService.ajouterCycle(new Cycle(null, "Licence", null));
-		cycleService.ajouterCycle(new Cycle(null, "Master", null));
-		cycleService.ajouterCycle(new Cycle(null, "Doctorat", null));
-
-		Niveau l1 = niveauService.ajouterNiveau(new Niveau(null, "L1", cycle1, null));
-		Niveau l2 = niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1, null));
-		Niveau l3 = niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2, null));
-
 		// Ajout des filières
 		Filiere filiere1 = filiereService.ajouterFiliere(new Filiere(null, "L2I", null));
 		Filiere filiere2 = filiereService.ajouterFiliere(new Filiere(null, "Mathematique", null));
-		Filiere filiere3 = filiereService.ajouterFiliere(new Filiere(null, "Cybersecurite", null));
-		Filiere filiere4 = filiereService.ajouterFiliere(new Filiere(null, "Physique", null));
-		Filiere filiere5 = filiereService.ajouterFiliere(new Filiere(null, "LEA", null));
+		Filiere filiere3 = filiereService.ajouterFiliere(new Filiere(null, "Geographie", null));
+		Filiere filiere4 = filiereService.ajouterFiliere(new Filiere(null, "Agronomie", null));
+		Filiere filiere5 = filiereService.ajouterFiliere(new Filiere(null, "Histoire", null));
 
 		// Ajout des formations
 		Formation l3_L2I = formationService
-				.ajouterFormation(new Formation(null, "L2I", filiere1, null, null, l1));
+				.ajouterFormation(new Formation(null, "L3_2I", filiere1, null, null, l1));
 		Formation l2_MPI = formationService
 				.ajouterFormation(new Formation(null, "Mathematique", filiere2, null, null, l2));
-
-		// Ajout des enseignements
-		// enseignementService.ajouterEnseignement(new Enseignement(null, "testENS1",
-		// "Machin", classe1, groupe1, null));
-		Semestre t = new Semestre(null, null, null, null, null);
+		// Ajout des Semetres
 		Semestre semestre_5 = semestreRepository.save(new Semestre(null, "Semestre 5", null, null, null));
 		Semestre semestre_6 = semestreRepository.save(new Semestre(null, "Semestre 6", null, null, null));
 		Semestre semestre_3 = semestreRepository.save(new Semestre(null, "Semestre 3", null, null, null));
@@ -241,35 +233,88 @@ public class GestionDaosApplication implements CommandLineRunner {
 		Classe semestre_5_3_L21 = classeRepository
 				.save(new Classe(null, "Licence 3 L2I Semestre 5", 30, 1, null,
 						l3_L2I, null, semestre_5, null));
-		Classe semestre_6_3_L21 = classeRepository.save(new Classe(null, "Licence 3 L2I Semestre 6", 30, 1, null,
-				l3_L2I, null, semestre_6, null));
+		Classe semestre_6_3_L21 = classeRepository
+				.save(new Classe(null, "Licence 3 L2I Semestre 6", 32, 1, "Tres Intense comme formation ",
+						l3_L2I, null, semestre_6, null));
 		Classe semestre_3_2_MPI = classeRepository.save(new Classe(null, "Licence 2 MPI Semestre 3", 70, 2, null,
 				l2_MPI, null, semestre_3, null));
 		Classe semestre_4_L2_MI = classeRepository.save(new Classe(null, "Licence 2 MI Semestre 4", 30, 1, null,
 				l2_MPI, null, semestre_4, null));
 		Classe semestre_4_L2_MP = classeRepository.save(new Classe(null, "Licence 2 MP Semestre 4", 30, 1, null,
 				l2_MPI, null, semestre_4, null));
-		// Ajou des modules
 		// Ajout des groupes
-		Groupe groupe1 = groupeService.ajouterGroupe(new Groupe(null, "Groupe1", 25, "", null, semestre_6_3_L21));
+		Groupe groupe1 = groupeService.ajouterGroupe(
+				new Groupe(null, "Groupe GL", 25, "C'est l'option Genile LOgiciel", null, semestre_6_3_L21));
 		Groupe groupe2 = groupeService.ajouterGroupe(new Groupe(null, "Groupe2", 50, "", null, semestre_6_3_L21));
 		Groupe groupe3 = groupeService.ajouterGroupe(new Groupe(null, "Alpha", 40, "", null, semestre_4_L2_MI));
 		Groupe groupe4 = groupeService.ajouterGroupe(new Groupe(null, "Beta", 30, "", null, semestre_4_L2_MI));
-
-		Module dd = new Module(null, null, null, 0, 0, null,
-				null, null, ue_3, null, semestre_4, null);
+		// Ajout des Modules
+		// Génie Logiciel Anvacé
 		Module module1 = moduleRepository
-				.save(new Module(null, "Genie Logiciel 1", "CM", 2, 2, null,
+				.save(new Module(null, "Génie Logiciel Anvacé", "CM", 2, 2, "C'est la suite logique de GL1",
 						null, null, ue_3, null, semestre_4, null));
-		Module module2 = moduleRepository.save(new Module(null, "Genie Logiciel 1", "TD", 2, 2, null,
+		Module module1_1 = moduleRepository
+				.save(new Module(null, "Génie Logiciel Anvacé", "TP", 2, 2, "C'est la suite logique de GL1",
+						null, null, ue_3, null, semestre_4, null));
+		// Développement d'Applications Orientés
+		Module module2 = moduleRepository
+				.save(new Module(null, "Développement d'Applications Orientés Service", "CM", 2, 2, null,
+						null, null, ue_3, null, semestre_4, null));
+		Module module2_1 = moduleRepository
+				.save(new Module(null, "Développement d'Applications Orientés Service", "TP", 2, 2, null,
+						null, null, ue_3, null, semestre_4, null));
+		// Sécurité des réseux
+		Module module3 = moduleRepository.save(new Module(null, "Sécurité des réseux", "CM", 2, 2, null,
 				null, null, ue_3, null, semestre_4, null));
-		Module module3 = moduleRepository.save(new Module(null, "Reseaux et Telecoms", "CM", 2, 2, null,
+		Module module3_1 = moduleRepository.save(new Module(null, "Sécurité des réseux", "TP", 2, 2, null,
 				null, null, ue_3, null, semestre_4, null));
-		Module module4 = moduleRepository.save(new Module(null, "Reseaux et Telecoms", "TD", 2, 2, null,
+		// Administration Réseaux
+		Module module4 = moduleRepository.save(new Module(null, "Administration Réseaux", "CM", 2, 2, null,
 				null, null, ue_3, null, semestre_4, null));
-		Enseignement e = new Enseignement(null, null, null, module4, semestre_4_L2_MP, groupe4, null);
-		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null, module1, semestre_5_3_L21, null,
+		Module module4_1 = moduleRepository.save(new Module(null, "Administration Réseaux", "TP", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+
+		// Anglais
+		Module module5 = moduleRepository.save(new Module(null, "Anglais 6", "CM", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+		// Droit des TICS
+		Module module6 = moduleRepository.save(new Module(null, "Droit des TICS", "CM", 2, 2, null,
+				null, null, ue_3, null, semestre_4, null));
+		// Enseignement pour Semstre 6 L3 L2I
+		Enseignement gl_cm = enseignementRepository
+				.save(new Enseignement(null, "Génie Logiciel Anvacé-CM", null, module1,
+						semestre_6_3_L21, null,
+						null));
+		enseignementRepository.save(new Enseignement(null, "Génie Logiciel Anvacé-TP", null, module1_1,
+				semestre_6_3_L21, null,
 				null));
+		Enseignement daos_cm = enseignementRepository
+				.save(new Enseignement(null, "Développement d'Applications Orientés Service-CM", null, module2,
+						semestre_6_3_L21, null,
+						null));
+		Enseignement daos_tp = enseignementRepository
+				.save(new Enseignement(null, "Développement d'Applications Orientés Service-TP", null, module2_1,
+						semestre_6_3_L21, null,
+						null));
+		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-CM", null, module3,
+				semestre_6_3_L21, null,
+				null));
+		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-TP", null, module3_1,
+				semestre_6_3_L21, null,
+				null));
+		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-CM", null, module4,
+				semestre_6_3_L21, null,
+				null));
+		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-TP", null, module4_1,
+				semestre_6_3_L21, null,
+				null));
+		enseignementRepository.save(new Enseignement(null, "Anglais 6", null, module5,
+				semestre_6_3_L21, null,
+				null));
+		enseignementRepository.save(new Enseignement(null, "Droit des TICS", null, module6,
+				semestre_6_3_L21, null,
+				null));
+		// ----------------------------------
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null,
 				module2, semestre_5_3_L21, null, null));
 		enseignementRepository
@@ -293,17 +338,14 @@ public class GestionDaosApplication implements CommandLineRunner {
 						semestre_5_3_L21, null, null));
 
 		Repartition r1 = repartitionService
-				.ajouterRepartition(new Repartition(null, enseignement1, vac, null));
+				.ajouterRepartition(new Repartition(null, daos_cm, per, null));
 		Repartition r2 = repartitionService
-				.ajouterRepartition(new Repartition(null, enseignement2, per, null));
+				.ajouterRepartition(new Repartition(null, daos_tp, vac, null));
+		// Repartition r3 = repartitionService
+		// .ajouterRepartition(new Repartition(null, gl_cm, vac, null));
 
 		// =================================================================
 
-		Deroulement d1 = new Deroulement(null,
-				"Analyse - Modelisation - Conception",
-				"Opération intellectuelle consistant à décomposer un tout en ses éléments constituants et d'en établir les relations",
-				null);
-		all.deroulementService.ajouterDeroulement(d1);
 		all.deroulementService.ajouterDeroulement(new Deroulement(null,
 				"Analyse - Modelisation - Conception",
 				"Test deroulement",
@@ -312,8 +354,13 @@ public class GestionDaosApplication implements CommandLineRunner {
 				.ajouterEmploi(new Emploi(null, null, new Date(), new Date()));
 		// all.seanceService.ajouterSeance(seance1);
 		Seance seance1 = all.seanceService.ajouterSeance(new Seance(null, "Lundi", "08:00", "01:30",
-				em1, d1,
+				em1, null,
 				r1, salle1));
+		Deroulement d1 = new Deroulement(null,
+				"Initialiation aux Application Monolithique - Introduction aux microService - Realise d'une application MicroService",
+				"Opération intellectuelle consistant à décomposer un tout en ses éléments constituants et d'en établir les relations et d'en faire une application",
+				seance1);
+		all.deroulementService.ajouterDeroulement(d1);
 
 	}
 
