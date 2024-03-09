@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.uasz.Gestion_DAOS.Service.Mapper;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.SeanceDTO;
 import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
@@ -23,4 +25,16 @@ public class RepartitionDTO {
 
   private List<SeanceDTO> seances;
 
+  // public RepartitionDTO(Repartition repartition) {
+  //   this.enseignement = Mapper.mapEnseignementToDTO(repartition.getEnseignement());
+  //   if (repartition.getEnseignant() instanceof PER)
+  //     this.setEnseignant(Mapper.mapPerdto(repartition.getEnseignant()));
+
+  //   else
+  //     this.setEnseignant(Mapper.mapVacataireDTO(repartition.getEnseignant()));
+
+  //   // this.setSeances(repartition.getSeances().stream().map(s -> new
+  //   // SeanceDTO(s)).collect(Collectors.toList()));
+
+  // }
 }

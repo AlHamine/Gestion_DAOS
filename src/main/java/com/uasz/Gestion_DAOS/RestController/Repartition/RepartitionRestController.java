@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,8 +34,8 @@ public class RepartitionRestController {
     }
 
     @GetMapping(path = "/repartition/{id}")
-    public Repartition recherchRepartition(@PathVariable Long id) {
-        return repartitionService.rechercherRepartition(id);
+    public RepartitionDTO recherchRepartition(@PathVariable Long id) {
+        return Mapper.mRepartitionDTO(repartitionService.rechercherRepartition(id));
     }
 
     @PostMapping(path = "/repartition")
@@ -42,9 +43,17 @@ public class RepartitionRestController {
         return repartitionService.ajouterRepartition(Repartition);
     }
 
-    @PutMapping(path = "/repartition/{id}")
-    public Repartition modifierRepartition(@RequestBody Repartition Repartition, @PathVariable Long id) {
-        return repartitionService.modifierRepartition(Repartition);
+    // @PatchMapping(path = "/repartition/{id}/{idEnseignant}/{idEnseignement}")
+    // public Repartition modifierRepartition(@RequestBody Repartition Repartition, @PathVariable Long id,
+    //         @PathVariable Long idEnseignant, @PathVariable Long idEnseignement) {
+    //     // repartitionService.UpdateRepartition(Repartition, id, idEnseignant,
+    //     // idEnseignement);
+    //     return null;
+    // }
+    @PatchMapping(path = "/repartition/{id}")
+    public Repartition modifierRepartition(@RequestBody Repartition Repartition,
+    @PathVariable Long id) {
+    return repartitionService.modifierRepartition(Repartition);
     }
 
     @DeleteMapping(path = "/repartition/{id}")

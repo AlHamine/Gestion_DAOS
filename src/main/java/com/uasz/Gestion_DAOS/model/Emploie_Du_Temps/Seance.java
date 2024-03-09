@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @NoArgsConstructor
@@ -19,15 +19,16 @@ public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    // private String titre;
-    private LocalDateTime heureDebut;
+    private String jour;
+    private String heureDebut;
     private String dureee;
 
     @ManyToOne
     private Emploi emploi;
     @OneToOne(mappedBy = "seance")
     private Deroulement deroulement;
-    @JsonIgnore
     @ManyToOne
     private Repartition repartition;
+    @ManyToOne
+    private Salle salle;
 }

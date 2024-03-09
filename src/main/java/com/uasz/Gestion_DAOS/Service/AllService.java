@@ -86,7 +86,7 @@ public class AllService {
                 filiereService.afficherToutFiliere().size(), salleService.afficherToutSalle().size(),
                 batimentService.afficherToutBatiment().size(), classeService.afficherToutClasse().size(),
                 seanceService.afficherToutSeance().size(),
-                repartitionService.afficherToutRepartition().size());
+                repartitionService.afficherToutRepartition().size(), emploiService.afficherToutEmploi().size());
     }
 
 }

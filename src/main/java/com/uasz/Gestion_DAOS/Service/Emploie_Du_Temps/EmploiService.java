@@ -43,10 +43,10 @@ public class EmploiService {
             return null;
     }
 
-    public Boolean suprimerEmploi(Emploi batiment) {
-        Emploi emploiModifier = rechercherEmploi(batiment.getId());
+    public Boolean suprimerEmploi(Long batiment) {
+        Emploi emploiModifier = rechercherEmploi(batiment);
         if (emploiModifier != null) {
-            emploiRepository.delete(batiment);
+            emploiRepository.delete(emploiModifier);
             return true;
         } else
             return false;

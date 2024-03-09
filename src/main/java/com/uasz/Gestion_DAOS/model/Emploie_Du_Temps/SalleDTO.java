@@ -18,5 +18,5 @@ public class SalleDTO {
 
     private int capacite;
     private Long batimentId;
-
+    private String batimentNom;
 }

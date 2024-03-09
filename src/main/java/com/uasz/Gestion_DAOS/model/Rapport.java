@@ -27,5 +27,6 @@ public class Rapport {
     private int nbClasse;
     private int nbSeance;
     private int nbRepartition;
+    private int nbEmploi;
 
 }

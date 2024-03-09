@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,5 +19,7 @@ public class Emploi {
     @OneToMany(mappedBy = "emploi")
     private List<Seance> seances;
     // Date Debut Date fin
+    private Date dateDebut;
+    private Date dateFin;
 
 }

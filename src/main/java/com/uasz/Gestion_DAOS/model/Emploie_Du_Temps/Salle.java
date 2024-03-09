@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS.model.Emploie_Du_Temps;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -21,5 +23,6 @@ public class Salle {
 
     @ManyToOne
     private Batiment batiment;
-
+    @OneToMany(mappedBy = "salle")
+    private List<Seance> seances;
 }

@@ -1,11 +1,14 @@
 package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Emploie_Du_Temps.SeanceRepository;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
+import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.SeanceDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -30,6 +33,16 @@ public class SeanceService {
         return seanceRepository.findAll();
     }
 
+    public List<Seance> afficherSeanceSelonEmploi(Long id) {
+        return seanceRepository.findByEmploi(id);
+    }
+    // public List<Seance> afficherSeanceSelonEmploi(Long id) {
+    // return seanceRepository.findAll().stream().filter(m ->
+    // {if(m.getEmploi()!=null) return m.getEmploi().getId()== id; else return
+    // null})
+    // .collect(Collectors.toList());
+    // }
+
     public Seance rechercherSeance(Long id) {
         return seanceRepository.findById(id).get();
     }
@@ -39,11 +52,17 @@ public class SeanceService {
         if (seanceModifier != null) {
             seanceModifier.setDureee(seance.getDureee());
             seanceModifier.setHeureDebut(seance.getHeureDebut());
-            seanceModifier.setDeroulement(seance.getDeroulement());
+            if (seance.getDeroulement() != null)
+                seanceModifier.setDeroulement(seance.getDeroulement());
             seanceModifier.setEmploi(seance.getEmploi());
-            // seanceModifier.setRepartition(seance.getRepartition());
+            if (seance.getRepartition() != null)
+                seanceModifier.setRepartition(seance.getRepartition());
+            if (seance.getSalle() != null)
+                seanceModifier.setSalle(seance.getSalle());
             // seanceModifier.setTitre(seance.getTitre());
-            return seanceRepository.save(seanceModifier);
+            Seance s = seanceRepository.save(seanceModifier);
+            return s;
+            // return new SeanceDTO(s);
         } else
             return null;
     }

@@ -1,5 +1,6 @@
 package com.uasz.Gestion_DAOS;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +35,7 @@ import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.SemestreService;
 import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.UEService;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Batiment;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Deroulement;
+import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Emploi;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Salle;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
@@ -129,8 +131,8 @@ public class GestionDaosApplication implements CommandLineRunner {
 		Cycle cycle2 = new Cycle(null, "Ingenieurie", null);
 		cycleService.ajouterCycle(cycle1);
 		cycleService.ajouterCycle(cycle2);
-		String[] noms = { "Dupont", "Martin", "Dubois", "Thomas", "Lefebvre", "Dubois", "Thomas", "Lefebvre" };
-		String[] prenoms = { "Jean", "Marie", "Claire", "Philippe", "Sophie", "Claire", "Philippe", "Sophie" };
+		String[] noms = { "DIALLO", "DRAME", "TOURE", "DIOP", "MALACK", "FAYE", "FAYE", "NDIAYE" };
+		String[] prenoms = { "Ousmane", "Khadim", "Bachir", "Kamir", "Youssou", "El Hadji", "Marie", "Sophie" };
 		String[] grades = { "Professeur", "Maître de conférences", "Assistant",
 				"Chargé de cours", "Docteur", "Assistant",
 				"Chargé de cours", "Docteur" };
@@ -154,8 +156,8 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 			pERService.ajouterPER(per);
 		}
-		String[] nomss = { "Girard", "Fontaine", "Lemoine", "Durand", "Roux" };
-		String[] prenomss = { "Sandrine", "Sylvie", "Paul", "Luc", "Marie" };
+		String[] nomss = { "MALACK", "MBOUP", "Lemoine", "Durand", "Roux" };
+		String[] prenomss = { "Kamir", "Sylvie", "Paul", "Luc", "Marie" };
 
 		// Créez et ajoutez 5 objets Vacataire à la base de données
 		for (int i = 4; i >= 0; i--) {
@@ -174,8 +176,8 @@ public class GestionDaosApplication implements CommandLineRunner {
 		Batiment b2 = new Batiment(null, "PGF SUP", null);
 
 		all.batimentService.ajouterBatiment(b2);
-		all.salleService.ajouterSalle(new Salle(null, "A1", 15, b1));
-		all.salleService.ajouterSalle(new Salle(null, "B4", 25, b2));
+		Salle salle1 = all.salleService.ajouterSalle(new Salle(null, "A1", 15, b1, null));
+		all.salleService.ajouterSalle(new Salle(null, "B4", 25, b2, null));
 		Vacataire vac = new Vacataire();
 		vac.setNom(nomss[2]);
 		vac.setPrenom(prenomss[3]);
@@ -306,10 +308,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 				List.of("Analyse", "Modelisation", "Conception"),
 				"Test deroulement",
 				null));
-		Seance seance1 = new Seance(null, LocalDateTime.now(), "1h30", null, d1,
-				r1);
-
+		Emploi em1 = all.emploiService
+				.ajouterEmploi(new Emploi(null, null, new Date(), new Date()));
 		// all.seanceService.ajouterSeance(seance1);
+		Seance seance1 = all.seanceService.ajouterSeance(new Seance(null, "Lundi", "08:00", "01:30",
+				em1, d1,
+				r1, salle1));
 
 	}
 
