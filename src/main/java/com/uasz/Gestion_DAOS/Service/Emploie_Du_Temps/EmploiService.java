@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import jakarta.transaction.Transactional;
 
 public class EmploiService {
 
-    
     @Autowired
     private EmploiRepository emploiRepository;
 
@@ -37,7 +37,10 @@ public class EmploiService {
     public Emploi modifierEmploi(Emploi emploi) {
         Emploi emploiModifier = rechercherEmploi(emploi.getId());
         if (emploiModifier != null) {
-            emploiModifier.setSeances(emploi.getSeances());
+            if (emploiModifier.getSeances() != null)
+                emploiModifier.setSeances(emploi.getSeances());
+            emploiModifier.setDateDebut(emploi.getDateDebut());
+            emploiModifier.setDateFin(emploi.getDateFin());
             return emploiRepository.save(emploiModifier);
         } else
             return null;
