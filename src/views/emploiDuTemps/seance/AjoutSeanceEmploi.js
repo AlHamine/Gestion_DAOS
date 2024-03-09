@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
-import { CButton, CForm, CCardBody, CFormSelect, CCol, CFormInput } from '@coreui/react'
+import { CButton, CForm, CCardBody, CFormSelect, CCol, CFormInput, CRow } from '@coreui/react'
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 export default function AjouterSeanceEmploi() {
   const navigate = useNavigate()
   const [repartitions, setRepartitions] = useState([])
@@ -13,6 +14,7 @@ export default function AjouterSeanceEmploi() {
     salle: { id: '' },
     heureDebut: '',
     dureee: '',
+    jour: '',
     emploi: { id: id },
   })
   useEffect(() => {
@@ -149,60 +151,94 @@ export default function AjouterSeanceEmploi() {
                 </option>
               ))}
             </CFormSelect>
+            <Link to={'/repartition/repartition/AjouterRepartition'}>
+              <CButton color="success" size="sm" onClick={handleSave}>
+                Ajouter Nouvelle Repartition
+              </CButton>
+            </Link>
           </CCardBody>
           <br />
           <CCardBody>
-            <CFormSelect
-              aria-label="Default select example"
-              name="salle"
-              onChange={handleChangeSalle}
-              required
-              invalid={true}
-            >
-              <option disabled selected formNoValidate value="">
-                Selectionner une salle
-              </option>
-              {salles.map((e) => (
-                <option key={e.id} value={e.id}>
-                  {e.batimentNom}- Salle {e.numero} avec une capacite de {e.capacite} places
+            <CRow>
+              <CFormSelect
+                aria-label="Default select example"
+                name="salle"
+                onChange={handleChangeSalle}
+                required
+                invalid={true}
+              >
+                <option disabled selected formNoValidate value="">
+                  Selectionner une salle
                 </option>
-              ))}
-            </CFormSelect>
+                {salles.map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.batimentNom}- Salle {e.numero} avec une capacite de {e.capacite} places
+                  </option>
+                ))}
+              </CFormSelect>
+
+              <Link to={'/emploiDuTemps/seance/AjouterSeance'}>
+                <CButton color="success" size="sm" onClick={handleSave}>
+                  Ajouter Nouveau Salle
+                </CButton>
+              </Link>
+            </CRow>
           </CCardBody>
+          <CFormSelect
+            id="validationServer01"
+            label="Jour de la semaine"
+            defaultValue=""
+            name="jour"
+            onChange={handleChange}
+            valid
+            required
+          >
+            <option disabled selected formNoValidate value="">
+              Sélectionnez un jour
+            </option>
+            <option value="lundi">Lundi</option>
+            <option value="mardi">Mardi</option>
+            <option value="mercredi">Mercredi</option>
+            <option value="jeudi">Jeudi</option>
+            <option value="vendredi">Vendredi</option>
+            <option value="samedi">Samedi</option>
+          </CFormSelect>
+
           <CCardBody>
-            <CCol md={6}>
-              <CFormInput
-                type="text"
-                id="validationServer01"
-                label="Heure de Debut"
-                defaultValue=""
-                name="heureDebut"
-                onChange={handleChange}
-                valid
-                placeholder="hh:mm"
-                required
-                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" // Expression régulière pour HH:MM
-              />
-            </CCol>
+            <CRow>
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  id="validationServer01"
+                  label="Heure de Debut"
+                  defaultValue=""
+                  name="heureDebut"
+                  onChange={handleChange}
+                  valid
+                  placeholder="hh:mm"
+                  required
+                  pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" // Expression régulière pour HH:MM
+                />
+              </CCol>
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  id="validationServer013"
+                  placeholder="hh:mm"
+                  label="Duree"
+                  defaultValue=""
+                  name="dureee"
+                  onChange={handleChange}
+                  valid
+                  required
+                  // invalid={!!dureeError2}
+                  // step="60"
+                  pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                />
+              </CCol>
+            </CRow>
           </CCardBody>
-          <CCardBody>
-            <CCol md={6}>
-              <CFormInput
-                type="text"
-                id="validationServer013"
-                placeholder="hh:mm"
-                label="Duree"
-                defaultValue=""
-                name="dureee"
-                onChange={handleChange}
-                valid
-                required
-                // invalid={!!dureeError2}
-                // step="60"
-                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-              />
-            </CCol>
-          </CCardBody>
+          <CCardBody></CCardBody>
 
           <div style={{ marginTop: '20px' }}>
             <CButton color="danger" type="submit" className="me-2" onClick={backward}>

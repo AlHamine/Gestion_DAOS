@@ -81,6 +81,7 @@ export default function Salle() {
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Numero</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Capacite</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Batiment</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -93,6 +94,7 @@ export default function Salle() {
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
                     <CTableDataCell>{Salle.numero}</CTableDataCell>
                     <CTableDataCell>{Salle.capacite}</CTableDataCell>
+                    <CTableDataCell>{Salle.batimentNom}</CTableDataCell>
                     <CTableDataCell className="text-center">
                       {/* <CButton color="primary" className="me-1">
                         <EditIcon className="icon4" />

@@ -19,6 +19,7 @@ import {
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Typography from 'src/views/theme/typography/Typography'
 // import { DocsExample } from 'src/components'
 
@@ -26,7 +27,7 @@ export default function BatimentSalle() {
   const { id } = useParams()
   const [listSalle, setListSalle] = useState([])
   const [batiment, setBatiment] = useState({})
-
+  const navigate = useNavigate()
   useEffect(() => {
     const chargerbatiments = () => {
       fetch(SERVER_URL + `emploi/batiment/${id}`, {
@@ -45,7 +46,9 @@ export default function BatimentSalle() {
     chargerbatiments()
     fetchSalle()
   }, [])
-
+  const backward = () => {
+    navigate('/emploiDuTemps/batiment/Batiment/' + id + '/Salle')
+  }
   const fetchSalle = () => {
     fetch(SERVER_URL + `emploi/batiment/${id}/salles`)
       .then((response) => {
@@ -84,6 +87,11 @@ export default function BatimentSalle() {
           <Link to={`/emploiDuTemps/batiment/${id}/AjouterSalle`}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
               Ajouter un Salle
+            </CButton>
+          </Link>
+          <Link to={`/emploiDuTemps/batiment/Batiment`}>
+            <CButton color="danger" style={{ fontWeight: 'bold' }}>
+              Retour
             </CButton>
           </Link>
         </div>

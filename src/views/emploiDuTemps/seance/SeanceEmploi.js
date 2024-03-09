@@ -134,7 +134,7 @@ export default function SeanceEmploi() {
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
-                  {/* <CTableHeaderCell scope="col">Details</CTableHeaderCell> */}
+                  <CTableHeaderCell scope="col">Details</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
@@ -173,9 +173,11 @@ export default function SeanceEmploi() {
                         <DeleteIcon className="icon3" />
                       </CButton>
                     </CTableDataCell>
-                    {/* <CTableDataCell>
-                      <CButton color="info">Detail</CButton>
-                    </CTableDataCell> */}
+                    <CTableDataCell>
+                      <Link to={`/emploiDuTemps/deroulement/Deroulement/${id}/${Seance.id}`}>
+                        <CButton color="info">Gerer Deroulement</CButton>
+                      </Link>
+                    </CTableDataCell>
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">

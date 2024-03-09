@@ -15,7 +15,7 @@ import { SERVER_URL } from 'src/constantURL'
 
 export default function AjouterPER() {
   const navigate = useNavigate()
-  
+
   const [per, setPER] = useState({
     prenom: '',
     nom: '',

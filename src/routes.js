@@ -357,14 +357,18 @@ const routes = [
     element: ModifierBatiment,
   },
   // ---------------------------- Deroulement ----------------------------
-  { path: '/emploiDuTemps/deroulement/Deroulement', name: 'Deroulement', element: Deroulement },
   {
-    path: '/emploiDuTemps/deroulement/AjouterDeroulement',
+    path: '/emploiDuTemps/deroulement/Deroulement/:id/:idseance',
+    name: 'Deroulement',
+    element: Deroulement,
+  },
+  {
+    path: '/emploiDuTemps/deroulement/AjouterDeroulement/:idE/:idseance',
     name: 'AjouterDeroulement',
     element: AjouterDeroulement,
   },
   {
-    path: '/emploiDuTemps/deroulement/ModifierDeroulement/:id',
+    path: '/emploiDuTemps/deroulement/ModifierDeroulement/:idE/:idseance/:id',
     name: 'ModifierDeroulement',
     element: ModifierDeroulement,
   },

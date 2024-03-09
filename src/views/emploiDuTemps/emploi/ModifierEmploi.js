@@ -37,13 +37,13 @@ export default function ModifierEmploi() {
         })
         .then((data) => {
           setEmploi(data)
-          console.log(emploi)
-          console.log(data)
+          //console.log(emploi)
+          //console.log(data)
         })
         .catch((error) => console.error('Error fetching Emploi:', error))
     }
     chargerEmploi()
-    console.log(emploi)
+    //console.log(emploi)
   }, [])
 
   const handleChange = (event) => {
@@ -57,7 +57,7 @@ export default function ModifierEmploi() {
   const addEmploi = (repartition) => {
     // const selectedBatiment = batiments.find((e) => e.id == emploi.batimentId)
     // emploi.batiment = selectedBatiment
-    console.log('TEST FETCHING', repartition)
+    //console.log('TEST FETCHING', repartition)
     fetch(SERVER_URL + 'emploi/emploi/' + emploi.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -80,8 +80,8 @@ export default function ModifierEmploi() {
       dateDebut: emploi.dateDebut,
       dateFin: emploi.dateFin,
     }
-    console.log('---_--------____-_-______--')
-    console.log(donne)
+    //console.log('---_--------____-_-______--')
+    //console.log(donne)
     addEmploi(donne)
   }
   function extractDateOnly(dateTimeString) {

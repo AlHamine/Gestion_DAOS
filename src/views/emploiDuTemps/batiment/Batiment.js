@@ -80,6 +80,8 @@ export default function Batiment() {
                 <CTableRow>
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Nombre de Salles</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Capacite Totale</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -91,6 +93,13 @@ export default function Batiment() {
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
                     <CTableDataCell>{Batiment.nom}</CTableDataCell>
+                    <CTableDataCell>{Batiment.salles?.length}</CTableDataCell>
+                    <CTableDataCell>
+                      {Batiment.salles?.reduce(
+                        (total, salle) => total + parseInt(salle.capacite),
+                        0,
+                      )}
+                    </CTableDataCell>
                     <CTableDataCell className="text-center">
                       {/* <CButton color="primary" className="me-1">
                         Modifier
