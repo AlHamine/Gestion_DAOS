@@ -109,8 +109,11 @@ export default function AjouterRepartition() {
               name="enseignement"
               onChange={handleChangeEnseignement}
               required
+              invalid={true}
             >
-              <option>Selectionner un enseignement</option>
+              <option disabled selected formNoValidate value="">
+                Selectionner un enseignement
+              </option>
               {enseignements.map((e) => (
                 <option key={e.id} value={e.id}>
                   Classe: {e.classe} {e.groupe ? ` - Groupe : ${e.groupe}` : ' - '} {e.module}
@@ -125,8 +128,11 @@ export default function AjouterRepartition() {
               name="enseignant"
               onChange={handleChangeEnseignant}
               required
+              invalid={true}
             >
-              <option>Selectionner un enseignant</option>
+              <option disabled selected formNoValidate value="">
+                Selectionner un enseignant
+              </option>
               {enseignants.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.id} - {e.prenom} {e.nom} {e.grade} en {e.specialite}

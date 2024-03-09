@@ -18,19 +18,32 @@ import {
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
 // import { DocsExample } from 'src/components'
-
+import { useParams } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-export default function Seance() {
+export default function SeanceEmploi() {
   const [listSeance, setListSeance] = useState([])
+  const [emploi, setEmploi] = useState()
+  const { id } = useParams()
 
-  useEffect(() => {
-    fetchSeance()
-  }, [])
+  const chargerEmploi = () => {
+    fetch(SERVER_URL + 'emploi/emploi/' + id)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data) => setEmploi(data))
+      .catch((error) => console.error('Error fetching Seance:', error))
+  }
 
   const fetchSeance = () => {
-    fetch(SERVER_URL + 'emploi/seance')
+    fetch(SERVER_URL + 'emploi/' + id + '/seance')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -40,16 +53,17 @@ export default function Seance() {
       .then((data) => setListSeance(data))
       .catch((error) => console.error('Error fetching Seance:', error))
   }
-  function extractHourAndMinute(dateString) {
-    // Créer un objet Date à partir de la chaîne de caractères
-    var dateObj = new Date(dateString)
 
-    // Extraire l'heure et les minutes
-    var heure = dateObj.getHours()
-    var minute = dateObj.getMinutes()
+  function extractDateOnly(dateTimeString) {
+    // Vérifier si la chaîne est vide ou null
+    if (!dateTimeString) {
+      return null
+    }
 
-    // Retourner un objet avec l'heure et les minutes
-    return `${heure}h${minute} `
+    // Extraire la date uniquement
+    const dateOnly = dateTimeString.substring(0, 10)
+
+    return dateOnly
   }
   const onDelClick = (id) => {
     // console.log(typeof id)
@@ -66,12 +80,26 @@ export default function Seance() {
         .catch((err) => console.error(err))
     }
   }
-
+  useEffect(() => {
+    fetchSeance()
+    chargerEmploi()
+  }, [])
   return (
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/emploiDuTemps/seance/AjouterSeance'}>
+          <Card>
+            <CardContent>
+              <Typography variant="body1">
+                Liste des séances de l{"'"} emploi du{' '}
+                <strong>{extractDateOnly(emploi?.dateDebut)}</strong> au{' '}
+                <strong>{extractDateOnly(emploi?.dateFin)}</strong> de la Classe :{' '}
+                <strong>{emploi?.classe}</strong> - Filière : <strong>{emploi?.filiere}</strong>
+                <strong>{emploi?.nom}</strong>
+              </Typography>
+            </CardContent>
+          </Card>
+          <Link to={`/emploiDuTemps/seance/AjoutSeance/Emploi/${id}`}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
               Ajouter un Seance
             </CButton>
@@ -81,7 +109,12 @@ export default function Seance() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des Seance</small>
+            <strong>
+              Liste des seances de l{"'"}emploi du {extractDateOnly(emploi?.dateDebut)} au{' '}
+              {extractDateOnly(emploi?.dateFin)} de la Classe : {emploi?.classe} - Filiere :{' '}
+              {emploi?.filiere}
+              <b>{emploi?.nom}</b>{' '}
+            </strong>{' '}
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -95,6 +128,7 @@ export default function Seance() {
                   <CTableHeaderCell scope="col">Module</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Semestre</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Batiment-Salle</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Jour</CTableHeaderCell>
                   <CTableHeaderCell scope="col">HeureDebut</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Duree</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
@@ -122,10 +156,11 @@ export default function Seance() {
                     <CTableDataCell>
                       {Seance.salle.batimentNom}-{Seance.salle.numero}
                     </CTableDataCell>
+                    <CTableDataCell>{Seance.jour}</CTableDataCell>
                     <CTableDataCell>{Seance.heureDebut}</CTableDataCell>
                     <CTableDataCell>{Seance.dureee}</CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/emploiDuTemps/seance/ModifierSeance/${Seance.id}`}>
+                      <Link to={`/emploiDuTemps/seance/ModifierSeance/Emploi/${id}/${Seance.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           <EditIcon className="icon4" />
                         </CButton>

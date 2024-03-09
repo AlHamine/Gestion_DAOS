@@ -137,6 +137,11 @@ const AjouterSalleB = React.lazy(() => import('./views/emploiDuTemps/salle/Batim
 const ModifierSalle = React.lazy(() => import('./views/emploiDuTemps/salle/ModifierSalle'))
 // ---------------------------- Seance ----------------------------
 const Seance = React.lazy(() => import('./views/emploiDuTemps/seance/Seance'))
+const SeanceEmploi = React.lazy(() => import('./views/emploiDuTemps/seance/SeanceEmploi'))
+const AjoutSeanceEmploi = React.lazy(() => import('./views/emploiDuTemps/seance/AjoutSeanceEmploi'))
+const ModifierSeanceEmploi = React.lazy(() =>
+  import('./views/emploiDuTemps/seance/ModifierSeanceEmploi'),
+)
 const AjouterSeance = React.lazy(() => import('./views/emploiDuTemps/seance/AjouterSeance'))
 const ModifierSeance = React.lazy(() => import('./views/emploiDuTemps/seance/ModifierSeance'))
 
@@ -393,6 +398,22 @@ const routes = [
     name: 'ModifierSalle',
     element: ModifierSalle,
   },
+
+  //
+  { path: '/emploiDuTemps/seance/Seance/Emploi/:id', name: 'SeanceEmploi', element: SeanceEmploi },
+  {
+    path: '/emploiDuTemps/seance/AjoutSeance/Emploi/:id',
+    name: 'AjoutSeanceEmploi',
+    element: AjoutSeanceEmploi,
+  },
+  {
+    path: '/emploiDuTemps/seance/ModifierSeance/Emploi/:id/:idseance',
+    name: 'ModifierSeanceEmploi',
+    element: ModifierSeanceEmploi,
+  },
+
+  //
+
   // ---------------------------- Seance ----------------------------
   { path: '/emploiDuTemps/seance/Seance', name: 'Seance', element: Seance },
   {

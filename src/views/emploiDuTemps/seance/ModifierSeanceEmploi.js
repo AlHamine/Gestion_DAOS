@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 export default function ModifierSeance() {
   const navigate = useNavigate()
   const { id } = useParams()
+  const { idseance } = useParams()
   const [repartitions, setRepartitions] = useState([])
   const [salles, setSalles] = useState([])
   const [seance, setSeance] = useState({
@@ -13,12 +14,27 @@ export default function ModifierSeance() {
     salle: { id: '' },
     heureDebut: '',
     dureee: '',
+    emploi: { id: id },
+    repartition: '',
   })
+  const handleSave = () => {
+    const donne = {
+      id: seance.id,
+      salle: { id: seance.salle.id },
+      dureee: seance.dureee,
+      heureDebut: seance.heureDebut,
+      emploi: { id: parseInt(id) },
+      repartition: { id: seance.repartition.id },
+    }
+    console.log(donne)
+    addSeance(donne)
+  }
+
   useEffect(() => {
     // repartition
 
     const chargerSeance = () => {
-      fetch(SERVER_URL + 'emploi/seance/' + id, {
+      fetch(SERVER_URL + 'emploi/seance/' + idseance, {
         headers: { 'Content-Type': 'application/json' },
       })
         .then((response) => {
@@ -64,22 +80,33 @@ export default function ModifierSeance() {
     chargerSeance()
     chargerRepartitions()
     chargerSalles()
+    // seance.dureee = exSeance.dureee
+    // seance.heureDebut = exSeance.heureDebut
+    // seance.repartition = { id: exSeance.repartition }
+    // seance.salle = { id: exSeance?.salle?.id }
+    // console.log(seance)
   }, [])
 
   const handleChangeReparttion = (e) => {
     const selectedIdd = e.target.value
     console.log(selectedIdd)
+    // seance.repartition = {}
     const selectedRepartition = repartitions.find((e) => e.id == selectedIdd)
     console.log(selectedRepartition)
+    seance.repartition = { id: selectedRepartition.id }
     setSeance((prevState) => ({
       ...prevState,
       repartition: { id: selectedRepartition.id },
     }))
+
+    console.log('terstdtttttttttttttttttttttt')
+    console.log(seance)
   }
   const backward = () => {
-    navigate('/emploiDuTemps/seance/Seance')
+    navigate('/emploiDuTemps/seance/Seance/Emploi/' + id)
   }
   const handleChangeSalle = (e) => {
+    console.log('Testing' + id)
     const selectedId = e.target.value
     const selectedSalle = salles.find((e) => e.id == selectedId)
     console.log(selectedSalle)
@@ -108,8 +135,8 @@ export default function ModifierSeance() {
   }
   const addSeance = (seance) => {
     console.log('Test FETCHING', seance)
-    fetch(SERVER_URL + 'emploi/seance', {
-      method: 'POST',
+    fetch(SERVER_URL + 'emploi/seance/' + seance.id, {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seance),
     })
@@ -122,10 +149,6 @@ export default function ModifierSeance() {
         }
       })
       .catch((err) => console.error(err))
-  }
-
-  const handleSave = () => {
-    addSeance(seance)
   }
 
   return (
@@ -143,9 +166,16 @@ export default function ModifierSeance() {
               name="repartition"
               onChange={handleChangeReparttion}
               required
-              value={seance.repartitionId}
+              // defaultValue={seance.repartition}
+              value={
+                typeof seance.repartition == 'string' ? seance.repartition : seance.repartition.id
+              }
+              invalid={true}
             >
-              <option>Selectionner une repartition</option>
+              {console.log(seance)}
+              <option disabled selected formNoValidate value="">
+                Selectionner une repartition
+              </option>
               {repartitions.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.enseignant.prenom} {e.enseignant.nom} {e.enseignant.grade} en{' '}
@@ -163,9 +193,12 @@ export default function ModifierSeance() {
               name="salle"
               onChange={handleChangeSalle}
               required
-              value={seance.salle.id}
+              value={seance?.salle?.id}
+              invalid={true}
             >
-              <option>Selectionner une salle</option>
+              <option disabled selected formNoValidate value="">
+                Selectionner une salle
+              </option>
               {salles.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.batimentNom}- Salle {e.numero} avec une capacite de {e.capacite} places

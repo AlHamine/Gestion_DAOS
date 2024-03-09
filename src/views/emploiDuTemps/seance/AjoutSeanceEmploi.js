@@ -3,35 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
 import { CButton, CForm, CCardBody, CFormSelect, CCol, CFormInput } from '@coreui/react'
 import { useParams } from 'react-router-dom'
-export default function ModifierSeance() {
+export default function AjouterSeanceEmploi() {
   const navigate = useNavigate()
-  const { id } = useParams()
   const [repartitions, setRepartitions] = useState([])
   const [salles, setSalles] = useState([])
+  const { id } = useParams()
   const [seance, setSeance] = useState({
     repartition: { id: '' },
     salle: { id: '' },
     heureDebut: '',
     dureee: '',
+    emploi: { id: id },
   })
   useEffect(() => {
     // repartition
-
-    const chargerSeance = () => {
-      fetch(SERVER_URL + 'emploi/seance/' + id, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            throw new Error('Network response was not ok')
-          }
-        })
-        .then((data) => setSeance(data))
-        .catch((err) => console.error(err))
-    }
-
     const chargerRepartitions = () => {
       fetch(SERVER_URL + 'repartition/repartition ', {
         headers: { 'Content-Type': 'application/json' },
@@ -61,7 +46,7 @@ export default function ModifierSeance() {
         .then((data) => setSalles(data))
         .catch((err) => console.error(err))
     }
-    chargerSeance()
+
     chargerRepartitions()
     chargerSalles()
   }, [])
@@ -77,7 +62,7 @@ export default function ModifierSeance() {
     }))
   }
   const backward = () => {
-    navigate('/emploiDuTemps/seance/Seance')
+    navigate('/emploiDuTemps/seance/Seance/Emploi/' + id)
   }
   const handleChangeSalle = (e) => {
     const selectedId = e.target.value
@@ -93,7 +78,6 @@ export default function ModifierSeance() {
 
   const handleChange = (event) => {
     const { name, value } = event.target
-
     // Mettre à jour la valeur de duree
     // setDuree(value)
     setSeance({
@@ -115,7 +99,15 @@ export default function ModifierSeance() {
     })
       .then((response) => {
         if (response.ok) {
-          alert('Seance modifiée avec succès')
+          alert('Seance ajoutée avec succès')
+
+          setSeance({
+            repartition: { id: '' },
+            salle: { id: '' },
+            heureDebut: '',
+            dureee: '',
+            emploi: { id: id },
+          })
           backward()
         } else {
           alert('Something went wrong')
@@ -131,7 +123,7 @@ export default function ModifierSeance() {
   return (
     <div style={{ transform: 'scale(1.2)' }}>
       <br></br>
-      <h2 className="text-center">MODIFICATION D{"'"}UNE SEANCE</h2>
+      <h2 className="text-center">AJOUT D{"'"}UNE SEANCE</h2>
       <CForm className="row g-3" validated={true}>
         <br />
         <br />
@@ -143,9 +135,11 @@ export default function ModifierSeance() {
               name="repartition"
               onChange={handleChangeReparttion}
               required
-              value={seance.repartitionId}
+              invalid={true}
             >
-              <option>Selectionner une repartition</option>
+              <option disabled selected formNoValidate value="">
+                Selectionner une repartition
+              </option>
               {repartitions.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.enseignant.prenom} {e.enseignant.nom} {e.enseignant.grade} en{' '}
@@ -163,9 +157,11 @@ export default function ModifierSeance() {
               name="salle"
               onChange={handleChangeSalle}
               required
-              value={seance.salle.id}
+              invalid={true}
             >
-              <option>Selectionner une salle</option>
+              <option disabled selected formNoValidate value="">
+                Selectionner une salle
+              </option>
               {salles.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.batimentNom}- Salle {e.numero} avec une capacite de {e.capacite} places
@@ -176,7 +172,6 @@ export default function ModifierSeance() {
           <CCardBody>
             <CCol md={6}>
               <CFormInput
-                // className="text-center"
                 type="text"
                 id="validationServer01"
                 label="Heure de Debut"
@@ -184,9 +179,9 @@ export default function ModifierSeance() {
                 name="heureDebut"
                 onChange={handleChange}
                 valid
-                value={seance.heureDebut}
+                placeholder="hh:mm"
                 required
-                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" // Expression régulière pour HH:MM
               />
             </CCol>
           </CCardBody>
@@ -194,14 +189,16 @@ export default function ModifierSeance() {
             <CCol md={6}>
               <CFormInput
                 type="text"
-                id="validationServer014"
+                id="validationServer013"
+                placeholder="hh:mm"
                 label="Duree"
                 defaultValue=""
                 name="dureee"
                 onChange={handleChange}
                 valid
-                value={seance.dureee}
                 required
+                // invalid={!!dureeError2}
+                // step="60"
                 pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
               />
             </CCol>

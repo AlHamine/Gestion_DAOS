@@ -93,8 +93,8 @@ export default function ModifierRepartition() {
 
   const addRepartition = (repartition) => {
     console.log('TEST FETCHING', repartition)
-    fetch(SERVER_URL + 'repartition/repartition', {
-      method: 'POST',
+    fetch(SERVER_URL + 'repartition/repartition/' + repartition.id, {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(repartition),
     })
@@ -110,7 +110,14 @@ export default function ModifierRepartition() {
   }
 
   const handleSave = () => {
-    addRepartition(repartition)
+    const typeEns = repartition.enseignement.matricule ? 'PER' : 'VAC'
+    const donne = {
+      id: repartition.id,
+      enseignement: { id: repartition.enseignement.id },
+      enseignant: { id: repartition.enseignant.id, type: typeEns },
+    }
+    console.log(donne)
+    addRepartition(donne)
   }
 
   return (
@@ -126,7 +133,7 @@ export default function ModifierRepartition() {
             <option>Selectionner un enseignement</option>
             {enseignements.map((e) => (
               <option key={e.id} value={e.id}>
-                Classe: {e.groupe.classe.libelle} - Groupe: {e.groupe.libelle} {e.module.nom}
+                Classe: {e.classe} {e.groupe ? ` - Groupe : ${e.groupe}` : ' - '} {e.module}
               </option>
             ))}
           </CFormSelect>
