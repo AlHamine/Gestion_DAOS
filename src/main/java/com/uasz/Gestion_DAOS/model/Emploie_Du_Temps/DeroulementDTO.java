@@ -10,16 +10,19 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Deroulement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class DeroulementDTO {
     private Long id;
-    @Column(length = 500)
+
     private String objectifs;
     // private Date date;
-    @Column(length = 500)
+
     private String description;
-    @OneToOne
-    private Seance seance;
+
+    public DeroulementDTO(Deroulement d) {
+        this.id = d.getId();
+        this.objectifs = d.getObjectifs();
+        this.description = d.getDescription();
+
+    }
 }

@@ -33,13 +33,17 @@ public class DeroulementService {
         return deroulementRepository.findById(id).get();
     }
 
+    public Deroulement rechercherDeroulementSeancee(Long id) {
+        return deroulementRepository.deroulementBySeance(id);
+    }
+
     public Deroulement modifierDeroulement(Deroulement deroulement) {
         Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
         if (DeroulementModifier != null) {
             // DeroulementModifier.setDate(deroulement.getDate());
             DeroulementModifier.setObjectifs(deroulement.getObjectifs());
             DeroulementModifier.setDescription(deroulement.getDescription());
-            DeroulementModifier.setSeance(deroulement.getSeance());
+            // DeroulementModifier.setSeance(deroulement.getSeance());
 
             return deroulementRepository.save(DeroulementModifier);
         } else

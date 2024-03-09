@@ -156,8 +156,8 @@ public class GestionDaosApplication implements CommandLineRunner {
 
 			pERService.ajouterPER(per);
 		}
-		String[] nomss = { "MALACK", "MBOUP", "Lemoine", "Durand", "Roux" };
-		String[] prenomss = { "Kamir", "Sylvie", "Paul", "Luc", "Marie" };
+		String[] nomss = { "MALACK", "MBOUP", "Dieng", "Ka", "THIAM" };
+		String[] prenomss = { "Kamir", "Mor", "Sidiya", "Dame", "Amadou" };
 
 		// Créez et ajoutez 5 objets Vacataire à la base de données
 		for (int i = 4; i >= 0; i--) {
@@ -186,8 +186,8 @@ public class GestionDaosApplication implements CommandLineRunner {
 		all.vacataireService.ajouterVacataire(vac);
 		PER per = new PER("B078X", specialites[3]);
 		per.setGrade(grades[2]);
-		per.setNom("TestPer");
-		per.setPrenom("TestPfrenom");
+		per.setNom("Diop");
+		per.setPrenom("Ibrahima");
 		all.perService.ajouterPER(per);
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -300,12 +300,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 		// =================================================================
 
 		Deroulement d1 = new Deroulement(null,
-				List.of("Analyse", "Modelisation", "Conception"),
+				"Analyse - Modelisation - Conception",
 				"Opération intellectuelle consistant à décomposer un tout en ses éléments constituants et d'en établir les relations",
 				null);
 		all.deroulementService.ajouterDeroulement(d1);
 		all.deroulementService.ajouterDeroulement(new Deroulement(null,
-				List.of("Analyse", "Modelisation", "Conception"),
+				"Analyse - Modelisation - Conception",
 				"Test deroulement",
 				null));
 		Emploi em1 = all.emploiService

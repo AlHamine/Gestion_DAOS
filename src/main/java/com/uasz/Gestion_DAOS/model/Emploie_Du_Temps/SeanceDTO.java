@@ -19,7 +19,8 @@ public class SeanceDTO {
     private String dureee;
     private Long emploiId;
     private Long deroulementId;
-    // private RepartitionDTO repartition;
+    private String deroulement_objectifs;
+    private String deroulement_desc;
     // Enseignements
     private String jour;
     private String repartition;
@@ -44,6 +45,10 @@ public class SeanceDTO {
         this.jour = seance.getJour();
         this.heureDebut = seance.getHeureDebut();
         this.dureee = seance.getDureee();
+        if (seance.getDeroulement() != null) {
+            this.deroulement_objectifs = seance.getDeroulement().getDescription();
+            this.deroulement_desc = seance.getDeroulement().getDescription();
+        }
         if (seance.getEmploi() != null) {
             this.emploiId = seance.getEmploi().getId();
         }
