@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.ECRepository;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -48,6 +49,10 @@ import java.util.List;
             return true;
         } else
             return false;
+    }
+
+    public List<com.uasz.Gestion_DAOS.model.Maquette.Module> ecDetailsModule(Long id) {
+        return ecRepository.ecDetailsModule(id);
     }
 
 }

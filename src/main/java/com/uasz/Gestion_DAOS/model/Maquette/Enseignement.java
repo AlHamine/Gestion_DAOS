@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS.model.Maquette;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +19,7 @@ public class Enseignement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private String libelle;
+    @JsonIgnore
     private List<String> objectifs;
     private String description;
     @ManyToOne
@@ -24,4 +28,5 @@ public class Enseignement {
     private Groupe groupe;
     @ManyToOne
     private Module module;
+    private Date createdAt = new Date();
 }

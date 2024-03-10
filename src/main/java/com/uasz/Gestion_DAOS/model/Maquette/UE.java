@@ -26,7 +26,7 @@ public class UE {
     @JsonIgnore
     @OneToMany(mappedBy = "ue", cascade = CascadeType.ALL)
     private List<EC> ecs;
-    
+    @JsonIgnore
     @OneToMany(mappedBy = "ue")
     private List<Module> module;
 

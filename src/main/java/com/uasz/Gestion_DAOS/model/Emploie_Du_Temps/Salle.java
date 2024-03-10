@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS.model.Emploie_Du_Temps;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data; 
@@ -15,5 +17,5 @@ public class Salle {
     private int capacity;
     @ManyToOne
     private Batiment batiment;
-
+    private Date createdAt = new Date();
 }

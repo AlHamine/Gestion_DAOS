@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.GroupeRepository;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 
 import jakarta.transaction.Transactional;
@@ -49,6 +50,10 @@ public class GroupeService {
             return true;
         } else
             return false;
+    }
+
+    public List<Enseignement> groupeDetailsEnseignement(Long id) {
+        return groupeRepository.groupeDetailsEnseignement(id);
     }
 
 }

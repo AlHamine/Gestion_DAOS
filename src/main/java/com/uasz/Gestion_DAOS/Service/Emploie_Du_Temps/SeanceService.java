@@ -47,10 +47,19 @@ public class SeanceService {
             return null;
     }
 
-    public Boolean suprimerSeance(Seance batiment) {
-        Seance seanceModifier = rechercherSeance(batiment.getId());
+    // public Boolean suprimerSeance(Seance batiment) {
+    //     Seance seanceModifier = rechercherSeance(batiment.getId());
+    //     if (seanceModifier != null) {
+    //         seanceRepository.delete(batiment);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+
+    public Boolean suprimerSeance(Long id) {
+        Seance seanceModifier = rechercherSeance(id);
         if (seanceModifier != null) {
-            seanceRepository.delete(batiment);
+            seanceRepository.delete(seanceModifier);
             return true;
         } else
             return false;

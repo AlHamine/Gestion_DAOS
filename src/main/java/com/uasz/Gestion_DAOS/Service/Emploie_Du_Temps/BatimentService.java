@@ -40,10 +40,19 @@ public class BatimentService {
             return null;
     }
 
-    public Boolean suprimerBatiment(Batiment batiment) {
-        Batiment BatimentModifier = rechercherBatiment(batiment.getId());
+    // public Boolean suprimerBatiment(Batiment batiment) {
+    //     Batiment BatimentModifier = rechercherBatiment(batiment.getId());
+    //     if (BatimentModifier != null) {
+    //         batimentRepository.delete(batiment);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+
+    public Boolean suprimerBatiment(Long id) {
+        Batiment BatimentModifier = rechercherBatiment(id);
         if (BatimentModifier != null) {
-            batimentRepository.delete(batiment);
+            batimentRepository.delete(BatimentModifier);
             return true;
         } else
             return false;

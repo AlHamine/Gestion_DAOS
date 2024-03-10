@@ -2,6 +2,7 @@ package com.uasz.Gestion_DAOS.Service.Maquette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.ModuleRepository;
+import com.uasz.Gestion_DAOS.model.Maquette.Enseignement;
 import com.uasz.Gestion_DAOS.model.Maquette.Module;
 
 import jakarta.transaction.Transactional;
@@ -50,6 +51,9 @@ public class ModuleService {
             return false;
     }
 
-
+    public List<Enseignement> detailsModuleEnseignement(Long id) {
+        // return moduleRepository.findById(id).get().getEnseignements();
+        return moduleRepository.detailsModuleEnseignement(id);
+    }
 
 }

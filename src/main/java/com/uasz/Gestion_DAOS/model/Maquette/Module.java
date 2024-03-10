@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -22,9 +25,11 @@ public class Module {
     private EC ec;
     @ManyToOne
     private Semestre semestre;
+    @JsonIgnore
     @ManyToMany (mappedBy = "module")
     private List<Enseignement>enseignements;
     @ManyToOne
     private Maquette maquette;
+    private Date createdAt = new Date();
 
 }

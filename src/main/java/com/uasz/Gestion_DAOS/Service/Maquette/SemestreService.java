@@ -3,6 +3,7 @@ package com.uasz.Gestion_DAOS.Service.Maquette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.SemestreRepository;
+import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
 
 import jakarta.transaction.Transactional;
@@ -48,6 +49,14 @@ public class SemestreService {
             return true;
         } else
             return false;
+    }
+
+    public List<Classe> semestreDetailsClasse(Long id) {
+        return semestreRepository.semestreDetailsClasse(id);
+    }
+
+    public List<com.uasz.Gestion_DAOS.model.Maquette.Module> semestreDetailsModule(Long id) {
+        return semestreRepository.semestreDetailsModule(id);
     }
 
 }

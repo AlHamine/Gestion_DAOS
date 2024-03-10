@@ -14,7 +14,6 @@ import jakarta.transaction.Transactional;
  */
 @Service
 @Transactional
-
 public class DeroulementService {
     @Autowired
     private DeroulementRepository deroulementRepository;
@@ -47,13 +46,21 @@ public class DeroulementService {
             return null;
     }
 
-    public Boolean suprimerDeroulement(Deroulement deroulement) {
-        Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
-        if (DeroulementModifier != null) {
-            deroulementRepository.delete(deroulement);
+    // public Boolean suprimerDeroulement(Deroulement deroulement) {
+    //     Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
+    //     if (DeroulementModifier != null) {
+    //         deroulementRepository.delete(deroulement);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+
+    public Boolean suprimerDeroulement(Long id) {
+        Deroulement deroulementModifier = rechercherDeroulement(id);
+        if (deroulementModifier != null) {
+            deroulementRepository.delete(deroulementModifier);
             return true;
         } else
             return false;
     }
-
 }

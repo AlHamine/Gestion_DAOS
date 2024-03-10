@@ -8,30 +8,31 @@
 import java.util.Date;
 import java.util.List;
 
-    @Entity
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class EC {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-        private String libelle;
-        private String Code;
-        private int cm;
-        private int td;
-        private int tp;
-        private int tpe;
-        
-        private int coefficient;
-        private String description;
-        private Date dateCreation;
-        
-        @ManyToOne
-        private UE ue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-        
-        @OneToMany(mappedBy = "ec")
-        private List<Module> module;
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class EC {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String libelle;
+    private String Code;
+    private int cm;
+    private int td;
+    private int tp;
+    private int tpe;
+    
+    private int coefficient;
+    private String description;
+    private Date dateCreation;
+    
+    @ManyToOne
+    private UE ue;
+    @JsonIgnore
+    @OneToMany(mappedBy = "ec")
+    private List<Module> module;
 
-    }
+}

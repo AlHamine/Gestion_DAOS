@@ -51,8 +51,12 @@ public class NiveauService {
     //     return niveauRepository.findAllById(id);
     // }
 
-    public List<Formation> detailsFormationsDuNiveaux(Long niveauId) {
-        return niveauRepository.findByFormation(niveauRepository.findById(niveauId).get());
+    // public List<Formation> detailsFormationsDuNiveaux(Long niveauId) {
+    //     return niveauRepository.findByFormation(niveauRepository.findById(niveauId).get());
+    // }
+
+    public List<Formation> niveauDetailsFormation(Long id) {
+        return niveauRepository.niveauDetailsFormation(id);
     }
 
 }

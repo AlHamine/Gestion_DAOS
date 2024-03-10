@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-
 public class ClasseService {
     @Autowired
     private ClasseRepository classeRepository;
@@ -69,6 +68,14 @@ public class ClasseService {
     public List<Groupe> groupe_classe(Long id) {
         return classeRepository.findById(id).get().getGroupes();
 
+    }
+
+    public List<Groupe> classeDetailsGroupe(Long id) {
+        return classeRepository.classeDetailsGroupe(id);
+    }
+
+    public List<Enseignement> classeDetailsEnseignement(Long id) {
+        return classeRepository.classeDetailsEnseignement(id);
     }
 
     // public List<Groupe> groupe_classe(Long id) {

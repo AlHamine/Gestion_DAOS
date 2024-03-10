@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
@@ -34,4 +35,5 @@ public class Repartition {
     private int travauxPratique;
     @OneToMany(mappedBy = "repartition")
     private List<Seance> seances;
+    private Date createdAt = new Date();
 }

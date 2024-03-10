@@ -61,4 +61,8 @@ public class FiliereService {
     public List<Formation> detailsFormation(Long filiereId) {
         return filiereRepository.findByFormation(filiereRepository.findById(filiereId).get());
     }
+
+    public List<Formation> filiereDetailsFormation(Long id) {
+        return filiereRepository.filiereDetailsFormation(id);
+    }
 }

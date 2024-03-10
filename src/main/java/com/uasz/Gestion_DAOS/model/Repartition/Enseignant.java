@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS.model.Repartition;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,5 +20,5 @@ public abstract class Enseignant {
     private String nom;
     private String prenom;
     private String grade;
-
+    private Date createdAt = new Date();
 }

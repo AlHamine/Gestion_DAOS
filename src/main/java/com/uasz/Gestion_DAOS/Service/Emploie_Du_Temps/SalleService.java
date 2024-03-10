@@ -44,10 +44,18 @@ public class SalleService {
             return null;
     }
 
-    public Boolean suprimerSalle(Salle batiment) {
-        Salle salleModifier = rechercherSalle(batiment.getId());
+    // public Boolean suprimerSalle(Salle batiment) {
+    //     Salle salleModifier = rechercherSalle(batiment.getId());
+    //     if (salleModifier != null) {
+    //         salleRepository.delete(batiment);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+    public Boolean suprimerSalle(Long id) {
+        Salle salleModifier = rechercherSalle(id);
         if (salleModifier != null) {
-            salleRepository.delete(batiment);
+            salleRepository.delete(salleModifier);
             return true;
         } else
             return false;

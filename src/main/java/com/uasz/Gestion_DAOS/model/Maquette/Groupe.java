@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS.model.Maquette;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,11 +21,13 @@ public class Groupe {
     private String libelle;
     private int effectif;
     private String description;
+    @JsonIgnore
     @OneToMany
     private List<Enseignement> enseignement;
     @ManyToOne
     @JoinColumn(name = "classe")
     private Classe classe;
+    private Date createdAt = new Date();
 
     @Override
     public String toString() {

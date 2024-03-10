@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -24,4 +25,5 @@ public class Seance {
     private Deroulement deroulement ;
     @ManyToOne
     private Repartition repartition;
+    private Date createdAt = new Date();
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -13,5 +14,6 @@ public class Emploi {
     private Long id;
     @OneToMany(mappedBy = "emploi")
     private List<Seance> seances;
+    private Date createdAt = new Date();
 
 }

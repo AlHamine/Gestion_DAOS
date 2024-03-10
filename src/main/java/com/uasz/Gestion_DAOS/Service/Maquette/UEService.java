@@ -25,6 +25,11 @@ public class UEService {
         return ueRepository.findAll();
     }
 
+    // Retourne les EC qui sont relier aves cet UE
+    // public List<EC> afficherDetailsUEDesEC(Long idUE) {
+    //     return ueRepository.findEcs(idUE);
+    // }
+
     public UE rechercherUE(Long id) {
         if (!ueRepository.findById(id).isPresent()) {
             return null;
@@ -82,5 +87,9 @@ public class UEService {
 
     public List<EC> detailsUE(Long id) {
         return ueRepository.findById(id).get().getEcs();
+    }
+
+    public List<com.uasz.Gestion_DAOS.model.Maquette.Module> detailsModule(Long id) {
+        return ueRepository.findById(id).get().getModule();
     }
 }

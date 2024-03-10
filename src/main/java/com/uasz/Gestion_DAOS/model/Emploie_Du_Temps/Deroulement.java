@@ -19,4 +19,5 @@ public class Deroulement {
     private String processus;
     @OneToOne
     private Seance seance;
+    private Date createdAt = new Date();
 }

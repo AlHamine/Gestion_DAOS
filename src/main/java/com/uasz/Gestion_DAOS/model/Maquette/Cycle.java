@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -18,7 +21,9 @@ public class Cycle {
     private String nom;
 
     // @OneToMany(cascade = CascadeType.ALL, mappedBy = "cycle")
+    @JsonIgnore
     @OneToMany(mappedBy = "cycle")
     private List<Niveau> niveaux;
+    private Date createdAt = new Date();
 }
 

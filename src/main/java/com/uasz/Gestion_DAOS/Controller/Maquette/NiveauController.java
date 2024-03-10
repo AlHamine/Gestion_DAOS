@@ -58,10 +58,10 @@ public class NiveauController {
         return "redirect:/details_cycle?id=" + cycleId;
     }
 
-    @RequestMapping(value = "/details_niveau_formation", method = RequestMethod.GET)
-    public String detailsNiveauFormation(Model model, @RequestParam(name = "niveauId") Long niveauId) {
-        model.addAttribute("niveau", niveauService.rechercherNiveau(niveauId));
-        model.addAttribute("lesformationsDuNiveaux", niveauService.detailsFormationsDuNiveaux(niveauId));
-        return "niveau_details";
-    }
+    // @RequestMapping(value = "/details_niveau_formation", method = RequestMethod.GET)
+    // public String detailsNiveauFormation(Model model, @RequestParam(name = "niveauId") Long niveauId) {
+    //     model.addAttribute("niveau", niveauService.rechercherNiveau(niveauId));
+    //     model.addAttribute("lesformationsDuNiveaux", niveauService.detailsFormationsDuNiveaux(niveauId));
+    //     return "niveau_details";
+    // }
 }

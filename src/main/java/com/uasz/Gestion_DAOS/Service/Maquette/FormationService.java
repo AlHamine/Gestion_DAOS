@@ -2,6 +2,7 @@ package com.uasz.Gestion_DAOS.Service.Maquette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.FormationRepository;
+import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
@@ -63,6 +64,10 @@ public class FormationService {
     public Niveau detailsFormationNiveau(Long formationId) {
         // return formationRepository.findByNiveau(formationRepository.findById((formationId)).get());
         return formationRepository.findById((formationId)).get().getNiveau();
+    }
+
+    public List<Classe> formationDetailsClasse(Long id) {
+        return formationRepository.formationDetailsClasse(id);
     }
 
 }

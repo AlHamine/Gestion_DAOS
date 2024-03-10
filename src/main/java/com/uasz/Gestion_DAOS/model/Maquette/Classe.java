@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -19,14 +22,16 @@ public class Classe {
     private int effectif;
     private int nbreGroupe;
     private String description;
+    @JsonIgnore
     @OneToMany(mappedBy = "classe")
     private List<Enseignement> enseignement;
     @ManyToOne
     private Semestre semestre;
+    @JsonIgnore
     @OneToMany(mappedBy = "classe")
     private List<Groupe> groupes;
     @ManyToOne
     private Formation formation;
-    
+    private Date createdAt = new Date();
 
 }

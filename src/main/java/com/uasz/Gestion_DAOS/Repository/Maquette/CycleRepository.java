@@ -16,6 +16,9 @@ public interface CycleRepository extends JpaRepository<Cycle, Long> {
     @Query("SELECT n FROM Niveau n WHERE n.cycle = ?1")
     List<Niveau> findByCycle(Cycle cycle);
 
+    @Query("SELECT n FROM Niveau n WHERE n.cycle.id =:id")
+    List<Niveau> cycleDetailsGroupe(@Param("id") Long id);
+
     // @Query(nativeQuery = true, value = "SELECT * FROM niveau WHERE cycle =:idc ")
     // List<Niveau> findByCycle(@Param("idc") Long idc);
 

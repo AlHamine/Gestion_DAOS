@@ -1,7 +1,6 @@
 package com.uasz.Gestion_DAOS.Service.Repartition;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Repartition.RepartitionRepository;
@@ -9,15 +8,16 @@ import com.uasz.Gestion_DAOS.Repository.Repartition.RepartitionRepository;
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 /**
  * RepartitionService
  */
 @Service
+@AllArgsConstructor
 @Transactional
 public class RepartitionService {
 
-    @Autowired
     private RepartitionRepository repartitionRepository;
 
     public Repartition ajouterRepartition(Repartition repartition) {
@@ -55,10 +55,19 @@ public class RepartitionService {
             return null;
     }
 
-    public Boolean suprimerRepartition(Repartition repartition) {
-        Repartition repartitionModifier = rechercherRepartition(repartition.getId());
+    // public Boolean suprimerRepartition(Repartition repartition) {
+    //     Repartition repartitionModifier = rechercherRepartition(repartition.getId());
+    //     if (repartitionModifier != null) {
+    //         repartitionRepository.delete(repartition);
+    //         return true;
+    //     } else
+    //         return false;
+    // }
+
+    public Boolean suprimerRepartition(Long id) {
+        Repartition repartitionModifier = rechercherRepartition(id);
         if (repartitionModifier != null) {
-            repartitionRepository.delete(repartition);
+            repartitionRepository.delete(repartitionModifier);
             return true;
         } else
             return false;

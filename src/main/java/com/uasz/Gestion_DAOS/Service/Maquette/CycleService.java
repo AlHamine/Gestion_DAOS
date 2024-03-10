@@ -1,27 +1,23 @@
 package com.uasz.Gestion_DAOS.Service.Maquette;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Maquette.CycleRepository;
 import com.uasz.Gestion_DAOS.model.Maquette.Cycle;
+import com.uasz.Gestion_DAOS.model.Maquette.Groupe;
 import com.uasz.Gestion_DAOS.model.Maquette.Niveau;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
-// import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
-
+@AllArgsConstructor
 public class CycleService {
-    @Autowired
-    private CycleRepository cycleRepository;
 
-    // @Autowired
-    // private NiveauService niveauService;
+    private CycleRepository cycleRepository;
 
     public Cycle ajouterCycle(Cycle cycle) {
         cycleRepository.save(cycle);
@@ -75,6 +71,10 @@ public class CycleService {
     //     // return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
 
         return cycleRepository.findByCycle(cycleRepository.findById(idCycle).get());
+    }
+
+    public List<Niveau> cycleDetailsGroupe(Long id) {
+        return cycleRepository.cycleDetailsGroupe(id);
     }
 
     // public List<Niveau> detailsNiveau(Long idCycle) {

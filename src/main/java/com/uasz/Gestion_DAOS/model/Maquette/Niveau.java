@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS.model.Maquette;
 
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +23,8 @@ public class Niveau {
     @JoinColumn(name = "cycle")
     @ManyToOne
     private Cycle cycle;
+    @JsonIgnore
     @OneToMany(mappedBy = "niveau")
     private List<Formation> formations;
+    private Date createdAt = new Date();
 }

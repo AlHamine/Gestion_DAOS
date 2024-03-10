@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS.model.Repartition;
 
+import java.util.Date;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -16,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class PER extends Enseignant {
     private String matricule;
     private String specialite;
+    private Date createdAt = new Date();
 }
