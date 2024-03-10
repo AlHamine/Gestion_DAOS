@@ -33,5 +33,5 @@ public class Groupe {
     public String toString() {
         return this.getId() + " " + this.libelle + " " + this.effectif + " " + this.getDescription();
     }
-    
+
 }

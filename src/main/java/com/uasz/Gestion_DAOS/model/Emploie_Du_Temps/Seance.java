@@ -9,21 +9,28 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
-@Data @NoArgsConstructor @AllArgsConstructor
+
+// import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titre;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateFin;
+    private String jour;
+    private String heureDebut;
+    private String dureee;
 
     @ManyToOne
     private Emploi emploi;
     @OneToOne(mappedBy = "seance")
-    private Deroulement deroulement ;
+    private Deroulement deroulement;
     @ManyToOne
     private Repartition repartition;
     private Date createdAt = new Date();
+    @ManyToOne
+    private Salle salle;
 }

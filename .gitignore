@@ -32,10 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 # /target
-
+pom.xml
 HELP.md
 mvnw
-mvnw.cmd
+mvnw.cmd    
 src/main/resources/application.properties
 
 .q_file_picker/

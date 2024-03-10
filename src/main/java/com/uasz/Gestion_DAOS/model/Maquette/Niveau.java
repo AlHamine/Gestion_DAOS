@@ -21,6 +21,7 @@ public class Niveau {
     private String nom;
     // @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cycle")
+    @JsonIgnore
     @ManyToOne
     private Cycle cycle;
     @JsonIgnore

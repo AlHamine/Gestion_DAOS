@@ -49,7 +49,7 @@ public class BatimentService {
     //         return false;
     // }
 
-    public Boolean suprimerBatiment(Long id) {
+    public Boolean suprimerBatiment(long id) {
         Batiment BatimentModifier = rechercherBatiment(id);
         if (BatimentModifier != null) {
             batimentRepository.delete(BatimentModifier);

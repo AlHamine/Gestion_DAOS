@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.SemestreService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.SemestreService;
+// import com.uasz.Gestion_DAOS.Service.Maquette.SemestreService;
 import com.uasz.Gestion_DAOS.model.Maquette.Classe;
 import com.uasz.Gestion_DAOS.model.Maquette.Semestre;
 

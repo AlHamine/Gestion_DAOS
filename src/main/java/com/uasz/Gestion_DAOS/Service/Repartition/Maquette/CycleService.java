@@ -1,4 +1,4 @@
-package com.uasz.Gestion_DAOS.Service.Maquette;
+package com.uasz.Gestion_DAOS.Service.Repartition.Maquette;
 
 import org.springframework.stereotype.Service;
 

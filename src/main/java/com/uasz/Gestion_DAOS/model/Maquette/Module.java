@@ -17,8 +17,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Module {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    private  String nom;
+    private Long id;
+    private String nom;
+    private String cours;
+    private int coefficient;
+    private int nbreHeure;
+    private String description;
+    private String objectifs;
+    @ManyToOne
+    private Maquette maquette;
     @ManyToOne
     private UE ue;
     @ManyToOne
@@ -28,8 +35,6 @@ public class Module {
     @JsonIgnore
     @ManyToMany (mappedBy = "module")
     private List<Enseignement>enseignements;
-    @ManyToOne
-    private Maquette maquette;
     private Date createdAt = new Date();
 
 }

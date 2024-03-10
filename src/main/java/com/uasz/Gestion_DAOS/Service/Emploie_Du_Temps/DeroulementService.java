@@ -18,7 +18,6 @@ public class DeroulementService {
     @Autowired
     private DeroulementRepository deroulementRepository;
 
- 
     public Deroulement ajouterDeroulement(Deroulement deroulement) {
         deroulementRepository.save(deroulement);
         return deroulement;
@@ -33,13 +32,17 @@ public class DeroulementService {
         return deroulementRepository.findById(id).get();
     }
 
+    public Deroulement rechercherDeroulementSeancee(Long id) {
+        return deroulementRepository.deroulementBySeance(id);
+    }
+
     public Deroulement modifierDeroulement(Deroulement deroulement) {
         Deroulement DeroulementModifier = rechercherDeroulement(deroulement.getId());
         if (DeroulementModifier != null) {
-            DeroulementModifier.setDate(deroulement.getDate());
-            DeroulementModifier.setMatiere(deroulement.getMatiere());
-            DeroulementModifier.setProcessus(deroulement.getProcessus());
-            DeroulementModifier.setSeance(deroulement.getSeance());
+            // DeroulementModifier.setDate(deroulement.getDate());
+            DeroulementModifier.setObjectifs(deroulement.getObjectifs());
+            DeroulementModifier.setDescription(deroulement.getDescription());
+            // DeroulementModifier.setSeance(deroulement.getSeance());
 
             return deroulementRepository.save(DeroulementModifier);
         } else
@@ -54,11 +57,11 @@ public class DeroulementService {
     //     } else
     //         return false;
     // }
-
-    public Boolean suprimerDeroulement(Long id) {
-        Deroulement deroulementModifier = rechercherDeroulement(id);
-        if (deroulementModifier != null) {
-            deroulementRepository.delete(deroulementModifier);
+    
+    public Boolean suprimerDeroulement(Long deroulement) {
+        Deroulement DeroulementModifier = rechercherDeroulement(deroulement);
+        if (DeroulementModifier != null) {
+            deroulementRepository.delete(DeroulementModifier);
             return true;
         } else
             return false;

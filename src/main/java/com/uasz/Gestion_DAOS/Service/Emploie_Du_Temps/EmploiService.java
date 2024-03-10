@@ -1,4 +1,5 @@
 package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,10 @@ public class EmploiService {
     public Emploi modifierEmploi(Emploi emploi) {
         Emploi emploiModifier = rechercherEmploi(emploi.getId());
         if (emploiModifier != null) {
-            emploiModifier.setSeances(emploi.getSeances());
+            if (emploiModifier.getSeances() != null)
+                emploiModifier.setSeances(emploi.getSeances());
+            emploiModifier.setDateDebut(emploi.getDateDebut());
+            emploiModifier.setDateFin(emploi.getDateFin());
             return emploiRepository.save(emploiModifier);
         } else
             return null;
@@ -50,9 +54,9 @@ public class EmploiService {
     //     } else
     //         return false;
     // }
-
-    public Boolean suprimerEmploi(Long id) {
-        Emploi emploiModifier = rechercherEmploi(id);
+    
+    public Boolean suprimerEmploi(Long batiment) {
+        Emploi emploiModifier = rechercherEmploi(batiment);
         if (emploiModifier != null) {
             emploiRepository.delete(emploiModifier);
             return true;

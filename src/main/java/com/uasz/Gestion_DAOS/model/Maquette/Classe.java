@@ -22,6 +22,8 @@ public class Classe {
     private int effectif;
     private int nbreGroupe;
     private String description;
+    @ManyToOne
+    private Formation formation;
     @JsonIgnore
     @OneToMany(mappedBy = "classe")
     private List<Enseignement> enseignement;
@@ -30,8 +32,6 @@ public class Classe {
     @JsonIgnore
     @OneToMany(mappedBy = "classe")
     private List<Groupe> groupes;
-    @ManyToOne
-    private Formation formation;
     private Date createdAt = new Date();
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.UEService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.UEService;
 import com.uasz.Gestion_DAOS.model.Maquette.UE;
 
 /**
@@ -30,10 +30,12 @@ public class UEController {
     }
 
     // @RequestMapping(value = "/ue", method = RequestMethod.GET)
-    // public String lister_ue(Model model, @RequestParam(name  = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "5") int size)  {
-    //     Page<UE> ueList = ueService.afficherToutUE();
-    //     model.addAttribute("listeDesUE", ueList);
-    //     return "ue";
+    // public String lister_ue(Model model, @RequestParam(name = "page",
+    // defaultValue = "0") int page, @RequestParam(name = "size", defaultValue =
+    // "5") int size) {
+    // Page<UE> ueList = ueService.afficherToutUE();
+    // model.addAttribute("listeDesUE", ueList);
+    // return "ue";
     // }
 
     @RequestMapping(value = "/ajouter_ue", method = RequestMethod.POST)
@@ -55,6 +57,13 @@ public class UEController {
         return "ue_details";
     }
 
+    @RequestMapping(value = "/ue_modules", method = RequestMethod.GET)
+    public String ue_modules(Model modele, @RequestParam(name = "id") Long id) {
+        modele.addAttribute("ue", ueService.rechercherUE(id));
+        modele.addAttribute("listeDesModules", ueService.UE_modules(id));
+        return "ue_modules";
+    }
+
     // @RequestMapping(value = "/form_ajouter_ue", method = RequestMethod.GET)
     // public String form_ajouter_ue(Model modele) {
     // return "ue_add";
@@ -68,7 +77,7 @@ public class UEController {
     // modele.addAttribute("ue", ue);
     // return "ue_edit";
     // }
-    
+
     @RequestMapping(value = "/modifier_ue", method = RequestMethod.POST)
     public String modifier_ue(UE ue) {
         ueService.modifierUE(ue);

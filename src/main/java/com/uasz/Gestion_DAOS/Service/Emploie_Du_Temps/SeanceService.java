@@ -1,10 +1,14 @@
 package com.uasz.Gestion_DAOS.Service.Emploie_Du_Temps;
+
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uasz.Gestion_DAOS.Repository.Emploie_Du_Temps.SeanceRepository;
 import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.Seance;
+import com.uasz.Gestion_DAOS.model.Emploie_Du_Temps.SeanceDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -29,6 +33,16 @@ public class SeanceService {
         return seanceRepository.findAll();
     }
 
+    public List<Seance> afficherSeanceSelonEmploi(Long id) {
+        return seanceRepository.findByEmploi(id);
+    }
+    // public List<Seance> afficherSeanceSelonEmploi(Long id) {
+    // return seanceRepository.findAll().stream().filter(m ->
+    // {if(m.getEmploi()!=null) return m.getEmploi().getId()== id; else return
+    // null})
+    // .collect(Collectors.toList());
+    // }
+
     public Seance rechercherSeance(Long id) {
         return seanceRepository.findById(id).get();
     }
@@ -36,13 +50,19 @@ public class SeanceService {
     public Seance modifierSeance(Seance seance) {
         Seance seanceModifier = rechercherSeance(seance.getId());
         if (seanceModifier != null) {
-            seanceModifier.setDateDebut(seance.getDateDebut());
-            seanceModifier.setDateFin(seance.getDateFin());
-            seanceModifier.setDeroulement(seance.getDeroulement());
+            seanceModifier.setDureee(seance.getDureee());
+            seanceModifier.setHeureDebut(seance.getHeureDebut());
+            if (seance.getDeroulement() != null)
+                seanceModifier.setDeroulement(seance.getDeroulement());
             seanceModifier.setEmploi(seance.getEmploi());
-            seanceModifier.setRepartition(seance.getRepartition());
-            seanceModifier.setTitre(seance.getTitre());
-            return seanceRepository.save(seanceModifier);
+            if (seance.getRepartition() != null)
+                seanceModifier.setRepartition(seance.getRepartition());
+            if (seance.getSalle() != null)
+                seanceModifier.setSalle(seance.getSalle());
+            // seanceModifier.setTitre(seance.getTitre());
+            Seance s = seanceRepository.save(seanceModifier);
+            return s;
+            // return new SeanceDTO(s);
         } else
             return null;
     }

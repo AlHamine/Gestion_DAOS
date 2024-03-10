@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
-import com.uasz.Gestion_DAOS.Service.Maquette.FormationService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.FiliereService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.FormationService;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 
 

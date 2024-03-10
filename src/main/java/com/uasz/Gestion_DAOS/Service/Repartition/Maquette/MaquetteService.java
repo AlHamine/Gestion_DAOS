@@ -1,4 +1,4 @@
-package com.uasz.Gestion_DAOS.Service.Maquette;
+package com.uasz.Gestion_DAOS.Service.Repartition.Maquette;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.uasz.Gestion_DAOS.Repository.Maquette.MaquetteRepository;
@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 @Service
 @Transactional
-
 public class MaquetteService {
     @Autowired
     private MaquetteRepository maquetteRepository;

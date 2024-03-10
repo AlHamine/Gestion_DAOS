@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.ECService;
+// import com.uasz.Gestion_DAOS.Service.Maquette.ECService;
 import com.uasz.Gestion_DAOS.model.Maquette.EC;
 
 import lombok.AllArgsConstructor;

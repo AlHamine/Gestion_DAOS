@@ -9,7 +9,6 @@ import com.uasz.Gestion_DAOS.model.Repartition.Repartition;
 /**
  * RepartitionRepository
  */
-public interface RepartitionRepository extends JpaRepository<Repartition,Long> {
+public interface RepartitionRepository extends JpaRepository<Repartition, Long> {
 
-  
 }

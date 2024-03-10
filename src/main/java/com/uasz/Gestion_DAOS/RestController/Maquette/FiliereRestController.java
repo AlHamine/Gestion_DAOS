@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
+import com.uasz.Gestion_DAOS.Service.Repartition.Maquette.FiliereService;
+// import com.uasz.Gestion_DAOS.Service.Maquette.FiliereService;
 import com.uasz.Gestion_DAOS.model.Maquette.Filiere;
 import com.uasz.Gestion_DAOS.model.Maquette.Formation;
 
