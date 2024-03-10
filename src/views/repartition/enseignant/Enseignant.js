@@ -7,7 +7,7 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
+  CFormInput,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -24,6 +24,37 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 export default function Enseignant() {
   const [listEnseignant, setListEnseignant] = useState([])
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(10) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listEnseignant.length / itemsPerPage)
+
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
+  // Index de la dernière UE à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première UE à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des UE à afficher sur la page actuelle
+  const currentPER = listEnseignant
+    .filter(
+      (ue) =>
+        ue.specialite.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.specialite.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.nom.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .slice(indexOfFirstUE, indexOfLastUE)
 
   useEffect(() => {
     fetchEnseignant()
@@ -72,13 +103,20 @@ export default function Enseignant() {
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Liste </strong> <small>des Enseignant</small>
+            <CFormInput
+              type="text"
+              size="sm"
+              placeholder="Rechercher PER par Specialite |  Grade | Prenom  |Nom"
+              aria-label="sm input example"
+              onChange={handleSearchChange}
+            />
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Matricule</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Prenom</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
@@ -91,9 +129,9 @@ export default function Enseignant() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listEnseignant.map((Enseignant, index) => (
+                {currentPER.map((Enseignant, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell> */}
                     <CTableDataCell>{Enseignant?.matricule}</CTableDataCell>
                     <CTableDataCell>{Enseignant.prenom}</CTableDataCell>
                     <CTableDataCell>{Enseignant.nom}</CTableDataCell>
@@ -138,11 +176,42 @@ export default function Enseignant() {
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
-                  <CPaginationItem disabled>Previous</CPaginationItem>
-                  <CPaginationItem>1</CPaginationItem>
-                  <CPaginationItem>2</CPaginationItem>
-                  <CPaginationItem>3</CPaginationItem>
-                  <CPaginationItem>Next</CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>Previous</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-200)}>
+                      Previous
+                    </CPaginationItem>
+                  )}
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>1</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>2</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>3</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Fin</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                      Fin
+                    </CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Next</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-100)}>
+                      Next
+                    </CPaginationItem>
+                  )}
                 </CPagination>
               </CTableBody>
             </CTable>

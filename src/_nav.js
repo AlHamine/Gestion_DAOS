@@ -146,11 +146,11 @@ const _nav = [
         name: 'Batiment',
         to: '/emploiDuTemps/batiment/Batiment',
       },
-      {
-        component: CNavItem,
-        name: 'Deroulement',
-        to: '/emploiDuTemps/deroulement/Deroulement',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Deroulement',
+      //   to: '/emploiDuTemps/deroulement/Deroulement',
+      // },
       {
         component: CNavItem,
         name: 'Emploi',

@@ -7,7 +7,7 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
+  CFormInput,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -25,11 +25,47 @@ import Typography from '@mui/material/Typography'
 import { useParams } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import PDFComponent from 'src/PDFComponent'
 export default function SeanceEmploi() {
   const [listSeance, setListSeance] = useState([])
   const [emploi, setEmploi] = useState()
   const { id } = useParams()
 
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(10) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listSeance.length / itemsPerPage)
+
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
+  // Index de la dernière UE à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première UE à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des UE à afficher sur la page actuelle
+  const currentPER = listSeance
+    .filter(
+      (ue) =>
+        ue.nom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.prenom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.libelle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.classe.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.jour.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.dureee.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.heureDebut.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.salle.batimentNom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.groupe?.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .slice(indexOfFirstUE, indexOfLastUE)
   const chargerEmploi = () => {
     fetch(SERVER_URL + 'emploi/emploi/' + id)
       .then((response) => {
@@ -80,6 +116,97 @@ export default function SeanceEmploi() {
         .catch((err) => console.error(err))
     }
   }
+  const testDonne = [
+    {
+      jour: 'Lundi',
+      heureDebut: '8:00-10:00',
+      prenom: 'Pierre',
+      nom: 'Dupont',
+      grade: 'Professeur',
+      libelle: 'Algorithmique',
+      classe: 'L2i',
+      groupe: 'A',
+      module: 'M2101',
+      semestre: 1,
+      salle: {
+        batimentNom: 'Batiment A',
+        numero: '101',
+      },
+      dureee: '120',
+    },
+    {
+      jour: 'Mardi',
+      heureDebut: '10:00-12:00',
+      prenom: 'Marie',
+      nom: 'Martin',
+      grade: 'ATER',
+      libelle: "Travaux Pratiques d'Algorithmique",
+      classe: 'L2i',
+      groupe: 'A',
+      module: 'M2101',
+      semestre: 1,
+      salle: {
+        batimentNom: 'Batiment C',
+        numero: '202',
+      },
+      dureee: '90',
+    },
+    {
+      jour: 'Mercredi',
+      heureDebut: '15:00-17:00',
+      prenom: 'Jean',
+      nom: 'Durant',
+      grade: 'Professeur',
+      libelle: 'Bases de Données',
+      classe: 'L2i',
+      groupe: '',
+      module: 'M2102',
+      semestre: 1,
+      salle: {
+        batimentNom: 'Batiment B',
+        numero: '305',
+      },
+      dureee: '120',
+    },
+    {
+      jour: 'Jeudi',
+      heureDebut: '17:00-19:00',
+      nom: 'Aucun',
+      prenom: '',
+      grade: '',
+      libelle: 'Créneau libre',
+      classe: '',
+      groupe: '',
+      module: '',
+      semestre: 0,
+      salle: {
+        batimentNom: '',
+        numero: '',
+      },
+      dureee: '120',
+    },
+    {
+      jour: 'Vendredi',
+      heureDebut: '8:00-10:00',
+      prenom: 'Sophie',
+      nom: 'Lefebvre',
+      grade: 'Ingénieur',
+      libelle: 'Projet Web',
+      classe: 'L2i',
+      groupe: '',
+      module: 'M2103',
+      semestre: 1,
+      salle: {
+        batimentNom: 'Batiment A',
+        numero: '105',
+      },
+      dureee: '120',
+    },
+  ]
+
+  const handlePDFDownload = () => {
+    PDFComponent({ seances: listSeance, emploi: emploi })
+  }
   useEffect(() => {
     fetchSeance()
     chargerEmploi()
@@ -104,6 +231,12 @@ export default function SeanceEmploi() {
               Ajouter un Seance
             </CButton>
           </Link>
+          {/* <PDFDownloadLink document={<PDFComponent seances={listSeance} />} fileName="document.pdf">
+            {({ blob, url, loading, error }) => (loading ? 'Chargement...' : 'Télécharger PDF')}
+          </PDFDownloadLink> */}
+          <CButton color="success" style={{ color: 'white' }} onClick={handlePDFDownload}>
+            Télécharger PDF
+          </CButton>
         </div>
       </div>
       <CCol xs={12}>
@@ -115,6 +248,13 @@ export default function SeanceEmploi() {
               {emploi?.filiere}
               <b>{emploi?.nom}</b>{' '}
             </strong>{' '}
+            <CFormInput
+              type="text"
+              size="sm"
+              placeholder="Rechercher Seance parEnseignant	Libelle	| Classe |	Module	| Semestre	| Batiment-Salle |	Jour	| HeureDebut |	Duree	| Operation	| Details"
+              aria-label="sm input example"
+              onChange={handleSearchChange}
+            />
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -138,7 +278,7 @@ export default function SeanceEmploi() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listSeance.map((Seance, index) => (
+                {currentPER.map((Seance, index) => (
                   <CTableRow key={index}>
                     {/* <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell> */}
                     {/* <CTableDataCell>{Seance.numero}</CTableDataCell> */}
@@ -181,11 +321,42 @@ export default function SeanceEmploi() {
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
-                  <CPaginationItem disabled>Previous</CPaginationItem>
-                  <CPaginationItem>1</CPaginationItem>
-                  <CPaginationItem>2</CPaginationItem>
-                  <CPaginationItem>3</CPaginationItem>
-                  <CPaginationItem>Next</CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>Previous</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-200)}>
+                      Previous
+                    </CPaginationItem>
+                  )}
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>1</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>2</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>3</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Fin</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                      Fin
+                    </CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Next</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-100)}>
+                      Next
+                    </CPaginationItem>
+                  )}
                 </CPagination>
               </CTableBody>
             </CTable>

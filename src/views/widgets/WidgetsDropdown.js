@@ -13,6 +13,7 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 import { SERVER_URL } from 'src/constantURL'
+import { Link } from 'react-router-dom'
 const WidgetsDropdown = () => {
   const [rapport, setRapport] = useState(0)
   const fetchRapport = () => {
@@ -56,7 +57,9 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/maquette/formation/Formation`}>Voir</Link>
+                  </CDropdownItem>
                   <CDropdownItem disabled>Formation</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -141,7 +144,9 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir + Details</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/maquette/filiere/Filiere`}>Voir ... </Link>
+                  </CDropdownItem>
                   <CDropdownItem disabled>....</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -226,7 +231,9 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir ...</CDropdownItem>
+                  <Link to={`/repartition/enseignant/Enseignant`}>
+                    <CDropdownItem>Voir ...</CDropdownItem>
+                  </Link>
                   <CDropdownItem disabled>+</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -295,7 +302,10 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir +Details...</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/emploiDuTemps/batiment/Batiment`}>Voir ... </Link>
+                  </CDropdownItem>
+
                   <CDropdownItem disabled>..</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -387,7 +397,10 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/maquette/classe/Classe`}>Voir ... </Link>
+                  </CDropdownItem>
+
                   <CDropdownItem disabled>Formation</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -465,14 +478,16 @@ const WidgetsDropdown = () => {
             </span> */}
               </>
             }
-            title="Enseignemnt(s)"
+            title="Enseignement(s)"
             action={
               <CDropdown alignment="end">
                 <CDropdownToggle color="transparent" caret={false} className="p-0">
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir + Details</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/maquette/enseignement/Enseignement`}>Voir ... </Link>
+                  </CDropdownItem>
                   <CDropdownItem disabled>....</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -557,9 +572,10 @@ const WidgetsDropdown = () => {
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Action</CDropdownItem>
-                  <CDropdownItem>Another action</CDropdownItem>
-                  <CDropdownItem>Something else here...</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/repartition/repartition/Repartition`}>Voir ... </Link>
+                  </CDropdownItem>
+
                   <CDropdownItem disabled>Disabled action</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -617,18 +633,21 @@ const WidgetsDropdown = () => {
             color="dark"
             value={
               <>
-                {rapport.nbSeance} Seances <br />
+                {rapport.nbEmploi} Emploi du temps <br />
+                Total {rapport.nbSeance} Seances
                 {/* Total {rapport.nbSalle} Salles <br /> */}
               </>
             }
-            title="Seance(s)"
+            title="Emploi et Seance(s)"
             action={
               <CDropdown alignment="end">
                 <CDropdownToggle color="transparent" caret={false} className="p-0">
                   <CIcon icon={cilOptions} className="text-high-emphasis-inverse" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem>Voir +Details...</CDropdownItem>
+                  <CDropdownItem>
+                    <Link to={`/emploiDuTemps/emploi/Emploi`}>Voir ... </Link>
+                  </CDropdownItem>
                   <CDropdownItem disabled>..</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>

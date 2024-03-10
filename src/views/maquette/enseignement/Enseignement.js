@@ -132,8 +132,8 @@ export default function Enseignement() {
                         : enseignement.libelle}
                     </CTableDataCell>
                     <CTableDataCell>
-                      {enseignement.description.length > 15
-                        ? `${enseignement.description.substring(0, 15)}...`
+                      {enseignement.description?.length > 15
+                        ? `${enseignement.description?.substring(0, 15)}...`
                         : enseignement.description}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">

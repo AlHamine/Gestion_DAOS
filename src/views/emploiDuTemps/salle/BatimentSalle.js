@@ -7,7 +7,7 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
+  CFormInput,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -28,6 +28,30 @@ export default function BatimentSalle() {
   const [listSalle, setListSalle] = useState([])
   const [batiment, setBatiment] = useState({})
   const navigate = useNavigate()
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage] = useState(10) // Nombre d'éléments par page
+  const [currentPage, setCurrentPage] = useState(1) // La page courante
+  const handleSearchChange = (libelle) => {
+    setSearchTerm(libelle.target.value)
+  }
+  const lastPageNumber = Math.ceil(listSalle.length / itemsPerPage)
+
+  const handleChangePaginate = (value) => {
+    if (value === -100) {
+      setCurrentPage(currentPage + 1)
+    } else if (value === -200) {
+      setCurrentPage(currentPage - 1)
+    } else setCurrentPage(value)
+  }
+  // Index de la dernière UE à afficher sur la page
+  const indexOfLastUE = currentPage * itemsPerPage
+  // Index de la première UE à afficher sur la page
+  const indexOfFirstUE = indexOfLastUE - itemsPerPage
+  // Liste des UE à afficher sur la page actuelle
+  const currentPER = listSalle
+    .filter((ue) => ue.numero?.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(indexOfFirstUE, indexOfLastUE)
   useEffect(() => {
     const chargerbatiments = () => {
       fetch(SERVER_URL + `emploi/batiment/${id}`, {
@@ -100,6 +124,13 @@ export default function BatimentSalle() {
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Liste </strong> <small>des Salle</small>
+            <CFormInput
+              type="text"
+              size="sm"
+              placeholder="Rechercher Batiment par 	Numero |  Capacite"
+              aria-label="sm input example"
+              onChange={handleSearchChange}
+            />
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -116,7 +147,7 @@ export default function BatimentSalle() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listSalle.map((Salle, index) => (
+                {currentPER.map((Salle, index) => (
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
                     <CTableDataCell>{Salle.numero}</CTableDataCell>

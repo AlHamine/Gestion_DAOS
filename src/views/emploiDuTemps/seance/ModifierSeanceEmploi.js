@@ -9,13 +9,14 @@ export default function ModifierSeance() {
   const { idseance } = useParams()
   const [repartitions, setRepartitions] = useState([])
   const [salles, setSalles] = useState([])
+  const [repart, setRepart] = useState(0)
   const [seance, setSeance] = useState({
     repartition: { id: '' },
     salle: { id: '' },
     heureDebut: '',
     dureee: '',
     emploi: { id: id },
-    repartition: '',
+    jour: '',
   })
   const handleSave = () => {
     const donne = {
@@ -24,7 +25,9 @@ export default function ModifierSeance() {
       dureee: seance.dureee,
       heureDebut: seance.heureDebut,
       emploi: { id: parseInt(id) },
-      repartition: { id: seance.repartition.id },
+      repartition: { id: repart }, // Assurez-vous que la repartition est déjà sauvegardée en base de données
+
+      jour: seance.jour,
     }
     console.log(donne)
     addSeance(donne)
@@ -44,7 +47,10 @@ export default function ModifierSeance() {
             throw new Error('Network response was not ok')
           }
         })
-        .then((data) => setSeance(data))
+        .then((data) => {
+          setSeance(data)
+          setRepart(data.repartition)
+        })
         .catch((err) => console.error(err))
     }
 
@@ -59,7 +65,9 @@ export default function ModifierSeance() {
             throw new Error('Network response was not ok')
           }
         })
-        .then((data) => setRepartitions(data))
+        .then((data) => {
+          setRepartitions(data)
+        })
         .catch((err) => console.error(err))
     }
 
@@ -90,7 +98,7 @@ export default function ModifierSeance() {
   const handleChangeReparttion = (e) => {
     const selectedIdd = e.target.value
     console.log(selectedIdd)
-    // seance.repartition = {}
+    seance.repartition = {}
     const selectedRepartition = repartitions.find((e) => e.id == selectedIdd)
     console.log(selectedRepartition)
     seance.repartition = { id: selectedRepartition.id }
@@ -98,24 +106,25 @@ export default function ModifierSeance() {
       ...prevState,
       repartition: { id: selectedRepartition.id },
     }))
+    setRepart(selectedIdd)
 
     console.log('terstdtttttttttttttttttttttt')
-    console.log(seance)
+    // console.log(seance)
   }
   const backward = () => {
     navigate('/emploiDuTemps/seance/Seance/Emploi/' + id)
   }
   const handleChangeSalle = (e) => {
-    console.log('Testing' + id)
+    // console.log('Testing' + id)
     const selectedId = e.target.value
     const selectedSalle = salles.find((e) => e.id == selectedId)
-    console.log(selectedSalle)
+    // console.log(selectedSalle)
     // selectedSalle.type = selectedSalle.matricule ? 'PER' : 'VAC'
     setSeance((prevState) => ({
       ...prevState,
       salle: { id: selectedSalle.id },
     }))
-    console.log(seance)
+    // console.log(seance)
   }
 
   const handleChange = (event) => {
@@ -172,7 +181,6 @@ export default function ModifierSeance() {
               }
               invalid={true}
             >
-              {console.log(seance)}
               <option disabled selected formNoValidate value="">
                 Selectionner une repartition
               </option>
@@ -207,6 +215,27 @@ export default function ModifierSeance() {
             </CFormSelect>
           </CCardBody>
           <CCardBody>
+            <CFormSelect
+              id="validationServer01"
+              label="Jour de la semaine"
+              defaultValue=""
+              name="jour"
+              onChange={handleChange}
+              invalid={true}
+              required
+              value={seance.jour}
+            >
+              <option disabled selected formNoValidate value="">
+                Sélectionnez un jour
+              </option>
+              <option value="Lundi">Lundi</option>
+              <option value="Mardi">Mardi</option>
+              <option value="Mercredi">Mercredi</option>
+              <option value="Jeudi">Jeudi</option>
+              <option value="Vendredi">Vendredi</option>
+              <option value="Samedi">Samedi</option>
+            </CFormSelect>
+
             <CCol md={6}>
               <CFormInput
                 // className="text-center"

@@ -7,7 +7,7 @@ import {
   CRow,
   CTable,
   CTableBody,
-  // CTableCaption,
+  CFormInput,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -44,8 +44,14 @@ export default function PER() {
   // Index de la première UE à afficher sur la page
   const indexOfFirstUE = indexOfLastUE - itemsPerPage
   // Liste des UE à afficher sur la page actuelle
-  const currentUEs = listPER
-    .filter((ue) => ue.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
+  const currentPER = listPER
+    .filter(
+      (ue) =>
+        ue.specialite.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.nom.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
     .slice(indexOfFirstUE, indexOfLastUE)
   useEffect(() => {
     fetchPER()
@@ -94,6 +100,13 @@ export default function PER() {
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Liste </strong> <small>des PER</small>
+            <CFormInput
+              type="text"
+              size="sm"
+              placeholder="Rechercher PER par Nom | Prenom  | Grade | Specialite"
+              aria-label="sm input example"
+              onChange={handleSearchChange}
+            />
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#table-head"> */}
@@ -112,7 +125,7 @@ export default function PER() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {listPER.map((PER, index) => (
+                {currentPER.map((PER, index) => (
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {index + 1} </CTableHeaderCell>
                     <CTableDataCell style={{ width: '20px' }}>{PER.prenom}</CTableDataCell>
@@ -142,11 +155,42 @@ export default function PER() {
                   </CTableRow>
                 ))}
                 <CPagination align="end" aria-label="Page navigation example">
-                  <CPaginationItem disabled>Previous</CPaginationItem>
-                  <CPaginationItem>1</CPaginationItem>
-                  <CPaginationItem>2</CPaginationItem>
-                  <CPaginationItem>3</CPaginationItem>
-                  <CPaginationItem>Next</CPaginationItem>
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>Previous</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-200)}>
+                      Previous
+                    </CPaginationItem>
+                  )}
+                  {currentPage === 1 ? (
+                    <CPaginationItem disabled>1</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(1)}>1</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>2</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(2)}>2</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>3</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(3)}>3</CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Fin</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(lastPageNumber)}>
+                      Fin
+                    </CPaginationItem>
+                  )}
+                  {currentPage === lastPageNumber ? (
+                    <CPaginationItem disabled>Next</CPaginationItem>
+                  ) : (
+                    <CPaginationItem onClick={() => handleChangePaginate(-100)}>
+                      Next
+                    </CPaginationItem>
+                  )}
                 </CPagination>
               </CTableBody>
             </CTable>
