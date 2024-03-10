@@ -23,11 +23,11 @@ const PDFComponent = ({ seances, emploi }) => {
   // doc.internal.scaleFactor = 1.25
   const entete = `EMPLOI DU TEMPS DU ${extractDateOnly(emploi?.dateDebut)} au ${extractDateOnly(
     emploi?.dateFin,
-  )} de la Classe :\n ${emploi?.classe}  - Filière : ${emploi?.filiere} - ${emploi?.nom}`
+  )} de la Classe :\n ${emploi?.classe}  - Filière : ${emploi?.filiere}`
   doc.text(entete, 50, 30)
   // Créer les en-têtes de tableau avec les jours de la semaine et les heures
   const headers = ['  ', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-  const hours = ['8:00', '10:00', '12:00', '15:00', '17:00', '19:00']
+  const hours = ['8:00', '9:00', '10:00', '11:00', '12:00', '15:00', '16:00', '17:00', '19:00']
 
   // Préparer les données du tableau
   const tableData = hours.map((hour, index) => {
@@ -38,7 +38,7 @@ const PDFComponent = ({ seances, emploi }) => {
         row.push(
           `${seance.module}\n${seance.prenom} ${seance.nom}\n${seance.classe} ${
             seance.groupe ? `(${seance.groupe})` : ''
-          }\n${seance.salle.batimentNom}-${seance.salle.numero}\n${seance.dureee}`,
+          }\n${seance.salle.batimentNom}-${seance.salle.numero}\nDuree: ${seance.dureee}`,
         )
       } else {
         row.push('ok')
