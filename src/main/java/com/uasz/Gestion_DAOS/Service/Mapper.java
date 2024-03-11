@@ -115,14 +115,18 @@ public class Mapper {
 
     public static EnseignementDTO mapEnseignementToDTO(Enseignement enseignement) {
         EnseignementDTO eDTO = new EnseignementDTO();
+        if(enseignement.getClass() != null) {
+            eDTO.setClasse(enseignement.getClasse().getLibelle());
+            eDTO.setSemestre(enseignement.getClasse().getSemestre().getLibelle());
+        }
         eDTO.setId(enseignement.getId());
-        eDTO.setClasse(enseignement.getClasse().getLibelle());
         eDTO.setDescription(enseignement.getDescription());
+        // if(enseignement.getLibelle() != null)
         eDTO.setLibelle(enseignement.getLibelle());
+
         if (enseignement.getGroupe() != null)
             eDTO.setGroupe(enseignement.getGroupe().getLibelle());
         eDTO.setModule(enseignement.getModule().getCours() + " - " + enseignement.getModule().getNom());
-        eDTO.setSemestre(enseignement.getClasse().getSemestre().getLibelle());
 
         return eDTO;
     }

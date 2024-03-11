@@ -32,16 +32,17 @@ public class EnseignementRestController {
 
     private EnseignementService enseignementService;
 
-    // @GetMapping(path = "/enseignement")
-    // public List<Enseignement> listerEnseignement() {
-    //     return enseignementService.afficherToutEnseignement();
-
-
     @GetMapping(path = "/enseignement")
-    public List<EnseignementDTO> listerEnseignement() {
-        return enseignementService.afficherToutEnseignement().stream().map(e -> Mapper.mapEnseignementToDTO(e))
-                .collect(Collectors.toList());
+    public List<Enseignement> listerEnseignement() {
+        return enseignementService.afficherToutEnseignement();
     }
+
+
+    // @GetMapping(path = "/enseignement")
+    // public List<EnseignementDTO> listerEnseignement() {
+    //     return enseignementService.afficherToutEnseignement().stream().map(e -> Mapper.mapEnseignementToDTO(e))
+    //             .collect(Collectors.toList());
+    // }
 
     @GetMapping(path = "/enseignement/{id}")
     public Enseignement recherchEnseignement(@PathVariable Long id) {

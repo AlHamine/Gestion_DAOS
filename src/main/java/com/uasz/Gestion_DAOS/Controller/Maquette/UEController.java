@@ -60,7 +60,8 @@ public class UEController {
     @RequestMapping(value = "/ue_modules", method = RequestMethod.GET)
     public String ue_modules(Model modele, @RequestParam(name = "id") Long id) {
         modele.addAttribute("ue", ueService.rechercherUE(id));
-        modele.addAttribute("listeDesModules", ueService.UE_modules(id));
+        // modele.addAttribute("listeDesModules", ueService.UE_modules(id)); // OLD
+        modele.addAttribute("listeDesModules", ueService.detailsModule(id));
         return "ue_modules";
     }
 
