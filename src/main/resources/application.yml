@@ -6,6 +6,19 @@ spring:
     name: proxy-service
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - PATCH
+            - DELETE
+            - PUT
       routes:
         - id: maquette-service
           uri: http://localhost:8081/
@@ -22,6 +35,7 @@ spring:
 
   main:
     web-application-type: reactive
+    # allow-bean-definition-overriding: true
 
 eureka:
   client:
