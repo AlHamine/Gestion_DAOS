@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.EmploiDTO;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.Service.EmploiService;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.model.Emploi;
 
@@ -30,8 +31,8 @@ public class EmploiController {
     }
 
     @GetMapping(path = "/emploi/{id}")
-    public Emploi recherchEmploi(@PathVariable Long id) {
-        return emploiService.rechercherEmploi(id);
+    public EmploiDTO recherchEmploi(@PathVariable Long id) {
+        return new EmploiDTO(emploiService.rechercherEmploi(id));
     }
 
     @PostMapping(path = "/emploi")

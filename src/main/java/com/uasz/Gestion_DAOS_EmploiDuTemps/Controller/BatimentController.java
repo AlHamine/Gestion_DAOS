@@ -1,6 +1,7 @@
 package com.uasz.Gestion_DAOS_EmploiDuTemps.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.BatimentDTO;
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.Mapper;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.Service.BatimentService;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.model.Batiment;
+
 
 @RestController
 @RequestMapping("/emploi")
@@ -24,14 +28,19 @@ public class BatimentController {
     @Autowired
     private BatimentService batimentService;
 
+    // @GetMapping(path = "/batiment")
+    // public List<Batiment> listerBatiment() {
+    // return batimentService.afficherToutBatiment();
+    // }
     @GetMapping(path = "/batiment")
-    public List<Batiment> listerBatiment() {
-        return batimentService.afficherToutBatiment();
+    public List<BatimentDTO> listerBatiment() {
+        return batimentService.afficherToutBatiment().stream().map(utilisateur -> Mapper.mapBatimentToDTO(utilisateur))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/batiment/{id}")
-    public Batiment recherchBatiment(@PathVariable Long id) {
-        return batimentService.rechercherBatiment(id);
+    public BatimentDTO recherchBatiment(@PathVariable Long id) {
+        return Mapper.mapBatimentToDTO(batimentService.rechercherBatiment(id));
     }
 
     @PostMapping(path = "/batiment")

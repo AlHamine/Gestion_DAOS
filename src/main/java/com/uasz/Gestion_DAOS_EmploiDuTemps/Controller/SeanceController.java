@@ -1,6 +1,7 @@
 package com.uasz.Gestion_DAOS_EmploiDuTemps.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.SeanceDTO;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.Service.SeanceService;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.model.Seance;
 
@@ -32,6 +34,11 @@ public class SeanceController {
     @GetMapping(path = "/seance/{id}")
     public Seance recherchSeance(@PathVariable Long id) {
         return seanceService.rechercherSeance(id);
+    }
+
+    @GetMapping(path = "/{id}/seance")
+    public List<SeanceDTO> listerSeanceSelonEmploi(@PathVariable Long id) {
+        return seanceService.afficherSeanceSelonEmploi(id).stream().map(s -> new SeanceDTO(s)).collect(Collectors.toList());
     }
 
     @PostMapping(path = "/seance")

@@ -1,6 +1,7 @@
 package com.uasz.Gestion_DAOS_EmploiDuTemps.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.Mapper;
+import com.uasz.Gestion_DAOS_EmploiDuTemps.DTO.SalleDTO;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.Service.SalleService;
 import com.uasz.Gestion_DAOS_EmploiDuTemps.model.Salle;
 
@@ -24,14 +27,25 @@ public class SalleController {
     @Autowired
     private SalleService salleService;
 
+    // @GetMapping(path = "/salle")
+    // public List<Salle> listerSalle() {
+    // return salleService.afficherToutSalle();
+    // }
     @GetMapping(path = "/salle")
-    public List<Salle> listerSalle() {
-        return salleService.afficherToutSalle();
+    public List<SalleDTO> listerSalle() {
+        return salleService.afficherToutSalle().stream().map(salle -> Mapper.mapSalleToDTO(salle))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/batiment/{batimentId}/salles")
+    public List<SalleDTO> SalleBatiment(@PathVariable Long batimentId) {
+        return salleService.afficherSalleSelonBatiment(batimentId).stream().map(salle -> Mapper.mapSalleToDTO(salle))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/salle/{id}")
-    public Salle recherchSalle(@PathVariable Long id) {
-        return salleService.rechercherSalle(id);
+    public SalleDTO recherchSalle(@PathVariable Long id) {
+        return Mapper.mapSalleToDTO(salleService.rechercherSalle(id));
     }
 
     @PostMapping(path = "/salle")
