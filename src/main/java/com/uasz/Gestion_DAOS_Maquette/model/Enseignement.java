@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS_Maquette.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +23,6 @@ public class Enseignement {
     private Classe classe;
     @ManyToOne
     private Groupe groupe;
+    //     @OneToMany
+    // private List<Repartition> repartition;
 }

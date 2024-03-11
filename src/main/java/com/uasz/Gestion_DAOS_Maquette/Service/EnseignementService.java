@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS_Maquette.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,10 +9,11 @@ import com.uasz.Gestion_DAOS_Maquette.Repository.EnseignementRepository;
 import com.uasz.Gestion_DAOS_Maquette.model.Enseignement;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
+
 
 @Service
 @Transactional
+
 public class EnseignementService {
     @Autowired
     private EnseignementRepository enseignementRepository;
@@ -18,6 +21,7 @@ public class EnseignementService {
     public Enseignement ajouterEnseignement(Enseignement ue) {
         enseignementRepository.save(ue);
         return ue;
+
     }
 
     public List<Enseignement> afficherToutEnseignement() {
@@ -31,7 +35,7 @@ public class EnseignementService {
     public Enseignement modifierEnseignement(Enseignement enseignement) {
         Enseignement enseignementModifier = rechercherEnseignement(enseignement.getId());
         if (enseignementModifier != null) {
-            enseignementModifier.setClasse(enseignement.getClasse());
+            // enseignementModifier.setClasse(enseignement.getClasse());
             enseignementModifier.setGroupe(enseignement.getGroupe());
             enseignementModifier.setModule(enseignement.getModule());
             enseignementModifier.setLibelle(enseignement.getLibelle());

@@ -1,6 +1,9 @@
 package com.uasz.Gestion_DAOS_Maquette.Controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uasz.Gestion_DAOS_Maquette.Mapper;
+import com.uasz.Gestion_DAOS_Maquette.DTO.EnseignementDTO;
 import com.uasz.Gestion_DAOS_Maquette.Service.EnseignementService;
 import com.uasz.Gestion_DAOS_Maquette.model.Enseignement;
+
 
 @RestController
 @RequestMapping("/maquette")
@@ -25,8 +31,9 @@ public class EnseignementController {
     private EnseignementService enseignementService;
 
     @GetMapping(path = "/enseignement")
-    public List<Enseignement> listerEnseignement() {
-        return enseignementService.afficherToutEnseignement();
+    public List<EnseignementDTO> listerEnseignement() {
+        return enseignementService.afficherToutEnseignement().stream().map(e -> Mapper.mapEnseignementToDTO(e))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/enseignement/{id}")

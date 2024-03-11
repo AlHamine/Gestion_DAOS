@@ -17,6 +17,7 @@ public class Enseignement_Repartition {
     private String libelle;
     private String description;
     private Long idModule;
+    private String module;
     private String cours;
     private int coefficient;
     private int nbreHeure;
@@ -24,7 +25,7 @@ public class Enseignement_Repartition {
     private String classe;
     private Long idGroupe;
     private String groupe;
-    // private Long idSemestre;
+    private String filiere;
     private String semestre;
 
 }
