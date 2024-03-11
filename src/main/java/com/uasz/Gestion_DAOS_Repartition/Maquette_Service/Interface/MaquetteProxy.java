@@ -3,6 +3,7 @@ package com.uasz.Gestion_DAOS_Repartition.Maquette_Service.Interface;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -13,6 +14,11 @@ public interface MaquetteProxy {
     @GetMapping(path = "/maquette/api/enseignements_Repartitions")
     List<Enseignement> lister_enseignements_Repartitions();
 
-    // @GetMapping(path = "/maquette/api/{id}")
-    // Enseignement rechercher_ue(@PathVariable Long id);
+    @GetMapping("/maquette/api/enseignements_Repartition/{id}")
+    Enseignement rechercher_Enseignement(@PathVariable Long id);
+  
+    @DeleteMapping("/maquette/enseignement/{id}")
+    public Boolean supprimerEnseignement(@PathVariable Long id);
+    // @PatchMapping()
+
 }

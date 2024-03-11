@@ -1,8 +1,6 @@
-package com.uasz.Gestion_DAOS_Repartition.Maquette_Service.Model;
+package com.uasz.Gestion_DAOS_Repartition.Emploi_Service.Model;
 
 import java.util.Collection;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uasz.Gestion_DAOS_Repartition.model.Repartition;
 
 import jakarta.persistence.Entity;
@@ -11,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,27 +17,31 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Enseignement {
-
+public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String heureDebut;
+    private String dureee;
+    private Long emploiId;
+    private Long deroulementId;
+    private String deroulement_objectifs;
+    private String deroulement_desc;
+    // Enseignements
+    private String jour;
+    private String repartition;
     private String libelle;
     private String description;
-    private Long idModule;
     private String module;
-    private String cours;
-    private int coefficient;
-    private int nbreHeure;
-    private Long idClasse;
     private String classe;
-    private Long idGroupe;
-    private String groupe;
-    private String filiere;
+    // private Long salleId;
     private String semestre;
-    @JsonIgnore
-    @OneToMany(mappedBy = "enseignement", fetch = FetchType.LAZY)
-    // private Repartition repartition;
-    private Collection<Repartition> repartition;
-
+    private String groupe;
+    // Ensignant
+    private String nom;
+    private String prenom;
+    private String grade;
+    // private SalleDTO salle;
+    private String specialite;
+    private String matricule;
 }

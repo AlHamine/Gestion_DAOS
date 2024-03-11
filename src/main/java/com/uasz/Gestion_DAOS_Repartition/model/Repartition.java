@@ -1,5 +1,9 @@
 package com.uasz.Gestion_DAOS_Repartition.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.uasz.Gestion_DAOS_Repartition.Emploi_Service.Model.Seance;
 import com.uasz.Gestion_DAOS_Repartition.Maquette_Service.Model.Enseignement;
 
 import jakarta.persistence.*;
@@ -15,20 +19,11 @@ public class Repartition {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String classe;
-  private int effectif;
-  private int semestre;
   @ManyToOne
   private Enseignement enseignement;
-  private int credit;
-  private int dureeCours;
   @ManyToOne
   private Enseignant enseignant;
-  private int cm;
-  private String ResponsableTD;
-  private String ResponsableTP;
-  private int travauxDirige;
-  private int travauxPratique;
-  // @OneToMany(mappedBy = "repartition")
-  // private List<Seance> seances;
+  @JsonIgnore
+  @OneToMany(mappedBy = "repartition")
+  private List<Seance> seances;
 }
