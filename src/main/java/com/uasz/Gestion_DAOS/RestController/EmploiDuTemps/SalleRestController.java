@@ -27,15 +27,15 @@ public class SalleRestController {
     @Autowired
     private SalleService salleService;
 
-    // @GetMapping(path = "/salle")
-    // public List<Salle> listerSalle() {
-    // return salleService.afficherToutSalle();
-    // }
     @GetMapping(path = "/salle")
-    public List<SalleDTO> listerSalle() {
-        return salleService.afficherToutSalle().stream().map(salle -> Mapper.mapSalleToDTO(salle))
-                .collect(Collectors.toList());
+    public List<Salle> listerSalle() {
+    return salleService.afficherToutSalle();
     }
+    // @GetMapping(path = "/salle")
+    // public List<SalleDTO> listerSalle() {
+    //     return salleService.afficherToutSalle().stream().map(salle -> Mapper.mapSalleToDTO(salle))
+    //             .collect(Collectors.toList());
+    // }
 
     @GetMapping(path = "/batiment/{batimentId}/salles")
     public List<SalleDTO> SalleBatiment(@PathVariable Long batimentId) {

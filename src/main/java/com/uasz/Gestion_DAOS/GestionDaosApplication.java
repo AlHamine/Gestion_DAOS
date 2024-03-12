@@ -205,12 +205,12 @@ public class GestionDaosApplication implements CommandLineRunner {
 		moduleService.ajouterModule(new Module(null, "Gestion des ressources humaines", "Cours", 4, 6, "Cours de gestion des RH", "Objectifs du module", null, null, null, null, null, new Date()));
 		moduleService.ajouterModule(new Module(null, "Droit international", "Cours", 3, 5, "Cours de droit international public", "Objectifs du module", null, null, null, null, null, new Date()));
 
-		enseignementService.ajouterEnseignement(new Enseignement(null, "testENS1", "objectif", "description", module1, null, null, new Date(), null));
-		enseignementService.ajouterEnseignement(new Enseignement(null, "Mathématiques avancées", "Objectifs du cours de mathématiques", "Description du cours de mathématiques avancées", module2, null, null, new Date(), null));
-		enseignementService.ajouterEnseignement(new Enseignement(null, "Programmation en Java", "Objectifs du cours de programmation", "Description du cours de programmation en Java", module2, null, null, new Date(), null));
-		enseignementService.ajouterEnseignement(new Enseignement(null, "Finance d'entreprise", "Objectifs du cours de finance", "Description du cours de finance d'entreprise", module1, null, null, new Date(), null));
-		enseignementService.ajouterEnseignement(new Enseignement(null, "Biologie cellulaire avancée", "Objectifs du cours de biologie cellulaire", "Description du cours de biologie cellulaire avancée", module1, null, null, new Date(), null));
-		enseignementService.ajouterEnseignement(new Enseignement(null, "Marketing stratégique", "Objectifs du cours de marketing", "Description du cours de marketing stratégique", module2, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "testENS1", "objectif", "description", module1, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "Mathématiques avancées", "Objectifs du cours de mathématiques", "Description du cours de mathématiques avancées", module2, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "Programmation en Java", "Objectifs du cours de programmation", "Description du cours de programmation en Java", module2, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "Finance d'entreprise", "Objectifs du cours de finance", "Description du cours de finance d'entreprise", module1, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "Biologie cellulaire avancée", "Objectifs du cours de biologie cellulaire", "Description du cours de biologie cellulaire avancée", module1, null, null, new Date(), null));
+		// enseignementService.ajouterEnseignement(new Enseignement(null, "Marketing stratégique", "Objectifs du cours de marketing", "Description du cours de marketing stratégique", module2, null, null, new Date(), null));
 
 		semestreService.ajouterSemestre(new Semestre(null, "lib", "semestre 1", null, null, null));
 		semestreService.ajouterSemestre(new Semestre(null, "lib 5", "semestre 5", null, null, null));
@@ -225,17 +225,17 @@ public class GestionDaosApplication implements CommandLineRunner {
 		emploiService.ajouterEmploi(new Emploi(null, null, new Date(), null, null));
 		emploiService.ajouterEmploi(new Emploi(null, null, new Date(), null, null));
 
-		repartitionService.ajouterRepartition(new Repartition());
-		repartitionService.ajouterRepartition(new Repartition());
-		repartitionService.ajouterRepartition(new Repartition());
+		// repartitionService.ajouterRepartition(new Repartition());
+		// repartitionService.ajouterRepartition(new Repartition());
+		// repartitionService.ajouterRepartition(new Repartition());
 
-		salleService.ajouterSalle(new Salle());
-		salleService.ajouterSalle(new Salle());
-		salleService.ajouterSalle(new Salle());
+		// salleService.ajouterSalle(new Salle());
+		// salleService.ajouterSalle(new Salle());
+		// salleService.ajouterSalle(new Salle());
 
-		seanceService.ajouterSeance(new Seance());
-		seanceService.ajouterSeance(new Seance());
-		seanceService.ajouterSeance(new Seance());
+		// seanceService.ajouterSeance(new Seance());
+		// seanceService.ajouterSeance(new Seance());
+		// seanceService.ajouterSeance(new Seance());
 
 		maquetteService.ajouterMaquette(new Maquette(null, 2, 4, "intitule other", 3, 7, 11, 45, 6, 400, 21, null, null, new Date()));
 		maquetteService.ajouterMaquette(new Maquette(null, 2, 4, "titre", 3, 7, 11, 45, 6, 400, 21, null, null, new Date()));
@@ -257,7 +257,7 @@ public class GestionDaosApplication implements CommandLineRunner {
 				"Droit", "Securite et Reseaux", "Reseaux et Telecom",
 				"Genie Logiciel", "Anglais" };
 
-		// // Créez et ajoutez 5 objets PER à la base de données
+		// Créez et ajoutez 5 objets PER à la base de données
 		for (int i = 0; i < 8; i++) {
 			PER per = new PER();
 			per.setNom(noms[i]);

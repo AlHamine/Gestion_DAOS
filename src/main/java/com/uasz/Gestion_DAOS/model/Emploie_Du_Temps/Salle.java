@@ -23,6 +23,7 @@ public class Salle {
     @ManyToOne
     private Batiment batiment;
     private Date createdAt = new Date();
+    @JsonIgnore
     @OneToMany(mappedBy = "salle")
     private List<Seance> seances;
 }
