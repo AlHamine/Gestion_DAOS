@@ -1,5 +1,7 @@
 package com.uasz.Gestion_DAOS_Maquette;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -62,16 +64,15 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 		SpringApplication.run(GestionDaosMaquetteApplication.class, args);
 	}
 
-
 	@Override
 	public void run(String... args) throws Exception {
-		Cycle cycle1 = cycleService.ajouterCycle(new Cycle(null, "Licence", null));
-		Cycle cycle2 = cycleService.ajouterCycle(new Cycle(null, "Master", null));
-		Cycle cycle3 = cycleService.ajouterCycle(new Cycle(null, "Doctorat", null));
+		Cycle cycle1 = cycleService.ajouterCycle(new Cycle(null, "Licence", null, new Date()));
+		Cycle cycle2 = cycleService.ajouterCycle(new Cycle(null, "Master", null, new Date()));
+		Cycle cycle3 = cycleService.ajouterCycle(new Cycle(null, "Doctorat", null, new Date()));
 		// Les niveaux
-		Niveau l1 = niveauService.ajouterNiveau(new Niveau(null, "L1", cycle1, null));
-		Niveau l2 = niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1, null));
-		Niveau l3 = niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2, null));
+		Niveau l1 = niveauService.ajouterNiveau(new Niveau(null, "L1", cycle1, null, new Date()));
+		Niveau l2 = niveauService.ajouterNiveau(new Niveau(null, "L2", cycle1, null, new Date()));
+		Niveau l3 = niveauService.ajouterNiveau(new Niveau(null, "M1", cycle2, null, new Date()));
 		// Les enseignants
 
 		// Ajout des unités d'enseignement (UEs)
@@ -82,6 +83,14 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 		UE ue_4 = ueService
 				.ajouterUE(new UE(null, "Gestions de donnees structurees", "INF354", 8, 4, null, null, null, null));
 		UE ue_5 = ueService.ajouterUE(new UE(null, "Humanites et Entreprise", "INF355", 6, 3, null, null, null, null));
+
+		ecService
+				.ajouterEC(new EC(null, "EC 2", "EC002", 3, 2, 2, 1, 4, "Description for EC 2", new Date(), 
+						ue_1, null));
+		ecService.ajouterEC(new EC(null, "EC 1", "EC001", 4, 3, 2, 1, 5, "Description for EC 1", null, ue_1, null));
+		ecService
+				.ajouterEC(new EC(null, "EC 3", "EC003", 4, 3, 2, 1, 5, "Description for EC 3", new Date(), 
+						ue_2, null));
 
 		// Ajout des filières
 		Filiere filiere1 = filiereService.ajouterFiliere(new Filiere(null, "L2I", null));
@@ -96,24 +105,27 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 		Formation l2_MPI = formationService
 				.ajouterFormation(new Formation(null, "Mathematique", filiere2, null, null, l2));
 		// Ajout des Semetres
-		Semestre semestre_5 = semestreRepository.save(new Semestre(null, "Semestre 5", null, null, null));
-		Semestre semestre_6 = semestreRepository.save(new Semestre(null, "Semestre 6", null, null, null));
-		Semestre semestre_3 = semestreRepository.save(new Semestre(null, "Semestre 3", null, null, null));
-		Semestre semestre_4 = semestreRepository.save(new Semestre(null, "Semestre 4", null, null, null));
-		// Ajout des classes
+		Semestre semestre_5 = semestreRepository
+				.save(new Semestre(null, "Semestre 5", "Description 1", null, null, new Date()));
+		Semestre semestre_6 = semestreRepository
+				.save(new Semestre(null, "Semestre 6", "Description 2", null, null, new Date()));
+		Semestre semestre_3 = semestreRepository
+				.save(new Semestre(null, "Semestre 3", "Description 3", null, null, new Date()));
+		Semestre semestre_4 = semestreRepository
+				.save(new Semestre(null, "Semestre 4", "Description 4", null, null, new Date()));
 
-		Classe semestre_5_3_L21 = classeRepository
-				.save(new Classe(null, "Licence 3 L2I Semestre 5", 30, 1, null,
-						l3_L2I, null, semestre_5, null));
-		Classe semestre_6_3_L21 = classeRepository
-				.save(new Classe(null, "Licence 3 L2I Semestre 6", 32, 1, "Tres Intense comme formation ",
-						l3_L2I, null, semestre_6, null));
-		Classe semestre_3_2_MPI = classeRepository.save(new Classe(null, "Licence 2 MPI Semestre 3", 70, 2, null,
-				l2_MPI, null, semestre_3, null));
-		Classe semestre_4_L2_MI = classeRepository.save(new Classe(null, "Licence 2 MI Semestre 4", 30, 1, null,
-				l2_MPI, null, semestre_4, null));
-		Classe semestre_4_L2_MP = classeRepository.save(new Classe(null, "Licence 2 MP Semestre 4", 30, 1, null,
-				l2_MPI, null, semestre_4, null));
+		// Ajout des classes
+		Classe semestre_5_3_L21 = classeService.ajouterClasse(new Classe(null, "Licence 3 L2I Semestre 5", 30, 1,
+				"Desc 1", l3_L2I, null, semestre_5, null, new Date()));
+		Classe semestre_6_3_L21 = classeRepository.save(new Classe(null, "Licence 3 L2I Semestre 6", 32, 1,
+				"Tres Intense comme formation ", l3_L2I, null, semestre_6, null, new Date()));
+		Classe semestre_3_2_MPI = classeRepository.save(
+				new Classe(null, "Licence 2 MPI Semestre 3", 70, 2, null, l2_MPI, null, semestre_3, null, new Date()));
+		Classe semestre_4_L2_MI = classeRepository.save(
+				new Classe(null, "Licence 2 MI Semestre 4", 30, 1, null, l2_MPI, null, semestre_4, null, new Date()));
+		Classe semestre_4_L2_MP = classeRepository.save(
+				new Classe(null, "Licence 2 MP Semestre 4", 30, 1, null, l2_MPI, null, semestre_4, null, new Date()));
+
 		// Ajout des groupes
 		Groupe groupe1 = groupeService.ajouterGroupe(
 				new Groupe(null, "Groupe GL", 25, "C'est l'option Genile LOgiciel", null, semestre_6_3_L21));
@@ -154,51 +166,61 @@ public class GestionDaosMaquetteApplication implements CommandLineRunner {
 				null, null, ue_3, null, semestre_4, null));
 		// Enseignement pour Semstre 6 L3 L2I
 		Enseignement gl_cm = enseignementRepository
-				.save(new Enseignement(null, "Génie Logiciel Anvacé-CM", null, module1,
+				.save(new Enseignement(null, "Génie Logiciel Anvacé-CM",
+						"", module1,
 						semestre_6_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Génie Logiciel Anvacé-TP", null, module1_1,
+		enseignementRepository.save(new Enseignement(null, "Génie Logiciel Anvacé-TP",
+				"", module1_1,
 				semestre_6_3_L21,
 				null));
 		Enseignement daos_cm = enseignementRepository
-				.save(new Enseignement(null, "Développement d'Applications Orientés Service-CM", null, module2,
+				.save(new Enseignement(null, "Développement d'Applications Orientés Service-CM",
+						"", module2,
 						semestre_6_3_L21, null));
 		Enseignement daos_tp = enseignementRepository
-				.save(new Enseignement(null, "Développement d'Applications Orientés Service-TP", null, module2_1,
+				.save(new Enseignement(null, "Développement d'Applications Orientés Service-TP",
+						"", module2_1,
 						semestre_6_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-CM", null, module3,
+		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-CM",
+				"", module3,
 				semestre_6_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-TP", null, module3_1,
+		enseignementRepository.save(new Enseignement(null, "Sécurité des réseux-TP",
+				"", module3_1,
 				semestre_6_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-CM", null, module4,
+		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-CM",
+				"", module4,
 				semestre_6_3_L21, null));
-		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-TP", null, module4_1,
+		enseignementRepository.save(new Enseignement(null, "Administration Réseaux-TP",
+				"", module4_1,
 				semestre_6_3_L21, null));
 		enseignementRepository.save(new Enseignement(null, "Anglais 6", null, module5,
 				semestre_6_3_L21,
 				null));
-		enseignementRepository.save(new Enseignement(null, "Droit des TICS", null, module6,
+		enseignementRepository.save(new Enseignement(null, "Droit des TICS", "", module6,
 				semestre_6_3_L21, null));
 		// ----------------------------------
-		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", null,
+		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1", "",
 				module2, semestre_5_3_L21, null));
 		enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
+				.save(new Enseignement(null, "Reseaux et Telecoms", "", module3,
 						semestre_5_3_L21, null));
 		enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4,
+				.save(new Enseignement(null, "Reseaux et Telecoms", "", module4,
 						semestre_5_3_L21, null));
 
 		Enseignement enseignement1 = enseignementRepository
-				.save(new Enseignement(null, "Genie Logiciel 1", null, module1,
+				.save(new Enseignement(null, "Genie Logiciel 1", "", module1,
 						semestre_5_3_L21, groupe1));
 		enseignementRepository.save(new Enseignement(null, "Genie Logiciel 1",
 				null,
 				module2, semestre_5_3_L21, groupe2));
 		Enseignement enseignement2 = enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module3,
+				.save(new Enseignement(null, "Reseaux et Telecoms",
+						"", module3,
 						semestre_5_3_L21, null));
 		enseignementRepository
-				.save(new Enseignement(null, "Reseaux et Telecoms", null, module4,
+				.save(new Enseignement(null, "Reseaux et Telecoms",
+						"", module4,
 						semestre_5_3_L21, null));
 	}
 }

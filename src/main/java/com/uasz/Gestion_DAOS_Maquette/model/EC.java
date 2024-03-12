@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -22,14 +24,14 @@ public class EC {
     private int td;
     private int tp;
     private int tpe;
-    
+
     private int coefficient;
     private String description;
     private Date dateCreation;
-    
+
     @ManyToOne
     private UE ue;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "ec")
     private List<Module> module;
 

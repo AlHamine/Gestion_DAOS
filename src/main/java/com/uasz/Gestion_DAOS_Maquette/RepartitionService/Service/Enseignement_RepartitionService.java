@@ -26,6 +26,7 @@ public class Enseignement_RepartitionService {
             enseignement_Repartition.setDescription(enseignement.getDescription());
             enseignement_Repartition.setId(enseignement.getId());
             enseignement_Repartition.setIdModule(enseignement.getModule().getId());
+            enseignement_Repartition.setModule(enseignement.getModule().getNom());
             enseignement_Repartition.setIdClasse(enseignement.getClasse().getId());
             enseignement_Repartition.setNbreHeure(enseignement.getModule().getNbreHeure());
             enseignement_Repartition.setCoefficient(enseignement.getModule().getCoefficient());

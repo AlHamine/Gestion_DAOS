@@ -2,6 +2,8 @@ package com.uasz.Gestion_DAOS_Maquette.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ public class Groupe {
     private String libelle;
     private int effectif;
     private String description;
+    @JsonIgnore
     @OneToMany
     private List<Enseignement> enseignement;
     @ManyToOne
