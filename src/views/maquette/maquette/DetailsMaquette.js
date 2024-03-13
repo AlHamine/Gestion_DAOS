@@ -21,6 +21,7 @@ import { Link, useParams } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import style from './maquette.css'
+import Typography from '@mui/material/Typography'
 export default function DetailsMaquette() {
   const { id } = useParams()
   const [listModule, setListModule] = useState([])
@@ -101,7 +102,7 @@ export default function DetailsMaquette() {
         <div className="text-center">
           <Link to={'/maquette/module/AjouterModule'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Add a Module
+              Ajouter un Module
             </CButton>
           </Link>
         </div>
@@ -109,6 +110,13 @@ export default function DetailsMaquette() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
+            <h1>
+              MAQUETTE DE LA FORMATION: <strong>{listModule[1]?.formation}</strong> <br></br>
+              Filiere : <strong>{listModule[1]?.filiere}</strong> - Filière :{' '}
+              {/* <strong>{emploi?.filiere}</strong>
+              <strong>{emploi?.nom}</strong> */}
+            </h1>
+
             <div>
               <div>
                 <strong style={{ display: 'block', textAlign: 'center' }}></strong>
@@ -124,11 +132,11 @@ export default function DetailsMaquette() {
           </CCardHeader>
         </CCard>
         <CCardBody>
-          <CTable className="table-row">
+          <CTable className="table">
             <CTableHead color="dark">
-              <CTableRow className="header-row">
+              <CTableRow className="table">
                 <CTableHeaderCell colSpan="3">
-                  UNITES D{"'"}ENSEIGNEMENT Semestre 1
+                  UNITES D{"'"}ENSEIGNEMENT {listModule[1]?.semestre}
                 </CTableHeaderCell>
                 {/* <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell> */}

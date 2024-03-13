@@ -28,3 +28,9 @@ gap: '3px';
     /* padding: 5px; */
     /* text-align: center; */
 }
+.table td {
+    border: 2px solid black;
+    /* Modifiez cette valeur selon vos besoins */
+    padding: 8px;
+    /* Ajoutez un padding pour améliorer l'apparence */
+}
