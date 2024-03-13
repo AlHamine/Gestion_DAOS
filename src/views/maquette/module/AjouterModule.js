@@ -114,7 +114,7 @@ export default function AjouterModule() {
     const selectedUE = listUE[selectedModuleIndex]
     setModule({
       ...module,
-      ue: selectedUE,
+      ue: { id: selectedUE.id },
     })
   }
 
@@ -123,7 +123,7 @@ export default function AjouterModule() {
     const selectedEC = listEC[selectedModuleIndex]
     setModule({
       ...module,
-      ec: selectedEC,
+      ec: { id: selectedEC.id },
     })
   }
 
@@ -132,7 +132,7 @@ export default function AjouterModule() {
     const selectedMaquette = listMaquette[selectedModuleIndex]
     setModule({
       ...module,
-      maquette: selectedMaquette,
+      maquette: { id: parseInt(selectedModuleIndex) },
     })
   }
 
@@ -141,7 +141,7 @@ export default function AjouterModule() {
     const selectedSemestre = listSemestre[selectedModuleIndex]
     setModule({
       ...module,
-      semestre: selectedSemestre,
+      semestre: { id: selectedSemestre.id },
     })
   }
 
@@ -221,7 +221,7 @@ export default function AjouterModule() {
             feedbackInvalid="Selection un maquette valide"
             aria-label="select example"
             required
-            // name="module"
+            name="maquette"
             // value={atelier.module ? atelier.module.id : ''}
             onChange={handleChangeMaquette}
           >
@@ -229,8 +229,8 @@ export default function AjouterModule() {
               Selection son maquette
             </option>
             {listMaquette.map((maquette, index) => (
-              <option key={index} value={index}>
-                {'Intitule : '} {maquette.intitule}
+              <option key={index} value={maquette.id}>
+                {'Maquette de  : '} {maquette?.formation}-{maquette?.filiere}
               </option>
             ))}
           </CFormSelect>

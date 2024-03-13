@@ -36,12 +36,14 @@ const PDFComponent = ({ seances, emploi }) => {
       const seance = seances.find((s) => s.jour == day && s.heureDebut == hour)
       if (seance) {
         row.push(
-          `${seance.module}\n${seance.prenom} ${seance.nom}\n${seance.classe} ${
-            seance.groupe ? `(${seance.groupe})` : ''
-          }\n${seance.salle.batimentNom}-${seance.salle.numero}\nDuree: ${seance.dureee}`,
+          `${seance.module != null ? seance.module : seance.libelle}\n${seance.prenom} ${
+            seance.nom
+          }\n${seance.classe} ${seance.groupe ? `(${seance.groupe})` : ''}\n${
+            seance.salle.batimentNom
+          }-${seance.salle.numero}\nDuree: ${seance.dureee}`,
         )
       } else {
-        row.push('ok')
+        row.push('-')
       }
     })
     return row

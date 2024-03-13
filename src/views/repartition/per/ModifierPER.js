@@ -57,6 +57,7 @@ export default function ModifierPER() {
   const addPER = (uesave) => {
     fetch(SERVER_URL + 'repartition/per', {
       method: 'POST',
+      mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(uesave),
     })

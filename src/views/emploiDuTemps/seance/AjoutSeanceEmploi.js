@@ -15,7 +15,7 @@ export default function AjouterSeanceEmploi() {
     heureDebut: '',
     dureee: '',
     jour: '',
-    emploi: { id: id },
+    emploi: { id: parseInt(id) },
   })
   useEffect(() => {
     // repartition

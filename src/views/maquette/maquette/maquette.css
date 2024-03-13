@@ -1,0 +1,30 @@
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    /* Ajuster le nombre de colonnes selon vos besoins */
+gap: '3px';
+}
+
+.table-row {
+    grid-column: span 14;
+    /* Ajuster la largeur des cellules si nécessaire */
+    border-radius: 2px;
+}
+
+.header-row {
+    background-color: #c62b2b;
+    font-weight: bold;
+}
+
+.data-row {
+    border-bottom: 4px solid #a41c1c;
+}
+
+.cell {
+    padding: 5px;
+    text-align: center;
+}
+.cellh {
+    /* padding: 5px; */
+    /* text-align: center; */
+}

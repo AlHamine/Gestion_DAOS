@@ -11,6 +11,7 @@ const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 // const AddUe = React.lazy(() => import('./views/base/ue/AddUe'))
 // const EditUe = React.lazy(() => import('./views/base/ue/EditUe'))
 // Fin
+const DetailsMaquette = React.lazy(() => import('./views/maquette/maquette/DetailsMaquette.js'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
 const Cards = React.lazy(() => import('./views/base/cards/Cards'))
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'))
@@ -250,6 +251,11 @@ const routes = [
     path: '/maquette/maquette/ModifierMaquette/:id',
     name: 'ModifierMaquette',
     element: ModifierMaquette,
+  },
+  {
+    path: '/maquette/maquette/detailsMaquette/:id',
+    name: 'DetailsMaquette',
+    element: DetailsMaquette,
   },
   // ---------------------------- Module ----------------------------
   { path: '/maquette/module/Module', name: 'Module', element: Module },

@@ -131,8 +131,8 @@ export default function Classe() {
                     <CTableDataCell>{classe.effectif}</CTableDataCell>
                     <CTableDataCell>{classe.nbreGroupe}</CTableDataCell>
                     <CTableDataCell>
-                      {classe.description.length > 10
-                        ? `${classe.description.substring(0, 10)}...`
+                      {classe.description?.length > 10
+                        ? `${classe.description?.substring(0, 10)}...`
                         : classe.description}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">

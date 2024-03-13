@@ -50,8 +50,8 @@ export default function Emploi() {
       (ue) =>
         ue.filiere?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.classe?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ue.dateDebut.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ue.dateFin.toLowerCase().includes(searchTerm.toLowerCase()),
+        ue.dateDebut?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.dateFin?.toLowerCase().includes(searchTerm.toLowerCase()),
     )
     .slice(indexOfFirstUE, indexOfLastUE)
   useEffect(() => {

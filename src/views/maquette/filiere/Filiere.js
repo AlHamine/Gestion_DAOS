@@ -125,7 +125,7 @@ export default function Filiere() {
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row">{filiere.id}</CTableHeaderCell>
                     <CTableDataCell>
-                      {filiere.nom.length > 10 ? `${filiere.nom.substring(0, 10)}...` : filiere.nom}
+                      {filiere.nom.length > 30 ? `${filiere.nom.substring(0, 10)}...` : filiere.nom}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/filiere/ModifierFiliere/${filiere.id}`}>

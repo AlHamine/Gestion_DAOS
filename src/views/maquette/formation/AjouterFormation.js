@@ -96,7 +96,7 @@ export default function AjouterFormation() {
     const selectedFiliere = listFiliere[selectedModuleIndex]
     setFormation({
       ...formation,
-      filiere: selectedFiliere,
+      filiere: { id: selectedFiliere.id },
     })
   }
 
@@ -105,7 +105,7 @@ export default function AjouterFormation() {
     const selectedMaquette = listMaquette[selectedModuleIndex]
     setFormation({
       ...formation,
-      maquette: selectedMaquette,
+      maquette: { id: selectedMaquette.id },
     })
   }
 
@@ -114,7 +114,7 @@ export default function AjouterFormation() {
     const selectedNiveau = listNiveau[selectedModuleIndex]
     setFormation({
       ...formation,
-      niveau: selectedNiveau,
+      niveau: { id: selectedNiveau.id },
     })
   }
 
@@ -184,7 +184,7 @@ export default function AjouterFormation() {
             </option>
             {listMaquette.map((maquette, index) => (
               <option key={index} value={index}>
-                {'Intitule : '} {maquette && maquette.intitule}
+                {'Maquette de  : '} {maquette?.formation}-{maquette?.filiere}
               </option>
             ))}
           </CFormSelect>

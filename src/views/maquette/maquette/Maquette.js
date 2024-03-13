@@ -77,7 +77,7 @@ export default function Maquette() {
   const indexOfFirstUE = indexOfLastUE - itemsPerPage
   // Liste des Maquette à afficher sur la page actuelle
   const currentMaquettes = maquetteList
-    .filter((maquette) => maquette.intitule.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((maquette) => maquette.filiere?.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(indexOfFirstUE, indexOfLastUE)
 
   return (
@@ -114,16 +114,9 @@ export default function Maquette() {
               <CTableHead color="dark">
                 <CTableRow>
                   <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Credit</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">CoefUE</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Intitule</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">CM</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">TD</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">TP</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">CUMULE</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">TPE</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">VH</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">COEF</CTableHeaderCell>
+                  <CTableHeaderCell scope="col"></CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Filiere</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Formation</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -135,19 +128,8 @@ export default function Maquette() {
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row"> {maquette.id} </CTableHeaderCell>
                     <CTableDataCell className="text-center">{maquette.credit}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.coefUe}</CTableDataCell>
-                    <CTableDataCell>
-                      {maquette.intitule.length > 15
-                        ? `${maquette.intitule.substring(0, 15)}...`
-                        : maquette.intitule}
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.cm}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.td}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.tp}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.cumule}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.tpe}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.vh}</CTableDataCell>
-                    <CTableDataCell className="text-center">{maquette.coef}</CTableDataCell>
+                    <CTableDataCell className="text-center">{maquette.filiere}</CTableDataCell>
+                    <CTableDataCell className="text-center">{maquette.formation}</CTableDataCell>
 
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/maquette/ModifierMaquette/${maquette.id}`}>
@@ -160,7 +142,7 @@ export default function Maquette() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/maquette/${maquette.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/maquette/detailsMaquette/${maquette.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

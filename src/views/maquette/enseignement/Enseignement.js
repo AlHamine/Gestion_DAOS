@@ -113,9 +113,12 @@ export default function Enseignement() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Description</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Module</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Classe</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Semestre</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
                   </CTableHeaderCell>
@@ -125,16 +128,33 @@ export default function Enseignement() {
               <CTableBody>
                 {currentEnseignement.map((enseignement, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {enseignement.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {enseignement.id} </CTableHeaderCell> */}
                     <CTableDataCell>
                       {enseignement.libelle.length > 15
-                        ? `${enseignement.libelle.substring(0, 15)}...`
+                        ? `${enseignement.libelle}`
                         : enseignement.libelle}
                     </CTableDataCell>
                     <CTableDataCell>
                       {enseignement.description?.length > 15
                         ? `${enseignement.description?.substring(0, 15)}...`
                         : enseignement.description}
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      {enseignement.module?.length > 15
+                        ? `${enseignement.module?.substring(0, 15)}...`
+                        : enseignement.module}
+                    </CTableDataCell>
+
+                    <CTableDataCell>
+                      {enseignement.classe?.length > 15
+                        ? `${enseignement.classe?.substring(0, 20)}...`
+                        : enseignement.classe}
+                    </CTableDataCell>
+
+                    <CTableDataCell>
+                      {enseignement.semestre?.length > 15
+                        ? `${enseignement.semestre?.substring(0, 20)}...`
+                        : enseignement.semestre}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/enseignement/ModifierEnseignement/${enseignement.id}`}>

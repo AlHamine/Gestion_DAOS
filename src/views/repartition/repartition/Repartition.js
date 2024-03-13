@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { Alert } from '@coreui/coreui'
 export default function Repartition() {
   const [listRepartition, setListRepartition] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -50,8 +51,10 @@ export default function Repartition() {
         ue.enseignant.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignement.groupe?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignement.module?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.enseignement.libelle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignement.semestre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignant.grade?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ue.enseignant.matricule?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignant.specialite?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ue.enseignant.prenom.toLowerCase().includes(searchTerm.toLowerCase()),
     )
@@ -78,7 +81,14 @@ export default function Repartition() {
       fetch(SERVER_URL + `repartition/repartition/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            alert('Repartition supprimer')
+            // response.json().then((data = {}))
+            alert('Repartition supprimée avec succès')
+            if (SERVER_URL == 'http://localhost:8080/')
+              fetch(SERVER_URL + `emploi/repartition/${id}`, { method: 'DELETE' }).then(
+                (reponse) => {
+                  if (reponse.ok) alert('Cote Slave aussi')
+                },
+              )
             fetchRepartition()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")

@@ -241,7 +241,7 @@ export default function ModifierModule() {
             </option>
             {listMaquette.map((maquette, index) => (
               <option key={index} value={index}>
-                {'Intitule : '} {maquette.intitule}
+                {'Maquette de  : '} {maquette?.formation}-{maquette?.filiere}
               </option>
             ))}
           </CFormSelect>

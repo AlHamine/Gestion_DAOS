@@ -127,7 +127,7 @@ export default function Formation() {
                   <CTableRow key={index}>
                     <CTableHeaderCell scope="row">{formation.id}</CTableHeaderCell>
                     <CTableDataCell>
-                      {formation.nom.length > 10
+                      {formation.nom.length > 30
                         ? `${formation.nom.substring(0, 10)}...`
                         : formation.nom}
                     </CTableDataCell>

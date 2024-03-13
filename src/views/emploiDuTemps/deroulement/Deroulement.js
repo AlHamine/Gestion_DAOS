@@ -16,7 +16,7 @@ export default function Deroulement() {
   }, [])
 
   const fetchDeroulement = () => {
-    fetch(SERVER_URL + 'emploi/seance/' + id + '/deroulement')
+    fetch(SERVER_URL + 'emploi/seance/' + idseance + '/deroulement')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -52,7 +52,7 @@ export default function Deroulement() {
             <strong>Liste </strong> <small>des deroulement</small>
           </CCardHeader>
           <CCardBody>
-            {deroulement ? (
+            {deroulement?.id != null ? (
               <div>
                 <CCard>
                   <CCardBody>

@@ -1,28 +1,49 @@
-import { CButton, CCard, CCardHeader, CCol, CForm, CFormInput, CFormTextarea } from '@coreui/react'
-import React, { useState } from 'react'
+import { CButton, CCard, CCardHeader, CCol, CForm, CFormSelect, CFormTextarea } from '@coreui/react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SERVER_URL } from 'src/constantURL'
 
 export default function AjouterMaquette() {
   const navigate = useNavigate()
+  const [listFormation, setListFormation] = useState([])
   const [maquette, setMaquette] = useState({
-    credit: '',
-    coefUe: '',
-    intitule: '',
-    cm: '',
-    td: '',
-    tp: '',
-    cumule: '',
-    tpe: '',
-    vh: '',
-    coef: '',
+    formation: null,
+    module: null,
   })
+
+  useEffect(() => {
+    const fetchFormation = () => {
+      fetch(SERVER_URL + 'maquette/formation')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok')
+          }
+          return response.json()
+        })
+        .then((data) => {
+          data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          setListFormation(data)
+        })
+        .catch((error) => console.error('Error fetching Formation:', error))
+    }
+
+    fetchFormation()
+    // fetchSemestre()
+  }, [])
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setMaquette({
       ...maquette,
       [name]: value,
+    })
+  }
+  const handleChangeFormation = (event) => {
+    const selectedModuleIndex = event.target.value
+    const selectedFormation = listFormation[selectedModuleIndex]
+    setMaquette({
+      ...maquette,
+      formation: selectedFormation,
     })
   }
 
@@ -63,133 +84,24 @@ export default function AjouterMaquette() {
             </div>
           </CCardHeader>
         </CCard>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="Credit"
-            defaultValue=""
-            name="credit"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="CoefUe"
-            defaultValue=""
-            name="coefUe"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="CM"
-            defaultValue=""
-            name="cm"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="TD"
-            defaultValue=""
-            name="td"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="TP"
-            defaultValue=""
-            name="tp"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="Cumule"
-            defaultValue=""
-            name="cumule"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="TPE"
-            defaultValue=""
-            name="tpe"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="VH"
-            defaultValue=""
-            name="vh"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
-        <CCol md={4}>
-          <CFormInput
-            type="number"
-            id="validationServer01"
-            label="Coef"
-            defaultValue=""
-            name="coef"
-            onChange={handleChange}
-            valid
-            required
-            min={0}
-          />
-        </CCol>
         <div className="mb-3">
-          <CFormTextarea
-            feedbackInvalid="SVP entrer l'intitule du maquette."
-            id="validationTextarea"
-            label="Entrer l'Intitule du maquette"
-            placeholder="L'intitule du maquette."
+          <CFormSelect
+            label="Selection la formation de classe"
+            feedbackInvalid="Selection une formation valide"
+            aria-label="select example"
             required
-            name="intitule"
-            onChange={handleChange}
-          ></CFormTextarea>
+            name="formation"
+            onChange={handleChangeFormation}
+          >
+            <option selected="" value="">
+              Selection son formation
+            </option>
+            {listFormation.map((formation, index) => (
+              <option key={index} value={index}>
+                {'Nom : '} {formation && formation.nom}
+              </option>
+            ))}
+          </CFormSelect>
         </div>
         <div>
           <CCol xs={12} className="d-flex justify-content-center">

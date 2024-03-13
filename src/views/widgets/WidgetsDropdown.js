@@ -15,26 +15,39 @@ import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 const WidgetsDropdown = () => {
-  const [rapport, setRapport] = useState(0)
-  const fetchRapport = () => {
-    fetch(SERVER_URL + 'rapport')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        return response.json()
-      })
-      .then((data) => {
-        // Trier les ateliers par date de création en ordre décroissant
+  // const [rapport, setRapport] = useState({})
+  const [maquette, setMaquette] = useState(0)
+  const [repartition, setRapartition] = useState(0)
+  const [rapport, setRapport] = useState({})
 
-        setRapport(data)
-        console.log(data)
-      })
-      .catch((error) => console.error('Error fetching UE:', error))
-  }
   useEffect(() => {
+    const fetchRapport = async () => {
+      try {
+        let newData = {}
+
+        if (SERVER_URL !== 'http://localhost:8080/') {
+          const rapportResponse = await fetch(`${SERVER_URL}rapport`).then((response) =>
+            response.json(),
+          )
+          newData = { ...newData, ...rapportResponse }
+        } else {
+          const [maquetteResponse, repartitionResponse, emploiResponse] = await Promise.all([
+            fetch(`${SERVER_URL}rapport/maquette`).then((response) => response.json()),
+            fetch(`${SERVER_URL}repartition/rapport`).then((response) => response.json()),
+            fetch(`${SERVER_URL}emploi/rapport`).then((response) => response.json()),
+          ])
+          newData = { ...newData, ...maquetteResponse, ...repartitionResponse, ...emploiResponse }
+        }
+
+        setRapport((prevState) => ({ ...prevState, ...newData }))
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
     fetchRapport()
   }, [])
+
   return (
     <>
       <CRow>

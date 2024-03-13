@@ -82,9 +82,25 @@ export default function AjouterRepartition() {
       .then((response) => {
         if (response.ok) {
           alert('Repartition ajoutée avec succès')
-          navigate('/repartition/repartition/Repartition')
+          backward()
+          return response.json()
         } else {
           alert('Something went wrong')
+        }
+        // navigate('/repartition/repartition/Repartition')
+      })
+      .then((data) => {
+        console.log('TESTTTTTTTTTTTTTT SECOND FTECH')
+        console.log(data)
+        if (SERVER_URL == 'http://localhost:8080/') {
+          fetch(SERVER_URL + 'emploi/repartition', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          }).then((response2) => {
+            if (response2.ok) alert('Repartition ajoutée avec succès Cote Slave')
+            navigate('/repartition/repartition/Repartition')
+          })
         }
       })
       .catch((err) => console.error(err))
