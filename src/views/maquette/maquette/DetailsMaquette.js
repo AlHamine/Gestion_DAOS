@@ -74,27 +74,42 @@ export default function DetailsMaquette() {
         .catch((err) => console.error(err))
     }
   }
-
-  const groupedModules = listModule.reduce((acc, module) => {
-    const key = `${module.libelle_ue}_${module.credit_ue}_${module.coefficient_ue}`
-    const existingGroup = acc.find((item) => item.key === key)
-    if (existingGroup) {
-      existingGroup.details.push(module)
-    } else {
-      acc.push({
-        key,
-        libelle_ue: module.libelle_ue,
-        credit_ue: module.credit_ue,
-        coefficient_ue: module.coefficient_ue,
-        details: [module],
-      })
+  const groupedModulesSemestre = listModule.reduce((acc, module) => {
+    const key = module.semestre
+    if (!acc[key]) {
+      acc[key] = []
     }
+    acc[key].push(module)
     return acc
-  }, [])
+  }, {})
 
-  const currentModules = groupedModules
-    .filter((group) => group.libelle_ue.toLowerCase().includes(searchTerm.toLowerCase()))
-    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const groupedModules = (semesterModules) => {
+    return semesterModules.reduce((acc, module) => {
+      const key = `${module.libelle_ue}_${module.credit_ue}_${module.coefficient_ue}`
+      const existingGroup = acc.find((item) => item.key === key)
+      if (existingGroup) {
+        existingGroup.details.push(module)
+      } else {
+        acc.push({
+          key,
+          libelle_ue: module.libelle_ue,
+          credit_ue: module.credit_ue,
+          coefficient_ue: module.coefficient_ue,
+          details: [module],
+        })
+      }
+      return acc
+    }, [])
+  }
+  console.log(groupedModulesSemestre['Semestre 4'])
+  // const currentModules = groupedModules
+  //   .filter(
+  //     (group) =>
+  //       group.libelle_ue?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       group.libelleec?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       group.nom?.toLowerCase().includes(searchTerm.toLowerCase()),
+  //   )
+  //   .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   return (
     <div>
@@ -112,7 +127,7 @@ export default function DetailsMaquette() {
           <CCardHeader>
             <h1>
               MAQUETTE DE LA FORMATION: <strong>{listModule[1]?.formation}</strong> <br></br>
-              Filiere : <strong>{listModule[1]?.filiere}</strong> - Filière :{' '}
+              Filiere : <strong>{listModule[1]?.filiere}</strong>
               {/* <strong>{emploi?.filiere}</strong>
               <strong>{emploi?.nom}</strong> */}
             </h1>
@@ -132,18 +147,25 @@ export default function DetailsMaquette() {
           </CCardHeader>
         </CCard>
         <CCardBody>
-          <CTable className="table">
-            <CTableHead color="dark">
-              <CTableRow className="table">
-                <CTableHeaderCell colSpan="3">
-                  UNITES D{"'"}ENSEIGNEMENT {listModule[1]?.semestre}
-                </CTableHeaderCell>
-                {/* <CTableHeaderCell></CTableHeaderCell>
+          {Object.keys(groupedModulesSemestre).map((semestre, indice) => (
+            <CTable key={indice} className="table">
+              <CTableHead color="dark">
+                <CTableRow className="table">
+                  <CTableHeaderCell
+                    style={{ backgroundColor: 'green', color: 'white' }}
+                    colSpan="3"
+                  >
+                    UNITES D{"'"}ENSEIGNEMENT {semestre}
+                  </CTableHeaderCell>
+                  {/* <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell> */}
-                <CTableHeaderCell colSpan="5" style={{ textAlign: 'center' }}>
-                  ELEMENTS CONSTITUTIFS
-                </CTableHeaderCell>
-                {/* <CTableHeaderCell></CTableHeaderCell>
+                  <CTableHeaderCell
+                    colSpan="5"
+                    style={{ textAlign: 'center', backgroundColor: 'green', color: 'white' }}
+                  >
+                    ELEMENTS CONSTITUTIFS
+                  </CTableHeaderCell>
+                  {/* <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell>
@@ -153,104 +175,107 @@ export default function DetailsMaquette() {
                 <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell> */}
-              </CTableRow>
-              <CTableRow>
-                <CTableHeaderCell>Intitulés</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Crédits</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Coeff_UE</CTableHeaderCell>
-
-                <CTableRow>
-                  <CTableHeaderCell style={{ minWidth: '350px', maxWidth: '400px' }}>
-                    Intitulés
-                  </CTableHeaderCell>
-                  <CTableHeaderCell scope="col" style={{ width: '50px' }}>
-                    CM
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    TD
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    TP
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    CM+TD/TP
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    TPE
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    VHT
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '50px' }} scope="col">
-                    Coeff
-                  </CTableHeaderCell>
-                  <CTableHeaderCell style={{ width: '111px' }} scope="col">
-                    Operation
-                  </CTableHeaderCell>
                 </CTableRow>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody>
-              {currentModules.map((group, groupIndex) => (
-                <React.Fragment key={groupIndex}>
+                <CTableRow>
+                  <CTableHeaderCell>Intitulés</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Crédits</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Coeff_UE</CTableHeaderCell>
+
                   <CTableRow>
-                    <CTableHeaderCell>{group.libelle_ue}</CTableHeaderCell>
-                    <CTableDataCell>{group.credit_ue}</CTableDataCell>
-                    <CTableDataCell className="text-center">{group.coefficient_ue}</CTableDataCell>
-                    {/* <CTableDataCell colSpan="2"></CTableDataCell> */}
-                    {group.details.map((module, moduleIndex) => (
-                      <CTableRow key={moduleIndex}>
-                        {/* <div> */}
-                        {/* <CTableDataCell>{module.nom}</CTableDataCell> */}
-                        <CTableDataCell style={{ minWidth: '350px' }}>
-                          {module.libelleec} testLibe
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.cmec}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.tdec}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.tpec}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '80px' }}>
-                          {parseInt(module.tpec) + parseInt(module.cmec) + parseInt(module.tdec)}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.tpeec}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.nbreHeure}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                          {module.coefficient}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                          <Link to={`/maquette/module/ModifierModule/${module.id}`}>
-                            <CButton
-                              color="primary"
-                              style={{ fontWeight: 'bold', marginRight: '5px' }}
-                            >
-                              <EditIcon className="icon4" />
-                            </CButton>
-                          </Link>
-                          <CButton
-                            style={{ color: 'white' }}
-                            color="danger"
-                            onClick={() => onDelClickModule(module.id)}
-                          >
-                            <DeleteIcon className="icon3" />
-                          </CButton>
-                        </CTableDataCell>
-                        {/* </div> */}
-                      </CTableRow>
-                    ))}
+                    <CTableHeaderCell style={{ minWidth: '350px', maxWidth: '400px' }}>
+                      Intitulés
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" style={{ width: '50px' }}>
+                      CM
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      TD
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      TP
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      CM+TD/TP
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      TPE
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      VHT
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '50px' }} scope="col">
+                      Coeff
+                    </CTableHeaderCell>
+                    <CTableHeaderCell style={{ width: '111px' }} scope="col">
+                      Operation
+                    </CTableHeaderCell>
                   </CTableRow>
-                </React.Fragment>
-              ))}
-            </CTableBody>
-          </CTable>
+                </CTableRow>
+              </CTableHead>
+              <CTableBody>
+                {groupedModules(groupedModulesSemestre[semestre]).map((group, groupIndex) => (
+                  <React.Fragment key={groupIndex}>
+                    <CTableRow>
+                      <CTableHeaderCell>{group.libelle_ue}</CTableHeaderCell>
+                      <CTableDataCell>{group.credit_ue}</CTableDataCell>
+                      <CTableDataCell className="text-center">
+                        {group.coefficient_ue}
+                      </CTableDataCell>
+                      {/* <CTableDataCell colSpan="2"></CTableDataCell> */}
+                      {group?.details?.map((module, moduleIndex) => (
+                        <CTableRow key={moduleIndex}>
+                          {/* <div> */}
+                          {/* <CTableDataCell>{module.nom}</CTableDataCell> */}
+                          <CTableDataCell style={{ minWidth: '350px' }}>
+                            {module.libelleec} testLibe
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.cmec}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.tdec}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.tpec}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '80px' }}>
+                            {parseInt(module.tpec) + parseInt(module.cmec) + parseInt(module.tdec)}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.tpeec}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.nbreHeure}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center" style={{ width: '50px' }}>
+                            {module.coefficient}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center">
+                            <Link to={`/maquette/module/ModifierModule/${module.id}`}>
+                              <CButton
+                                color="primary"
+                                style={{ fontWeight: 'bold', marginRight: '5px' }}
+                              >
+                                <EditIcon className="icon4" />
+                              </CButton>
+                            </Link>
+                            <CButton
+                              style={{ color: 'white' }}
+                              color="danger"
+                              onClick={() => onDelClickModule(module.id)}
+                            >
+                              <DeleteIcon className="icon3" />
+                            </CButton>
+                          </CTableDataCell>
+                          {/* </div> */}
+                        </CTableRow>
+                      ))}
+                    </CTableRow>
+                  </React.Fragment>
+                ))}
+              </CTableBody>
+            </CTable>
+          ))}
           <CPagination align="end" aria-label="Page navigation example">
             {currentPage === 1 ? (
               <CPaginationItem disabled>Previous</CPaginationItem>
