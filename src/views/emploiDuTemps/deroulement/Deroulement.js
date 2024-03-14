@@ -49,7 +49,7 @@ export default function Deroulement() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Liste </strong> <small>des deroulement</small>
+            <h2>Deroulement de la Sceance {deroulement?.seance}</h2>
           </CCardHeader>
           <CCardBody>
             {deroulement?.id != null ? (
