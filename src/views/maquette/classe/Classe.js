@@ -16,6 +16,7 @@ import {
   CPaginationItem,
   CFormInput,
 } from '@coreui/react'
+// import DeleteIcon from '@mui/icons-material/Delete'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
 
@@ -52,7 +53,7 @@ export default function Classe() {
       })
       .then((data) => {
         // Trier les ateliers par date de création en ordre décroissant
-        data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        // data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         setListClasse(data)
       })
       .catch((error) => console.error('Error fetching Classe:', error))
@@ -112,7 +113,7 @@ export default function Classe() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Effectif</CTableHeaderCell>
                   <CTableHeaderCell scope="col">NbreGroupe</CTableHeaderCell>
@@ -126,13 +127,13 @@ export default function Classe() {
               <CTableBody>
                 {currentUEs.map((classe, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row">{classe.id}</CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row">{classe.id}</CTableHeaderCell> */}
                     <CTableDataCell>{classe.libelle}</CTableDataCell>
                     <CTableDataCell>{classe.effectif}</CTableDataCell>
                     <CTableDataCell>{classe.nbreGroupe}</CTableDataCell>
                     <CTableDataCell>
-                      {classe.description?.length > 10
-                        ? `${classe.description?.substring(0, 10)}...`
+                      {classe.description?.length > 15
+                        ? `${classe.description.substring(0, 15)}...`
                         : classe.description}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
@@ -143,10 +144,11 @@ export default function Classe() {
                       </Link>
                       <CButton color="danger" onClick={() => onDelClick(classe.id)}>
                         Supprimer
+                        {/* <DeleteIcon className="icon3" /> */}
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/classe/${classe.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/classe/classeDetails/${classe.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

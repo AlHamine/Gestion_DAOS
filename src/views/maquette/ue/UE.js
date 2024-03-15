@@ -52,7 +52,7 @@ export default function UE() {
       })
       .then((data) => {
         // Trier les ateliers par date de création en ordre décroissant
-        data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        // data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         setListUE(data)
       })
       .catch((error) => console.error('Error fetching UE:', error))
@@ -113,7 +113,7 @@ export default function UE() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell
+                  {/* <CTableHeaderCell
                     scope="col"
                     style={{
                       maxWidth: '50px',
@@ -123,7 +123,7 @@ export default function UE() {
                     }}
                   >
                     #
-                  </CTableHeaderCell>
+                  </CTableHeaderCell> */}
                   {/* <CTableHeaderCell scope="col" className="w-25">
                     #
                   </CTableHeaderCell> */}
@@ -140,10 +140,10 @@ export default function UE() {
               <CTableBody>
                 {currentUEs.map((ue, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row">{ue.id}</CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row">{ue.id}</CTableHeaderCell> */}
                     <CTableDataCell>{ue.code}</CTableDataCell>
                     <CTableDataCell>
-                      {ue.libelle.length > 15 ? `${ue.libelle.substring(0, 15)}...` : ue.libelle}
+                      {ue.libelle.length > 25 ? `${ue.libelle.substring(0, 25)}...` : ue.libelle}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">{ue.credit}</CTableDataCell>
                     <CTableDataCell className="text-center">{ue.coefficient}</CTableDataCell>
@@ -158,7 +158,7 @@ export default function UE() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/ue/${ue.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/ue/${ue.id}/UEDetails`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

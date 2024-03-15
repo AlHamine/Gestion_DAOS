@@ -113,7 +113,7 @@ export default function Module() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
                   <CTableHeaderCell scope="col">UE</CTableHeaderCell>
                   <CTableHeaderCell scope="col">EC</CTableHeaderCell>
@@ -128,22 +128,16 @@ export default function Module() {
               <CTableBody>
                 {currentModules.map((module, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {module.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {module.id} </CTableHeaderCell> */}
                     <CTableDataCell>
                       {module.nom.length > 15 ? `${module.nom.substring(0, 15)}...` : module.nom}
                     </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      {module.ue && module.ue.libelle}
-                    </CTableDataCell>
+                    <CTableDataCell>{module.ue && module.ue.libelle}</CTableDataCell>
                     <CTableDataCell className="text-center">
                       {module.ec && module.ec.libelle}
                     </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      {module.maquette && module.maquette.intitule}
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      {module.semestre && module.semestre.libelle}
-                    </CTableDataCell>
+                    <CTableDataCell>{module.maquette && module.maquette.intitule}</CTableDataCell>
+                    <CTableDataCell>{module.semestre && module.semestre.libelle}</CTableDataCell>
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/module/ModifierModule/${module.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
@@ -155,7 +149,7 @@ export default function Module() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/module/${module.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/module/ModuleDetails/${module.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

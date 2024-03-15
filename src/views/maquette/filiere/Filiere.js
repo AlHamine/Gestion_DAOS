@@ -112,7 +112,7 @@ export default function Filiere() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
@@ -123,9 +123,9 @@ export default function Filiere() {
               <CTableBody>
                 {currentFilieres.map((filiere, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row">{filiere.id}</CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row">{filiere.id}</CTableHeaderCell> */}
                     <CTableDataCell>
-                      {filiere.nom.length > 30 ? `${filiere.nom.substring(0, 10)}...` : filiere.nom}
+                      {filiere.nom.length > 25 ? `${filiere.nom.substring(0, 25)}...` : filiere.nom}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/filiere/ModifierFiliere/${filiere.id}`}>
@@ -138,7 +138,7 @@ export default function Filiere() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/filiere/${filiere.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/filiere/filiereDetails/${filiere.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

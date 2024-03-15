@@ -113,7 +113,7 @@ export default function Semestre() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Description</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
@@ -125,7 +125,7 @@ export default function Semestre() {
               <CTableBody>
                 {currentSemestres.map((maquette, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {maquette.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {maquette.id} </CTableHeaderCell> */}
                     <CTableDataCell>
                       {maquette.libelle.length > 15
                         ? `${maquette.libelle.substring(0, 15)}...`
@@ -143,7 +143,7 @@ export default function Semestre() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/semestre/${maquette.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/semestre/semestreDetails/${maquette.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

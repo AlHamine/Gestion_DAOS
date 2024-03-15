@@ -114,7 +114,7 @@ export default function Formation() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
@@ -125,10 +125,10 @@ export default function Formation() {
               <CTableBody>
                 {currentFormations.map((formation, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row">{formation.id}</CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row">{formation.id}</CTableHeaderCell> */}
                     <CTableDataCell>
-                      {formation.nom.length > 30
-                        ? `${formation.nom.substring(0, 10)}...`
+                      {formation.nom.length > 25
+                        ? `${formation.nom.substring(0, 25)}...`
                         : formation.nom}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
@@ -142,7 +142,7 @@ export default function Formation() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/formation/${formation.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/formation/formationDetails/${formation.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

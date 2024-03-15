@@ -160,7 +160,7 @@ export default function DetailsMaquette() {
                   {/* <CTableHeaderCell></CTableHeaderCell>
                 <CTableHeaderCell></CTableHeaderCell> */}
                   <CTableHeaderCell
-                    colSpan="5"
+                    colSpan="2"
                     style={{ textAlign: 'center', backgroundColor: 'green', color: 'white' }}
                   >
                     ELEMENTS CONSTITUTIFS
@@ -206,9 +206,9 @@ export default function DetailsMaquette() {
                     <CTableHeaderCell style={{ width: '50px' }} scope="col">
                       Coeff
                     </CTableHeaderCell>
-                    <CTableHeaderCell style={{ width: '111px' }} scope="col">
+                    {/* <CTableHeaderCell style={{ width: '111px' }} scope="col">
                       Operation
-                    </CTableHeaderCell>
+                    </CTableHeaderCell> */}
                   </CTableRow>
                 </CTableRow>
               </CTableHead>
@@ -221,13 +221,13 @@ export default function DetailsMaquette() {
                       <CTableDataCell className="text-center">
                         {group.coefficient_ue}
                       </CTableDataCell>
-                      {/* <CTableDataCell colSpan="2"></CTableDataCell> */}
+
                       {group?.details?.map((module, moduleIndex) => (
                         <CTableRow key={moduleIndex}>
                           {/* <div> */}
                           {/* <CTableDataCell>{module.nom}</CTableDataCell> */}
                           <CTableDataCell style={{ minWidth: '350px' }}>
-                            {module.libelleec} testLibe
+                            {module.libelleec}
                           </CTableDataCell>
                           <CTableDataCell className="text-center" style={{ width: '50px' }}>
                             {module.cmec}
@@ -245,12 +245,12 @@ export default function DetailsMaquette() {
                             {module.tpeec}
                           </CTableDataCell>
                           <CTableDataCell className="text-center" style={{ width: '50px' }}>
-                            {module.nbreHeure}
+                            {module.vht}
                           </CTableDataCell>
                           <CTableDataCell className="text-center" style={{ width: '50px' }}>
                             {module.coefficient}
                           </CTableDataCell>
-                          <CTableDataCell className="text-center">
+                          {/* <CTableDataCell className="text-center">
                             <Link to={`/maquette/module/ModifierModule/${module.id}`}>
                               <CButton
                                 color="primary"
@@ -266,7 +266,7 @@ export default function DetailsMaquette() {
                             >
                               <DeleteIcon className="icon3" />
                             </CButton>
-                          </CTableDataCell>
+                          </CTableDataCell> */}
                           {/* </div> */}
                         </CTableRow>
                       ))}
@@ -274,6 +274,102 @@ export default function DetailsMaquette() {
                   </React.Fragment>
                 ))}
               </CTableBody>
+              <CTableRow>
+                <CTableDataCell>
+                  <b>Totale {semestre}</b>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <b>
+                    {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                      return somme + (group.credit_ue || 0)
+                    }, 0)}
+                  </b>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <b>
+                    {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                      return somme + (group.coefficient_ue || 0)
+                    }, 0)}
+                  </b>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <CTableRow>
+                    <CTableDataCell style={{ minWidth: '340px', maxWidth: '400px' }}>
+                      <b className="text-center">TOTALE {semestre}</b>
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.cmec || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.tdec || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.tpec || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center" style={{ width: '80px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.tpec + module.cmec + module.tdec || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.tpeec || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.vht || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                    <CTableDataCell style={{ width: '50px' }}>
+                      {groupedModules(groupedModulesSemestre[semestre])?.reduce((somme, group) => {
+                        return (
+                          somme +
+                          (group.details?.reduce((sommeModule, module) => {
+                            return sommeModule + (module.coefficient || 0)
+                          }, 0) || 0)
+                        )
+                      }, 0)}
+                    </CTableDataCell>
+                  </CTableRow>
+                </CTableDataCell>
+              </CTableRow>
             </CTable>
           ))}
           <CPagination align="end" aria-label="Page navigation example">

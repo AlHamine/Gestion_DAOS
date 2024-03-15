@@ -15,6 +15,7 @@ import {
   CPagination,
   CPaginationItem,
   CFormInput,
+  CPopover,
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
 import { Link } from 'react-router-dom'
@@ -167,14 +168,32 @@ export default function Enseignement() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/enseignement/${enseignement.id}/UEDetailsEC`}>
-                        <CButton
-                          color="info"
-                          style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}
-                        >
-                          Detail
-                        </CButton>
-                      </Link>
+                      {/* <Link to={`/maquette/enseignement/${enseignement.id}/UEDetailsEC`}> */}
+                      <CPopover
+                        content={
+                          <div>
+                            <p>
+                              <strong>Libellé: </strong> {enseignement.libelle}
+                            </p>
+                            <p>
+                              <strong>Description: </strong> {enseignement.description}
+                            </p>
+                            <p>
+                              <strong>Date:</strong> {enseignement.createdAt}
+                            </p>
+                          </div>
+                        }
+                        placement="right"
+                        title={
+                          <div>
+                            <strong>{enseignement.libelle}</strong>
+                          </div>
+                        }
+                        trigger="focus"
+                      >
+                        <CButton color="info">Detail</CButton>
+                      </CPopover>
+                      {/* </Link> */}
                     </CTableDataCell>
                   </CTableRow>
                 ))}

@@ -114,7 +114,7 @@ export default function EC() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Code</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
                   <CTableHeaderCell scope="col">CM</CTableHeaderCell>
@@ -132,7 +132,7 @@ export default function EC() {
               <CTableBody>
                 {currentECs.map((ec, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {ec.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {ec.id} </CTableHeaderCell> */}
                     <CTableDataCell>{ec.code}</CTableDataCell>
                     <CTableDataCell>
                       {ec.libelle.length > 15 ? `${ec.libelle.substring(0, 15)}...` : ec.libelle}
@@ -158,7 +158,7 @@ export default function EC() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/ec/${ec.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/ec/DetailsEC/${ec.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

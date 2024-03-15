@@ -67,14 +67,18 @@ const UEDetailsEC = React.lazy(() => import('./views/maquette/ue/UEDetailsEC'))
 const Classe = React.lazy(() => import('./views/maquette/classe/Classe'))
 const AjouterClasse = React.lazy(() => import('./views/maquette/classe/AjouterClasse'))
 const ModifierClasse = React.lazy(() => import('./views/maquette/classe/ModifierClasse'))
+const DetailsClasse = React.lazy(() => import('./views/maquette/classe/DetailsClasse'))
 // ---------------------------- Cycle ----------------------------
 const Cycle = React.lazy(() => import('./views/maquette/cycle/Cycle'))
 const AjouterCycle = React.lazy(() => import('./views/maquette/cycle/AjouterCycle'))
 const ModifierCycle = React.lazy(() => import('./views/maquette/cycle/ModifierCycle'))
+const DetailsCycle = React.lazy(() => import('./views/maquette/cycle/DetailsCycle'))
 // ---------------------------- EC ----------------------------
 const EC = React.lazy(() => import('./views/maquette/ec/EC'))
 const AjouterEC = React.lazy(() => import('./views/maquette/ec/AjouterEC'))
 const ModifierEC = React.lazy(() => import('./views/maquette/ec/ModifierEC'))
+const DetailsEC = React.lazy(() => import('./views/maquette/ec/DetailsEC'))
+
 // ---------------------------- Enseignement ----------------------------
 const Enseignement = React.lazy(() => import('./views/maquette/enseignement/Enseignement'))
 const AjouterEnseignement = React.lazy(() =>
@@ -87,14 +91,17 @@ const ModifierEnseignement = React.lazy(() =>
 const Filiere = React.lazy(() => import('./views/maquette/filiere/Filiere'))
 const AjouterFiliere = React.lazy(() => import('./views/maquette/filiere/AjouterFiliere'))
 const ModifierFiliere = React.lazy(() => import('./views/maquette/filiere/ModifierFiliere'))
+const FiliereDetails = React.lazy(() => import('./views/maquette/filiere/FiliereDetails'))
 // ---------------------------- Formation ----------------------------
 const Formation = React.lazy(() => import('./views/maquette/formation/Formation'))
 const AjouterFormation = React.lazy(() => import('./views/maquette/formation/AjouterFormation'))
 const ModifierFormation = React.lazy(() => import('./views/maquette/formation/ModifierFormation'))
+const FormationDetails = React.lazy(() => import('./views/maquette/formation/FormationDetails'))
 // ---------------------------- Groupe ----------------------------
 const Groupe = React.lazy(() => import('./views/maquette/groupe/Groupe'))
 const AjouterGroupe = React.lazy(() => import('./views/maquette/groupe/AjouterGroupe'))
 const ModifierGroupe = React.lazy(() => import('./views/maquette/groupe/ModifierGroupe'))
+const DetailsGroupe = React.lazy(() => import('./views/maquette/groupe/DetailsGroupe'))
 // ---------------------------- Maquette ----------------------------
 const Maquette = React.lazy(() => import('./views/maquette/maquette/Maquette'))
 const AjouterMaquette = React.lazy(() => import('./views/maquette/maquette/AjouterMaquette'))
@@ -103,15 +110,19 @@ const ModifierMaquette = React.lazy(() => import('./views/maquette/maquette/Modi
 const Module = React.lazy(() => import('./views/maquette/module/Module'))
 const AjouterModule = React.lazy(() => import('./views/maquette/module/AjouterModule'))
 const ModifierModule = React.lazy(() => import('./views/maquette/module/ModifierModule'))
+const ModuleDetails = React.lazy(() => import('./views/maquette/module/ModuleDetails'))
+
 // ---------------------------- Niveau ----------------------------
 const Niveau = React.lazy(() => import('./views/maquette/niveau/Niveau'))
 const AjouterNiveau = React.lazy(() => import('./views/maquette/niveau/AjouterNiveau'))
 const ModifierNiveau = React.lazy(() => import('./views/maquette/niveau/ModifierNiveau'))
+const DetailsNiveau = React.lazy(() => import('./views/maquette/niveau/DetailsNiveau'))
+
 // ---------------------------- Semestre ----------------------------
 const Semestre = React.lazy(() => import('./views/maquette/semestre/Semestre'))
 const AjouterSemestre = React.lazy(() => import('./views/maquette/semestre/AjouterSemestre'))
 const ModifierSemestre = React.lazy(() => import('./views/maquette/semestre/ModifierSemestre'))
-
+const SemestreDetails = React.lazy(() => import('./views/maquette/semestre/SemestreDetails'))
 // ########################## Emploi Du Temps ##########################
 // ---------------------------- Batiment ----------------------------
 const Batiment = React.lazy(() => import('./views/emploiDuTemps/batiment/Batiment'))
@@ -188,14 +199,18 @@ const routes = [
   { path: '/maquette/classe/Classe', name: 'Classe', element: Classe },
   { path: '/maquette/classe/AjouterClasse', name: 'AjouterClasse', element: AjouterClasse },
   { path: '/maquette/classe/ModifierClasse/:id', name: 'ModifierClasse', element: ModifierClasse },
+  { path: '/maquette/classe/classeDetails/:id', name: 'DetailsClasse', element: DetailsClasse },
   // ---------------------------- Cycle ----------------------------
   { path: '/maquette/cycle/Cycle', name: 'Cycle', element: Cycle },
   { path: '/maquette/cycle/AjouterCycle', name: 'AjouterCycle', element: AjouterCycle },
   { path: '/maquette/cycle/ModifierCycle/:id', name: 'ModifierCycle', element: ModifierCycle },
+  { path: '/maquette/cycle/DetailsCycle/:id', name: 'DetailsCycle', element: DetailsCycle },
+
   // ---------------------------- EC ----------------------------
   { path: '/maquette/ec/EC', name: 'EC', element: EC },
   { path: '/maquette/ec/AjouterEC', name: 'AjouterEC', element: AjouterEC },
   { path: '/maquette/ec/ModifierEC/:id', name: 'ModifierEC', element: ModifierEC },
+  { path: '/maquette/ec/DetailsEC/:id', name: 'DetailsEC', element: DetailsEC },
   // ---------------------------- Enseignement ----------------------------
   { path: '/maquette/enseignement/Enseignement', name: 'Enseignement', element: Enseignement },
   {
@@ -216,6 +231,12 @@ const routes = [
     name: 'ModifierFiliere',
     element: ModifierFiliere,
   },
+  {
+    path: '/maquette/filiere/filiereDetails/:id',
+    name: 'FiliereDetails',
+    element: FiliereDetails,
+  },
+
   // ---------------------------- Formation ----------------------------
   { path: '/maquette/formation/Formation', name: 'Formation', element: Formation },
   {
@@ -228,6 +249,12 @@ const routes = [
     name: 'ModifierFormation',
     element: ModifierFormation,
   },
+  {
+    path: '/maquette/formation/formationDetails/:id',
+    name: 'FormationDetails',
+    element: FormationDetails,
+  },
+
   // ---------------------------- Groupe ----------------------------
   { path: '/maquette/groupe/Groupe', name: 'Groupe', element: Groupe },
   {
@@ -240,6 +267,12 @@ const routes = [
     name: 'ModifierGroupe',
     element: ModifierGroupe,
   },
+  {
+    path: '/maquette/groupe/DetailsGroupe/:id',
+    name: 'DetailsGroupe',
+    element: DetailsGroupe,
+  },
+
   // ---------------------------- Maquette ----------------------------
   { path: '/maquette/maquette/Maquette', name: 'Maquette', element: Maquette },
   {
@@ -269,6 +302,12 @@ const routes = [
     name: 'ModifierModule',
     element: ModifierModule,
   },
+
+  {
+    path: '/maquette/module/ModuleDetails/:id',
+    name: 'ModuleDetails',
+    element: ModuleDetails,
+  },
   // ---------------------------- Niveau ----------------------------
   { path: '/maquette/niveau/Niveau', name: 'Niveau', element: Niveau },
   {
@@ -281,6 +320,11 @@ const routes = [
     name: 'ModifierNiveau',
     element: ModifierNiveau,
   },
+  {
+    path: '/maquette/niveau/DetailsNiveau/:id',
+    name: 'DetailsNiveau',
+    element: DetailsNiveau,
+  },
   // ---------------------------- Semestre ----------------------------
   { path: '/maquette/semestre/Semestre', name: 'Semestre', element: Semestre },
   {
@@ -292,6 +336,11 @@ const routes = [
     path: '/maquette/semestre/ModifierSemestre/:id',
     name: 'ModifierSemestre',
     element: ModifierSemestre,
+  },
+  {
+    path: '/maquette/semestre/semestreDetails/:id',
+    name: 'SemestreDetails',
+    element: SemestreDetails,
   },
   // ---------------------------- UE ----------------------------
   { path: '/maquette/ue/UE', name: 'UE', element: UE },

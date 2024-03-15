@@ -111,7 +111,7 @@ export default function Cycle() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
@@ -122,9 +122,9 @@ export default function Cycle() {
               <CTableBody>
                 {currentCycle.map((cycle, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {cycle.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {cycle.id} </CTableHeaderCell> */}
                     <CTableDataCell>
-                      {cycle.nom.length > 10 ? `${cycle.nom.substring(0, 10)}...` : cycle.nom}
+                      {cycle.nom.length > 25 ? `${cycle.nom.substring(0, 25)}...` : cycle.nom}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
                       <Link to={`/maquette/cycle/ModifierCycle/${cycle.id}`}>
@@ -137,7 +137,7 @@ export default function Cycle() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/cycle/${cycle.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/cycle/DetailsCycle/${cycle.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

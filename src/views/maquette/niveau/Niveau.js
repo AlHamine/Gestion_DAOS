@@ -111,7 +111,7 @@ export default function Niveau() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
                   <CTableHeaderCell scope="col">Nom</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
@@ -122,7 +122,7 @@ export default function Niveau() {
               <CTableBody>
                 {currentNiveaux.map((niveau, index) => (
                   <CTableRow key={index}>
-                    <CTableHeaderCell scope="row"> {niveau.id} </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="row"> {niveau.id} </CTableHeaderCell> */}
                     <CTableDataCell>
                       {niveau.nom.length > 10 ? `${niveau.nom.substring(0, 10)}...` : niveau.nom}
                     </CTableDataCell>
@@ -137,7 +137,7 @@ export default function Niveau() {
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/niveau/${niveau.id}/UEDetailsEC`}>
+                      <Link to={`/maquette/niveau/DetailsNiveau/${niveau.id}`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}

@@ -17,22 +17,39 @@ import {
   CFormInput,
 } from '@coreui/react'
 import { SERVER_URL } from 'src/constantURL'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-export default function Groupe() {
-  const [listGroupe, setListGroupe] = useState([])
+export default function ModuleDetails() {
+  const { id } = useParams()
+  const [listEnseignement, setListEnseignement] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [itemsPerPage] = useState(10) // Nombre d'éléments par page
   const [currentPage, setCurrentPage] = useState(1) // La page courante
+  const [infobehind, setInfobehind] = useState({})
+
+  const fetchInfobehind = () => {
+    fetch(SERVER_URL + `maquette/module/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setInfobehind(data)
+      })
+      .catch((error) => console.error('Error fetching Groupe:', error))
+  }
 
   useEffect(() => {
-    fetchGroupe()
+    fetchEnseignement()
+    fetchInfobehind()
   }, [])
 
   const handleSearchChange = (libelle) => {
     setSearchTerm(libelle.target.value)
   }
-  const lastPageNumber = Math.ceil(listGroupe.length / itemsPerPage)
+  const lastPageNumber = Math.ceil(listEnseignement.length / itemsPerPage)
 
   const handleChangePaginate = (value) => {
     if (value === -100) {
@@ -42,8 +59,8 @@ export default function Groupe() {
     } else setCurrentPage(value)
   }
 
-  const fetchGroupe = () => {
-    fetch(SERVER_URL + `maquette/groupe`)
+  const fetchEnseignement = () => {
+    fetch(SERVER_URL + `maquette/moduleDetailsEnseignement/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -52,17 +69,17 @@ export default function Groupe() {
       })
       .then((data) => {
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        setListGroupe(data)
+        setListEnseignement(data)
       })
-      .catch((error) => console.error('Error fetching Groupe:', error))
+      .catch((error) => console.error('Error fetching Enseignement:', error))
   }
 
   const onDelClick = (id) => {
-    if (window.confirm('Are you sure to delete the Groupe?')) {
-      fetch(SERVER_URL + `maquette/groupe/${id}`, { method: 'DELETE' })
+    if (window.confirm('Are you sure to delete the Enseignement?')) {
+      fetch(SERVER_URL + `maquette/enseignement/${id}`, { method: 'DELETE' })
         .then((response) => {
           if (response.ok) {
-            fetchGroupe()
+            fetchEnseignement()
           } else {
             alert("Une erreur s'est produite lors de la suppression.")
           }
@@ -71,22 +88,22 @@ export default function Groupe() {
     }
   }
 
-  // Index de la dernière Groupe à afficher sur la page
+  // Index de la dernière Enseignement à afficher sur la page
   const indexOfLastUE = currentPage * itemsPerPage
-  // Index de la première Groupe à afficher sur la page
+  // Index de la première Enseignement à afficher sur la page
   const indexOfFirstUE = indexOfLastUE - itemsPerPage
-  // Liste des Groupe à afficher sur la page actuelle
-  const currentEnseignement = listGroupe
-    .filter((groupe) => groupe.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Liste des Enseignement à afficher sur la page actuelle
+  const currentEnseignement = listEnseignement
+    .filter((enseignement) => enseignement.libelle.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(indexOfFirstUE, indexOfLastUE)
 
   return (
     <CRow>
       <div className="d-grid gap-2 col-6 mx-auto" style={{ marginBottom: '10px' }}>
         <div className="text-center">
-          <Link to={'/maquette/groupe/AjouterGroupe'}>
+          <Link to={'/maquette/enseignement/AjouterEnseignement'}>
             <CButton color="primary" style={{ fontWeight: 'bold' }}>
-              Ajouter un Groupe
+              Ajouter un Enseignement
             </CButton>
           </Link>
         </div>
@@ -99,11 +116,15 @@ export default function Groupe() {
                 <strong style={{ display: 'block', textAlign: 'center' }}>
                   Liste des Enseignements
                 </strong>
+                <h2>
+                  Module : {infobehind?.nom}, Cours : {infobehind?.cours}, Objectifs :{' '}
+                  {infobehind?.objectifs}{' '}
+                </h2>
               </div>
               <CFormInput
                 type="text"
                 size="sm"
-                placeholder="Rechercher Groupe par libelle"
+                placeholder="Rechercher Enseignement par libelle"
                 aria-label="sm input example"
                 onChange={handleSearchChange}
               />
@@ -113,9 +134,8 @@ export default function Groupe() {
             <CTable>
               <CTableHead color="dark">
                 <CTableRow>
-                  {/* <CTableHeaderCell scope="col">#</CTableHeaderCell> */}
+                  <CTableHeaderCell scope="col">#</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Libelle</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Effectif</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Description</CTableHeaderCell>
                   <CTableHeaderCell scope="col" className="text-center">
                     Operation
@@ -124,36 +144,31 @@ export default function Groupe() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {currentEnseignement.map((groupe, index) => (
+                {currentEnseignement.map((enseignement, index) => (
                   <CTableRow key={index}>
-                    {/* <CTableHeaderCell scope="row"> {groupe.id} </CTableHeaderCell> */}
+                    <CTableHeaderCell scope="row"> {enseignement.id} </CTableHeaderCell>
                     <CTableDataCell>
-                      {groupe.libelle.length > 15
-                        ? `${groupe.libelle.substring(0, 15)}...`
-                        : groupe.libelle}
+                      {enseignement.libelle.length > 15
+                        ? `${enseignement.libelle.substring(0, 15)}...`
+                        : enseignement.libelle}
                     </CTableDataCell>
                     <CTableDataCell>
-                      {groupe.effectif.length > 15
-                        ? `${groupe.effectif.substring(0, 15)}...`
-                        : groupe.effectif}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      {groupe.description.length > 15
-                        ? `${groupe.description.substring(0, 15)}...`
-                        : groupe.description}
+                      {enseignement.description.length > 15
+                        ? `${enseignement.description.substring(0, 15)}...`
+                        : enseignement.description}
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
-                      <Link to={`/maquette/groupe/ModifierGroupe/${groupe.id}`}>
+                      <Link to={`/maquette/enseignement/ModifierEnseignement/${enseignement.id}`}>
                         <CButton color="primary" style={{ fontWeight: 'bold', marginRight: '5px' }}>
                           Modifier
                         </CButton>
                       </Link>
-                      <CButton color="danger" onClick={() => onDelClick(groupe.id)}>
+                      <CButton color="danger" onClick={() => onDelClick(enseignement.id)}>
                         Supprimer
                       </CButton>
                     </CTableDataCell>
                     <CTableDataCell>
-                      <Link to={`/maquette/groupe/DetailsGroupe/${groupe.id}`}>
+                      <Link to={`/maquette/enseignement/${enseignement.id}/UEDetailsEC`}>
                         <CButton
                           color="info"
                           style={{ fontWeight: 'bold', marginRight: '5px', marginLeft: '0px' }}
